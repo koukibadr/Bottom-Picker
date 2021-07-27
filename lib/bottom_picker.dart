@@ -1,7 +1,29 @@
-library bottom_picker;
+import 'package:flutter/material.dart';
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+class BottomPicker extends StatelessWidget {
+  show(BuildContext context) {
+    showBottomSheet(
+      context: context,
+      builder: (context) {
+        return BottomSheet(
+          onClosing: () {},
+          builder: (context) {
+            return this;
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+    );
+  }
 }
