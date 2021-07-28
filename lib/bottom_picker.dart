@@ -1,3 +1,4 @@
+import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:flutter/material.dart';
 
 class BottomPicker extends StatelessWidget {
@@ -24,6 +25,7 @@ class BottomPicker extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+      child: Center(child: BottomPickerButton()),
     );
   }
 }
