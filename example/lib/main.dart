@@ -25,14 +25,15 @@ class ExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Center(
+      child: Center(
           child: ElevatedButton(
-            onPressed: () {
-              BottomPicker().show(context);
-            },
-            child: Text("Click Here"),
-          )
-      ),
+        onPressed: () {
+          BottomPicker(
+            title: "Choose trip date",
+          ).show(context);
+        },
+        child: Text("Click Here"),
+      )),
     );
   }
 }

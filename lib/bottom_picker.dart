@@ -1,11 +1,52 @@
+import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class BottomPicker extends StatelessWidget {
+  final String title;
+  final TextStyle titleStyle;
+  final bool dismissable;
+
+  late CupertinoDatePickerMode datePickerMode;
+  late BOTTOM_PICKER_TYPE bottomPickerType;
+
+  BottomPicker(
+      {required this.title,
+      this.titleStyle = const TextStyle(),
+      this.dismissable = false}) {
+    this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
+  }
+
+  BottomPicker.date(
+      {required this.title,
+      this.titleStyle = const TextStyle(),
+      this.dismissable = false}) {
+    this.datePickerMode = CupertinoDatePickerMode.date;
+    this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
+  }
+
+  BottomPicker.dateTime(
+      {required this.title,
+      this.titleStyle = const TextStyle(),
+      this.dismissable = false}) {
+    this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
+    this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
+  }
+
+  BottomPicker.time(
+      {required this.title,
+      this.titleStyle = const TextStyle(),
+      this.dismissable = false}) {
+    this.datePickerMode = CupertinoDatePickerMode.time;
+    this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
+  }
+
   show(BuildContext context) {
     showModalBottomSheet(
         context: context,
+        isDismissible: this.dismissable,
         backgroundColor: Colors.transparent,
         builder: (context) {
           return BottomSheet(
@@ -35,24 +76,14 @@ class BottomPicker extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Choose trip date"),
+                  Text(this.title, style: this.titleStyle),
                   Icon(Icons.close, color: Colors.black, size: 20)
                 ],
               ),
             ),
-            Container(
-              height: 150,
-              width: 150,
-              child: CupertinoPicker(
-                  itemExtent: 40,
-                  onSelectedItemChanged: (int) {},
-                  children: [
-                    Text("data"),
-                    Text("data"),
-                    Text("data"),
-                    Text("data")
-                  ]),
-            ),
+            this.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
+                ? _renderSimplePicker()
+                : _renderDateTimePicker(this.datePickerMode),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -62,6 +93,26 @@ class BottomPicker extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Container _renderSimplePicker() {
+    return Container(
+      height: 150,
+      width: 150,
+      child: CupertinoPicker(
+          itemExtent: 30,
+          onSelectedItemChanged: (int) {},
+          children: [Text("data"), Text("data"), Text("data"), Text("data")]),
+    );
+  }
+
+  _renderDateTimePicker(CupertinoDatePickerMode mode) {
+    return Container(
+      height: 150,
+      child: CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          onDateTimeChanged: (DateTime date) {}),
     );
   }
 }
