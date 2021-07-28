@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 class BottomPicker extends StatelessWidget {
   show(BuildContext context) {
-    showBottomSheet(
-      context: context,
-      builder: (context) {
-        return BottomSheet(
-          onClosing: () {},
-          builder: (context) {
-            return this;
-          },
-        );
-      },
-    );
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return BottomSheet(
+              backgroundColor: Colors.transparent,
+              onClosing: () {},
+              builder: (context) {
+                return this;
+              });
+        });
   }
 
   @override
@@ -21,7 +21,7 @@ class BottomPicker extends StatelessWidget {
       height: 250,
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Colors.red,
+          color: Colors.white,
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20))),
     );
