@@ -36,6 +36,9 @@ class ExampleApp extends StatelessWidget {
               Text("Badr"),
               Text("Salah")
             ],
+            onSubmit: (data){
+              print(data);
+            },
           ).show(context);
         },
         child: Text("Click Here"),
