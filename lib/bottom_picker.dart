@@ -4,11 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class BottomPicker extends StatelessWidget {
+class BottomPicker extends StatefulWidget {
   final String title;
   final TextStyle titleStyle;
   final bool dismissable;
   late List<Text>? items;
+
+  final Function? onChange;
+  final Function? onSubmit;
+  final Function? onClose;
 
   late CupertinoDatePickerMode datePickerMode;
   late BOTTOM_PICKER_TYPE bottomPickerType;
@@ -17,7 +21,10 @@ class BottomPicker extends StatelessWidget {
       {required this.title,
       required this.items,
       this.titleStyle = const TextStyle(),
-      this.dismissable = false}) {
+      this.dismissable = false,
+      this.onChange,
+      this.onSubmit,
+      this.onClose}) {
     this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
     assert(this.items != null && this.items!.isNotEmpty);
   }
@@ -25,7 +32,10 @@ class BottomPicker extends StatelessWidget {
   BottomPicker.date(
       {required this.title,
       this.titleStyle = const TextStyle(),
-      this.dismissable = false}) {
+      this.dismissable = false,
+      this.onChange,
+      this.onSubmit,
+      this.onClose}) {
     this.datePickerMode = CupertinoDatePickerMode.date;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -33,7 +43,10 @@ class BottomPicker extends StatelessWidget {
   BottomPicker.dateTime(
       {required this.title,
       this.titleStyle = const TextStyle(),
-      this.dismissable = false}) {
+      this.dismissable = false,
+      this.onChange,
+      this.onSubmit,
+      this.onClose}) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -41,7 +54,10 @@ class BottomPicker extends StatelessWidget {
   BottomPicker.time(
       {required this.title,
       this.titleStyle = const TextStyle(),
-      this.dismissable = false}) {
+      this.dismissable = false,
+      this.onChange,
+      this.onSubmit,
+      this.onClose}) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -62,6 +78,11 @@ class BottomPicker extends StatelessWidget {
   }
 
   @override
+  _BottomPickerState createState() => _BottomPickerState();
+}
+
+class _BottomPickerState extends State<BottomPicker> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 300,
@@ -79,14 +100,14 @@ class BottomPicker extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(this.title, style: this.titleStyle),
+                  Text(this.widget.title, style: this.widget.titleStyle),
                   Icon(Icons.close, color: Colors.black, size: 20)
                 ],
               ),
             ),
-            this.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
+            this.widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
                 ? _renderSimplePicker()
-                : _renderDateTimePicker(this.datePickerMode),
+                : _renderDateTimePicker(this.widget.datePickerMode),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -106,7 +127,7 @@ class BottomPicker extends StatelessWidget {
       child: CupertinoPicker(
           itemExtent: 35,
           onSelectedItemChanged: (int) {},
-          children: this.items!),
+          children: this.widget.items!),
     );
   }
 

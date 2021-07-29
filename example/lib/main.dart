@@ -30,7 +30,12 @@ class ExampleApp extends StatelessWidget {
         onPressed: () {
           BottomPicker(
             title: "Choose trip date",
-            items: [Text("Ali"), Text("Fathi"), Text("Badr"), Text("Salah")],
+            items: [
+              Text("Ali"),
+              Text("Fathi"),
+              Text("Badr"),
+              Text("Salah")
+            ],
           ).show(context);
         },
         child: Text("Click Here"),
