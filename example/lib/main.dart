@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: Scaffold(
         body: ExampleApp(),
@@ -30,6 +30,7 @@ class ExampleApp extends StatelessWidget {
         onPressed: () {
           BottomPicker(
             title: "Choose trip date",
+            items: [Text("Ali"), Text("Fathi"), Text("Badr"), Text("Salah")],
           ).show(context);
         },
         child: Text("Click Here"),

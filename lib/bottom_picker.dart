@@ -8,15 +8,18 @@ class BottomPicker extends StatelessWidget {
   final String title;
   final TextStyle titleStyle;
   final bool dismissable;
+  late List<Text>? items;
 
   late CupertinoDatePickerMode datePickerMode;
   late BOTTOM_PICKER_TYPE bottomPickerType;
 
   BottomPicker(
       {required this.title,
+      required this.items,
       this.titleStyle = const TextStyle(),
       this.dismissable = false}) {
     this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
+    assert(this.items != null && this.items!.isNotEmpty);
   }
 
   BottomPicker.date(
@@ -61,7 +64,7 @@ class BottomPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 300,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -98,12 +101,12 @@ class BottomPicker extends StatelessWidget {
 
   Container _renderSimplePicker() {
     return Container(
-      height: 150,
-      width: 150,
+      height: 200,
+      width: 250,
       child: CupertinoPicker(
-          itemExtent: 30,
+          itemExtent: 35,
           onSelectedItemChanged: (int) {},
-          children: [Text("data"), Text("data"), Text("data"), Text("data")]),
+          children: this.items!),
     );
   }
 
