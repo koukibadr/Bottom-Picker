@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 class BottomPickerButton extends StatelessWidget {
   final Function onClick;
   final List<Color> gradientColors;
+  final Color iconColor;
 
   BottomPickerButton(
-      {required this.onClick, this.gradientColors = BLUE_THEME_COLOR});
+      {required this.onClick,
+      required this.iconColor,
+      this.gradientColors = BLUE_THEME_COLOR});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class BottomPickerButton extends StatelessWidget {
                 stops: [0.0, 1.0],
                 tileMode: TileMode.clamp)),
         child: Center(
-          child: Icon(Icons.done, color: Colors.white, size: 20),
+          child: Icon(Icons.done, color: this.iconColor, size: 20),
         ),
       ),
     );

@@ -20,6 +20,7 @@ class BottomPicker extends StatefulWidget {
 
   final BOTTOM_PICKER_THEME bottomPickerTheme;
   final List<Color>? gradientColors;
+  final Color iconColor;
 
   BottomPicker(
       {required this.title,
@@ -30,7 +31,8 @@ class BottomPicker extends StatefulWidget {
       this.onSubmit,
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors}) {
+      this.gradientColors,
+      this.iconColor = Colors.white}) {
     this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
     assert(this.items != null && this.items!.isNotEmpty);
   }
@@ -43,7 +45,8 @@ class BottomPicker extends StatefulWidget {
       this.onSubmit,
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors}) {
+      this.gradientColors,
+      this.iconColor = Colors.white}) {
     this.datePickerMode = CupertinoDatePickerMode.date;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -56,7 +59,8 @@ class BottomPicker extends StatefulWidget {
       this.onSubmit,
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors}) {
+      this.gradientColors,
+      this.iconColor = Colors.white}) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -69,7 +73,8 @@ class BottomPicker extends StatefulWidget {
       this.onSubmit,
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors}) {
+      this.gradientColors,
+      this.iconColor = Colors.white}) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -145,6 +150,7 @@ class _BottomPickerState extends State<BottomPicker> {
                     }
                     Navigator.pop(context);
                   },
+                  iconColor: this.widget.iconColor,
                   gradientColors: getGradientColor(),
                 ),
               ],
@@ -184,7 +190,7 @@ class _BottomPickerState extends State<BottomPicker> {
     Navigator.pop(context);
     this.widget.onClose?.call();
   }
-  
+
   List<Color> getGradientColor() {
     if (this.widget.gradientColors != null) {
       return this.widget.gradientColors!;

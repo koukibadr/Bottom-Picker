@@ -1,4 +1,5 @@
 import 'package:bottom_picker/bottom_picker.dart';
+import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,6 +40,7 @@ class ExampleApp extends StatelessWidget {
             onSubmit: (data){
               print(data);
             },
+            bottomPickerTheme: BOTTOM_PICKER_THEME.PLUM_PLATE,
           ).show(context);
         },
         child: Text("Click Here"),
