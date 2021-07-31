@@ -21,6 +21,7 @@ class BottomPicker extends StatefulWidget {
   final BOTTOM_PICKER_THEME bottomPickerTheme;
   final List<Color>? gradientColors;
   final Color iconColor;
+  late int selectedItemIndex;
 
   BottomPicker(
       {required this.title,
@@ -32,7 +33,8 @@ class BottomPicker extends StatefulWidget {
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
-      this.iconColor = Colors.white}) {
+      this.iconColor = Colors.white,
+      this.selectedItemIndex = 0}) {
     this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
     assert(this.items != null && this.items!.isNotEmpty);
   }
@@ -60,7 +62,8 @@ class BottomPicker extends StatefulWidget {
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
-      this.iconColor = Colors.white}) {
+      this.iconColor = Colors.white,
+      this.selectedItemIndex = 0}) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -74,7 +77,8 @@ class BottomPicker extends StatefulWidget {
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
-      this.iconColor = Colors.white}) {
+      this.iconColor = Colors.white,
+      this.selectedItemIndex = 0}) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -167,6 +171,7 @@ class _BottomPickerState extends State<BottomPicker> {
       width: 250,
       child: CupertinoPicker(
           itemExtent: 35,
+          scrollController: FixedExtentScrollController(initialItem: this.widget.selectedItemIndex),
           onSelectedItemChanged: (int index) {
             this.selectedItemIndex = index;
             this.widget.onChange?.call(index);
