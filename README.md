@@ -80,7 +80,6 @@ final  Function? onClose;
 ///HEAVY_RAIN,
 ///PLUM_PLATE,
 ///MORNING_SALAD
-///```
 final  BOTTOM_PICKER_THEME bottomPickerTheme;
 
   
@@ -99,9 +98,8 @@ final  Color iconColor;
 ///by default it's 0, needs to be in the range [0, this.items.length-1]
 ///otherwise an exception will be thrown
 ///for date and time picker type this parameter is not available
-late  int selectedItemIndex;
+int selectedItemIndex;
 
-  
 
 ///The initial date time applied on the date and time picker
 ///by default it's null
@@ -121,7 +119,7 @@ DateTime? minDateTime;
 
 ///define whether the time uses 24h or 12h format
 ///by default it's false (12h format)
-late  bool use24hFormat;
+bool use24hFormat;
 ```
 
 
