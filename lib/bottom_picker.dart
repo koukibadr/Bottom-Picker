@@ -27,6 +27,8 @@ class BottomPicker extends StatefulWidget {
   DateTime? maxDateTime;
   DateTime? minDateTime;
 
+  late bool use24hFormat;
+
   BottomPicker(
       {required this.title,
       required this.items,
@@ -91,7 +93,8 @@ class BottomPicker extends StatefulWidget {
       this.selectedItemIndex = 0,
       this.initialDateTime,
       this.minDateTime,
-      this.maxDateTime}) {
+      this.maxDateTime,
+      this.use24hFormat = false}) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     if (this.minDateTime != null && this.maxDateTime != null) {
@@ -124,7 +127,8 @@ class BottomPicker extends StatefulWidget {
       this.selectedItemIndex = 0,
       this.initialDateTime,
       this.minDateTime,
-      this.maxDateTime}) {
+      this.maxDateTime,
+      this.use24hFormat = false}) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     if (this.minDateTime != null && this.maxDateTime != null) {
@@ -252,7 +256,8 @@ class _BottomPickerState extends State<BottomPicker> {
           },
           initialDateTime: this.widget.initialDateTime,
           maximumDate: this.widget.maxDateTime,
-          minimumDate: this.widget.minDateTime),
+          minimumDate: this.widget.minDateTime,
+          use24hFormat: this.widget.use24hFormat),
     );
   }
 
