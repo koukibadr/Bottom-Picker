@@ -37,11 +37,13 @@ class ExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Color(0xffF6F2F2),
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Image.network("https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true",width: 200,),
           ElevatedButton(
             onPressed: () {
               _openSimpleItemPicker(context, countryList);
