@@ -244,7 +244,7 @@ class _BottomPickerState extends State<BottomPicker> {
 
   _renderDateTimePicker(CupertinoDatePickerMode mode) {
     return Container(
-      height: 150,
+      height: 200,
       child: CupertinoDatePicker(
           mode: CupertinoDatePickerMode.date,
           onDateTimeChanged: (DateTime date) {
