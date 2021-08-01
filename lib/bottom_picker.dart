@@ -64,6 +64,7 @@ class BottomPicker extends StatefulWidget {
       this.maxDateTime}) {
     this.datePickerMode = CupertinoDatePickerMode.date;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
+    this.use24hFormat = false;
     if (this.minDateTime != null && this.maxDateTime != null) {
       assert(this.minDateTime!.isBefore(this.maxDateTime!));
     }
@@ -250,7 +251,7 @@ class _BottomPickerState extends State<BottomPicker> {
     return Container(
       height: 200,
       child: CupertinoDatePicker(
-          mode: CupertinoDatePickerMode.date,
+          mode: mode,
           onDateTimeChanged: (DateTime date) {
             this.widget.onChange?.call(date);
           },

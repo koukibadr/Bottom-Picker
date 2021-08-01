@@ -23,23 +23,133 @@ class MyApp extends StatelessWidget {
 }
 
 class ExampleApp extends StatelessWidget {
+  final countryList = [
+    Text("Algeria 🇩🇿"),
+    Text("Maroco 🇲🇦"),
+    Text("Tunisia 🇹🇳"),
+    Text("Palestine 🇵🇸"),
+    Text("Egypt 🇪🇬"),
+    Text("Syria 🇸🇾"),
+    Text("Irak 🇮🇶"),
+    Text("Mauritania 🇲🇷")
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-          child: ElevatedButton(
-        onPressed: () {
-          BottomPicker.date(
-            title: "Choose trip date",
-            onSubmit: (data) {
-              print(data);
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              _openSimpleItemPicker(context, countryList);
             },
-            bottomPickerTheme: BOTTOM_PICKER_THEME.PLUM_PLATE,
-            minDateTime: DateTime(2020, 10, 8),
-          ).show(context);
-        },
-        child: Text("Click Here"),
-      )),
+            child: Text("Simple Item picker"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _openSecondSimpleItemPicker(context, countryList);
+            },
+            child: Text("Simple Item picker with different theme"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _openDatePicker(context);
+            },
+            child: Text("Date Picker"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _openTimePicker(context);
+            },
+            child: Text("Time Picker"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _openDateTimePicker(context);
+            },
+            child: Text("Date and Time Picker"),
+          ),
+        ],
+      ),
     );
+  }
+
+  _openSimpleItemPicker(BuildContext context, List<Text> items) {
+    BottomPicker(
+            items: items,
+            title: "Choose your country",
+            titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15))
+        .show(context);
+  }
+
+  _openSecondSimpleItemPicker(BuildContext context, List<Text> items) {
+    BottomPicker(
+            items: items,
+            title: "Choose your country",
+            titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            onChange: (index) {
+              print(index);
+            },
+            onSubmit: (index) {
+              print(index);
+            },
+            bottomPickerTheme: BOTTOM_PICKER_THEME.MORNING_SALAD)
+        .show(context);
+  }
+
+  _openDatePicker(BuildContext context) {
+    BottomPicker.date(
+            title: "Set your Birthday",
+            titleStyle: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 15, color: Colors.blue),
+            onChange: (index) {
+              print(index);
+            },
+            onSubmit: (index) {
+              print(index);
+            },
+            bottomPickerTheme: BOTTOM_PICKER_THEME.PLUM_PLATE)
+        .show(context);
+  }
+
+  _openTimePicker(BuildContext context) {
+    BottomPicker.time(
+            title: "Set your next meeting time",
+            titleStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.orange),
+            onSubmit: (index) {
+              print(index);
+            },
+            onClose: () {
+              print("Picker closed");
+            },
+            bottomPickerTheme: BOTTOM_PICKER_THEME.ORANGE,
+            use24hFormat: true)
+        .show(context);
+  }
+
+  _openDateTimePicker(BuildContext context) {
+    BottomPicker.dateTime(
+            title: "Set the event exact time and date",
+            titleStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.black),
+            onSubmit: (index) {
+              print(index);
+            },
+            onClose: () {
+              print("Picker closed");
+            },
+            iconColor: Colors.black,
+            minDateTime: DateTime(2021,7,1),
+            maxDateTime: DateTime(2021,8,2),
+            gradientColors: [Color(0xfffdcbf1),Color(0xffe6dee9)])
+        .show(context);
   }
 }
