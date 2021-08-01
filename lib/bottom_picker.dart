@@ -22,6 +22,7 @@ class BottomPicker extends StatefulWidget {
   final List<Color>? gradientColors;
   final Color iconColor;
   late int selectedItemIndex;
+  DateTime? initialDateTime;
 
   BottomPicker(
       {required this.title,
@@ -48,7 +49,8 @@ class BottomPicker extends StatefulWidget {
       this.onClose,
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
-      this.iconColor = Colors.white}) {
+      this.iconColor = Colors.white,
+      this.initialDateTime}) {
     this.datePickerMode = CupertinoDatePickerMode.date;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -63,7 +65,8 @@ class BottomPicker extends StatefulWidget {
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
       this.iconColor = Colors.white,
-      this.selectedItemIndex = 0}) {
+      this.selectedItemIndex = 0,
+      this.initialDateTime}) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -78,7 +81,8 @@ class BottomPicker extends StatefulWidget {
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
       this.iconColor = Colors.white,
-      this.selectedItemIndex = 0}) {
+      this.selectedItemIndex = 0,
+      this.initialDateTime}) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
   }
@@ -171,7 +175,8 @@ class _BottomPickerState extends State<BottomPicker> {
       width: 250,
       child: CupertinoPicker(
           itemExtent: 35,
-          scrollController: FixedExtentScrollController(initialItem: this.widget.selectedItemIndex),
+          scrollController: FixedExtentScrollController(
+              initialItem: this.widget.selectedItemIndex),
           onSelectedItemChanged: (int index) {
             this.selectedItemIndex = index;
             this.widget.onChange?.call(index);
@@ -187,7 +192,8 @@ class _BottomPickerState extends State<BottomPicker> {
           mode: CupertinoDatePickerMode.date,
           onDateTimeChanged: (DateTime date) {
             this.widget.onChange?.call(date);
-          }),
+          },
+          initialDateTime: this.widget.initialDateTime),
     );
   }
 

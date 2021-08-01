@@ -29,14 +29,8 @@ class ExampleApp extends StatelessWidget {
       child: Center(
           child: ElevatedButton(
         onPressed: () {
-          BottomPicker(
+          BottomPicker.date(
             title: "Choose trip date",
-            items: [
-              Text("Ali"),
-              Text("Fathi"),
-              Text("Badr"),
-              Text("Salah")
-            ],
             onSubmit: (data){
               print(data);
             },
