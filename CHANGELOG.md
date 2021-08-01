@@ -1,3 +1,9 @@
-## [0.0.1] - TODO: Add release date.
+## [1.0.0] - 08/01/2021
 
-* TODO: Describe initial release.
+* Simple list item picker
+* Date picker with  max and min dates configuration
+* Time picker with 12h/24h time format
+* Date and time picker
+* Multiple built-in themes
+* Customized button theme with custom colors
+* On item change / On submit and On close callback handlers
