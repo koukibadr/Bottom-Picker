@@ -31,10 +31,11 @@ class ExampleApp extends StatelessWidget {
         onPressed: () {
           BottomPicker.date(
             title: "Choose trip date",
-            onSubmit: (data){
+            onSubmit: (data) {
               print(data);
             },
             bottomPickerTheme: BOTTOM_PICKER_THEME.PLUM_PLATE,
+            minDateTime: DateTime(2020, 10, 8),
           ).show(context);
         },
         child: Text("Click Here"),

@@ -22,7 +22,10 @@ class BottomPicker extends StatefulWidget {
   final List<Color>? gradientColors;
   final Color iconColor;
   late int selectedItemIndex;
+
   DateTime? initialDateTime;
+  DateTime? maxDateTime;
+  DateTime? minDateTime;
 
   BottomPicker(
       {required this.title,
@@ -38,6 +41,10 @@ class BottomPicker extends StatefulWidget {
       this.selectedItemIndex = 0}) {
     this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
     assert(this.items != null && this.items!.isNotEmpty);
+    assert(this.selectedItemIndex >= 0);
+    if (this.selectedItemIndex > 0) {
+      assert(this.selectedItemIndex < this.items!.length);
+    }
   }
 
   BottomPicker.date(
@@ -50,9 +57,25 @@ class BottomPicker extends StatefulWidget {
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
       this.iconColor = Colors.white,
-      this.initialDateTime}) {
+      this.initialDateTime,
+      this.minDateTime,
+      this.maxDateTime}) {
     this.datePickerMode = CupertinoDatePickerMode.date;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
+    if (this.minDateTime != null && this.maxDateTime != null) {
+      assert(this.minDateTime!.isBefore(this.maxDateTime!));
+    }
+    if (this.maxDateTime != null &&
+        this.initialDateTime == null &&
+        DateTime.now().isAfter(this.maxDateTime!)) {
+      this.initialDateTime = this.maxDateTime;
+    }
+
+    if (this.minDateTime != null &&
+        this.initialDateTime == null &&
+        DateTime.now().isBefore(this.minDateTime!)) {
+      this.initialDateTime = this.minDateTime;
+    }
   }
 
   BottomPicker.dateTime(
@@ -66,9 +89,26 @@ class BottomPicker extends StatefulWidget {
       this.gradientColors,
       this.iconColor = Colors.white,
       this.selectedItemIndex = 0,
-      this.initialDateTime}) {
+      this.initialDateTime,
+      this.minDateTime,
+      this.maxDateTime}) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
+    if (this.minDateTime != null && this.maxDateTime != null) {
+      assert(this.minDateTime!.isBefore(this.maxDateTime!));
+    }
+
+    if (this.maxDateTime != null &&
+        this.initialDateTime == null &&
+        DateTime.now().isAfter(this.maxDateTime!)) {
+      this.initialDateTime = this.maxDateTime;
+    }
+
+    if (this.minDateTime != null &&
+        this.initialDateTime == null &&
+        DateTime.now().isBefore(this.minDateTime!)) {
+      this.initialDateTime = this.minDateTime;
+    }
   }
 
   BottomPicker.time(
@@ -82,9 +122,26 @@ class BottomPicker extends StatefulWidget {
       this.gradientColors,
       this.iconColor = Colors.white,
       this.selectedItemIndex = 0,
-      this.initialDateTime}) {
+      this.initialDateTime,
+      this.minDateTime,
+      this.maxDateTime}) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
+    if (this.minDateTime != null && this.maxDateTime != null) {
+      assert(this.minDateTime!.isBefore(this.maxDateTime!));
+    }
+
+    if (this.maxDateTime != null &&
+        this.initialDateTime == null &&
+        DateTime.now().isAfter(this.maxDateTime!)) {
+      this.initialDateTime = this.maxDateTime;
+    }
+
+    if (this.minDateTime != null &&
+        this.initialDateTime == null &&
+        DateTime.now().isBefore(this.minDateTime!)) {
+      this.initialDateTime = this.minDateTime;
+    }
   }
 
   show(BuildContext context) {
@@ -193,7 +250,9 @@ class _BottomPickerState extends State<BottomPicker> {
           onDateTimeChanged: (DateTime date) {
             this.widget.onChange?.call(date);
           },
-          initialDateTime: this.widget.initialDateTime),
+          initialDateTime: this.widget.initialDateTime,
+          maximumDate: this.widget.maxDateTime,
+          minimumDate: this.widget.minDateTime),
     );
   }
 
