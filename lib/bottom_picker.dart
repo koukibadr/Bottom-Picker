@@ -6,13 +6,12 @@ import 'package:flutter/widgets.dart';
 
 // ignore: must_be_immutable
 class BottomPicker extends StatefulWidget {
-  
-  ///The dateTime picker mode 
+  ///The dateTime picker mode
   ///[CupertinoDatePickerMode.date] or [CupertinoDatePickerMode.dateAndTime] or [CupertinoDatePickerMode.time]
   ///
   late CupertinoDatePickerMode datePickerMode;
 
-  ///the bottom picker type 
+  ///the bottom picker type
   ///```dart
   ///{
   ///SIMPLE,
@@ -145,18 +144,17 @@ class BottomPicker extends StatefulWidget {
   ///it's required for all bottom picker types
   ///
   final String title;
-  
+
   ///The text style applied on the title
   ///by default it applies simple text style
   ///
   final TextStyle titleStyle;
-  
-  
+
   ///defines whether the bottom picker is dismissable or not
   ///by default it's set to false
-  /// 
+  ///
   final bool dismissable;
-  
+
   ///list of items (List of text) used to create simple item picker (required)
   ///and should not be empty or null
   ///
@@ -168,13 +166,13 @@ class BottomPicker extends StatefulWidget {
   ///whether it's date picker or simple item picker it will return a value DateTime or int(index)
   ///
   final Function(dynamic)? onChange;
-  
+
   ///Nullable function invoked  when clicking on submit button
-  ///if the picker  type is date/time/dateTime it will return DateTime value 
+  ///if the picker  type is date/time/dateTime it will return DateTime value
   ///else it will return the index of the selected item
   ///
   final Function(dynamic)? onSubmit;
-  
+
   ///Invoked when clicking on the close button
   ///
   final Function? onClose;
@@ -197,13 +195,13 @@ class BottomPicker extends StatefulWidget {
   ///when it's not null it will be applied
   ///
   final List<Color>? gradientColors;
-  
-  ///define the icon color on the button 
+
+  ///define the icon color on the button
   ///by default it's White
   ///
   final Color iconColor;
-  
-  ///used for simple bottom picker 
+
+  ///used for simple bottom picker
   ///by default it's 0, needs to be in the range [0, this.items.length-1]
   ///otherwise an exception will be thrown
   ///for date and time picker type this parameter is not available
@@ -214,11 +212,11 @@ class BottomPicker extends StatefulWidget {
   ///by default it's null
   ///
   DateTime? initialDateTime;
-  
+
   ///the max date time on the date picker
   ///by default it's null
   DateTime? maxDateTime;
-  
+
   ///the minimum date & time applied on the date picker
   ///by default it's null
   ///
@@ -229,6 +227,10 @@ class BottomPicker extends StatefulWidget {
   ///
   late bool use24hFormat;
 
+
+  ///display the bottom picker popup
+  ///[context] the app context to display the popup
+  ///
   show(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -327,7 +329,7 @@ class _BottomPickerState extends State<BottomPicker> {
     );
   }
 
-  _renderDateTimePicker(CupertinoDatePickerMode mode) {
+  Container _renderDateTimePicker(CupertinoDatePickerMode mode) {
     return Container(
       height: 200,
       child: CupertinoDatePicker(
