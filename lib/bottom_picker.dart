@@ -335,6 +335,7 @@ class _BottomPickerState extends State<BottomPicker> {
       child: CupertinoDatePicker(
           mode: mode,
           onDateTimeChanged: (DateTime date) {
+            this.selectedDateTime = date;
             this.widget.onChange?.call(date);
           },
           initialDateTime: this.widget.initialDateTime,

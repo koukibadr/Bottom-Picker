@@ -142,14 +142,14 @@ class ExampleApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
                 color: Colors.black),
-            onSubmit: (index) {
-              print(index);
+            onSubmit: (date) {
+              print(date);
             },
             onClose: () {
               print("Picker closed");
             },
             iconColor: Colors.black,
-            minDateTime: DateTime(2021,7,1),
+            minDateTime: DateTime(2021,5,1),
             maxDateTime: DateTime(2021,8,2),
             gradientColors: [Color(0xfffdcbf1),Color(0xffe6dee9)])
         .show(context);
