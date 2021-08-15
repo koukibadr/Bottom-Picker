@@ -227,7 +227,6 @@ class BottomPicker extends StatefulWidget {
   ///
   late bool use24hFormat;
 
-
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
