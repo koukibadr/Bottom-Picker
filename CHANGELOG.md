@@ -1,3 +1,7 @@
+## [1.0.1] - 15/01/2021
+
+* Fix onSubmit return value bug
+
 ## [1.0.0] - 08/01/2021
 
 * Simple list item picker
