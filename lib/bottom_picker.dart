@@ -234,10 +234,12 @@ class BottomPicker extends StatefulWidget {
     showModalBottomSheet(
         context: context,
         isDismissible: this.dismissable,
+        enableDrag: false,
         backgroundColor: Colors.transparent,
         builder: (context) {
           return BottomSheet(
               backgroundColor: Colors.transparent,
+              enableDrag: false,
               onClosing: () {},
               builder: (context) {
                 return this;

@@ -82,6 +82,9 @@ class ExampleApp extends StatelessWidget {
   _openSimpleItemPicker(BuildContext context, List<Text> items) {
     BottomPicker(
             items: items,
+            onClose: (){
+              print("Hello");
+            },
             title: "Choose your country",
             titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15))
         .show(context);
