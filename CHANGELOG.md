@@ -1,3 +1,7 @@
+## [1.0.2] - 27/08/2021
+
+* Fix bottom picker drag bug
+
 ## [1.0.1] - 15/01/2021
 
 * Fix onSubmit return value bug
