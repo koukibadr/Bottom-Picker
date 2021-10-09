@@ -85,6 +85,9 @@ class ExampleApp extends StatelessWidget {
             onClose: (){
               print("Hello");
             },
+            onSubmit: (value){
+              print(value);
+            },
             title: "Choose your country",
             titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15))
         .show(context);
