@@ -43,7 +43,10 @@ class ExampleApp extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.network("https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true",width: 200,),
+          Image.network(
+            "https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true",
+            width: 200,
+          ),
           ElevatedButton(
             onPressed: () {
               _openSimpleItemPicker(context, countryList);
@@ -80,16 +83,20 @@ class ExampleApp extends StatelessWidget {
   }
 
   _openSimpleItemPicker(BuildContext context, List<Text> items) {
-    BottomPicker(
-            items: items,
-            onClose: (){
-              print("Hello");
+    BottomPicker.dateTime(
+            title: 'LanguageStrings().chooseEndDateTime',
+            titleStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+            onSubmit: (index) {
+              print(index);
             },
-            onSubmit: (value){
-              print(value);
-            },
-            title: "Choose your country",
-            titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15))
+            dismissable: true,
+            bottomPickerTheme: BOTTOM_PICKER_THEME.PLUM_PLATE,
+            use24hFormat: true,
+            // iconColor:  Colors.black,
+            initialDateTime: DateTime.now())
         .show(context);
   }
 
@@ -143,21 +150,18 @@ class ExampleApp extends StatelessWidget {
 
   _openDateTimePicker(BuildContext context) {
     BottomPicker.dateTime(
-            title: "Set the event exact time and date",
-            titleStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-                color: Colors.black),
-            onSubmit: (date) {
-              print(date);
-            },
-            onClose: () {
-              print("Picker closed");
-            },
-            iconColor: Colors.black,
-            minDateTime: DateTime(2021,5,1),
-            maxDateTime: DateTime(2021,8,2),
-            gradientColors: [Color(0xfffdcbf1),Color(0xffe6dee9)])
-        .show(context);
+        title: "Set the event exact time and date",
+        titleStyle: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),
+        onSubmit: (date) {
+          print(date);
+        },
+        onClose: () {
+          print("Picker closed");
+        },
+        iconColor: Colors.black,
+        minDateTime: DateTime(2021, 5, 1),
+        maxDateTime: DateTime(2021, 8, 2),
+        gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)]).show(context);
   }
 }
