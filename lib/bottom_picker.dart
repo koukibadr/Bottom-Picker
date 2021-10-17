@@ -264,8 +264,9 @@ class _BottomPickerState extends State<BottomPicker> {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height);
     return Container(
-      height: 300,
+      height: MediaQuery.of(context).size.height > 1000? MediaQuery.of(context).size.height  * 0.25: MediaQuery.of(context).size.height * 0.3,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -287,9 +288,10 @@ class _BottomPickerState extends State<BottomPicker> {
                 ],
               ),
             ),
-            this.widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
-                ? _renderSimplePicker()
-                : _renderDateTimePicker(this.widget.datePickerMode),
+            Expanded(
+                child: this.widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
+                    ? _renderSimplePicker()
+                    : _renderDateTimePicker(this.widget.datePickerMode)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -314,36 +316,29 @@ class _BottomPickerState extends State<BottomPicker> {
     );
   }
 
-  Container _renderSimplePicker() {
-    return Container(
-      height: 200,
-      width: 250,
-      child: CupertinoPicker(
-          itemExtent: 35,
-          scrollController: FixedExtentScrollController(
-              initialItem: this.widget.selectedItemIndex),
-          onSelectedItemChanged: (int index) {
-            this.selectedItemIndex = index;
-            this.widget.onChange?.call(index);
-          },
-          children: this.widget.items!),
-    );
+  Widget _renderSimplePicker() {
+    return CupertinoPicker(
+        itemExtent: 35,
+        scrollController: FixedExtentScrollController(
+            initialItem: this.widget.selectedItemIndex),
+        onSelectedItemChanged: (int index) {
+          this.selectedItemIndex = index;
+          this.widget.onChange?.call(index);
+        },
+        children: this.widget.items!);
   }
 
-  Container _renderDateTimePicker(CupertinoDatePickerMode mode) {
-    return Container(
-      height: 200,
-      child: CupertinoDatePicker(
-          mode: mode,
-          onDateTimeChanged: (DateTime date) {
-            this.selectedDateTime = date;
-            this.widget.onChange?.call(date);
-          },
-          initialDateTime: this.widget.initialDateTime,
-          maximumDate: this.widget.maxDateTime,
-          minimumDate: this.widget.minDateTime,
-          use24hFormat: this.widget.use24hFormat),
-    );
+  Widget _renderDateTimePicker(CupertinoDatePickerMode mode) {
+    return CupertinoDatePicker(
+        mode: mode,
+        onDateTimeChanged: (DateTime date) {
+          this.selectedDateTime = date;
+          this.widget.onChange?.call(date);
+        },
+        initialDateTime: this.widget.initialDateTime,
+        maximumDate: this.widget.maxDateTime,
+        minimumDate: this.widget.minDateTime,
+        use24hFormat: this.widget.use24hFormat);
   }
 
   _closeBottomPicker() {
