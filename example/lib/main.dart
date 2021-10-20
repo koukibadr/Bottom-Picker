@@ -111,7 +111,14 @@ class ExampleApp extends StatelessWidget {
             onSubmit: (index) {
               print(index);
             },
-            bottomPickerTheme: BOTTOM_PICKER_THEME.MORNING_SALAD)
+            bottomPickerTheme: BOTTOM_PICKER_THEME.MORNING_SALAD,
+            buttonText: "Choose country",
+            buttonTextStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold
+            ),
+            displayButtonIcon: false,
+            buttonSingleColor: Colors.red)
         .show(context);
   }
 

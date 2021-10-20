@@ -31,7 +31,11 @@ class BottomPicker extends StatefulWidget {
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
       this.iconColor = Colors.white,
-      this.selectedItemIndex = 0}) {
+      this.selectedItemIndex = 0,
+      this.buttonText,
+      this.buttonTextStyle,
+      this.displayButtonIcon = true,
+      this.buttonSingleColor}) {
     this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
     assert(this.items != null && this.items!.isNotEmpty);
     assert(this.selectedItemIndex >= 0);
@@ -52,7 +56,11 @@ class BottomPicker extends StatefulWidget {
       this.iconColor = Colors.white,
       this.initialDateTime,
       this.minDateTime,
-      this.maxDateTime}) {
+      this.maxDateTime,
+      this.buttonText,
+      this.buttonTextStyle,
+      this.displayButtonIcon = true,
+      this.buttonSingleColor}) {
     this.datePickerMode = CupertinoDatePickerMode.date;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     this.use24hFormat = false;
@@ -86,7 +94,11 @@ class BottomPicker extends StatefulWidget {
       this.initialDateTime,
       this.minDateTime,
       this.maxDateTime,
-      this.use24hFormat = false}) {
+      this.use24hFormat = false,
+      this.buttonText,
+      this.buttonTextStyle,
+      this.displayButtonIcon = true,
+      this.buttonSingleColor}) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     if (this.minDateTime != null && this.maxDateTime != null) {
@@ -120,7 +132,11 @@ class BottomPicker extends StatefulWidget {
       this.initialDateTime,
       this.minDateTime,
       this.maxDateTime,
-      this.use24hFormat = false}) {
+      this.use24hFormat = false,
+      this.buttonText,
+      this.buttonTextStyle,
+      this.displayButtonIcon = true,
+      this.buttonSingleColor}) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     if (this.minDateTime != null && this.maxDateTime != null) {
@@ -227,6 +243,14 @@ class BottomPicker extends StatefulWidget {
   ///
   late bool use24hFormat;
 
+  final String? buttonText;
+
+  final TextStyle? buttonTextStyle;
+
+  final bool displayButtonIcon;
+
+  final Color? buttonSingleColor;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -307,6 +331,10 @@ class _BottomPickerState extends State<BottomPicker> {
                   },
                   iconColor: this.widget.iconColor,
                   gradientColors: getGradientColor(),
+                  text: widget.buttonText,
+                  textStyle: widget.buttonTextStyle,
+                  displayIcon: widget.displayButtonIcon,
+                  solidColor: widget.buttonSingleColor
                 ),
               ],
             )
