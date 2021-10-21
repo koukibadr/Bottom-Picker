@@ -1,6 +1,7 @@
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -255,20 +256,28 @@ class BottomPicker extends StatefulWidget {
   ///[context] the app context to display the popup
   ///
   show(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        isDismissible: this.dismissable,
-        enableDrag: false,
-        backgroundColor: Colors.transparent,
-        builder: (context) {
-          return BottomSheet(
-              backgroundColor: Colors.transparent,
-              enableDrag: false,
-              onClosing: () {},
-              builder: (context) {
-                return this;
-              });
-        });
+    if (kIsWeb) {
+      showDatePicker(
+          context: context,
+          initialDate: this.initialDateTime ?? DateTime.now(),
+          firstDate: this.minDateTime ?? DateTime(1800),
+          lastDate: this.maxDateTime ?? DateTime(2100));
+    } else {
+      showModalBottomSheet(
+          context: context,
+          isDismissible: this.dismissable,
+          enableDrag: false,
+          backgroundColor: Colors.transparent,
+          builder: (context) {
+            return BottomSheet(
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                onClosing: () {},
+                builder: (context) {
+                  return this;
+                });
+          });
+    }
   }
 
   @override
@@ -290,7 +299,9 @@ class _BottomPickerState extends State<BottomPicker> {
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.height);
     return Container(
-      height: MediaQuery.of(context).size.height > 1000? MediaQuery.of(context).size.height  * 0.25: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height > 1000
+          ? MediaQuery.of(context).size.height * 0.25
+          : MediaQuery.of(context).size.height * 0.3,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -320,22 +331,21 @@ class _BottomPickerState extends State<BottomPicker> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BottomPickerButton(
-                  onClick: () {
-                    if (this.widget.bottomPickerType ==
-                        BOTTOM_PICKER_TYPE.SIMPLE) {
-                      this.widget.onSubmit?.call(this.selectedItemIndex);
-                    } else {
-                      this.widget.onSubmit?.call(this.selectedDateTime);
-                    }
-                    Navigator.pop(context);
-                  },
-                  iconColor: this.widget.iconColor,
-                  gradientColors: getGradientColor(),
-                  text: widget.buttonText,
-                  textStyle: widget.buttonTextStyle,
-                  displayIcon: widget.displayButtonIcon,
-                  solidColor: widget.buttonSingleColor
-                ),
+                    onClick: () {
+                      if (this.widget.bottomPickerType ==
+                          BOTTOM_PICKER_TYPE.SIMPLE) {
+                        this.widget.onSubmit?.call(this.selectedItemIndex);
+                      } else {
+                        this.widget.onSubmit?.call(this.selectedDateTime);
+                      }
+                      Navigator.pop(context);
+                    },
+                    iconColor: this.widget.iconColor,
+                    gradientColors: getGradientColor(),
+                    text: widget.buttonText,
+                    textStyle: widget.buttonTextStyle,
+                    displayIcon: widget.displayButtonIcon,
+                    solidColor: widget.buttonSingleColor),
               ],
             )
           ],
