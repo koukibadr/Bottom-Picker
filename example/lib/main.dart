@@ -77,6 +77,12 @@ class ExampleApp extends StatelessWidget {
             },
             child: Text("Date and Time Picker"),
           ),
+          ElevatedButton(
+            onPressed: () {
+              _openDateTimePicker(context);
+            },
+            child: Text("Bottom picker with custom button"),
+          ),
         ],
       ),
     );
@@ -159,6 +165,28 @@ class ExampleApp extends StatelessWidget {
         onClose: () {
           print("Picker closed");
         },
+        iconColor: Colors.black,
+        minDateTime: DateTime(2021, 5, 1),
+        maxDateTime: DateTime(2021, 8, 2),
+        gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)]).show(context);
+  }
+
+  _openDateTimePickerWithCustomButton(BuildContext context) {
+    BottomPicker.dateTime(
+        title: "Set the event exact time and date",
+        titleStyle: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),
+        onSubmit: (date) {
+          print(date);
+        },
+        onClose: () {
+          print("Picker closed");
+        },
+        buttonText: 'Confirm',
+        buttonTextStyle: const TextStyle(
+          color: Colors.white
+        ),
+        buttonSingleColor: Colors.pink,
         iconColor: Colors.black,
         minDateTime: DateTime(2021, 5, 1),
         maxDateTime: DateTime(2021, 8, 2),
