@@ -256,7 +256,7 @@ class BottomPicker extends StatefulWidget {
   ///if you want to display a text you can set [displayButtonIcon] to false
   final bool displayButtonIcon;
 
-  ///a single color will be applied to the button instead of the gradient 
+  ///a single color will be applied to the button instead of the gradient
   ///themes
   ///
   final Color? buttonSingleColor;

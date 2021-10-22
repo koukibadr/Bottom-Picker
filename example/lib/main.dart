@@ -79,7 +79,7 @@ class ExampleApp extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              _openDateTimePicker(context);
+              _openDateTimePickerWithCustomButton(context);
             },
             child: Text("Bottom picker with custom button"),
           ),
@@ -183,9 +183,7 @@ class ExampleApp extends StatelessWidget {
           print("Picker closed");
         },
         buttonText: 'Confirm',
-        buttonTextStyle: const TextStyle(
-          color: Colors.white
-        ),
+        buttonTextStyle: const TextStyle(color: Colors.white),
         buttonSingleColor: Colors.pink,
         iconColor: Colors.black,
         minDateTime: DateTime(2021, 5, 1),
