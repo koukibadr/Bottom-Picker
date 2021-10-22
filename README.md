@@ -28,6 +28,7 @@
 - Date and Time picker
 - 24h / 12h time format
 - Built-in themes
+- Customize confirm button
 
   
 
