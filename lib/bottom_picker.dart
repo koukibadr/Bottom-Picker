@@ -244,12 +244,21 @@ class BottomPicker extends StatefulWidget {
   ///
   late bool use24hFormat;
 
+  ///the text that will be applied to the button
+  ///if the text is null the button will be rendered with an icon
   final String? buttonText;
 
+  ///the button text style, will be applied on the button's text
   final TextStyle? buttonTextStyle;
 
+  ///display button icon
+  ///by default it's true
+  ///if you want to display a text you can set [displayButtonIcon] to false
   final bool displayButtonIcon;
 
+  ///a single color will be applied to the button instead of the gradient 
+  ///themes
+  ///
   final Color? buttonSingleColor;
 
   ///display the bottom picker popup
