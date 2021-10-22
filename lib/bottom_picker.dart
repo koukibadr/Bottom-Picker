@@ -256,28 +256,20 @@ class BottomPicker extends StatefulWidget {
   ///[context] the app context to display the popup
   ///
   show(BuildContext context) {
-    if (kIsWeb) {
-      showDatePicker(
-          context: context,
-          initialDate: this.initialDateTime ?? DateTime.now(),
-          firstDate: this.minDateTime ?? DateTime(1800),
-          lastDate: this.maxDateTime ?? DateTime(2100));
-    } else {
-      showModalBottomSheet(
-          context: context,
-          isDismissible: this.dismissable,
-          enableDrag: false,
-          backgroundColor: Colors.transparent,
-          builder: (context) {
-            return BottomSheet(
-                backgroundColor: Colors.transparent,
-                enableDrag: false,
-                onClosing: () {},
-                builder: (context) {
-                  return this;
-                });
-          });
-    }
+    showModalBottomSheet(
+        context: context,
+        isDismissible: this.dismissable,
+        enableDrag: false,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return BottomSheet(
+              backgroundColor: Colors.transparent,
+              enableDrag: false,
+              onClosing: () {},
+              builder: (context) {
+                return this;
+              });
+        });
   }
 
   @override
