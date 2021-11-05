@@ -292,7 +292,7 @@ class _BottomPickerState extends State<BottomPicker> {
   @override
   void initState() {
     super.initState();
-    this.selectedItemIndex = 0;
+    this.selectedItemIndex = widget.selectedItemIndex;
     this.selectedDateTime = DateTime.now();
   }
 
