@@ -1,3 +1,7 @@
+## [1.0.4] - 06/11/2021
+
+- Add selected index parameter
+
 ## [1.0.3] - 22/10/2021
 
 - Fix bugs

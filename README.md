@@ -29,6 +29,7 @@
 - 24h / 12h time format
 - Built-in themes
 - Customize confirm button
+- Customize first selected item
 
   
 
@@ -39,7 +40,7 @@
 To add bottom picker to your project add this line to your pubspec.yaml file
 ```yaml
 dependencies:
-	bottom_picker: ^1.0.3
+	bottom_picker: ^1.0.4
 ```
 
 ## Parameters
@@ -113,7 +114,7 @@ final  Color iconColor;
   
 
 ///used for simple bottom picker
-///by default it's 0, needs to be in the range [0, this.items.length-1]
+///by default it's 0, needs to be in the range [0, items.length-1]
 ///otherwise an exception will be thrown
 ///for date and time picker type this parameter is not available
 late  int selectedItemIndex;
