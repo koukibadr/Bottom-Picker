@@ -30,7 +30,7 @@
 - Built-in themes
 - Customize confirm button
 - Customize first selected item
-- enahnced tablet view
+- enhanced tablet view
 
   
 
