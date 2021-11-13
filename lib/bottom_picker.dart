@@ -268,17 +268,18 @@ class BottomPicker extends StatefulWidget {
         isDismissible: this.dismissable,
         enableDrag: false,
         constraints: BoxConstraints(
-            maxWidth: context.bottomPickerWidth,
-            maxHeight: context.bottomPickerHeight),
+          maxWidth: context.bottomPickerWidth,
+        ),
         backgroundColor: Colors.transparent,
         builder: (context) {
           return BottomSheet(
-              backgroundColor: Colors.transparent,
-              enableDrag: false,
-              onClosing: () {},
-              builder: (context) {
-                return this;
-              });
+            backgroundColor: Colors.transparent,
+            enableDrag: false,
+            onClosing: () {},
+            builder: (context) {
+              return this;
+            },
+          );
         });
   }
 
@@ -302,12 +303,15 @@ class _BottomPickerState extends State<BottomPicker> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height);
     return Container(
+      height: context.bottomPickerHeight,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -319,34 +323,37 @@ class _BottomPickerState extends State<BottomPicker> {
                 children: [
                   Text(this.widget.title, style: this.widget.titleStyle),
                   InkWell(
-                      onTap: _closeBottomPicker,
-                      child: Icon(Icons.close, color: Colors.black, size: 20))
+                    onTap: _closeBottomPicker,
+                    child: Icon(Icons.close, color: Colors.black, size: 20),
+                  )
                 ],
               ),
             ),
             Expanded(
-                child: this.widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
-                    ? _renderSimplePicker()
-                    : _renderDateTimePicker(this.widget.datePickerMode)),
+              child: this.widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
+                  ? _renderSimplePicker()
+                  : _renderDateTimePicker(this.widget.datePickerMode),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BottomPickerButton(
-                    onClick: () {
-                      if (this.widget.bottomPickerType ==
-                          BOTTOM_PICKER_TYPE.SIMPLE) {
-                        this.widget.onSubmit?.call(this.selectedItemIndex);
-                      } else {
-                        this.widget.onSubmit?.call(this.selectedDateTime);
-                      }
-                      Navigator.pop(context);
-                    },
-                    iconColor: this.widget.iconColor,
-                    gradientColors: getGradientColor(),
-                    text: widget.buttonText,
-                    textStyle: widget.buttonTextStyle,
-                    displayIcon: widget.displayButtonIcon,
-                    solidColor: widget.buttonSingleColor),
+                  onClick: () {
+                    if (this.widget.bottomPickerType ==
+                        BOTTOM_PICKER_TYPE.SIMPLE) {
+                      this.widget.onSubmit?.call(this.selectedItemIndex);
+                    } else {
+                      this.widget.onSubmit?.call(this.selectedDateTime);
+                    }
+                    Navigator.pop(context);
+                  },
+                  iconColor: this.widget.iconColor,
+                  gradientColors: getGradientColor(),
+                  text: widget.buttonText,
+                  textStyle: widget.buttonTextStyle,
+                  displayIcon: widget.displayButtonIcon,
+                  solidColor: widget.buttonSingleColor,
+                ),
               ],
             )
           ],
@@ -357,27 +364,29 @@ class _BottomPickerState extends State<BottomPicker> {
 
   Widget _renderSimplePicker() {
     return CupertinoPicker(
-        itemExtent: 35,
-        scrollController: FixedExtentScrollController(
-            initialItem: this.widget.selectedItemIndex),
-        onSelectedItemChanged: (int index) {
-          this.selectedItemIndex = index;
-          this.widget.onChange?.call(index);
-        },
-        children: this.widget.items!);
+      itemExtent: 35,
+      scrollController: FixedExtentScrollController(
+          initialItem: this.widget.selectedItemIndex),
+      onSelectedItemChanged: (int index) {
+        this.selectedItemIndex = index;
+        this.widget.onChange?.call(index);
+      },
+      children: this.widget.items!,
+    );
   }
 
   Widget _renderDateTimePicker(CupertinoDatePickerMode mode) {
     return CupertinoDatePicker(
-        mode: mode,
-        onDateTimeChanged: (DateTime date) {
-          this.selectedDateTime = date;
-          this.widget.onChange?.call(date);
-        },
-        initialDateTime: this.widget.initialDateTime,
-        maximumDate: this.widget.maxDateTime,
-        minimumDate: this.widget.minDateTime,
-        use24hFormat: this.widget.use24hFormat);
+      mode: mode,
+      onDateTimeChanged: (DateTime date) {
+        this.selectedDateTime = date;
+        this.widget.onChange?.call(date);
+      },
+      initialDateTime: this.widget.initialDateTime,
+      maximumDate: this.widget.maxDateTime,
+      minimumDate: this.widget.minDateTime,
+      use24hFormat: this.widget.use24hFormat,
+    );
   }
 
   _closeBottomPicker() {
