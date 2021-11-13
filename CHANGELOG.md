@@ -1,3 +1,8 @@
+## [1.0.5] - 13/11/2021
+
+- Enhanced tablet view
+- remove uneccessary parameters in datetime constructors
+
 ## [1.0.4] - 06/11/2021
 
 - Add selected index parameter

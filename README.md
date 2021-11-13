@@ -30,6 +30,7 @@
 - Built-in themes
 - Customize confirm button
 - Customize first selected item
+- enahnced tablet view
 
   
 
@@ -40,7 +41,7 @@
 To add bottom picker to your project add this line to your pubspec.yaml file
 ```yaml
 dependencies:
-	bottom_picker: ^1.0.4
+	bottom_picker: ^1.0.5
 ```
 
 ## Parameters

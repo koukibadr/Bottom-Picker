@@ -89,21 +89,14 @@ class ExampleApp extends StatelessWidget {
   }
 
   _openSimpleItemPicker(BuildContext context, List<Text> items) {
-    BottomPicker.dateTime(
-            title: 'LanguageStrings().chooseEndDateTime',
-            titleStyle: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            ),
-            onSubmit: (index) {
-              print(index);
-            },
-            dismissable: true,
-            bottomPickerTheme: BOTTOM_PICKER_THEME.PLUM_PLATE,
-            use24hFormat: true,
-            // iconColor:  Colors.black,
-            initialDateTime: DateTime.now())
-        .show(context);
+    BottomPicker(
+      items: items,
+      title: "Choose your country",
+      titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+      onSubmit: (index) {
+        print(index);
+      },
+    ).show(context);
   }
 
   _openSecondSimpleItemPicker(BuildContext context, List<Text> items) {
