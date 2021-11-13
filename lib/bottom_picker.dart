@@ -1,7 +1,7 @@
 import 'package:bottom_picker/resources/arrays.dart';
+import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -91,7 +91,6 @@ class BottomPicker extends StatefulWidget {
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
       this.iconColor = Colors.white,
-      this.selectedItemIndex = 0,
       this.initialDateTime,
       this.minDateTime,
       this.maxDateTime,
@@ -129,7 +128,6 @@ class BottomPicker extends StatefulWidget {
       this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
       this.gradientColors,
       this.iconColor = Colors.white,
-      this.selectedItemIndex = 0,
       this.initialDateTime,
       this.minDateTime,
       this.maxDateTime,
@@ -269,6 +267,9 @@ class BottomPicker extends StatefulWidget {
         context: context,
         isDismissible: this.dismissable,
         enableDrag: false,
+        constraints: BoxConstraints(
+            maxWidth: context.bottomPickerWidth,
+            maxHeight: context.bottomPickerHeight),
         backgroundColor: Colors.transparent,
         builder: (context) {
           return BottomSheet(
@@ -292,18 +293,17 @@ class _BottomPickerState extends State<BottomPicker> {
   @override
   void initState() {
     super.initState();
-    this.selectedItemIndex = widget.selectedItemIndex;
-    this.selectedDateTime = DateTime.now();
+    if (widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE) {
+      this.selectedItemIndex = widget.selectedItemIndex;
+    } else {
+      this.selectedDateTime = DateTime.now();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.height);
     return Container(
-      height: MediaQuery.of(context).size.height > 1000
-          ? MediaQuery.of(context).size.height * 0.25
-          : MediaQuery.of(context).size.height * 0.3,
-      width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
