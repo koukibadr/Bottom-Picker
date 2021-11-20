@@ -162,6 +162,7 @@ class ExampleApp extends StatelessWidget {
         iconColor: Colors.black,
         minDateTime: DateTime(2021, 5, 1),
         maxDateTime: DateTime(2021, 8, 2),
+        initialDateTime: DateTime(2021, 5, 1),
         gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)]).show(context);
   }
 
