@@ -295,9 +295,9 @@ class _BottomPickerState extends State<BottomPicker> {
   void initState() {
     super.initState();
     if (widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE) {
-      this.selectedItemIndex = widget.selectedItemIndex;
+      selectedItemIndex = widget.selectedItemIndex;
     } else {
-      this.selectedDateTime = DateTime.now();
+      selectedDateTime = widget.initialDateTime ?? DateTime.now();
     }
   }
 
@@ -321,7 +321,10 @@ class _BottomPickerState extends State<BottomPicker> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(this.widget.title, style: this.widget.titleStyle),
+                  Text(
+                    widget.title,
+                    style: widget.titleStyle,
+                  ),
                   InkWell(
                     onTap: _closeBottomPicker,
                     child: Icon(Icons.close, color: Colors.black, size: 20),
@@ -330,24 +333,23 @@ class _BottomPickerState extends State<BottomPicker> {
               ),
             ),
             Expanded(
-              child: this.widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
+              child: widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE
                   ? _renderSimplePicker()
-                  : _renderDateTimePicker(this.widget.datePickerMode),
+                  : _renderDateTimePicker(widget.datePickerMode),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BottomPickerButton(
                   onClick: () {
-                    if (this.widget.bottomPickerType ==
-                        BOTTOM_PICKER_TYPE.SIMPLE) {
-                      this.widget.onSubmit?.call(this.selectedItemIndex);
+                    if (widget.bottomPickerType == BOTTOM_PICKER_TYPE.SIMPLE) {
+                      widget.onSubmit?.call(selectedItemIndex);
                     } else {
-                      this.widget.onSubmit?.call(this.selectedDateTime);
+                      widget.onSubmit?.call(selectedDateTime);
                     }
                     Navigator.pop(context);
                   },
-                  iconColor: this.widget.iconColor,
+                  iconColor: widget.iconColor,
                   gradientColors: getGradientColor(),
                   text: widget.buttonText,
                   textStyle: widget.buttonTextStyle,
@@ -365,13 +367,13 @@ class _BottomPickerState extends State<BottomPicker> {
   Widget _renderSimplePicker() {
     return CupertinoPicker(
       itemExtent: 35,
-      scrollController: FixedExtentScrollController(
-          initialItem: this.widget.selectedItemIndex),
+      scrollController:
+          FixedExtentScrollController(initialItem: widget.selectedItemIndex),
       onSelectedItemChanged: (int index) {
-        this.selectedItemIndex = index;
-        this.widget.onChange?.call(index);
+        selectedItemIndex = index;
+        widget.onChange?.call(index);
       },
-      children: this.widget.items!,
+      children: widget.items!,
     );
   }
 
@@ -379,26 +381,26 @@ class _BottomPickerState extends State<BottomPicker> {
     return CupertinoDatePicker(
       mode: mode,
       onDateTimeChanged: (DateTime date) {
-        this.selectedDateTime = date;
-        this.widget.onChange?.call(date);
+        selectedDateTime = date;
+        widget.onChange?.call(date);
       },
-      initialDateTime: this.widget.initialDateTime,
-      maximumDate: this.widget.maxDateTime,
-      minimumDate: this.widget.minDateTime,
-      use24hFormat: this.widget.use24hFormat,
+      initialDateTime: widget.initialDateTime,
+      maximumDate: widget.maxDateTime,
+      minimumDate: widget.minDateTime,
+      use24hFormat: widget.use24hFormat,
     );
   }
 
   _closeBottomPicker() {
     Navigator.pop(context);
-    this.widget.onClose?.call();
+    widget.onClose?.call();
   }
 
   List<Color> getGradientColor() {
-    if (this.widget.gradientColors != null) {
-      return this.widget.gradientColors!;
+    if (widget.gradientColors != null) {
+      return widget.gradientColors!;
     } else {
-      return DEFAULT_COLORS[this.widget.bottomPickerTheme]!;
+      return DEFAULT_COLORS[widget.bottomPickerTheme]!;
     }
   }
 }
