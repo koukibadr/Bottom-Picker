@@ -1,3 +1,7 @@
+## [1.0.6] - 20/11/2021
+
+- Bug fixes
+
 ## [1.0.5] - 13/11/2021
 
 - Enhanced tablet view
