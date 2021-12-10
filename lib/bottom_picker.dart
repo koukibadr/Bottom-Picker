@@ -21,22 +21,24 @@ class BottomPicker extends StatefulWidget {
   ///```
   late BOTTOM_PICKER_TYPE bottomPickerType;
 
-  BottomPicker(
-      {required this.title,
-      required this.items,
-      this.titleStyle = const TextStyle(),
-      this.dismissable = false,
-      this.onChange,
-      this.onSubmit,
-      this.onClose,
-      this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors,
-      this.iconColor = Colors.white,
-      this.selectedItemIndex = 0,
-      this.buttonText,
-      this.buttonTextStyle,
-      this.displayButtonIcon = true,
-      this.buttonSingleColor}) {
+  BottomPicker({
+    required this.title,
+    required this.items,
+    this.titleStyle = const TextStyle(),
+    this.dismissable = false,
+    this.onChange,
+    this.onSubmit,
+    this.onClose,
+    this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
+    this.gradientColors,
+    this.iconColor = Colors.white,
+    this.selectedItemIndex = 0,
+    this.buttonText,
+    this.buttonTextStyle,
+    this.displayButtonIcon = true,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+  }) {
     this.bottomPickerType = BOTTOM_PICKER_TYPE.SIMPLE;
     assert(this.items != null && this.items!.isNotEmpty);
     assert(this.selectedItemIndex >= 0);
@@ -45,23 +47,25 @@ class BottomPicker extends StatefulWidget {
     }
   }
 
-  BottomPicker.date(
-      {required this.title,
-      this.titleStyle = const TextStyle(),
-      this.dismissable = false,
-      this.onChange,
-      this.onSubmit,
-      this.onClose,
-      this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors,
-      this.iconColor = Colors.white,
-      this.initialDateTime,
-      this.minDateTime,
-      this.maxDateTime,
-      this.buttonText,
-      this.buttonTextStyle,
-      this.displayButtonIcon = true,
-      this.buttonSingleColor}) {
+  BottomPicker.date({
+    required this.title,
+    this.titleStyle = const TextStyle(),
+    this.dismissable = false,
+    this.onChange,
+    this.onSubmit,
+    this.onClose,
+    this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
+    this.gradientColors,
+    this.iconColor = Colors.white,
+    this.initialDateTime,
+    this.minDateTime,
+    this.maxDateTime,
+    this.buttonText,
+    this.buttonTextStyle,
+    this.displayButtonIcon = true,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+  }) {
     this.datePickerMode = CupertinoDatePickerMode.date;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     this.use24hFormat = false;
@@ -81,24 +85,26 @@ class BottomPicker extends StatefulWidget {
     }
   }
 
-  BottomPicker.dateTime(
-      {required this.title,
-      this.titleStyle = const TextStyle(),
-      this.dismissable = false,
-      this.onChange,
-      this.onSubmit,
-      this.onClose,
-      this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors,
-      this.iconColor = Colors.white,
-      this.initialDateTime,
-      this.minDateTime,
-      this.maxDateTime,
-      this.use24hFormat = false,
-      this.buttonText,
-      this.buttonTextStyle,
-      this.displayButtonIcon = true,
-      this.buttonSingleColor}) {
+  BottomPicker.dateTime({
+    required this.title,
+    this.titleStyle = const TextStyle(),
+    this.dismissable = false,
+    this.onChange,
+    this.onSubmit,
+    this.onClose,
+    this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
+    this.gradientColors,
+    this.iconColor = Colors.white,
+    this.initialDateTime,
+    this.minDateTime,
+    this.maxDateTime,
+    this.use24hFormat = false,
+    this.buttonText,
+    this.buttonTextStyle,
+    this.displayButtonIcon = true,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+  }) {
     this.datePickerMode = CupertinoDatePickerMode.dateAndTime;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     if (this.minDateTime != null && this.maxDateTime != null) {
@@ -118,24 +124,26 @@ class BottomPicker extends StatefulWidget {
     }
   }
 
-  BottomPicker.time(
-      {required this.title,
-      this.titleStyle = const TextStyle(),
-      this.dismissable = false,
-      this.onChange,
-      this.onSubmit,
-      this.onClose,
-      this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
-      this.gradientColors,
-      this.iconColor = Colors.white,
-      this.initialDateTime,
-      this.minDateTime,
-      this.maxDateTime,
-      this.use24hFormat = false,
-      this.buttonText,
-      this.buttonTextStyle,
-      this.displayButtonIcon = true,
-      this.buttonSingleColor}) {
+  BottomPicker.time({
+    required this.title,
+    this.titleStyle = const TextStyle(),
+    this.dismissable = false,
+    this.onChange,
+    this.onSubmit,
+    this.onClose,
+    this.bottomPickerTheme = BOTTOM_PICKER_THEME.BLUE,
+    this.gradientColors,
+    this.iconColor = Colors.white,
+    this.initialDateTime,
+    this.minDateTime,
+    this.maxDateTime,
+    this.use24hFormat = false,
+    this.buttonText,
+    this.buttonTextStyle,
+    this.displayButtonIcon = true,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+  }) {
     this.datePickerMode = CupertinoDatePickerMode.time;
     this.bottomPickerType = BOTTOM_PICKER_TYPE.DATETIME;
     if (this.minDateTime != null && this.maxDateTime != null) {
@@ -259,6 +267,9 @@ class BottomPicker extends StatefulWidget {
   ///
   final Color? buttonSingleColor;
 
+  ///TODO add missing documentation
+  final Color backgroundColor;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -306,7 +317,7 @@ class _BottomPickerState extends State<BottomPicker> {
     return Container(
       height: context.bottomPickerHeight,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: widget.backgroundColor,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
