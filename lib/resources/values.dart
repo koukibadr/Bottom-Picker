@@ -1,1 +1,1 @@
-final double tabletMinSize = 768.0;
+const double tabletMinSize = 768.0;
