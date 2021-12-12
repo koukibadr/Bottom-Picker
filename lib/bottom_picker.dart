@@ -38,6 +38,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
   }) : super(key: key) {
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
     assert(items != null && items!.isNotEmpty);
@@ -65,6 +66,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -104,6 +106,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -143,6 +146,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -267,6 +271,9 @@ class BottomPicker extends StatefulWidget {
   ///
   final Color? buttonSingleColor;
 
+  ///TODO add missing documentation
+  final Color backgroundColor;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -314,8 +321,8 @@ class _BottomPickerState extends State<BottomPicker> {
   Widget build(BuildContext context) {
     return Container(
       height: context.bottomPickerHeight,
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: widget.backgroundColor,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
