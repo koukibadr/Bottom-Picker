@@ -4,6 +4,7 @@ import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:bottom_picker/resources/extensions.dart';
 
 // ignore: must_be_immutable
 class BottomPicker extends StatefulWidget {
@@ -323,7 +324,7 @@ class _BottomPickerState extends State<BottomPicker> {
       height: context.bottomPickerHeight,
       decoration: BoxDecoration(
         color: widget.backgroundColor,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
         ),
@@ -374,7 +375,7 @@ class _BottomPickerState extends State<BottomPicker> {
                     Navigator.pop(context);
                   },
                   iconColor: widget.iconColor,
-                  gradientColors: getGradientColor(),
+                  gradientColors: widget.gradientColor,
                   text: widget.buttonText,
                   textStyle: widget.buttonTextStyle,
                   displayIcon: widget.displayButtonIcon,
@@ -421,11 +422,4 @@ class _BottomPickerState extends State<BottomPicker> {
     widget.onClose?.call();
   }
 
-  List<Color> getGradientColor() {
-    if (widget.gradientColors != null) {
-      return widget.gradientColors!;
-    } else {
-      return defaultColors[widget.bottomPickerTheme]!;
-    }
-  }
 }
