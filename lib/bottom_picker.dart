@@ -1,6 +1,7 @@
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
+import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -359,7 +360,14 @@ class _BottomPickerState extends State<BottomPicker> {
             ),
             Expanded(
               child: widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
-                  ? _renderSimplePicker()
+                  ? SimplePicker(
+                      items: widget.items!,
+                      onChange: (int index) {
+                        selectedItemIndex = index;
+                        widget.onChange?.call(index);
+                      },
+                      selectedItemIndex: widget.selectedItemIndex,
+                    )
                   : _renderDateTimePicker(widget.datePickerMode),
             ),
             Row(
@@ -389,20 +397,6 @@ class _BottomPickerState extends State<BottomPicker> {
     );
   }
 
-  Widget _renderSimplePicker() {
-    return CupertinoPicker(
-      itemExtent: 35,
-      scrollController: FixedExtentScrollController(
-        initialItem: widget.selectedItemIndex,
-      ),
-      onSelectedItemChanged: (int index) {
-        selectedItemIndex = index;
-        widget.onChange?.call(index);
-      },
-      children: widget.items!,
-    );
-  }
-
   Widget _renderDateTimePicker(CupertinoDatePickerMode mode) {
     return CupertinoDatePicker(
       mode: mode,
@@ -421,5 +415,4 @@ class _BottomPickerState extends State<BottomPicker> {
     Navigator.pop(context);
     widget.onClose?.call();
   }
-
 }
