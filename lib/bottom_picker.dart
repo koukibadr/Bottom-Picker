@@ -1,6 +1,7 @@
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
+import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -368,7 +369,17 @@ class _BottomPickerState extends State<BottomPicker> {
                       },
                       selectedItemIndex: widget.selectedItemIndex,
                     )
-                  : _renderDateTimePicker(widget.datePickerMode),
+                  : DatePicker(
+                      intialDateTime: widget.initialDateTime,
+                      maxDateTime: widget.maxDateTime,
+                      minDateTime: widget.minDateTime,
+                      mode: widget.datePickerMode,
+                      onDateChanged: (DateTime date) {
+                        selectedDateTime = date;
+                        widget.onChange?.call(date);
+                      },
+                      use24hFormat: widget.use24hFormat,
+                    ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -394,20 +405,6 @@ class _BottomPickerState extends State<BottomPicker> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _renderDateTimePicker(CupertinoDatePickerMode mode) {
-    return CupertinoDatePicker(
-      mode: mode,
-      onDateTimeChanged: (DateTime date) {
-        selectedDateTime = date;
-        widget.onChange?.call(date);
-      },
-      initialDateTime: widget.initialDateTime,
-      maximumDate: widget.maxDateTime,
-      minimumDate: widget.minDateTime,
-      use24hFormat: widget.use24hFormat,
     );
   }
 
