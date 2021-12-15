@@ -18,8 +18,8 @@ class BottomPicker extends StatefulWidget {
   ///the bottom picker type
   ///```dart
   ///{
-  ///SIMPLE,
-  ///DATETIME
+  ///simple,
+  ///dateTime
   ///}
   ///```
   late BOTTOM_PICKER_TYPE bottomPickerType;
@@ -170,12 +170,12 @@ class BottomPicker extends StatefulWidget {
   ///possible values
   ///```
   ///{
-  ///BLUE,
-  ///ORANGE,
-  ///TEMPTING_AZURE,
-  ///HEAVY_RAIN,
-  ///PLUM_PLATE,
-  ///MORNING_SALAD
+  ///blue,
+  ///orange,
+  ///temptingAzure,
+  ///heavyRain,
+  ///plumPlate,
+  ///morningSalad
   ///}
   ///```
   final BOTTOM_PICKER_THEME bottomPickerTheme;
