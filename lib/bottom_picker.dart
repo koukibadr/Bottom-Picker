@@ -74,20 +74,7 @@ class BottomPicker extends StatefulWidget {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
     use24hFormat = false;
-    if (minDateTime != null && maxDateTime != null) {
-      assert(minDateTime!.isBefore(maxDateTime!));
-    }
-    if (maxDateTime != null &&
-        initialDateTime == null &&
-        DateTime.now().isAfter(maxDateTime!)) {
-      initialDateTime = maxDateTime;
-    }
-
-    if (minDateTime != null &&
-        initialDateTime == null &&
-        DateTime.now().isBefore(minDateTime!)) {
-      initialDateTime = minDateTime;
-    }
+    assertInitialValues();
   }
 
   BottomPicker.dateTime({
@@ -113,21 +100,7 @@ class BottomPicker extends StatefulWidget {
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
-    if (minDateTime != null && maxDateTime != null) {
-      assert(minDateTime!.isBefore(maxDateTime!));
-    }
-
-    if (maxDateTime != null &&
-        initialDateTime == null &&
-        DateTime.now().isAfter(maxDateTime!)) {
-      initialDateTime = maxDateTime;
-    }
-
-    if (minDateTime != null &&
-        initialDateTime == null &&
-        DateTime.now().isBefore(minDateTime!)) {
-      initialDateTime = minDateTime;
-    }
+    assertInitialValues();
   }
 
   BottomPicker.time({
@@ -153,21 +126,7 @@ class BottomPicker extends StatefulWidget {
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
-    if (minDateTime != null && maxDateTime != null) {
-      assert(minDateTime!.isBefore(maxDateTime!));
-    }
-
-    if (maxDateTime != null &&
-        initialDateTime == null &&
-        DateTime.now().isAfter(maxDateTime!)) {
-      initialDateTime = maxDateTime;
-    }
-
-    if (minDateTime != null &&
-        initialDateTime == null &&
-        DateTime.now().isBefore(minDateTime!)) {
-      initialDateTime = minDateTime;
-    }
+    assertInitialValues();
   }
 
   ///The title of the bottom picker
@@ -274,7 +233,9 @@ class BottomPicker extends StatefulWidget {
   ///
   final Color? buttonSingleColor;
 
-  ///TODO add missing documentation
+  ///the bottom picker background color,
+  ///by default it's white
+  ///
   final Color backgroundColor;
 
   ///display the bottom picker popup
@@ -355,7 +316,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       color: Colors.black,
                       size: 20,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -386,11 +347,11 @@ class _BottomPickerState extends State<BottomPicker> {
               children: [
                 BottomPickerButton(
                   onClick: () {
-                    if (widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple) {
-                      widget.onSubmit?.call(selectedItemIndex);
-                    } else {
-                      widget.onSubmit?.call(selectedDateTime);
-                    }
+                    widget.onSubmit?.call(
+                      widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
+                          ? selectedItemIndex
+                          : selectedDateTime,
+                    );
                     Navigator.pop(context);
                   },
                   iconColor: widget.iconColor,
