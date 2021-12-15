@@ -95,7 +95,8 @@ class ExampleApp extends StatelessWidget {
       items: items,
       title: 'Choose your country',
       titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-      backgroundColor: Colors.white.withOpacity(0.8),
+      backgroundColor: Colors.yellow.withOpacity(0.6),
+      bottomPickerTheme: BOTTOM_PICKER_THEME.morningSalad,
       onSubmit: (index) {
         print(index);
       },

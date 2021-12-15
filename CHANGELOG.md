@@ -1,3 +1,9 @@
+## [1.1.0] - 20/11/2021
+
+- Add background color parameter
+- Enhanced rendering performance
+- Bug fixes
+
 ## [1.0.6] - 20/11/2021
 
 - Bug fixes
