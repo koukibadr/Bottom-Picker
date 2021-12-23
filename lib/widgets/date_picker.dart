@@ -27,9 +27,9 @@ class DatePicker extends StatelessWidget {
     return CupertinoTheme(
       data: CupertinoThemeData(
         textTheme: CupertinoTextThemeData(
-            dateTimePickerTextStyle: textStyle,
+          dateTimePickerTextStyle: textStyle,
         ),
-     ),
+      ),
       child: CupertinoDatePicker(
         mode: mode,
         onDateTimeChanged: onDateChanged,

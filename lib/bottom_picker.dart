@@ -250,11 +250,9 @@ class BottomPicker extends StatefulWidget {
   ///
   final Color backgroundColor;
 
-
   ///date order applied on date picker or date time picker
   ///by default it's YYYY/MM/DD
   late DatePickerDateOrder? dateOrder;
-
 
   ///the picker text style applied on all types of bottom picker
   ///by default `TextStyle(fontSize: 14)`
