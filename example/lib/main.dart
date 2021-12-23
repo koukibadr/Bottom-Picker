@@ -37,6 +37,8 @@ class ExampleApp extends StatelessWidget {
     Text('Mauritania 🇲🇷')
   ];
 
+  final buttonWidth = 300.0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,41 +52,73 @@ class ExampleApp extends StatelessWidget {
             'https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true',
             width: 200,
           ),
-          ElevatedButton(
-            onPressed: () {
-              _openSimpleItemPicker(context, countryList);
-            },
-            child: Text('Simple Item picker'),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openSimpleItemPicker(context, countryList);
+              },
+              child: Text('Simple Item picker'),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              _openSecondSimpleItemPicker(context, countryList);
-            },
-            child: Text('Simple Item picker with different theme'),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openSecondSimpleItemPicker(context, countryList);
+              },
+              child: Text('Simple Item picker with different theme'),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              _openDatePicker(context);
-            },
-            child: Text('Date Picker'),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openDatePicker(context);
+              },
+              child: Text('Date Picker'),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              _openTimePicker(context);
-            },
-            child: Text('Time Picker'),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openTimePicker(context);
+              },
+              child: Text('Time Picker'),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              _openDateTimePicker(context);
-            },
-            child: Text('Date and Time Picker'),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openDateTimePicker(context);
+              },
+              child: Text('Date and Time Picker'),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              _openDateTimePickerWithCustomButton(context);
-            },
-            child: Text('Bottom picker with custom button'),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openDateTimePickerWithCustomButton(context);
+              },
+              child: Text('Bottom picker with custom button'),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openPickerWithCustomPickerTextStyle(context);
+              },
+              child: Text(
+                'Bottom picker with custom picker text style',
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -206,6 +240,24 @@ class ExampleApp extends StatelessWidget {
       minDateTime: DateTime(2021, 5, 1),
       maxDateTime: DateTime(2021, 8, 2),
       gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)],
+    ).show(context);
+  }
+
+  void _openPickerWithCustomPickerTextStyle(BuildContext context) {
+    BottomPicker(
+      items: [
+        Text('Leonardo DiCaprio'),
+        Text('Johnny Depp'),
+        Text('Robert De Niro'),
+        Text('Tom Hardy'),
+        Text('Ben Affleck'),
+      ],
+      title: 'Select the actor',
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+      ),
     ).show(context);
   }
 }

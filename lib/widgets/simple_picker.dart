@@ -5,6 +5,7 @@ class SimplePicker extends StatelessWidget {
   final Function(int)? onChange;
   final List<Text> items;
   final TextStyle textStyle;
+  final double itemExtent;
 
   const SimplePicker({
     Key? key,
@@ -12,6 +13,7 @@ class SimplePicker extends StatelessWidget {
     required this.onChange,
     required this.selectedItemIndex,
     required this.textStyle,
+    required this.itemExtent,
   }) : super(key: key);
 
   @override
@@ -19,11 +21,11 @@ class SimplePicker extends StatelessWidget {
     return CupertinoTheme(
       data: CupertinoThemeData(
         textTheme: CupertinoTextThemeData(
-          dateTimePickerTextStyle: textStyle,
+          pickerTextStyle: textStyle,
         ),
       ),
       child: CupertinoPicker(
-        itemExtent: 35,
+        itemExtent: itemExtent,
         scrollController: FixedExtentScrollController(
           initialItem: selectedItemIndex,
         ),

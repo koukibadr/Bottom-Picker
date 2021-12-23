@@ -43,6 +43,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerTextStyle = defaultPickerTextStyle,
+    this.itemExtent = 35,
   }) : super(key: key) {
     dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
@@ -78,6 +79,7 @@ class BottomPicker extends StatefulWidget {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
     use24hFormat = false;
+    itemExtent = 0;
     assertInitialValues();
   }
 
@@ -106,6 +108,7 @@ class BottomPicker extends StatefulWidget {
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
+    itemExtent = 0;
     assertInitialValues();
   }
 
@@ -134,6 +137,7 @@ class BottomPicker extends StatefulWidget {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
     dateOrder = null;
+    itemExtent = 0;
     assertInitialValues();
   }
 
@@ -256,6 +260,10 @@ class BottomPicker extends StatefulWidget {
   ///by default `TextStyle(fontSize: 14)`
   final TextStyle pickerTextStyle;
 
+  ///define the picker item extent available only for list items picker
+  ///by default it's 35
+  late double itemExtent;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -348,6 +356,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       },
                       selectedItemIndex: widget.selectedItemIndex,
                       textStyle: widget.pickerTextStyle,
+                      itemExtent: widget.itemExtent,
                     )
                   : DatePicker(
                       intialDateTime: widget.initialDateTime,
