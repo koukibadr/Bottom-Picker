@@ -3,7 +3,10 @@
 
   
 
+  
+
 #  Bottom Picker
+
 
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true"/>
@@ -11,17 +14,14 @@
 <b>Easy way to display bottom picker item or date/time picker</b>
 </p>
 
-  
-
-  
 
 | ![simple item picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true) | ![date_time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true) |
 |--|--|
 | ![time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/time%20picker.png?raw=true) | ![date picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date%20picker.png?raw=true) |
 
-##  Features
-
   
+
+##  Features
 
 -  Simple list picker wheel
 -  Date picker
@@ -33,24 +33,26 @@
 -  Customize first selected item
 -  enhanced tablet view
 -  customize background color
+-  customize date format order
+-  customize picker text style (color, font size, font weight...)
 
-  
 
 ##  Getting Started
-
 
 To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^1.1.0
+	bottom_picker: ^1.4.0
 ```
+
+  
 
 ##  Parameters
 
 ```dart
 
-///The title of the bottom picker
+///The title of the bottom picke
 ///it's required for all bottom picker types
 final String title;
 
@@ -96,18 +98,23 @@ final Function? onClose;
 ///plumPlate,
 ///morningSalad
 ///}
-final  BOTTOM_PICKER_THEME  bottomPickerTheme;
+final BOTTOM_PICKER_THEME bottomPickerTheme;
+
 
 
 ///to set a custom button theme color use this list
 ///when it's not null it will be applied
 final List<Color>? gradientColors;
 
+  
+  
 
 ///define the icon color on the button
 ///by default it's White
 final Color iconColor;
 
+  
+  
 
 ///used for simple bottom picker
 ///by default it's 0, needs to be in the range [0, items.length-1]
@@ -115,15 +122,18 @@ final Color iconColor;
 ///for date and time picker type this parameter is not available
 late int selectedItemIndex;
 
+ 
 
 ///The initial date time applied on the date and time picker
 ///by default it's null
 DateTime? initialDateTime;
 
+  
 
 ///the max date time on the date picker
 ///by default it's null
 DateTime? maxDateTime;
+
 
 
 ///the minimum date & time applied on the date picker
@@ -131,9 +141,11 @@ DateTime? maxDateTime;
 DateTime? minDateTime;
 
 
+
 ///define whether the time uses 24h or 12h format
 ///by default it's false (12h format)
 late bool use24hFormat;
+
 
 
 ///the text that will be applied to the button
@@ -144,6 +156,7 @@ final String? buttonText;
 ///the button text style, will be applied on the button's text
 final TextStyle? buttonTextStyle;
 
+  
 
 ///display button icon
 ///by default it's true
@@ -158,45 +171,65 @@ final Color? buttonSingleColor;
 
 ///the bottom picker background color,
 ///by default it's white
-final  Color  backgroundColor;
+final Color backgroundColor;
 
+
+
+///date order applied on date picker or date time picker
+///by default it's YYYY/MM/DD
+late  DatePickerDateOrder?  dateOrder;
+
+
+
+///the picker text style applied on all types of bottom picker
+///by default `TextStyle(fontSize: 14)`
+final  TextStyle  pickerTextStyle;
+
+
+///define the picker item extent available only for list items picker
+///by default it's 35
+late  double  itemExtent;
 ```
 
   
 
- 
+  
+
+  
 
 ##  Examples
 
   
-Simple item picker
 
+Simple item picker
 ```dart
 BottomPicker(
 	items: items,
 	title:  "Choose your country",
-	titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize:  15))
-.show(context);
+	titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize:  15)
+).show(context);
 ```
 
 <hr>
 
-
 Date picker
 
 ```dart
-
 BottomPicker.date(
 	title:  "Set your Birthday",
-	titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize:  15, color: Colors.blue),
+	titleStyle: TextStyle(
+		fontWeight: FontWeight.bold,
+		fontSize:  15,
+		color: Colors.blue
+	),
 	onChange: (index) {
 		print(index);
 	},
 	onSubmit: (index) {
 		print(index);
 	},
-	bottomPickerTheme: BOTTOM_PICKER_THEME.plumPlate)
-.show(context);
+	bottomPickerTheme: BOTTOM_PICKER_THEME.plumPlate
+).show(context);
 
 ```
 
@@ -207,7 +240,11 @@ Time picker
 ```dart
 BottomPicker.time(
 	title:  "Set your next meeting time",
-	titleStyle: TextStyle(fontWeight: FontWeight.bold,fontSize:  15,color: Colors.orange),
+	titleStyle: TextStyle(
+		fontWeight: FontWeight.bold,
+		fontSize:  15,
+		color: Colors.orange
+	),
 	onSubmit: (index) {
 		print(index);
 	},
@@ -215,8 +252,8 @@ BottomPicker.time(
 		print("Picker closed");
 	},
 	bottomPickerTheme: BOTTOM_PICKER_THEME.orange,
-	use24hFormat:  true)
-.show(context);
+	use24hFormat:  true
+).show(context);
 
 ```
 
@@ -227,7 +264,11 @@ Date & Time picker
 ```dart
 BottomPicker.dateTime(
 	title:  "Set the event exact time and date",
-	titleStyle: TextStyle(fontWeight: FontWeight.bold,fontSize:  15,color: Colors.black),
+	titleStyle: TextStyle(
+		fontWeight: FontWeight.bold,
+		fontSize:  15,
+		color: Colors.black
+	),
 	onSubmit: (index) {
 		print(index);
 	},
@@ -237,20 +278,25 @@ BottomPicker.dateTime(
 	iconColor: Colors.black,
 	minDateTime: DateTime(2021,7,1),
 	maxDateTime: DateTime(2021,8,2),
-	gradientColors: [Color(0xfffdcbf1),Color(0xffe6dee9)])
-.show(context);
+	gradientColors: [Color(0xfffdcbf1),Color(0xffe6dee9)]
+).show(context);
 
 ```
+
 <hr>
+
+  
 
 With custom button design
 
 ```dart
-
 BottomPicker.dateTime(
 	title:  "Set the event exact time and date",
 	titleStyle: TextStyle(
-		fontWeight: FontWeight.bold, fontSize:  15, color: Colors.black),
+		fontWeight: FontWeight.bold,
+		fontSize:  15,
+		color: Colors.black
+	),
 	onSubmit: (date) {
 		print(date);
 	},
@@ -267,32 +313,66 @@ BottomPicker.dateTime(
 ).show(context);
 
 ```
+
 <hr>
 
 With custom background
 
 ```dart
 BottomPicker(
-	items:  items,
+	items: items,
 	title:  'Choose your country',
-	titleStyle:  TextStyle(fontWeight:  FontWeight.bold,  fontSize:  15),
-	backgroundColor:  Colors.yellow.withOpacity(0.6),
-	bottomPickerTheme:  BOTTOM_PICKER_THEME.morningSalad,
+	titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize:  15),
+	backgroundColor: Colors.yellow.withOpacity(0.6),
+	bottomPickerTheme: BOTTOM_PICKER_THEME.morningSalad,
 	onSubmit: (index) {
 		print(index);
 	},
 ).show(context);
+
+```
+
+<p  align="center">
+<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_background.png?raw=true"  width="200"/>
+</p>
+
+<hr>
+With custom picker text style
+
+```dart
+BottomPicker(
+	items: [
+		Text('Leonardo DiCaprio'),
+		Text('Johnny Depp'),
+		Text('Robert De Niro'),
+		Text('Tom Hardy'),
+		Text('Ben Affleck'),
+	],
+	title:  'Select the actor',
+	pickerTextStyle:  TextStyle(
+		color:  Colors.blue,
+		fontSize:  12,
+		fontWeight:  FontWeight.bold,
+	),
+).show(context);
 ```
 <p  align="center">
-<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_background.png?raw=true" width="200"/>
+<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_picker_text_style.png?raw=true"  width="200"/>
 </p>
+  
 
   
 
 ##  Contribution
 
+  
+
 You can contribute to it [https://github.com/koukibadr/Bottom-Picker](https://github.com/koukibadr/Bottom-Picker)
 
+  
+
 -  If you **found a bug**, open an issue.
+
 -  If you **have a feature request**, open an issue.
+
 -  If you **want to contribute**, submit a pull request.

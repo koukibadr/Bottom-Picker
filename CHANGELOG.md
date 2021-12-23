@@ -1,3 +1,9 @@
+## [1.4.0] - 23/12/2021
+
+- Add picker text style attribute
+- Add date format order parameter
+- Add item extent parameter
+
 ## [1.1.0] - 20/11/2021
 
 - Add background color parameter
