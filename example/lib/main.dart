@@ -124,6 +124,11 @@ class ExampleApp extends StatelessWidget {
     BottomPicker.date(
       title: 'Set your Birthday',
       dateOrder: DatePickerDateOrder.dmy,
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
       titleStyle: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 15,

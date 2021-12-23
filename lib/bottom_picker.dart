@@ -1,5 +1,6 @@
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
+import 'package:bottom_picker/resources/values.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
@@ -41,6 +42,7 @@ class BottomPicker extends StatefulWidget {
     this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerTextStyle = defaultPickerTextStyle,
   }) : super(key: key) {
     dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
@@ -71,6 +73,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
+    this.pickerTextStyle = defaultPickerTextStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -99,6 +102,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
+    this.pickerTextStyle = defaultPickerTextStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -125,6 +129,7 @@ class BottomPicker extends StatefulWidget {
     this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerTextStyle = defaultPickerTextStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -241,9 +246,10 @@ class BottomPicker extends StatefulWidget {
   ///
   final Color backgroundColor;
 
-
   ///TODO add missing code documentation
   late DatePickerDateOrder? dateOrder;
+
+  final TextStyle pickerTextStyle;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -336,6 +342,7 @@ class _BottomPickerState extends State<BottomPicker> {
                         widget.onChange?.call(index);
                       },
                       selectedItemIndex: widget.selectedItemIndex,
+                      textStyle: widget.pickerTextStyle,
                     )
                   : DatePicker(
                       intialDateTime: widget.initialDateTime,
@@ -348,6 +355,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       },
                       use24hFormat: widget.use24hFormat,
                       dateOrder: widget.dateOrder,
+                      textStyle: widget.pickerTextStyle,
                     ),
             ),
             Row(

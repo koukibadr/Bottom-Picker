@@ -9,6 +9,7 @@ class DatePicker extends StatelessWidget {
   final DateTime? minDateTime;
   final bool use24hFormat;
   final DatePickerDateOrder? dateOrder;
+  final TextStyle textStyle;
 
   const DatePicker({
     Key? key,
@@ -18,19 +19,27 @@ class DatePicker extends StatelessWidget {
     required this.mode,
     required this.onDateChanged,
     required this.use24hFormat,
+    required this.textStyle,
     this.dateOrder,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoDatePicker(
-      mode: mode,
-      onDateTimeChanged: onDateChanged,
-      initialDateTime: intialDateTime,
-      maximumDate: maxDateTime,
-      minimumDate: minDateTime,
-      use24hFormat: use24hFormat,
-      dateOrder: dateOrder,
+    return CupertinoTheme(
+      data: CupertinoThemeData(
+        textTheme: CupertinoTextThemeData(
+            dateTimePickerTextStyle: textStyle,
+        ),
+     ),
+      child: CupertinoDatePicker(
+        mode: mode,
+        onDateTimeChanged: onDateChanged,
+        initialDateTime: intialDateTime,
+        maximumDate: maxDateTime,
+        minimumDate: minDateTime,
+        use24hFormat: use24hFormat,
+        dateOrder: dateOrder,
+      ),
     );
   }
 }
