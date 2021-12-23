@@ -2,6 +2,7 @@
 
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -122,6 +123,7 @@ class ExampleApp extends StatelessWidget {
   void _openDatePicker(BuildContext context) {
     BottomPicker.date(
       title: 'Set your Birthday',
+      dateOrder: DatePickerDateOrder.dmy,
       titleStyle: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 15,

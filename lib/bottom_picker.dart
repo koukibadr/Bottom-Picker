@@ -5,7 +5,6 @@ import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:bottom_picker/resources/extensions.dart';
 
 // ignore: must_be_immutable
@@ -43,6 +42,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
   }) : super(key: key) {
+    dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
     assert(items != null && items!.isNotEmpty);
     assert(selectedItemIndex >= 0);
@@ -70,6 +70,7 @@ class BottomPicker extends StatefulWidget {
     this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.dateOrder = DatePickerDateOrder.ymd,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -97,6 +98,7 @@ class BottomPicker extends StatefulWidget {
     this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.dateOrder = DatePickerDateOrder.ymd,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -126,6 +128,7 @@ class BottomPicker extends StatefulWidget {
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
+    dateOrder = null;
     assertInitialValues();
   }
 
@@ -238,6 +241,10 @@ class BottomPicker extends StatefulWidget {
   ///
   final Color backgroundColor;
 
+
+  ///TODO add missing code documentation
+  late DatePickerDateOrder? dateOrder;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -340,6 +347,7 @@ class _BottomPickerState extends State<BottomPicker> {
                         widget.onChange?.call(date);
                       },
                       use24hFormat: widget.use24hFormat,
+                      dateOrder: widget.dateOrder,
                     ),
             ),
             Row(
