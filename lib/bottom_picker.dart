@@ -2,6 +2,7 @@ import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/resources/values.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
+import 'package:bottom_picker/widgets/close_icon.dart';
 import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -46,6 +47,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 35,
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
   }) : super(key: key) {
     dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
@@ -79,6 +81,7 @@ class BottomPicker extends StatefulWidget {
     this.pickerTextStyle = defaultPickerTextStyle,
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -111,6 +114,7 @@ class BottomPicker extends StatefulWidget {
     this.pickerTextStyle = defaultPickerTextStyle,
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -141,6 +145,7 @@ class BottomPicker extends StatefulWidget {
     this.pickerTextStyle = defaultPickerTextStyle,
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -278,7 +283,8 @@ class BottomPicker extends StatefulWidget {
   ///by default `closeIconColor = Colors.black`
   final Color closeIconColor;
 
-  
+  //TODO add missing documentation
+  final LAYOUT_ORIENTATION layoutOrientation;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -352,14 +358,10 @@ class _BottomPickerState extends State<BottomPicker> {
                     style: widget.titleStyle,
                   ),
                   if (widget.displayCloseIcon)
-                    InkWell(
-                      onTap: _closeBottomPicker,
-                      child: Icon(
-                        Icons.close,
-                        color: widget.closeIconColor,
-                        size: 20,
-                      ),
-                    ),
+                    CloseIcon(
+                      onPress: _closeBottomPicker,
+                      iconColor: widget.closeIconColor,
+                    )
                 ],
               ),
             ),
