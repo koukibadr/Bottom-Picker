@@ -1,3 +1,9 @@
+## [1.5.0] - 23/12/2021
+
+- Add close icon color parameter
+- Add close icon display parameter
+- Add different layout orientation options (LTR, RTL)
+
 ## [1.4.0] - 23/12/2021
 
 - Add picker text style attribute
