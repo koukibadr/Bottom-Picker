@@ -270,10 +270,15 @@ class BottomPicker extends StatefulWidget {
   ///by default it's 35
   late double itemExtent;
 
-  //TODO add missing code documentation
+  ///indicate whether the close icon will be rendred or not
+  /// by default `displayCloseIcon = true`
   final bool displayCloseIcon;
 
+  ///the close icon color
+  ///by default `closeIconColor = Colors.black`
   final Color closeIconColor;
+
+  
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup

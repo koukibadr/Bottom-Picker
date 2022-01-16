@@ -11,6 +11,8 @@ enum BOTTOM_PICKER_THEME {
   morningSalad
 }
 
+enum LAYOUT_ORIENTATION { ltr, rtl }
+
 const List<Color> blueThemeColor = [
   Color(0xFF3366FF),
   Color(0xFF00CCFF),
