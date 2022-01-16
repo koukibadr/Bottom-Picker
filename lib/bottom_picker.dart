@@ -352,17 +352,9 @@ class _BottomPickerState extends State<BottomPicker> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.title,
-                    style: widget.titleStyle,
-                  ),
-                  if (widget.displayCloseIcon)
-                    CloseIcon(
-                      onPress: _closeBottomPicker,
-                      iconColor: widget.closeIconColor,
-                    )
-                ],
+                children: widget.layoutOrientation == LAYOUT_ORIENTATION.rtl
+                    ? _displayRTLOrientationLayout()
+                    : _displayLTROrientationLayout(),
               ),
             ),
             Expanded(
@@ -416,6 +408,33 @@ class _BottomPickerState extends State<BottomPicker> {
         ),
       ),
     );
+  }
+
+  List<Widget> _displayRTLOrientationLayout() {
+    return [
+      CloseIcon(
+        onPress: _closeBottomPicker,
+        iconColor: widget.closeIconColor,
+      ),
+      Text(
+        widget.title,
+        style: widget.titleStyle,
+        textAlign: TextAlign.end,
+      ),
+    ];
+  }
+
+  List<Widget> _displayLTROrientationLayout() {
+    return [
+      Text(
+        widget.title,
+        style: widget.titleStyle,
+      ),
+      CloseIcon(
+        onPress: _closeBottomPicker,
+        iconColor: widget.closeIconColor,
+      ),
+    ];
   }
 
   void _closeBottomPicker() {

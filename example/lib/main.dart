@@ -142,7 +142,7 @@ class ExampleApp extends StatelessWidget {
     BottomPicker(
       items: items,
       selectedItemIndex: 1,
-      title: 'Choose your country',
+      title: 'اختر بلدك',
       titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
       onChange: (index) {
         print(index);
@@ -151,6 +151,7 @@ class ExampleApp extends StatelessWidget {
         print(index);
       },
       bottomPickerTheme: BOTTOM_PICKER_THEME.morningSalad,
+      layoutOrientation: LAYOUT_ORIENTATION.rtl,
     ).show(context);
   }
 
