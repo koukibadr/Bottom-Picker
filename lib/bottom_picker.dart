@@ -44,6 +44,8 @@ class BottomPicker extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.pickerTextStyle = defaultPickerTextStyle,
     this.itemExtent = 35,
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
   }) : super(key: key) {
     dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
@@ -75,6 +77,8 @@ class BottomPicker extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
     this.pickerTextStyle = defaultPickerTextStyle,
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -105,6 +109,8 @@ class BottomPicker extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
     this.pickerTextStyle = defaultPickerTextStyle,
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -133,6 +139,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerTextStyle = defaultPickerTextStyle,
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -262,6 +270,11 @@ class BottomPicker extends StatefulWidget {
   ///by default it's 35
   late double itemExtent;
 
+  //TODO add missing code documentation
+  final bool displayCloseIcon;
+
+  final Color closeIconColor;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -333,14 +346,15 @@ class _BottomPickerState extends State<BottomPicker> {
                     widget.title,
                     style: widget.titleStyle,
                   ),
-                  InkWell(
-                    onTap: _closeBottomPicker,
-                    child: const Icon(
-                      Icons.close,
-                      color: Colors.black,
-                      size: 20,
+                  if (widget.displayCloseIcon)
+                    InkWell(
+                      onTap: _closeBottomPicker,
+                      child: Icon(
+                        Icons.close,
+                        color: widget.closeIconColor,
+                        size: 20,
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
