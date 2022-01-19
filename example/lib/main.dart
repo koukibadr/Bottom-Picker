@@ -259,6 +259,7 @@ class ExampleApp extends StatelessWidget {
         fontSize: 12,
         fontWeight: FontWeight.bold,
       ),
+      closeIconColor: Colors.red,
     ).show(context);
   }
 }

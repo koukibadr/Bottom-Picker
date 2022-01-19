@@ -1,3 +1,4 @@
+  
 
   
 
@@ -7,6 +8,8 @@
 
 #  Bottom Picker
 
+  
+  
 
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true"/>
@@ -14,6 +17,8 @@
 <b>Easy way to display bottom picker item or date/time picker</b>
 </p>
 
+  
+  
 
 | ![simple item picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true) | ![date_time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true) |
 |--|--|
@@ -21,7 +26,11 @@
 
   
 
+  
+
 ##  Features
+
+  
 
 -  Simple list picker wheel
 -  Date picker
@@ -31,11 +40,14 @@
 -  Built-in themes
 -  Customize confirm button
 -  Customize first selected item
--  enhanced tablet view
--  customize background color
--  customize date format order
--  customize picker text style (color, font size, font weight...)
-
+-  Enhanced tablet view
+-  Customize background color
+-  Customize date format order
+-  Customize picker text style (color, font size, font weight...)
+-  Customize close button style and display
+- Customize layout orientation (LTR / RTL )
+  
+  
 
 ##  Getting Started
 
@@ -43,15 +55,14 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^1.4.0
+	bottom_picker: ^1.5.0
 ```
-
-  
 
 ##  Parameters
 
-```dart
+  
 
+```dart
 ///The title of the bottom picke
 ///it's required for all bottom picker types
 final String title;
@@ -73,7 +84,7 @@ final bool dismissable;
 late List<Text>? items;
 
 
-///Nullable function, invoked when navigating between picker items
+///Nullable function, invoked when navigating between picker item
 ///whether it's date picker or simple item picker it will return a value DateTime or int(index)
 final Function(dynamic)? onChange;
 
@@ -101,20 +112,15 @@ final Function? onClose;
 final BOTTOM_PICKER_THEME bottomPickerTheme;
 
 
-
 ///to set a custom button theme color use this list
 ///when it's not null it will be applied
 final List<Color>? gradientColors;
 
-  
-  
 
 ///define the icon color on the button
 ///by default it's White
 final Color iconColor;
 
-  
-  
 
 ///used for simple bottom picker
 ///by default it's 0, needs to be in the range [0, items.length-1]
@@ -122,18 +128,15 @@ final Color iconColor;
 ///for date and time picker type this parameter is not available
 late int selectedItemIndex;
 
- 
 
 ///The initial date time applied on the date and time picker
 ///by default it's null
 DateTime? initialDateTime;
 
-  
 
 ///the max date time on the date picker
 ///by default it's null
 DateTime? maxDateTime;
-
 
 
 ///the minimum date & time applied on the date picker
@@ -141,11 +144,9 @@ DateTime? maxDateTime;
 DateTime? minDateTime;
 
 
-
 ///define whether the time uses 24h or 12h format
 ///by default it's false (12h format)
 late bool use24hFormat;
-
 
 
 ///the text that will be applied to the button
@@ -156,7 +157,6 @@ final String? buttonText;
 ///the button text style, will be applied on the button's text
 final TextStyle? buttonTextStyle;
 
-  
 
 ///display button icon
 ///by default it's true
@@ -174,21 +174,38 @@ final Color? buttonSingleColor;
 final Color backgroundColor;
 
 
-
 ///date order applied on date picker or date time picker
 ///by default it's YYYY/MM/DD
-late  DatePickerDateOrder?  dateOrder;
-
+late DatePickerDateOrder? dateOrder;
 
 
 ///the picker text style applied on all types of bottom picker
 ///by default `TextStyle(fontSize: 14)`
-final  TextStyle  pickerTextStyle;
+final TextStyle pickerTextStyle;
 
 
 ///define the picker item extent available only for list items picker
 ///by default it's 35
-late  double  itemExtent;
+late double itemExtent;
+
+
+///indicate whether the close icon will be rendred or not
+/// by default `displayCloseIcon = true`
+final  bool  displayCloseIcon;
+
+
+///the close icon color
+///by default `closeIconColor = Colors.black`
+final  Color  closeIconColor;
+
+
+///the layout orientation of the bottom picker
+///by default the orientation is set to LTR
+///```
+///LAYOUT_ORIENTATION.ltr,
+///LAYOUT_ORIENTATION.rtl
+///```
+final  LAYOUT_ORIENTATION  layoutOrientation;
 ```
 
   
@@ -197,9 +214,9 @@ late  double  itemExtent;
 
   
 
-##  Examples
-
   
+
+##  Examples
 
 Simple item picker
 ```dart
@@ -210,7 +227,10 @@ BottomPicker(
 ).show(context);
 ```
 
+
 <hr>
+
+  
 
 Date picker
 
@@ -234,6 +254,8 @@ BottomPicker.date(
 ```
 
 <hr>
+
+  
 
 Time picker
 
@@ -285,8 +307,6 @@ BottomPicker.dateTime(
 
 <hr>
 
-  
-
 With custom button design
 
 ```dart
@@ -316,9 +336,11 @@ BottomPicker.dateTime(
 
 <hr>
 
+
 With custom background
 
 ```dart
+
 BottomPicker(
 	items: items,
 	title:  'Choose your country',
@@ -331,15 +353,16 @@ BottomPicker(
 ).show(context);
 
 ```
-
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_background.png?raw=true"  width="200"/>
 </p>
 
 <hr>
+
 With custom picker text style
 
 ```dart
+
 BottomPicker(
 	items: [
 		Text('Leonardo DiCaprio'),
@@ -349,15 +372,46 @@ BottomPicker(
 		Text('Ben Affleck'),
 	],
 	title:  'Select the actor',
-	pickerTextStyle:  TextStyle(
-		color:  Colors.blue,
+	pickerTextStyle: TextStyle(
+		color: Colors.blue,
 		fontSize:  12,
-		fontWeight:  FontWeight.bold,
+		fontWeight: FontWeight.bold,
 	),
 ).show(context);
+
 ```
+
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_picker_text_style.png?raw=true"  width="200"/>
+</p>
+
+<hr>
+
+
+With custom close button style
+
+```dart
+
+BottomPicker(
+	items: [
+		Text('Leonardo DiCaprio'),
+		Text('Johnny Depp'),
+		Text('Robert De Niro'),
+		Text('Tom Hardy'),
+		Text('Ben Affleck'),
+	],
+	title:  'Select the actor',
+	pickerTextStyle: TextStyle(
+		color: Colors.blue,
+		fontSize:  12,
+		fontWeight: FontWeight.bold,
+	),
+	closeIconColor: Colors.red
+).show(context);
+
+```
+<p  align="center">
+<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_close_button.png?raw=true"  width="200"/>
 </p>
   
 
@@ -365,14 +419,13 @@ BottomPicker(
 
 ##  Contribution
 
-  
-
 You can contribute to it [https://github.com/koukibadr/Bottom-Picker](https://github.com/koukibadr/Bottom-Picker)
 
-  
-
 -  If you **found a bug**, open an issue.
-
 -  If you **have a feature request**, open an issue.
-
 -  If you **want to contribute**, submit a pull request.
+
+##  Contributors
+<a href = "https://github.com/koukibadr/Bottom-Picker/graphs/contributors">
+<img src = "https://contrib.rocks/image?repo=koukibadr/Bottom-Picker"/>
+</a>

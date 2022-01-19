@@ -1,4 +1,4 @@
-## [1.5.0] - 23/12/2021
+## [1.5.0] - 01/19/2022
 
 - Add close icon color parameter
 - Add close icon display parameter
