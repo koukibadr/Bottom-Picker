@@ -283,7 +283,6 @@ class BottomPicker extends StatefulWidget {
   ///by default `closeIconColor = Colors.black`
   final Color closeIconColor;
 
-
   ///the layout orientation of the bottom picker
   ///by default the orientation is set to LTR
   ///```
@@ -415,7 +414,6 @@ class _BottomPickerState extends State<BottomPicker> {
       ),
     );
   }
-
 
   ///render list widgets for RTL orientation
   List<Widget> _displayRTLOrientationLayout() {
