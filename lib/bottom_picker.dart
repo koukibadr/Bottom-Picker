@@ -354,6 +354,7 @@ class _BottomPickerState extends State<BottomPicker> {
                 left: 20,
                 right: 20,
                 top: 20,
+                bottom: 20,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -387,6 +388,9 @@ class _BottomPickerState extends State<BottomPicker> {
                       dateOrder: widget.dateOrder,
                       textStyle: widget.pickerTextStyle,
                     ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

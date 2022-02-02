@@ -254,9 +254,9 @@ class ExampleApp extends StatelessWidget {
         Text('Ben Affleck'),
       ],
       title: 'Select the actor',
+      
       pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontSize: 12,
+        color: Colors.black,
         fontWeight: FontWeight.bold,
       ),
       closeIconColor: Colors.red,
