@@ -135,6 +135,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
+      buttonAlignement: MainAxisAlignment.start,
     ).show(context);
   }
 
