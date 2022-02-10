@@ -48,6 +48,7 @@ class BottomPicker extends StatefulWidget {
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
     this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.buttonAlignement = MainAxisAlignment.center,
   }) : super(key: key) {
     dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
@@ -82,6 +83,7 @@ class BottomPicker extends StatefulWidget {
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
     this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.buttonAlignement = MainAxisAlignment.center,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -115,6 +117,7 @@ class BottomPicker extends StatefulWidget {
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
     this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.buttonAlignement = MainAxisAlignment.center,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -146,6 +149,7 @@ class BottomPicker extends StatefulWidget {
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
     this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.buttonAlignement = MainAxisAlignment.center,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -290,6 +294,10 @@ class BottomPicker extends StatefulWidget {
   ///LAYOUT_ORIENTATION.rtl
   ///```
   final LAYOUT_ORIENTATION layoutOrientation;
+
+
+  //TODO add missing code documentation
+  final MainAxisAlignment buttonAlignement;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
