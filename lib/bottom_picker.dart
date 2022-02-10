@@ -296,7 +296,8 @@ class BottomPicker extends StatefulWidget {
   final LAYOUT_ORIENTATION layoutOrientation;
 
 
-  //TODO add missing code documentation
+  ///THe alignement of the bottom picker button
+  ///by default it's `MainAxisAlignment.center`
   final MainAxisAlignment buttonAlignement;
 
   ///display the bottom picker popup
@@ -405,7 +406,7 @@ class _BottomPickerState extends State<BottomPicker> {
                 horizontal: 20,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: widget.buttonAlignement,
                 children: [
                   BottomPickerButton(
                     onClick: () {
