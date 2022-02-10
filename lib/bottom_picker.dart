@@ -392,26 +392,31 @@ class _BottomPickerState extends State<BottomPicker> {
             const SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BottomPickerButton(
-                  onClick: () {
-                    widget.onSubmit?.call(
-                      widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
-                          ? selectedItemIndex
-                          : selectedDateTime,
-                    );
-                    Navigator.pop(context);
-                  },
-                  iconColor: widget.iconColor,
-                  gradientColors: widget.gradientColor,
-                  text: widget.buttonText,
-                  textStyle: widget.buttonTextStyle,
-                  displayIcon: widget.displayButtonIcon,
-                  solidColor: widget.buttonSingleColor,
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BottomPickerButton(
+                    onClick: () {
+                      widget.onSubmit?.call(
+                        widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
+                            ? selectedItemIndex
+                            : selectedDateTime,
+                      );
+                      Navigator.pop(context);
+                    },
+                    iconColor: widget.iconColor,
+                    gradientColors: widget.gradientColor,
+                    text: widget.buttonText,
+                    textStyle: widget.buttonTextStyle,
+                    displayIcon: widget.displayButtonIcon,
+                    solidColor: widget.buttonSingleColor,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
