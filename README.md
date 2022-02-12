@@ -45,7 +45,8 @@
 -  Customize date format order
 -  Customize picker text style (color, font size, font weight...)
 -  Customize close button style and display
-- Customize layout orientation (LTR / RTL )
+-  Customize layout orientation (LTR / RTL )
+-  Customize button alignment 
   
   
 
@@ -55,7 +56,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^1.5.0
+	bottom_picker: ^1.6.0
 ```
 
 ##  Parameters
@@ -206,6 +207,10 @@ final  Color  closeIconColor;
 ///LAYOUT_ORIENTATION.rtl
 ///```
 final  LAYOUT_ORIENTATION  layoutOrientation;
+
+///THe alignement of the bottom picker button
+///by default it's `MainAxisAlignment.center`
+final MainAxisAlignment buttonAlignement;
 ```
 
   
