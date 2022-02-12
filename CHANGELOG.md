@@ -1,3 +1,10 @@
+## [1.6.0] - 12/02/2022
+
+- Update padding rendering in bottom picker widget
+- Add button alignement parameter
+- enhanced coding style
+- bug fixes
+
 ## [1.5.0] - 01/19/2022
 
 - Add close icon color parameter
