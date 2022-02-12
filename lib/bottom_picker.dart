@@ -295,7 +295,6 @@ class BottomPicker extends StatefulWidget {
   ///```
   final LAYOUT_ORIENTATION layoutOrientation;
 
-
   ///THe alignement of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
   final MainAxisAlignment buttonAlignement;
