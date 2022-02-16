@@ -1,3 +1,8 @@
+## [1.7.0] - 16/02/2022
+
+- Add height parameter to bottom picker widget
+- bug fixes
+
 ## [1.6.0] - 12/02/2022
 
 - Update padding rendering in bottom picker widget
