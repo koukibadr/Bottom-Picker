@@ -49,6 +49,7 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = defaultCloseIconColor,
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
+    this.height,
   }) : super(key: key) {
     dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
@@ -84,6 +85,7 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = defaultCloseIconColor,
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
+    this.height,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -95,6 +97,7 @@ class BottomPicker extends StatefulWidget {
   BottomPicker.dateTime({
     Key? key,
     required this.title,
+
     this.titleStyle = defaultTitleTextStyle,
     this.dismissable = defaultDismissableValue,
     this.onChange,
@@ -118,6 +121,7 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = defaultCloseIconColor,
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
+    this.height,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -150,6 +154,7 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = defaultCloseIconColor,
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
+    this.height,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -299,6 +304,10 @@ class BottomPicker extends StatefulWidget {
   ///by default it's `MainAxisAlignment.center`
   final MainAxisAlignment buttonAlignement;
 
+
+  ///TODO add missing code documentation
+  final double? height;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -345,7 +354,7 @@ class _BottomPickerState extends State<BottomPicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.bottomPickerHeight,
+      height: widget.height ?? context.bottomPickerHeight,
       decoration: BoxDecoration(
         color: widget.backgroundColor,
         borderRadius: const BorderRadius.only(
