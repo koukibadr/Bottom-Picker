@@ -47,7 +47,7 @@
 -  Customize close button style and display
 -  Customize layout orientation (LTR / RTL )
 -  Customize button alignment 
-  
+-  Customizable bottom picker height 
   
 
 ##  Getting Started
@@ -56,7 +56,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^1.6.0
+	bottom_picker: ^1.7.0
 ```
 
 ##  Parameters
@@ -211,6 +211,11 @@ final  LAYOUT_ORIENTATION  layoutOrientation;
 ///THe alignement of the bottom picker button
 ///by default it's `MainAxisAlignment.center`
 final MainAxisAlignment buttonAlignement;
+
+///bottom picker main widget height 
+///if it's null the bottom picker will get the height from
+///[bottomPickerHeight] extension on context
+final double? height;
 ```
 
   
