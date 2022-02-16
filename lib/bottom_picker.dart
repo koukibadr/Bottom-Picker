@@ -97,7 +97,6 @@ class BottomPicker extends StatefulWidget {
   BottomPicker.dateTime({
     Key? key,
     required this.title,
-
     this.titleStyle = defaultTitleTextStyle,
     this.dismissable = defaultDismissableValue,
     this.onChange,
@@ -304,8 +303,7 @@ class BottomPicker extends StatefulWidget {
   ///by default it's `MainAxisAlignment.center`
   final MainAxisAlignment buttonAlignement;
 
-
-  ///bottom picker main widget height 
+  ///bottom picker main widget height
   ///if it's null the bottom picker will get the height from
   ///[bottomPickerHeight] extension on context
   final double? height;
