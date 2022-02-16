@@ -305,7 +305,9 @@ class BottomPicker extends StatefulWidget {
   final MainAxisAlignment buttonAlignement;
 
 
-  ///TODO add missing code documentation
+  ///bottom picker main widget height 
+  ///if it's null the bottom picker will get the height from
+  ///[bottomPickerHeight] extension on context
   final double? height;
 
   ///display the bottom picker popup
