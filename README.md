@@ -48,6 +48,7 @@
 -  Customize layout orientation (LTR / RTL )
 -  Customize button alignment 
 -  Customizable bottom picker height 
+-  Customizable button display and visibility
   
 
 ##  Getting Started
@@ -56,7 +57,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^1.7.0
+	bottom_picker: ^1.8.0
 ```
 
 ##  Parameters
@@ -216,6 +217,10 @@ final MainAxisAlignment buttonAlignement;
 ///if it's null the bottom picker will get the height from
 ///[bottomPickerHeight] extension on context
 final double? height;
+
+///indicates if the submit button will be displayed or not
+///by default the submit button is shown
+final bool displaySubmitButton;
 ```
 
   
