@@ -1,3 +1,8 @@
+## [1.8.0] - 19/03/2022
+
+- Add display submit button parameter
+- bug fixes
+
 ## [1.7.0] - 16/02/2022
 
 - Add height parameter to bottom picker widget
