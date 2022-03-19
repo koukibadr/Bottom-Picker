@@ -324,7 +324,8 @@ class BottomPicker extends StatefulWidget {
   ///[bottomPickerHeight] extension on context
   final double? height;
 
-  //TODO add missing code documentation
+  ///indicates if the submit button will be displayed or not
+  ///by default the submit button is shown
   final bool displaySubmitButton;
 
   ///display the bottom picker popup
