@@ -50,6 +50,7 @@ class BottomPicker extends StatefulWidget {
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
     this.height,
+    this.displaySubmitButton = true,
   }) : super(key: key) {
     dateOrder = null;
     bottomPickerType = BOTTOM_PICKER_TYPE.simple;
@@ -86,6 +87,7 @@ class BottomPicker extends StatefulWidget {
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
     this.height,
+    this.displaySubmitButton = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -121,6 +123,7 @@ class BottomPicker extends StatefulWidget {
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
     this.height,
+    this.displaySubmitButton = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -154,6 +157,7 @@ class BottomPicker extends StatefulWidget {
     this.layoutOrientation = defaultLayoutOrientation,
     this.buttonAlignement = defaultButtonAlignement,
     this.height,
+    this.displaySubmitButton = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
@@ -308,6 +312,9 @@ class BottomPicker extends StatefulWidget {
   ///[bottomPickerHeight] extension on context
   final double? height;
 
+  //TODO add missing code documentation
+  final bool displaySubmitButton;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   ///
@@ -406,35 +413,34 @@ class _BottomPickerState extends State<BottomPicker> {
                       textStyle: widget.pickerTextStyle,
                     ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
+            if (widget.displaySubmitButton)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: widget.buttonAlignement,
+                  children: [
+                    BottomPickerButton(
+                      onClick: () {
+                        widget.onSubmit?.call(
+                          widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
+                              ? selectedItemIndex
+                              : selectedDateTime,
+                        );
+                        Navigator.pop(context);
+                      },
+                      iconColor: widget.iconColor,
+                      gradientColors: widget.gradientColor,
+                      text: widget.buttonText,
+                      textStyle: widget.buttonTextStyle,
+                      displayIcon: widget.displayButtonIcon,
+                      solidColor: widget.buttonSingleColor,
+                    ),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: widget.buttonAlignement,
-                children: [
-                  BottomPickerButton(
-                    onClick: () {
-                      widget.onSubmit?.call(
-                        widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
-                            ? selectedItemIndex
-                            : selectedDateTime,
-                      );
-                      Navigator.pop(context);
-                    },
-                    iconColor: widget.iconColor,
-                    gradientColors: widget.gradientColor,
-                    text: widget.buttonText,
-                    textStyle: widget.buttonTextStyle,
-                    displayIcon: widget.displayButtonIcon,
-                    solidColor: widget.buttonSingleColor,
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

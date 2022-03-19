@@ -136,6 +136,8 @@ class ExampleApp extends StatelessWidget {
         print(index);
       },
       buttonAlignement: MainAxisAlignment.start,
+      displayButtonIcon: false,
+      displaySubmitButton: false,
     ).show(context);
   }
 

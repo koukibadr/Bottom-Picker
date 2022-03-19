@@ -9,6 +9,6 @@ extension ContextExtensions on BuildContext {
 
   double get bottomPickerHeight =>
       MediaQuery.of(this).size.height >= tabletMinSize
-          ? MediaQuery.of(this).size.height * 0.25
+          ? MediaQuery.of(this).size.height * 0.3
           : MediaQuery.of(this).size.height * 0.4;
 }
