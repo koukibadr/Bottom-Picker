@@ -6,6 +6,7 @@ class DatePicker extends StatelessWidget {
   final DateTime? initialDateTime;
   final DateTime? maxDateTime;
   final DateTime? minDateTime;
+  final int? minuteInterval;
   final bool use24hFormat;
   final DatePickerDateOrder? dateOrder;
   final TextStyle textStyle;
@@ -13,6 +14,7 @@ class DatePicker extends StatelessWidget {
   const DatePicker({
     Key? key,
     required this.initialDateTime,
+    this.minuteInterval = 1,
     required this.maxDateTime,
     required this.minDateTime,
     required this.mode,
@@ -34,6 +36,7 @@ class DatePicker extends StatelessWidget {
         mode: mode,
         onDateTimeChanged: onDateChanged,
         initialDateTime: initialDateTime,
+        minuteInterval: minuteInterval,
         maximumDate: maxDateTime,
         minimumDate: minDateTime,
         use24hFormat: use24hFormat,
