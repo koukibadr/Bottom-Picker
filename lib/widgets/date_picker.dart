@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class DatePicker extends StatelessWidget {
   final CupertinoDatePickerMode mode;
   final Function(DateTime) onDateChanged;
-  final DateTime? intialDateTime;
+  final DateTime? initialDateTime;
   final DateTime? maxDateTime;
   final DateTime? minDateTime;
   final bool use24hFormat;
@@ -12,7 +12,7 @@ class DatePicker extends StatelessWidget {
 
   const DatePicker({
     Key? key,
-    required this.intialDateTime,
+    required this.initialDateTime,
     required this.maxDateTime,
     required this.minDateTime,
     required this.mode,
@@ -33,7 +33,7 @@ class DatePicker extends StatelessWidget {
       child: CupertinoDatePicker(
         mode: mode,
         onDateTimeChanged: onDateChanged,
-        initialDateTime: intialDateTime,
+        initialDateTime: initialDateTime,
         maximumDate: maxDateTime,
         minimumDate: minDateTime,
         use24hFormat: use24hFormat,

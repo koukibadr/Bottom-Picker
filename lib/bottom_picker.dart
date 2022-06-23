@@ -413,7 +413,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       itemExtent: widget.itemExtent,
                     )
                   : DatePicker(
-                      intialDateTime: widget.initialDateTime,
+                      initialDateTime: widget.initialDateTime,
                       maxDateTime: widget.maxDateTime,
                       minDateTime: widget.minDateTime,
                       mode: widget.datePickerMode,
