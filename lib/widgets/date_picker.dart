@@ -6,7 +6,7 @@ class DatePicker extends StatelessWidget {
   final DateTime? initialDateTime;
   final DateTime? maxDateTime;
   final DateTime? minDateTime;
-  final int? minuteInterval;
+  final int minuteInterval;
   final bool use24hFormat;
   final DatePickerDateOrder? dateOrder;
   final TextStyle textStyle;
