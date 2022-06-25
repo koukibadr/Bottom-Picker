@@ -114,6 +114,7 @@ class BottomPicker extends StatefulWidget {
     this.gradientColors,
     this.iconColor = Colors.white,
     this.initialDateTime,
+    this.minuteInterval,
     this.minDateTime,
     this.maxDateTime,
     this.use24hFormat = false,
@@ -250,6 +251,10 @@ class BottomPicker extends StatefulWidget {
   ///by default it's null
   ///
   DateTime? initialDateTime;
+
+  ///The gap between two minutes
+  ///by default it's 1 minute
+  int? minuteInterval;
 
   ///the max date time on the date picker
   ///by default it's null
@@ -413,7 +418,8 @@ class _BottomPickerState extends State<BottomPicker> {
                       itemExtent: widget.itemExtent,
                     )
                   : DatePicker(
-                      intialDateTime: widget.initialDateTime,
+                      initialDateTime: widget.initialDateTime,
+                      minuteInterval: widget.minuteInterval ?? 1,
                       maxDateTime: widget.maxDateTime,
                       minDateTime: widget.minDateTime,
                       mode: widget.datePickerMode,
