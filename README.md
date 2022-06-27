@@ -49,6 +49,7 @@
 -  Customize button alignment 
 -  Customizable bottom picker height 
 -  Customizable button display and visibility
+-  Customizable minuteInterval attribute
   
 
 ##  Getting Started
@@ -57,7 +58,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^1.8.0
+	bottom_picker: ^1.9.0
 ```
 
 ##  Parameters
@@ -221,6 +222,10 @@ final double? height;
 ///indicates if the submit button will be displayed or not
 ///by default the submit button is shown
 final bool displaySubmitButton;
+
+///The gap between two minutes
+///by default it's 1 minute
+int? minuteInterval;
 ```
 
   
