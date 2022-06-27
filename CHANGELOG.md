@@ -1,3 +1,7 @@
+## [1.9.0] - 27/06/2022
+
+- add minuteInterval attibute
+- Bug fixes
 ## [1.8.0] - 19/03/2022
 
 - Add display submit button parameter
