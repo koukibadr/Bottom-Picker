@@ -1,6 +1,5 @@
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
-import 'package:bottom_picker/resources/values.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:bottom_picker/widgets/close_icon.dart';
 import 'package:bottom_picker/widgets/date_picker.dart';
@@ -23,7 +22,7 @@ class BottomPicker extends StatefulWidget {
   ///dateTime
   ///}
   ///```
-  late BOTTOM_PICKER_TYPE bottomPickerType;
+  late BottomPickerType bottomPickerType;
 
   BottomPicker({
     Key? key,
@@ -34,7 +33,7 @@ class BottomPicker extends StatefulWidget {
     this.onChange,
     this.onSubmit,
     this.onClose,
-    this.bottomPickerTheme = BOTTOM_PICKER_THEME.blue,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.iconColor = Colors.white,
     this.selectedItemIndex = 0,
@@ -50,13 +49,13 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 35.0,
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
-    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
   }) : super(key: key) {
     dateOrder = null;
-    bottomPickerType = BOTTOM_PICKER_TYPE.simple;
+    bottomPickerType = BottomPickerType.simple;
     assert(items != null && items!.isNotEmpty);
     assert(selectedItemIndex >= 0);
     if (selectedItemIndex > 0) {
@@ -72,7 +71,7 @@ class BottomPicker extends StatefulWidget {
     this.onChange,
     this.onSubmit,
     this.onClose,
-    this.bottomPickerTheme = BOTTOM_PICKER_THEME.blue,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.iconColor = Colors.white,
     this.initialDateTime,
@@ -90,13 +89,13 @@ class BottomPicker extends StatefulWidget {
     ),
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
-    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
-    bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
+    bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
     itemExtent = 0;
     assertInitialValues();
@@ -110,7 +109,7 @@ class BottomPicker extends StatefulWidget {
     this.onChange,
     this.onSubmit,
     this.onClose,
-    this.bottomPickerTheme = BOTTOM_PICKER_THEME.blue,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.iconColor = Colors.white,
     this.initialDateTime,
@@ -130,13 +129,13 @@ class BottomPicker extends StatefulWidget {
     ),
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
-    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
-    bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
+    bottomPickerType = BottomPickerType.dateTime;
     itemExtent = 0;
     assertInitialValues();
   }
@@ -149,7 +148,7 @@ class BottomPicker extends StatefulWidget {
     this.onChange,
     this.onSubmit,
     this.onClose,
-    this.bottomPickerTheme = BOTTOM_PICKER_THEME.blue,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.iconColor = Colors.white,
     this.initialDateTime,
@@ -167,13 +166,13 @@ class BottomPicker extends StatefulWidget {
     ),
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
-    this.layoutOrientation = LAYOUT_ORIENTATION.ltr,
+    this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
-    bottomPickerType = BOTTOM_PICKER_TYPE.dateTime;
+    bottomPickerType = BottomPickerType.dateTime;
     dateOrder = null;
     itemExtent = 0;
     assertInitialValues();
@@ -228,7 +227,7 @@ class BottomPicker extends StatefulWidget {
   ///morningSalad
   ///}
   ///```
-  final BOTTOM_PICKER_THEME bottomPickerTheme;
+  final BottomPickerTheme bottomPickerTheme;
 
   ///to set a custom button theme color use this list
   ///when it's not null it will be applied
@@ -318,7 +317,7 @@ class BottomPicker extends StatefulWidget {
   ///LAYOUT_ORIENTATION.ltr,
   ///LAYOUT_ORIENTATION.rtl
   ///```
-  final LAYOUT_ORIENTATION layoutOrientation;
+  final LayoutOrientation layoutOrientation;
 
   ///THe alignement of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
@@ -369,7 +368,7 @@ class _BottomPickerState extends State<BottomPicker> {
   @override
   void initState() {
     super.initState();
-    if (widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple) {
+    if (widget.bottomPickerType == BottomPickerType.simple) {
       selectedItemIndex = widget.selectedItemIndex;
     } else {
       selectedDateTime = widget.initialDateTime ?? DateTime.now();
@@ -400,13 +399,13 @@ class _BottomPickerState extends State<BottomPicker> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: widget.layoutOrientation == LAYOUT_ORIENTATION.rtl
+                children: widget.layoutOrientation == LayoutOrientation.rtl
                     ? _displayRTLOrientationLayout()
                     : _displayLTROrientationLayout(),
               ),
             ),
             Expanded(
-              child: widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
+              child: widget.bottomPickerType == BottomPickerType.simple
                   ? SimplePicker(
                       items: widget.items!,
                       onChange: (int index) {
@@ -444,7 +443,7 @@ class _BottomPickerState extends State<BottomPicker> {
                     BottomPickerButton(
                       onClick: () {
                         widget.onSubmit?.call(
-                          widget.bottomPickerType == BOTTOM_PICKER_TYPE.simple
+                          widget.bottomPickerType == BottomPickerType.simple
                               ? selectedItemIndex
                               : selectedDateTime,
                         );

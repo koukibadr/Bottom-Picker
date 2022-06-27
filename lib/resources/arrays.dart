@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-enum BOTTOM_PICKER_TYPE { simple, dateTime }
+enum BottomPickerType { simple, dateTime }
 
-enum BOTTOM_PICKER_THEME {
+enum BottomPickerTheme {
   blue,
   orange,
   temptingAzure,
@@ -11,7 +11,7 @@ enum BOTTOM_PICKER_THEME {
   morningSalad
 }
 
-enum LAYOUT_ORIENTATION { ltr, rtl }
+enum LayoutOrientation { ltr, rtl }
 
 const List<Color> blueThemeColor = [
   Color(0xFF3366FF),
@@ -38,11 +38,11 @@ const List<Color> morningSalad = [
   Color(0xFF50A7C2),
 ];
 
-const Map<BOTTOM_PICKER_THEME, List<Color>> defaultColors = {
-  BOTTOM_PICKER_THEME.blue: blueThemeColor,
-  BOTTOM_PICKER_THEME.orange: orangeThemeColor,
-  BOTTOM_PICKER_THEME.temptingAzure: temptingAzure,
-  BOTTOM_PICKER_THEME.heavyRain: heavyRain,
-  BOTTOM_PICKER_THEME.plumPlate: plumPlate,
-  BOTTOM_PICKER_THEME.morningSalad: morningSalad,
+const Map<BottomPickerTheme, List<Color>> defaultColors = {
+  BottomPickerTheme.blue: blueThemeColor,
+  BottomPickerTheme.orange: orangeThemeColor,
+  BottomPickerTheme.temptingAzure: temptingAzure,
+  BottomPickerTheme.heavyRain: heavyRain,
+  BottomPickerTheme.plumPlate: plumPlate,
+  BottomPickerTheme.morningSalad: morningSalad,
 };

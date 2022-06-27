@@ -131,7 +131,7 @@ class ExampleApp extends StatelessWidget {
       title: 'Choose your country',
       titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
       backgroundColor: Colors.yellow.withOpacity(0.6),
-      bottomPickerTheme: BOTTOM_PICKER_THEME.morningSalad,
+      bottomPickerTheme: BottomPickerTheme.morningSalad,
       onSubmit: (index) {
         print(index);
       },
@@ -153,8 +153,8 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
-      bottomPickerTheme: BOTTOM_PICKER_THEME.morningSalad,
-      layoutOrientation: LAYOUT_ORIENTATION.rtl,
+      bottomPickerTheme: BottomPickerTheme.morningSalad,
+      layoutOrientation: LayoutOrientation.rtl,
     ).show(context);
   }
 
@@ -178,7 +178,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
-      bottomPickerTheme: BOTTOM_PICKER_THEME.plumPlate,
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(context);
   }
 
@@ -196,7 +196,7 @@ class ExampleApp extends StatelessWidget {
       onClose: () {
         print('Picker closed');
       },
-      bottomPickerTheme: BOTTOM_PICKER_THEME.orange,
+      bottomPickerTheme: BottomPickerTheme.orange,
       use24hFormat: true,
     ).show(context);
   }

@@ -1,3 +1,6 @@
+## [1.9.1] - 27/06/2022
+
+- Fix static analysis issues
 ## [1.9.0] - 27/06/2022
 
 - add minuteInterval attibute
