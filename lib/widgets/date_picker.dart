@@ -19,7 +19,7 @@ class DatePicker extends StatelessWidget {
     required this.minDateTime,
     required this.mode,
     required this.onDateChanged,
-    required this.use24hFormat,
+    this.use24hFormat = true,
     required this.textStyle,
     this.dateOrder,
   }) : super(key: key);

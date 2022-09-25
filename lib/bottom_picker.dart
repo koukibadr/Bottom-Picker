@@ -3,6 +3,7 @@ import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:bottom_picker/widgets/close_icon.dart';
 import 'package:bottom_picker/widgets/date_picker.dart';
+import 'package:bottom_picker/widgets/range_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -192,9 +193,6 @@ class BottomPicker extends StatefulWidget {
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.iconColor = Colors.white,
-    this.initialDateTime,
-    this.minDateTime,
-    this.maxDateTime,
     this.buttonText,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
@@ -209,6 +207,13 @@ class BottomPicker extends StatefulWidget {
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
+    this.initialSecondDate,
+    this.initialFirstDate,
+    this.minFirstDate,
+    this.minSecondDate,
+    this.maxFirstDate,
+    this.maxSecondDate,
+    this.dateOrder = DatePickerDateOrder.ymd,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDateTime;
@@ -375,10 +380,14 @@ class BottomPicker extends StatefulWidget {
   ///by default the submit button is shown
   late bool displaySubmitButton;
 
-
   //! range picker attributes
   late Function(DateTime, DateTime)? onSubmitPressed;
-
+  DateTime? minFirstDate;
+  DateTime? minSecondDate;
+  DateTime? maxFirstDate;
+  DateTime? maxSecondDate;
+  DateTime? initialFirstDate;
+  DateTime? initialSecondDate;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -479,41 +488,25 @@ class _BottomPickerState extends State<BottomPicker> {
                           dateOrder: widget.dateOrder,
                           textStyle: widget.pickerTextStyle,
                         )
-                      : Row(
-                          children: [
-                            Expanded(
-                              child: DatePicker(
-                                initialDateTime: widget.initialDateTime,
-                                minuteInterval: widget.minuteInterval ?? 1,
-                                maxDateTime: widget.maxDateTime,
-                                minDateTime: widget.minDateTime,
-                                mode: widget.datePickerMode,
-                                onDateChanged: (DateTime date) {
-                                  selectedDateTime = date;
-                                  widget.onChange?.call(date);
-                                },
-                                use24hFormat: widget.use24hFormat,
-                                dateOrder: widget.dateOrder,
-                                textStyle: widget.pickerTextStyle,
-                              ),
-                            ),
-                            Expanded(
-                              child: DatePicker(
-                                initialDateTime: widget.initialDateTime,
-                                minuteInterval: widget.minuteInterval ?? 1,
-                                maxDateTime: widget.maxDateTime,
-                                minDateTime: widget.minDateTime,
-                                mode: widget.datePickerMode,
-                                onDateChanged: (DateTime date) {
-                                  selectedDateTime = date;
-                                  widget.onChange?.call(date);
-                                },
-                                use24hFormat: widget.use24hFormat,
-                                dateOrder: widget.dateOrder,
-                                textStyle: widget.pickerTextStyle,
-                              ),
-                            ),
-                          ],
+                      : Expanded(
+                          child: RangePicker(
+                            initialFirstDateTime: widget.initialFirstDate,
+                            initialSecondDateTime: widget.initialSecondDate,
+                            maxFirstDate: widget.maxFirstDate,
+                            minFirstDate: widget.minFirstDate,
+                            maxSecondDate: widget.maxSecondDate,
+                            minSecondDate: widget.minSecondDate,
+                            onFirstDateChanged: (DateTime date) {
+                              selectedDateTime = date;
+                              widget.onChange?.call(date);
+                            },
+                            onSecondDateChanged: (DateTime date) {
+                              selectedDateTime = date;
+                              widget.onChange?.call(date);
+                            },
+                            dateOrder: widget.dateOrder,
+                            textStyle: widget.pickerTextStyle,
+                          ),
                         ),
             ),
             if (widget.displaySubmitButton)
