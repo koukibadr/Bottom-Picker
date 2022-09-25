@@ -499,10 +499,10 @@ class _BottomPickerState extends State<BottomPicker> {
                           maxSecondDate: widget.maxSecondDate,
                           minSecondDate: widget.minSecondDate,
                           onFirstDateChanged: (DateTime date) {
-                            selectedDateTime = date;
+                            selectedFirstDateTime = date;
                           },
                           onSecondDateChanged: (DateTime date) {
-                            selectedDateTime = date;
+                            selectedSecondDateTime = date;
                           },
                           dateOrder: widget.dateOrder,
                           textStyle: widget.pickerTextStyle,
