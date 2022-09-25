@@ -1,3 +1,9 @@
+## [1.9.1] - 25/09/2022
+
+- Add range date picker
+- Add description attribute
+- Add description text style attribute
+
 ## [1.9.1] - 27/06/2022
 
 - Fix static analysis issues
