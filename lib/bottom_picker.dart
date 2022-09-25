@@ -29,7 +29,9 @@ class BottomPicker extends StatefulWidget {
     Key? key,
     required this.title,
     required this.items,
+    this.description = '',
     this.titleStyle = const TextStyle(),
+    this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -68,7 +70,9 @@ class BottomPicker extends StatefulWidget {
   BottomPicker.date({
     Key? key,
     required this.title,
+    this.description = '',
     this.titleStyle = const TextStyle(),
+    this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -107,7 +111,9 @@ class BottomPicker extends StatefulWidget {
   BottomPicker.dateTime({
     Key? key,
     required this.title,
+    this.description = '',
     this.titleStyle = const TextStyle(),
+    this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -147,7 +153,9 @@ class BottomPicker extends StatefulWidget {
   BottomPicker.time({
     Key? key,
     required this.title,
+    this.description = '',
     this.titleStyle = const TextStyle(),
+    this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -187,7 +195,9 @@ class BottomPicker extends StatefulWidget {
     Key? key,
     required this.title,
     required this.onSubmitPressed,
+    this.description = '',
     this.titleStyle = const TextStyle(),
+    this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onClose,
     this.bottomPickerTheme = BottomPickerTheme.blue,
@@ -231,10 +241,17 @@ class BottomPicker extends StatefulWidget {
   ///
   final String title;
 
+  //! missing code documentation
+  final String description;
+
   ///The text style applied on the title
   ///by default it applies simple text style
   ///
   final TextStyle titleStyle;
+  
+
+  ///! code documentation
+  final TextStyle descriptionStyle;
 
   ///defines whether the bottom picker is dismissable or not
   ///by default it's set to false
@@ -549,10 +566,20 @@ class _BottomPickerState extends State<BottomPicker> {
         onPress: _closeBottomPicker,
         iconColor: widget.closeIconColor,
       ),
-      Text(
-        widget.title,
-        style: widget.titleStyle,
-        textAlign: TextAlign.end,
+      Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            widget.title,
+            style: widget.titleStyle,
+            textAlign: TextAlign.end,
+          ),
+          Text(
+            widget.description,
+            style: widget.descriptionStyle,
+            textAlign: TextAlign.end,
+          ),
+        ],
       ),
     ];
   }
@@ -560,9 +587,17 @@ class _BottomPickerState extends State<BottomPicker> {
   ///render list widgets for LTR orientation
   List<Widget> _displayLTROrientationLayout() {
     return [
-      Text(
-        widget.title,
-        style: widget.titleStyle,
+      Column(
+        children: [
+          Text(
+            widget.title,
+            style: widget.titleStyle,
+          ),
+          Text(
+            widget.description,
+            style: widget.descriptionStyle,
+          ),
+        ],
       ),
       CloseIcon(
         onPress: _closeBottomPicker,
