@@ -566,20 +566,23 @@ class _BottomPickerState extends State<BottomPicker> {
         onPress: _closeBottomPicker,
         iconColor: widget.closeIconColor,
       ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(
-            widget.title,
-            style: widget.titleStyle,
-            textAlign: TextAlign.end,
-          ),
-          Text(
-            widget.description,
-            style: widget.descriptionStyle,
-            textAlign: TextAlign.end,
-          ),
-        ],
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              widget.title,
+              style: widget.titleStyle,
+              textAlign: TextAlign.end,
+            ),
+            Text(
+              widget.description,
+              style: widget.descriptionStyle,
+              textAlign: TextAlign.end,
+            ),
+          ],
+        ),
       ),
     ];
   }
@@ -587,17 +590,20 @@ class _BottomPickerState extends State<BottomPicker> {
   ///render list widgets for LTR orientation
   List<Widget> _displayLTROrientationLayout() {
     return [
-      Column(
-        children: [
-          Text(
-            widget.title,
-            style: widget.titleStyle,
-          ),
-          Text(
-            widget.description,
-            style: widget.descriptionStyle,
-          ),
-        ],
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.title,
+              style: widget.titleStyle,
+            ),
+            Text(
+              widget.description,
+              style: widget.descriptionStyle,
+            ),
+          ],
+        ),
       ),
       CloseIcon(
         onPress: _closeBottomPicker,

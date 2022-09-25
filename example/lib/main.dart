@@ -92,6 +92,15 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openArabicRangeDatePicker(context);
+              },
+              child: Text('Arabic Range Date Picker'),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openTimePicker(context);
               },
               child: Text('Time Picker'),
@@ -194,6 +203,7 @@ class ExampleApp extends StatelessWidget {
   void _openRangeDatePicker(BuildContext context) {
     BottomPicker.rangeDate(
       title: 'Set date range',
+      description: 'Please select a first date and an end date',
       dateOrder: DatePickerDateOrder.dmy,
       pickerTextStyle: TextStyle(
         color: Colors.blue,
@@ -203,9 +213,39 @@ class ExampleApp extends StatelessWidget {
       titleStyle: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 15,
-        color: Colors.blue,
+        color: Colors.black,
       ),
-      onSubmitPressed: (firstDate, secondDate){
+      descriptionStyle: TextStyle(
+        color: Colors.black,
+      ),
+      onSubmitPressed: (firstDate, secondDate) {
+        print(firstDate);
+        print(secondDate);
+      },
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
+  void _openArabicRangeDatePicker(BuildContext context) {
+    BottomPicker.rangeDate(
+      title: 'حدد النطاق الزمني',
+      description: 'الرجاء تحديد أول تاريخ وتاريخ انتهاء',
+      dateOrder: DatePickerDateOrder.dmy,
+      layoutOrientation: LayoutOrientation.rtl,
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      titleStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: Colors.black,
+      ),
+      descriptionStyle: TextStyle(
+        color: Colors.black,
+      ),
+      onSubmitPressed: (firstDate, secondDate) {
         print(firstDate);
         print(secondDate);
       },
