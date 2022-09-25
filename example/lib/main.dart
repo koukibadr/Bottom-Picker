@@ -201,7 +201,7 @@ class ExampleApp extends StatelessWidget {
   }
 
   void _openRangeDatePicker(BuildContext context) {
-    BottomPicker.rangeDate(
+    BottomPicker.range(
       title: 'Set date range',
       description: 'Please select a first date and an end date',
       dateOrder: DatePickerDateOrder.dmy,
@@ -227,7 +227,7 @@ class ExampleApp extends StatelessWidget {
   }
 
   void _openArabicRangeDatePicker(BuildContext context) {
-    BottomPicker.rangeDate(
+    BottomPicker.range(
       title: 'حدد النطاق الزمني',
       description: 'الرجاء تحديد أول تاريخ وتاريخ انتهاء',
       dateOrder: DatePickerDateOrder.dmy,

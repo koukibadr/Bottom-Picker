@@ -191,7 +191,7 @@ class BottomPicker extends StatefulWidget {
     assertInitialValues();
   }
 
-  BottomPicker.rangeDate({
+  BottomPicker.range({
     Key? key,
     required this.title,
     required this.onSubmitPressed,
@@ -238,19 +238,19 @@ class BottomPicker extends StatefulWidget {
 
   ///The title of the bottom picker
   ///it's required for all bottom picker types
-  ///
   final String title;
-
-  //! missing code documentation
+  
+  ///The description of the bottom picker (displayed below the text)
+  ///by default it's an empty text
   final String description;
 
   ///The text style applied on the title
   ///by default it applies simple text style
-  ///
   final TextStyle titleStyle;
   
 
-  ///! code documentation
+  ///The text style applied on the description
+  ///by default it applies simple text style
   final TextStyle descriptionStyle;
 
   ///defines whether the bottom picker is dismissable or not
@@ -397,18 +397,37 @@ class BottomPicker extends StatefulWidget {
   ///by default the submit button is shown
   late bool displaySubmitButton;
 
-  //! range picker attributes
+  ///invoked when pressing on the submit button when using range picker
+  ///it return two dates (first date, end date)
+  ///required when using [BottomPicker.range]
   late Function(DateTime, DateTime)? onSubmitPressed;
+  
+  ///the minimum first date in the date range picker
+  ///not required if null no minimum will be set in the date picker
   DateTime? minFirstDate;
+  
+  ///the minimum second date in the date range picker
+  ///not required if null no minimum will be set in the date picker
   DateTime? minSecondDate;
+  
+  ///the maximum first date in the date range picker 
+  ///not required if null no minimum will be set in the date picker
   DateTime? maxFirstDate;
+  
+  ///the maximum second date in the date range picker
+  ///not required if null no minimum will be set in the date picker
   DateTime? maxSecondDate;
+  
+  ///the initial first date in the date range picker
+  ///not required if null no minimum will be set in the date picker
   DateTime? initialFirstDate;
+  
+  ///the initial last date in the date range picker
+  ///not required if null no minimum will be set in the date picker
   DateTime? initialSecondDate;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
-  ///
   void show(BuildContext context) {
     showModalBottomSheet(
       context: context,
