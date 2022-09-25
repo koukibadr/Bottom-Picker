@@ -239,7 +239,7 @@ class BottomPicker extends StatefulWidget {
   ///The title of the bottom picker
   ///it's required for all bottom picker types
   final String title;
-  
+
   ///The description of the bottom picker (displayed below the text)
   ///by default it's an empty text
   final String description;
@@ -247,7 +247,6 @@ class BottomPicker extends StatefulWidget {
   ///The text style applied on the title
   ///by default it applies simple text style
   final TextStyle titleStyle;
-  
 
   ///The text style applied on the description
   ///by default it applies simple text style
@@ -401,27 +400,27 @@ class BottomPicker extends StatefulWidget {
   ///it return two dates (first date, end date)
   ///required when using [BottomPicker.range]
   late Function(DateTime, DateTime)? onSubmitPressed;
-  
+
   ///the minimum first date in the date range picker
   ///not required if null no minimum will be set in the date picker
   DateTime? minFirstDate;
-  
+
   ///the minimum second date in the date range picker
   ///not required if null no minimum will be set in the date picker
   DateTime? minSecondDate;
-  
-  ///the maximum first date in the date range picker 
+
+  ///the maximum first date in the date range picker
   ///not required if null no minimum will be set in the date picker
   DateTime? maxFirstDate;
-  
+
   ///the maximum second date in the date range picker
   ///not required if null no minimum will be set in the date picker
   DateTime? maxSecondDate;
-  
+
   ///the initial first date in the date range picker
   ///not required if null no minimum will be set in the date picker
   DateTime? initialFirstDate;
-  
+
   ///the initial last date in the date range picker
   ///not required if null no minimum will be set in the date picker
   DateTime? initialSecondDate;
@@ -555,11 +554,19 @@ class _BottomPickerState extends State<BottomPicker> {
                   children: [
                     BottomPickerButton(
                       onClick: () {
-                        widget.onSubmit?.call(
-                          widget.bottomPickerType == BottomPickerType.simple
-                              ? selectedItemIndex
-                              : selectedDateTime,
-                        );
+                        if (widget.bottomPickerType ==
+                            BottomPickerType.simple) {
+                          widget.onSubmit?.call(selectedItemIndex);
+                        } else if (widget.bottomPickerType ==
+                            BottomPickerType.dateTime) {
+                          widget.onSubmit?.call(selectedDateTime);
+                        } else {
+                          widget.onSubmitPressed?.call(
+                            selectedFirstDateTime,
+                            selectedSecondDateTime,
+                          );
+                        }
+
                         Navigator.pop(context);
                       },
                       iconColor: widget.iconColor,

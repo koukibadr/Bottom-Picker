@@ -205,6 +205,8 @@ class ExampleApp extends StatelessWidget {
       title: 'Set date range',
       description: 'Please select a first date and an end date',
       dateOrder: DatePickerDateOrder.dmy,
+      minFirstDate: DateTime.now(),
+      minSecondDate: DateTime.now().add(const Duration(days: 1)),
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,
