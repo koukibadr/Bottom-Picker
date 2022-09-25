@@ -1,7 +1,7 @@
 import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:flutter/cupertino.dart';
 
-class RangePicker extends StatelessWidget {
+class RangePicker extends StatefulWidget {
   final Function(DateTime) onFirstDateChanged;
   final Function(DateTime) onSecondDateChanged;
   final DateTime? initialFirstDateTime;
@@ -28,29 +28,34 @@ class RangePicker extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<RangePicker> createState() => _RangePickerState();
+}
+
+class _RangePickerState extends State<RangePicker> {
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: DatePicker(
-            initialDateTime: initialFirstDateTime,
-            maxDateTime: maxFirstDate,
-            minDateTime: minFirstDate,
+            initialDateTime: widget.initialFirstDateTime,
+            maxDateTime: widget.maxFirstDate,
+            minDateTime: widget.minFirstDate,
             mode: CupertinoDatePickerMode.date,
-            onDateChanged: onFirstDateChanged,
-            dateOrder: dateOrder,
-            textStyle: textStyle,
+            onDateChanged: widget.onFirstDateChanged,
+            dateOrder: widget.dateOrder,
+            textStyle: widget.textStyle,
           ),
         ),
         Expanded(
           child: DatePicker(
-            initialDateTime: initialSecondDateTime,
-            maxDateTime: maxSecondDate,
-            minDateTime: minSecondDate,
+            initialDateTime: widget.initialSecondDateTime,
+            maxDateTime: widget.maxSecondDate,
+            minDateTime: widget.minSecondDate,
             mode: CupertinoDatePickerMode.date,
-            onDateChanged: onSecondDateChanged,
-            dateOrder: dateOrder,
-            textStyle: textStyle,
+            onDateChanged: widget.onSecondDateChanged,
+            dateOrder: widget.dateOrder,
+            textStyle: widget.textStyle,
           ),
         ),
       ],

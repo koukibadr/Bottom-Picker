@@ -83,6 +83,15 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openRangeDatePicker(context);
+              },
+              child: Text('Range Date Picker'),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openTimePicker(context);
               },
               child: Text('Time Picker'),
@@ -159,8 +168,9 @@ class ExampleApp extends StatelessWidget {
   }
 
   void _openDatePicker(BuildContext context) {
-    BottomPicker.rangeDate(
+    BottomPicker.date(
       title: 'Set your Birthday',
+      dateOrder: DatePickerDateOrder.dmy,
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,
@@ -171,8 +181,33 @@ class ExampleApp extends StatelessWidget {
         fontSize: 15,
         color: Colors.blue,
       ),
-      onSubmitPressed: (firstDate, lastDate){
-        
+      onChange: (index) {
+        print(index);
+      },
+      onSubmit: (index) {
+        print(index);
+      },
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
+  void _openRangeDatePicker(BuildContext context) {
+    BottomPicker.rangeDate(
+      title: 'Set date range',
+      dateOrder: DatePickerDateOrder.dmy,
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      titleStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: Colors.blue,
+      ),
+      onSubmitPressed: (firstDate, secondDate){
+        print(firstDate);
+        print(secondDate);
       },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(context);

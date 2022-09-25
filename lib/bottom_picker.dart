@@ -422,6 +422,9 @@ class _BottomPickerState extends State<BottomPicker> {
   late int selectedItemIndex;
   late DateTime selectedDateTime;
 
+  late DateTime selectedFirstDateTime;
+  late DateTime selectedSecondDateTime;
+
   @override
   void initState() {
     super.initState();
@@ -488,25 +491,21 @@ class _BottomPickerState extends State<BottomPicker> {
                           dateOrder: widget.dateOrder,
                           textStyle: widget.pickerTextStyle,
                         )
-                      : Expanded(
-                          child: RangePicker(
-                            initialFirstDateTime: widget.initialFirstDate,
-                            initialSecondDateTime: widget.initialSecondDate,
-                            maxFirstDate: widget.maxFirstDate,
-                            minFirstDate: widget.minFirstDate,
-                            maxSecondDate: widget.maxSecondDate,
-                            minSecondDate: widget.minSecondDate,
-                            onFirstDateChanged: (DateTime date) {
-                              selectedDateTime = date;
-                              widget.onChange?.call(date);
-                            },
-                            onSecondDateChanged: (DateTime date) {
-                              selectedDateTime = date;
-                              widget.onChange?.call(date);
-                            },
-                            dateOrder: widget.dateOrder,
-                            textStyle: widget.pickerTextStyle,
-                          ),
+                      : RangePicker(
+                          initialFirstDateTime: widget.initialFirstDate,
+                          initialSecondDateTime: widget.initialSecondDate,
+                          maxFirstDate: widget.maxFirstDate,
+                          minFirstDate: widget.minFirstDate,
+                          maxSecondDate: widget.maxSecondDate,
+                          minSecondDate: widget.minSecondDate,
+                          onFirstDateChanged: (DateTime date) {
+                            selectedDateTime = date;
+                          },
+                          onSecondDateChanged: (DateTime date) {
+                            selectedDateTime = date;
+                          },
+                          dateOrder: widget.dateOrder,
+                          textStyle: widget.pickerTextStyle,
                         ),
             ),
             if (widget.displaySubmitButton)
