@@ -159,9 +159,8 @@ class ExampleApp extends StatelessWidget {
   }
 
   void _openDatePicker(BuildContext context) {
-    BottomPicker.date(
+    BottomPicker.rangeDate(
       title: 'Set your Birthday',
-      dateOrder: DatePickerDateOrder.dmy,
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,
@@ -172,11 +171,8 @@ class ExampleApp extends StatelessWidget {
         fontSize: 15,
         color: Colors.blue,
       ),
-      onChange: (index) {
-        print(index);
-      },
-      onSubmit: (index) {
-        print(index);
+      onSubmitPressed: (firstDate, lastDate){
+        
       },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(context);

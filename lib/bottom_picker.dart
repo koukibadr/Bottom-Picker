@@ -55,6 +55,7 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
   }) : super(key: key) {
     dateOrder = null;
+    onSubmitPressed = null;
     bottomPickerType = BottomPickerType.simple;
     assert(items != null && items!.isNotEmpty);
     assert(selectedItemIndex >= 0);
@@ -98,6 +99,7 @@ class BottomPicker extends StatefulWidget {
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
     itemExtent = 0;
+    onSubmitPressed = null;
     assertInitialValues();
   }
 
@@ -137,6 +139,7 @@ class BottomPicker extends StatefulWidget {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
     itemExtent = 0;
+    onSubmitPressed = null;
     assertInitialValues();
   }
 
@@ -175,6 +178,46 @@ class BottomPicker extends StatefulWidget {
     bottomPickerType = BottomPickerType.dateTime;
     dateOrder = null;
     itemExtent = 0;
+    onSubmitPressed = null;
+    assertInitialValues();
+  }
+
+  BottomPicker.rangeDate({
+    Key? key,
+    required this.title,
+    required this.onSubmitPressed,
+    this.titleStyle = const TextStyle(),
+    this.dismissable = false,
+    this.onClose,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
+    this.gradientColors,
+    this.iconColor = Colors.white,
+    this.initialDateTime,
+    this.minDateTime,
+    this.maxDateTime,
+    this.buttonText,
+    this.buttonTextStyle,
+    this.displayButtonIcon = true,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+    this.pickerTextStyle = const TextStyle(
+      fontSize: 14,
+      color: Colors.black,
+    ),
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
+    this.layoutOrientation = LayoutOrientation.ltr,
+    this.buttonAlignement = MainAxisAlignment.center,
+    this.height,
+  }) : super(key: key) {
+    datePickerMode = CupertinoDatePickerMode.date;
+    bottomPickerType = BottomPickerType.rangeDateTime;
+    dateOrder = null;
+    itemExtent = 0;
+    onChange = null;
+    onSubmit = null;
+    displaySubmitButton = true;
+    assert(onSubmitPressed != null);
     assertInitialValues();
   }
 
@@ -203,13 +246,13 @@ class BottomPicker extends StatefulWidget {
   ///Nullable function, invoked when navigating between picker items
   ///whether it's date picker or simple item picker it will return a value DateTime or int(index)
   ///
-  final Function(dynamic)? onChange;
+  late Function(dynamic)? onChange;
 
   ///Nullable function invoked  when clicking on submit button
   ///if the picker  type is date/time/dateTime it will return DateTime value
   ///else it will return the index of the selected item
   ///
-  final Function(dynamic)? onSubmit;
+  late Function(dynamic)? onSubmit;
 
   ///Invoked when clicking on the close button
   ///
@@ -330,7 +373,12 @@ class BottomPicker extends StatefulWidget {
 
   ///indicates if the submit button will be displayed or not
   ///by default the submit button is shown
-  final bool displaySubmitButton;
+  late bool displaySubmitButton;
+
+
+  //! range picker attributes
+  late Function(DateTime, DateTime)? onSubmitPressed;
+
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -416,20 +464,57 @@ class _BottomPickerState extends State<BottomPicker> {
                       textStyle: widget.pickerTextStyle,
                       itemExtent: widget.itemExtent,
                     )
-                  : DatePicker(
-                      initialDateTime: widget.initialDateTime,
-                      minuteInterval: widget.minuteInterval ?? 1,
-                      maxDateTime: widget.maxDateTime,
-                      minDateTime: widget.minDateTime,
-                      mode: widget.datePickerMode,
-                      onDateChanged: (DateTime date) {
-                        selectedDateTime = date;
-                        widget.onChange?.call(date);
-                      },
-                      use24hFormat: widget.use24hFormat,
-                      dateOrder: widget.dateOrder,
-                      textStyle: widget.pickerTextStyle,
-                    ),
+                  : widget.bottomPickerType == BottomPickerType.dateTime
+                      ? DatePicker(
+                          initialDateTime: widget.initialDateTime,
+                          minuteInterval: widget.minuteInterval ?? 1,
+                          maxDateTime: widget.maxDateTime,
+                          minDateTime: widget.minDateTime,
+                          mode: widget.datePickerMode,
+                          onDateChanged: (DateTime date) {
+                            selectedDateTime = date;
+                            widget.onChange?.call(date);
+                          },
+                          use24hFormat: widget.use24hFormat,
+                          dateOrder: widget.dateOrder,
+                          textStyle: widget.pickerTextStyle,
+                        )
+                      : Row(
+                          children: [
+                            Expanded(
+                              child: DatePicker(
+                                initialDateTime: widget.initialDateTime,
+                                minuteInterval: widget.minuteInterval ?? 1,
+                                maxDateTime: widget.maxDateTime,
+                                minDateTime: widget.minDateTime,
+                                mode: widget.datePickerMode,
+                                onDateChanged: (DateTime date) {
+                                  selectedDateTime = date;
+                                  widget.onChange?.call(date);
+                                },
+                                use24hFormat: widget.use24hFormat,
+                                dateOrder: widget.dateOrder,
+                                textStyle: widget.pickerTextStyle,
+                              ),
+                            ),
+                            Expanded(
+                              child: DatePicker(
+                                initialDateTime: widget.initialDateTime,
+                                minuteInterval: widget.minuteInterval ?? 1,
+                                maxDateTime: widget.maxDateTime,
+                                minDateTime: widget.minDateTime,
+                                mode: widget.datePickerMode,
+                                onDateChanged: (DateTime date) {
+                                  selectedDateTime = date;
+                                  widget.onChange?.call(date);
+                                },
+                                use24hFormat: widget.use24hFormat,
+                                dateOrder: widget.dateOrder,
+                                textStyle: widget.pickerTextStyle,
+                              ),
+                            ),
+                          ],
+                        ),
             ),
             if (widget.displaySubmitButton)
               Padding(
