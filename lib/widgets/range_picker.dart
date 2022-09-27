@@ -32,8 +32,7 @@ class RangePicker extends StatefulWidget {
 }
 
 class _RangePickerState extends State<RangePicker> {
-  late DateTime initialSecondDate =
-      widget.minSecondDate ?? DateTime.now();
+  late DateTime initialSecondDate = widget.minSecondDate ?? DateTime.now();
 
   @override
   Widget build(BuildContext context) {
