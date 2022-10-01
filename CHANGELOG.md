@@ -1,4 +1,4 @@
-## [1.9.1] - 25/09/2022
+## [2.0.0] - 01/10/2022
 
 - Add range date picker
 - Add description attribute
