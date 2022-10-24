@@ -1,3 +1,7 @@
+## [2.0.1] - 24/10/2022
+
+- Update displayCloseIcon usage in code
+
 ## [2.0.0] - 01/10/2022
 
 - Add range date picker
@@ -7,10 +11,12 @@
 ## [1.9.1] - 27/06/2022
 
 - Fix static analysis issues
+
 ## [1.9.0] - 27/06/2022
 
 - add minuteInterval attibute
 - Bug fixes
+
 ## [1.8.0] - 19/03/2022
 
 - Add display submit button parameter
