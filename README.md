@@ -1,25 +1,17 @@
 # Bottom Picker
 
-  
-
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true"/>
 <br>
 <b>Easy way to display bottom picker item or date/time picker</b>
 </p>
 
-  
-
-| ![simple item picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true) | ![date_time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true) |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| ![time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/time%20picker.png?raw=true) | ![date picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date%20picker.png?raw=true) |
+| ![simple item picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true)    | ![date_time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true)   |
+| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| ![time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/time%20picker.png?raw=true)                    | ![date picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date%20picker.png?raw=true)             |
 | ![enter image description here](https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker_arabic.png?raw=true) | ![enter image description here](https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker.png?raw=true) |
 
-  
-
 ## Features
-
-  
 
 - Simple list picker wheel
 - Date range picker (RTL and LTR)
@@ -41,22 +33,17 @@
 - Customizable button display and visibility
 - Customizable minuteInterval attribute
 
-  
-
 ## Getting Started
-
-  
 
 To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.0.0
+	bottom_picker: ^2.0.1
 ```
 
-  
-
 ## Parameters
+
 ```dart
 ///The title of the bottom picker
 ///it's required for all bottom picker types
@@ -232,8 +219,6 @@ DateTime?  initialSecondDate;
 
 ## Examples
 
-  
-
 Simple item picker
 
 ```dart
@@ -292,9 +277,10 @@ BottomPicker.time(
 	use24hFormat:  true
 ).show(context);
 
-  
+
 
 ```
+
 <hr>
 
 Date & Time picker
@@ -323,11 +309,7 @@ BottomPicker.dateTime(
 
 <hr>
 
-  
-
 With custom button design
-
-  
 
 ```dart
 
@@ -353,7 +335,7 @@ BottomPicker.dateTime(
 	maxDateTime:  DateTime(2021, 8, 2),
 ).show(context);
 
-  
+
 
 ```
 
@@ -374,7 +356,7 @@ BottomPicker(
 	},
 ).show(context);
 
-  
+
 
 ```
 
@@ -384,9 +366,7 @@ BottomPicker(
 
 </p>
 
-
 <hr>
-
 
 With custom picker text style
 
@@ -409,8 +389,6 @@ BottomPicker(
 
 
 ```
-
-  
 
 <p  align="center">
 
@@ -480,20 +458,13 @@ BottomPicker.range(
 
 </p>
 
-  
-  
-
 ## Contribution
 
 You can contribute to it [https://github.com/koukibadr/Bottom-Picker](https://github.com/koukibadr/Bottom-Picker)
 
-  
-
 - If you **finda bug**, open an issue.
 - If you **have a feature request**, open an issue.
 - If you **want to contribute**, submit your pull request.
-
-  
 
 ## Contributors
 
