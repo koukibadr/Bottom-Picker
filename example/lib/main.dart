@@ -288,6 +288,10 @@ class ExampleApp extends StatelessWidget {
       onClose: () {
         print('Picker closed');
       },
+      customSubmitButton: TextButton(
+        child: Text('Submit'),
+        onPressed: () {},
+      ),
       iconColor: Colors.black,
       minDateTime: DateTime(2021, 5, 1),
       maxDateTime: DateTime(2021, 8, 2),
