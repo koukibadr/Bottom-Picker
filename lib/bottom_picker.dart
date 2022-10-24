@@ -56,7 +56,6 @@ class BottomPicker extends StatefulWidget {
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
-    this.customSubmitButton,
   }) : super(key: key) {
     dateOrder = null;
     onSubmitPressed = null;
@@ -100,7 +99,6 @@ class BottomPicker extends StatefulWidget {
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
-    this.customSubmitButton,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
@@ -144,7 +142,6 @@ class BottomPicker extends StatefulWidget {
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
-    this.customSubmitButton,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -185,7 +182,6 @@ class BottomPicker extends StatefulWidget {
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
-    this.customSubmitButton,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.dateTime;
@@ -228,7 +224,6 @@ class BottomPicker extends StatefulWidget {
     this.maxFirstDate,
     this.maxSecondDate,
     this.dateOrder = DatePickerDateOrder.ymd,
-    this.customSubmitButton,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDateTime;
@@ -349,10 +344,6 @@ class BottomPicker extends StatefulWidget {
   ///by default it's true
   ///if you want to display a text you can set [displayButtonIcon] to false
   final bool displayButtonIcon;
-
-  ///display custom submit button
-  ///this widget will be shown instead of default submit button
-  final Widget? customSubmitButton;
 
   ///a single color will be applied to the button instead of the gradient
   ///themes
@@ -561,31 +552,30 @@ class _BottomPickerState extends State<BottomPicker> {
                 child: Row(
                   mainAxisAlignment: widget.buttonAlignement,
                   children: [
-                    widget.customSubmitButton ??
-                        BottomPickerButton(
-                          onClick: () {
-                            if (widget.bottomPickerType ==
-                                BottomPickerType.simple) {
-                              widget.onSubmit?.call(selectedItemIndex);
-                            } else if (widget.bottomPickerType ==
-                                BottomPickerType.dateTime) {
-                              widget.onSubmit?.call(selectedDateTime);
-                            } else {
-                              widget.onSubmitPressed?.call(
-                                selectedFirstDateTime,
-                                selectedSecondDateTime,
-                              );
-                            }
+                    BottomPickerButton(
+                      onClick: () {
+                        if (widget.bottomPickerType ==
+                            BottomPickerType.simple) {
+                          widget.onSubmit?.call(selectedItemIndex);
+                        } else if (widget.bottomPickerType ==
+                            BottomPickerType.dateTime) {
+                          widget.onSubmit?.call(selectedDateTime);
+                        } else {
+                          widget.onSubmitPressed?.call(
+                            selectedFirstDateTime,
+                            selectedSecondDateTime,
+                          );
+                        }
 
-                            Navigator.pop(context);
-                          },
-                          iconColor: widget.iconColor,
-                          gradientColors: widget.gradientColor,
-                          text: widget.buttonText,
-                          textStyle: widget.buttonTextStyle,
-                          displayIcon: widget.displayButtonIcon,
-                          solidColor: widget.buttonSingleColor,
-                        ),
+                        Navigator.pop(context);
+                      },
+                      iconColor: widget.iconColor,
+                      gradientColors: widget.gradientColor,
+                      text: widget.buttonText,
+                      textStyle: widget.buttonTextStyle,
+                      displayIcon: widget.displayButtonIcon,
+                      solidColor: widget.buttonSingleColor,
+                    ),
                   ],
                 ),
               ),
@@ -598,7 +588,7 @@ class _BottomPickerState extends State<BottomPicker> {
   ///render list widgets for RTL orientation
   List<Widget> _displayRTLOrientationLayout() {
     return [
-      if (widget.displayCloseIcon)
+      if(widget.displayCloseIcon)
         CloseIcon(
           onPress: _closeBottomPicker,
           iconColor: widget.closeIconColor,
@@ -642,7 +632,7 @@ class _BottomPickerState extends State<BottomPicker> {
           ],
         ),
       ),
-      if (widget.displayCloseIcon)
+      if(widget.displayCloseIcon)
         CloseIcon(
           onPress: _closeBottomPicker,
           iconColor: widget.closeIconColor,
