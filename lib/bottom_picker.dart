@@ -588,10 +588,11 @@ class _BottomPickerState extends State<BottomPicker> {
   ///render list widgets for RTL orientation
   List<Widget> _displayRTLOrientationLayout() {
     return [
-      CloseIcon(
-        onPress: _closeBottomPicker,
-        iconColor: widget.closeIconColor,
-      ),
+      if(widget.displayCloseIcon)
+        CloseIcon(
+          onPress: _closeBottomPicker,
+          iconColor: widget.closeIconColor,
+        ),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -631,10 +632,11 @@ class _BottomPickerState extends State<BottomPicker> {
           ],
         ),
       ),
-      CloseIcon(
-        onPress: _closeBottomPicker,
-        iconColor: widget.closeIconColor,
-      ),
+      if(widget.displayCloseIcon)
+        CloseIcon(
+          onPress: _closeBottomPicker,
+          iconColor: widget.closeIconColor,
+        ),
     ];
   }
 
