@@ -457,8 +457,10 @@ class _BottomPickerState extends State<BottomPicker> {
   late int selectedItemIndex;
   late DateTime selectedDateTime;
 
-  late DateTime selectedFirstDateTime = widget.initialFirstDate ?? DateTime.now();
-  late DateTime selectedSecondDateTime = widget.initialSecondDate ?? DateTime.now();
+  late DateTime selectedFirstDateTime =
+      widget.initialFirstDate ?? DateTime.now();
+  late DateTime selectedSecondDateTime =
+      widget.initialSecondDate ?? DateTime.now();
 
   @override
   void initState() {
