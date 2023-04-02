@@ -1,3 +1,7 @@
+## [2.0.2] - 02/04/2023
+
+- Fix range picker initialization error (issue [#59](https://github.com/koukibadr/Bottom-Picker/issues/59))
+
 ## [2.0.1] - 24/10/2022
 
 - Update displayCloseIcon usage in code

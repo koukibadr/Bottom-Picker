@@ -1,19 +1,15 @@
 name: bottom_picker
 description: A new flutter package that let you create a bottom item picker or date & time picker with minmum parameters
-version: 2.0.1
-homepage: https://github.com/koukibadr/Bottom-Picker
-
+version: 2.0.2
+homepage: 'https://github.com/koukibadr/Bottom-Picker'
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.17.0"
-
+  flutter: '>=1.17.0'
 dependencies:
   flutter:
     sdk: flutter
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.4
-
-flutter:
+flutter: null
