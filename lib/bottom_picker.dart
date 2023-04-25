@@ -164,6 +164,7 @@ class BottomPicker extends StatefulWidget {
     this.gradientColors,
     this.iconColor = Colors.white,
     this.initialDateTime,
+    this.minuteInterval = 1,
     this.minDateTime,
     this.maxDateTime,
     this.use24hFormat = false,
@@ -189,6 +190,26 @@ class BottomPicker extends StatefulWidget {
     itemExtent = 0;
     onSubmitPressed = null;
     assertInitialValues();
+    
+    // https://github.com/flutter/flutter/issues/60456
+    if (initialDateTime == null) {
+      final dateTime = DateTime.now();
+      initialDateTime = DateTime(
+        dateTime.year,
+        dateTime.month,
+        dateTime.day,
+        dateTime.hour,
+        0,
+      );
+    } else {
+      initialDateTime = DateTime(
+        initialDateTime!.year,
+        initialDateTime!.month,
+        initialDateTime!.day,
+        initialDateTime!.hour,
+        0,
+      );
+    }
   }
 
   BottomPicker.range({
