@@ -32,7 +32,9 @@ class RangePicker extends StatefulWidget {
 }
 
 class _RangePickerState extends State<RangePicker> {
-  late DateTime initialSecondDate = widget.minSecondDate ?? DateTime.now();
+  late DateTime initialSecondDate =
+      widget.initialSecondDateTime ?? DateTime.now();
+  late DateTime minSecondDate = widget.initialSecondDateTime ?? DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,11 @@ class _RangePickerState extends State<RangePicker> {
                 widget.onSecondDateChanged.call(date);
                 setState(() {
                   initialSecondDate = date;
+                  minSecondDate = date;
+                });
+              } else {
+                setState(() {
+                  minSecondDate = date;
                 });
               }
             },
@@ -59,9 +66,10 @@ class _RangePickerState extends State<RangePicker> {
         ),
         Expanded(
           child: DatePicker(
+            key: UniqueKey(),
             initialDateTime: initialSecondDate,
             maxDateTime: widget.maxSecondDate,
-            minDateTime: initialSecondDate,
+            minDateTime: minSecondDate,
             mode: CupertinoDatePickerMode.date,
             onDateChanged: widget.onSecondDateChanged,
             dateOrder: widget.dateOrder,
