@@ -1,3 +1,9 @@
+## [2.0.3] - 27/05/2023
+
+- Fix automatic refresh issue when the second date was smaller than the first date
+- Fix: Inability to decrease the second date even if the first date was smaller. ([PR link](https://github.com/koukibadr/Bottom-Picker/pull/65))
+
+
 ## [2.0.2] - 02/04/2023
 
 - Fix range picker initialization error (issue [#59](https://github.com/koukibadr/Bottom-Picker/issues/59))
