@@ -1,3 +1,7 @@
+## [2.0.4] - 30/05/2023
+
+- Fix minute interval issue for cupertino date picker [https://github.com/flutter/flutter/issues/60456](https://github.com/flutter/flutter/issues/60456)
+
 ## [2.0.3] - 27/05/2023
 
 - Fix automatic refresh issue when the second date was smaller than the first date

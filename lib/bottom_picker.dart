@@ -190,7 +190,7 @@ class BottomPicker extends StatefulWidget {
     itemExtent = 0;
     onSubmitPressed = null;
     assertInitialValues();
-    
+
     // https://github.com/flutter/flutter/issues/60456
     if (initialDateTime == null) {
       final dateTime = DateTime.now();
