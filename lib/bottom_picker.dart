@@ -58,7 +58,8 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
-    this.buttonAlignement = MainAxisAlignment.center,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
     this.selectionOverlay,
@@ -107,7 +108,8 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
-    this.buttonAlignement = MainAxisAlignment.center,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
   }) : super(key: key) {
@@ -155,7 +157,8 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
-    this.buttonAlignement = MainAxisAlignment.center,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
   }) : super(key: key) {
@@ -201,7 +204,8 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
-    this.buttonAlignement = MainAxisAlignment.center,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
   }) : super(key: key) {
@@ -262,7 +266,8 @@ class BottomPicker extends StatefulWidget {
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
-    this.buttonAlignement = MainAxisAlignment.center,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.initialSecondDate,
     this.initialFirstDate,
@@ -450,9 +455,13 @@ class BottomPicker extends StatefulWidget {
   ///```
   final LayoutOrientation layoutOrientation;
 
-  ///THe alignement of the bottom picker button
+  ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
-  final MainAxisAlignment buttonAlignement;
+  final MainAxisAlignment buttonAlignment;
+
+  ///The alignment of the bottom picker button text
+  ///by default it's `MainAxisAlignment.center`
+  final MainAxisAlignment buttonTextAlignment;
 
   ///bottom picker main widget height
   ///if it's null the bottom picker will get the height from
@@ -620,7 +629,7 @@ class _BottomPickerState extends State<BottomPicker> {
                   vertical: 20,
                 ),
                 child: Row(
-                  mainAxisAlignment: widget.buttonAlignement,
+                  mainAxisAlignment: widget.buttonAlignment,
                   children: [
                     BottomPickerButton(
                       onClick: () {
@@ -637,6 +646,7 @@ class _BottomPickerState extends State<BottomPicker> {
 
                         Navigator.pop(context);
                       },
+                      buttonTextAlignment: widget.buttonTextAlignment,
                       iconColor: widget.iconColor,
                       gradientColors: widget.gradientColor,
                       text: widget.buttonText,

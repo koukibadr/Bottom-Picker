@@ -11,11 +11,13 @@ class BottomPickerButton extends StatelessWidget {
   final Color? solidColor;
   final double? buttonPadding;
   final double? buttonWidth;
+  final MainAxisAlignment buttonTextAlignment;
 
   BottomPickerButton({
     Key? key,
     required this.onClick,
     required this.iconColor,
+    required this.buttonTextAlignment,
     this.text,
     this.textStyle,
     this.displayIcon = true,
@@ -52,7 +54,7 @@ class BottomPickerButton extends StatelessWidget {
               : null,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: buttonTextAlignment,
           children: [
             if (text != null) Text(text!, style: textStyle),
             if (displayIcon)
