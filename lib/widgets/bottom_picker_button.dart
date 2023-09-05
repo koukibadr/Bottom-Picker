@@ -52,6 +52,7 @@ class BottomPickerButton extends StatelessWidget {
               : null,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (text != null) Text(text!, style: textStyle),
             if (displayIcon)
