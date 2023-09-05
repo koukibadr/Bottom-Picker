@@ -9,6 +9,8 @@ class BottomPickerButton extends StatelessWidget {
   final bool displayIcon;
   final TextStyle? textStyle;
   final Color? solidColor;
+  final double? buttonPadding;
+  final double? buttonWidth;
 
   BottomPickerButton({
     Key? key,
@@ -19,6 +21,8 @@ class BottomPickerButton extends StatelessWidget {
     this.displayIcon = true,
     this.gradientColors = blueThemeColor,
     this.solidColor,
+    this.buttonPadding,
+    this.buttonWidth,
   }) : super(key: key) {
     if (!displayIcon) {
       assert(text != null);
@@ -32,7 +36,8 @@ class BottomPickerButton extends StatelessWidget {
         onClick.call();
       },
       child: Container(
-        height: 40,
+        width: buttonWidth,
+        padding: EdgeInsets.all(buttonPadding ?? 8.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: solidColor,
@@ -46,19 +51,16 @@ class BottomPickerButton extends StatelessWidget {
                 )
               : null,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              if (text != null) Text(text!, style: textStyle),
-              if (displayIcon)
-                Icon(
-                  Icons.done,
-                  color: iconColor,
-                  size: 20,
-                ),
-            ],
-          ),
+        child: Row(
+          children: [
+            if (text != null) Text(text!, style: textStyle),
+            if (displayIcon)
+              Icon(
+                Icons.done,
+                color: iconColor,
+                size: 20,
+              ),
+          ],
         ),
       ),
     );

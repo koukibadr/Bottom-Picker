@@ -31,6 +31,8 @@ class BottomPicker extends StatefulWidget {
     required this.items,
     this.description = '',
     this.titleStyle = const TextStyle(),
+    this.titleAlignment = CrossAxisAlignment.end,
+    this.titlePadding = const EdgeInsets.all(0),
     this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
@@ -41,6 +43,8 @@ class BottomPicker extends StatefulWidget {
     this.iconColor = Colors.white,
     this.selectedItemIndex = 0,
     this.buttonText,
+    this.buttonPadding,
+    this.buttonWidth,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
@@ -52,10 +56,12 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 35.0,
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
+    this.selectionOverlay,
   }) : super(key: key) {
     dateOrder = null;
     onSubmitPressed = null;
@@ -72,6 +78,8 @@ class BottomPicker extends StatefulWidget {
     required this.title,
     this.description = '',
     this.titleStyle = const TextStyle(),
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment = CrossAxisAlignment.end,
     this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
@@ -84,6 +92,8 @@ class BottomPicker extends StatefulWidget {
     this.minDateTime,
     this.maxDateTime,
     this.buttonText,
+    this.buttonPadding,
+    this.buttonWidth,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
@@ -95,6 +105,7 @@ class BottomPicker extends StatefulWidget {
     ),
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
@@ -113,6 +124,8 @@ class BottomPicker extends StatefulWidget {
     required this.title,
     this.description = '',
     this.titleStyle = const TextStyle(),
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment = CrossAxisAlignment.end,
     this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
@@ -127,6 +140,8 @@ class BottomPicker extends StatefulWidget {
     this.maxDateTime,
     this.use24hFormat = false,
     this.buttonText,
+    this.buttonPadding,
+    this.buttonWidth,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
@@ -138,6 +153,7 @@ class BottomPicker extends StatefulWidget {
     ),
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
@@ -155,6 +171,8 @@ class BottomPicker extends StatefulWidget {
     required this.title,
     this.description = '',
     this.titleStyle = const TextStyle(),
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment = CrossAxisAlignment.end,
     this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onChange,
@@ -169,6 +187,8 @@ class BottomPicker extends StatefulWidget {
     this.maxDateTime,
     this.use24hFormat = false,
     this.buttonText,
+    this.buttonPadding,
+    this.buttonWidth,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
@@ -179,6 +199,7 @@ class BottomPicker extends StatefulWidget {
     ),
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
@@ -218,6 +239,8 @@ class BottomPicker extends StatefulWidget {
     required this.onSubmitPressed,
     this.description = '',
     this.titleStyle = const TextStyle(),
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment = CrossAxisAlignment.end,
     this.descriptionStyle = const TextStyle(),
     this.dismissable = false,
     this.onClose,
@@ -225,6 +248,8 @@ class BottomPicker extends StatefulWidget {
     this.gradientColors,
     this.iconColor = Colors.white,
     this.buttonText,
+    this.buttonPadding,
+    this.buttonWidth,
     this.buttonTextStyle,
     this.displayButtonIcon = true,
     this.buttonSingleColor,
@@ -235,6 +260,7 @@ class BottomPicker extends StatefulWidget {
     ),
     this.displayCloseIcon = true,
     this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignement = MainAxisAlignment.center,
     this.height,
@@ -268,6 +294,14 @@ class BottomPicker extends StatefulWidget {
   ///The text style applied on the title
   ///by default it applies simple text style
   final TextStyle titleStyle;
+
+  ///The padding applied on the title
+  ///by default it is set with zero values
+  final EdgeInsetsGeometry titlePadding;
+
+  ///Title and description alignment
+  ///The default value is `MainAxisAlignment.center`
+  final CrossAxisAlignment titleAlignment;
 
   ///The text style applied on the description
   ///by default it applies simple text style
@@ -358,6 +392,14 @@ class BottomPicker extends StatefulWidget {
   ///if the text is null the button will be rendered with an icon
   final String? buttonText;
 
+  ///the padding that will be applied to the button
+  ///if the padding is null the button will be rendered null
+  final double? buttonPadding;
+
+  ///the width that will be applied to the button
+  ///if the buttonWidth is null the button will be rendered with null
+  final double? buttonWidth;
+
   ///the button text style, will be applied on the button's text
   final TextStyle? buttonTextStyle;
 
@@ -395,6 +437,10 @@ class BottomPicker extends StatefulWidget {
   ///the close icon color
   ///by default `closeIconColor = Colors.black`
   final Color closeIconColor;
+
+  ///the close icon size
+  ///by default `closeIconSize = 20`
+  final double closeIconSize;
 
   ///the layout orientation of the bottom picker
   ///by default the orientation is set to LTR
@@ -446,6 +492,9 @@ class BottomPicker extends StatefulWidget {
   ///not required if null no minimum will be set in the date picker
   DateTime? initialSecondDate;
 
+  ///The overlay widget to show when a when is selc
+  Widget? selectionOverlay;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
@@ -478,10 +527,8 @@ class _BottomPickerState extends State<BottomPicker> {
   late int selectedItemIndex;
   late DateTime selectedDateTime;
 
-  late DateTime selectedFirstDateTime =
-      widget.initialFirstDate ?? DateTime.now();
-  late DateTime selectedSecondDateTime =
-      widget.initialSecondDate ?? DateTime.now();
+  late DateTime selectedFirstDateTime = widget.initialFirstDate ?? DateTime.now();
+  late DateTime selectedSecondDateTime = widget.initialSecondDate ?? DateTime.now();
 
   @override
   void initState() {
@@ -512,7 +559,6 @@ class _BottomPickerState extends State<BottomPicker> {
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 20,
-                top: 20,
                 bottom: 20,
               ),
               child: Row(
@@ -533,6 +579,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       selectedItemIndex: widget.selectedItemIndex,
                       textStyle: widget.pickerTextStyle,
                       itemExtent: widget.itemExtent,
+                      selectionOverlay: widget.selectionOverlay,
                     )
                   : widget.bottomPickerType == BottomPickerType.dateTime
                       ? DatePicker(
@@ -577,11 +624,9 @@ class _BottomPickerState extends State<BottomPicker> {
                   children: [
                     BottomPickerButton(
                       onClick: () {
-                        if (widget.bottomPickerType ==
-                            BottomPickerType.simple) {
+                        if (widget.bottomPickerType == BottomPickerType.simple) {
                           widget.onSubmit?.call(selectedItemIndex);
-                        } else if (widget.bottomPickerType ==
-                            BottomPickerType.dateTime) {
+                        } else if (widget.bottomPickerType == BottomPickerType.dateTime) {
                           widget.onSubmit?.call(selectedDateTime);
                         } else {
                           widget.onSubmitPressed?.call(
@@ -595,6 +640,8 @@ class _BottomPickerState extends State<BottomPicker> {
                       iconColor: widget.iconColor,
                       gradientColors: widget.gradientColor,
                       text: widget.buttonText,
+                      buttonPadding: widget.buttonPadding,
+                      buttonWidth: widget.buttonWidth,
                       textStyle: widget.buttonTextStyle,
                       displayIcon: widget.displayButtonIcon,
                       solidColor: widget.buttonSingleColor,
@@ -615,16 +662,20 @@ class _BottomPickerState extends State<BottomPicker> {
         CloseIcon(
           onPress: _closeBottomPicker,
           iconColor: widget.closeIconColor,
+          closeIconSize: widget.closeIconSize,
         ),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(
-              widget.title,
-              style: widget.titleStyle,
-              textAlign: TextAlign.end,
+            Padding(
+              padding: widget.titlePadding,
+              child: Text(
+                widget.title,
+                style: widget.titleStyle,
+                textAlign: TextAlign.end,
+              ),
             ),
             Text(
               widget.description,
@@ -642,11 +693,14 @@ class _BottomPickerState extends State<BottomPicker> {
     return [
       Expanded(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: widget.titleAlignment,
           children: [
-            Text(
-              widget.title,
-              style: widget.titleStyle,
+            Padding(
+              padding: widget.titlePadding,
+              child: Text(
+                widget.title,
+                style: widget.titleStyle,
+              ),
             ),
             Text(
               widget.description,
@@ -659,6 +713,7 @@ class _BottomPickerState extends State<BottomPicker> {
         CloseIcon(
           onPress: _closeBottomPicker,
           iconColor: widget.closeIconColor,
+          closeIconSize: widget.closeIconSize,
         ),
     ];
   }
