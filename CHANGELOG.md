@@ -1,3 +1,16 @@
+## [2.1.0] - 12/09/2023
+
+- ** Enhancements: **
+    - Added title padding to title widget
+    - Added title alignement
+    - Button padding, button width, Button text alignement and Button alignement  parameters
+    - Customizable close icon size
+    - Added `selectionOverlay` parameter
+    - Date range picker dates attributes assertion
+- **Bug fixes**
+    - Date range picker initial dates error
+    - Button padding issue
+
 ## [2.0.4] - 30/05/2023
 
 - Fix minute interval issue for cupertino date picker [https://github.com/flutter/flutter/issues/60456](https://github.com/flutter/flutter/issues/60456)

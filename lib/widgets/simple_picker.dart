@@ -28,7 +28,8 @@ class SimplePicker extends StatelessWidget {
       ),
       child: CupertinoPicker(
         itemExtent: itemExtent,
-        selectionOverlay: selectionOverlay ?? const CupertinoPickerDefaultSelectionOverlay(),
+        selectionOverlay:
+            selectionOverlay ?? const CupertinoPickerDefaultSelectionOverlay(),
         scrollController: FixedExtentScrollController(
           initialItem: selectedItemIndex,
         ),
