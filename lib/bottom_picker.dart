@@ -286,10 +286,10 @@ class BottomPicker extends StatefulWidget {
     displaySubmitButton = true;
     assert(onSubmitPressed != null);
     assertInitialValues();
-    if(minSecondDate != null && initialSecondDate != null){
+    if (minSecondDate != null && initialSecondDate != null) {
       assert(initialSecondDate!.isAfter(minSecondDate!));
     }
-    if(minFirstDate != null && initialFirstDate != null){
+    if (minFirstDate != null && initialFirstDate != null) {
       assert(initialFirstDate!.isAfter(minFirstDate!));
     }
   }
@@ -507,7 +507,9 @@ class BottomPicker extends StatefulWidget {
   ///not required if null no minimum will be set in the date picker
   DateTime? initialSecondDate;
 
-  ///The overlay widget to show when a when is selc
+  /// A widget overlaid on the picker to highlight the currently selected entry.
+  /// The [selectionOverlay] widget drawn above the [CupertinoPicker]'s picker
+  /// wheel.
   Widget? selectionOverlay;
 
   ///display the bottom picker popup
@@ -542,8 +544,10 @@ class _BottomPickerState extends State<BottomPicker> {
   late int selectedItemIndex;
   late DateTime selectedDateTime;
 
-  late DateTime selectedFirstDateTime = widget.initialFirstDate ?? DateTime.now();
-  late DateTime selectedSecondDateTime = widget.initialSecondDate ?? DateTime.now();
+  late DateTime selectedFirstDateTime =
+      widget.initialFirstDate ?? DateTime.now();
+  late DateTime selectedSecondDateTime =
+      widget.initialSecondDate ?? DateTime.now();
 
   @override
   void initState() {
@@ -639,9 +643,11 @@ class _BottomPickerState extends State<BottomPicker> {
                   children: [
                     BottomPickerButton(
                       onClick: () {
-                        if (widget.bottomPickerType == BottomPickerType.simple) {
+                        if (widget.bottomPickerType ==
+                            BottomPickerType.simple) {
                           widget.onSubmit?.call(selectedItemIndex);
-                        } else if (widget.bottomPickerType == BottomPickerType.dateTime) {
+                        } else if (widget.bottomPickerType ==
+                            BottomPickerType.dateTime) {
                           widget.onSubmit?.call(selectedDateTime);
                         } else {
                           widget.onSubmitPressed?.call(
