@@ -32,9 +32,32 @@ class RangePicker extends StatefulWidget {
 }
 
 class _RangePickerState extends State<RangePicker> {
-  late DateTime initialSecondDate =
-      widget.initialSecondDateTime ?? DateTime.now();
-  late DateTime minSecondDate = widget.initialSecondDateTime ?? DateTime.now();
+  late DateTime minSecondDate;
+  late DateTime initialSecondDate;
+
+  late DateTime initialFirstDate;
+  late DateTime minFirstDate;
+
+  @override
+  void initState() {
+    super.initState();
+    minFirstDate = widget.minFirstDate ??
+        DateTime.now().add(
+          const Duration(days: 1),
+        );
+    initialFirstDate = widget.initialFirstDateTime ??
+        minFirstDate.add(
+          const Duration(days: 1),
+        );
+    minSecondDate = widget.minSecondDate ??
+        DateTime.now().add(
+          const Duration(days: 1),
+        );
+    initialSecondDate = widget.initialSecondDateTime ??
+        minSecondDate.add(
+          const Duration(days: 1),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +65,9 @@ class _RangePickerState extends State<RangePicker> {
       children: [
         Expanded(
           child: DatePicker(
-            initialDateTime: widget.initialFirstDateTime,
+            initialDateTime: initialFirstDate,
             maxDateTime: widget.maxFirstDate,
-            minDateTime: widget.minFirstDate,
+            minDateTime: minFirstDate,
             mode: CupertinoDatePickerMode.date,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);

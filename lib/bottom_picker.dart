@@ -286,6 +286,12 @@ class BottomPicker extends StatefulWidget {
     displaySubmitButton = true;
     assert(onSubmitPressed != null);
     assertInitialValues();
+    if(minSecondDate != null && initialSecondDate != null){
+      assert(initialSecondDate!.isAfter(minSecondDate!));
+    }
+    if(minFirstDate != null && initialFirstDate != null){
+      assert(initialFirstDate!.isAfter(minFirstDate!));
+    }
   }
 
   ///The title of the bottom picker
