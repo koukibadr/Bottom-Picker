@@ -1,3 +1,7 @@
+## [2.1.1] - 27/09/2023
+
+- Update package license to MIT license
+
 ## [2.1.0] - 12/09/2023
 
 - ** Enhancements: **
