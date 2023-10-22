@@ -1,3 +1,11 @@
+## [2.2.1] - 22/10/2023
+
+- Fix analysis issues
+
+## [2.2.0] - 2/10/2023
+
+- Add localization support and multiple language support
+
 ## [2.1.1] - 27/09/2023
 
 - Update package license to MIT license
