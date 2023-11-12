@@ -2,6 +2,7 @@
 
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
+import 'package:bottom_picker/resources/time.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -271,6 +272,12 @@ class ExampleApp extends StatelessWidget {
       },
       bottomPickerTheme: BottomPickerTheme.orange,
       use24hFormat: true,
+      initialTime: Time(
+        minutes: 23,
+      ),
+      maxTime: Time(
+        hours: 17,
+      ),
     ).show(context);
   }
 

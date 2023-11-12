@@ -1,3 +1,8 @@
+## [2.3.1] - 12/11/2023
+
+- Fix minutes set value in the `time` constructor
+- Update `time` constructor to use `Time` class to ease setting hours and minutes values [PR-75](https://github.com/koukibadr/Bottom-Picker/pull/75)
+
 ## [2.2.1] - 22/10/2023
 
 - Fix analysis issues
