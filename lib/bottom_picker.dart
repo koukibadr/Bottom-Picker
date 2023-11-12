@@ -1,5 +1,6 @@
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
+import 'package:bottom_picker/resources/time.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:bottom_picker/widgets/close_icon.dart';
 import 'package:bottom_picker/widgets/date_picker.dart';
@@ -172,6 +173,9 @@ class BottomPicker extends StatefulWidget {
   BottomPicker.time({
     Key? key,
     required this.title,
+    required this.initialTime,
+    this.maxTime,
+    this.minTime,
     this.description = '',
     this.titleStyle = const TextStyle(),
     this.titlePadding = const EdgeInsets.all(0),
@@ -184,10 +188,7 @@ class BottomPicker extends StatefulWidget {
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.iconColor = Colors.white,
-    this.initialDateTime,
     this.minuteInterval = 1,
-    this.minDateTime,
-    this.maxDateTime,
     this.use24hFormat = false,
     this.buttonText,
     this.buttonPadding,
@@ -214,27 +215,8 @@ class BottomPicker extends StatefulWidget {
     dateOrder = null;
     itemExtent = 0;
     onSubmitPressed = null;
+    initialDateTime = null;
     assertInitialValues();
-
-    // https://github.com/flutter/flutter/issues/60456
-    if (initialDateTime == null) {
-      final dateTime = DateTime.now();
-      initialDateTime = DateTime(
-        dateTime.year,
-        dateTime.month,
-        dateTime.day,
-        dateTime.hour,
-        0,
-      );
-    } else {
-      initialDateTime = DateTime(
-        initialDateTime!.year,
-        initialDateTime!.month,
-        initialDateTime!.day,
-        initialDateTime!.hour,
-        0,
-      );
-    }
   }
 
   BottomPicker.range({
@@ -380,6 +362,11 @@ class BottomPicker extends StatefulWidget {
   ///by default it's null
   ///
   DateTime? initialDateTime;
+
+  Time? initialTime;
+
+  Time? maxTime;
+  Time? minTime;
 
   ///The gap between two minutes
   ///by default it's 1 minute
@@ -602,10 +589,10 @@ class _BottomPickerState extends State<BottomPicker> {
                     )
                   : widget.bottomPickerType == BottomPickerType.dateTime
                       ? DatePicker(
-                          initialDateTime: widget.initialDateTime,
+                          initialDateTime: widget.initialTime.toDateTime,
                           minuteInterval: widget.minuteInterval ?? 1,
-                          maxDateTime: widget.maxDateTime,
-                          minDateTime: widget.minDateTime,
+                          maxDateTime: widget.maxTime.toDateTime,
+                          minDateTime: widget.minTime.toDateTime,
                           mode: widget.datePickerMode,
                           onDateChanged: (DateTime date) {
                             selectedDateTime = date;
