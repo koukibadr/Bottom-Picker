@@ -363,9 +363,14 @@ class BottomPicker extends StatefulWidget {
   ///
   DateTime? initialDateTime;
 
+  ///The initial time set in the time picker widget
+  ///required only when using the `time` constructor
   Time? initialTime;
 
+  ///The max time can be set in the time picker widget
   Time? maxTime;
+
+  ///The min time can be set in the time picker widget
   Time? minTime;
 
   ///The gap between two minutes

@@ -39,7 +39,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.2.1
+	bottom_picker: ^2.3.1
 ```
 
 ## Parameters
@@ -131,6 +131,16 @@ dependencies:
   ///by default it's null
   ///
   DateTime? initialDateTime;
+
+  ///The initial time set in the time picker widget
+  ///required only when using the `time` constructor
+  Time? initialTime;
+
+  ///The max time can be set in the time picker widget
+  Time? maxTime;
+
+  ///The min time can be set in the time picker widget
+  Time? minTime;
 
   ///The gap between two minutes
   ///by default it's 1 minute
@@ -308,21 +318,27 @@ Time picker
 ```dart
 
 BottomPicker.time(
-	title:  "Set your next meeting time",
-	titleStyle:  TextStyle(
-		fontWeight:  FontWeight.bold,
-		fontSize:  15,
-		color:  Colors.orange
-	),
-	onSubmit: (index) {
-		print(index);
-	},
-	onClose: () {
-		print("Picker closed");
-	},
-	bottomPickerTheme:  BOTTOM_PICKER_THEME.orange,
-	use24hFormat:  true
-).show(context);
+      title: 'Set your next meeting time',
+      titleStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: Colors.orange,
+      ),
+      onSubmit: (index) {
+        print(index);
+      },
+      onClose: () {
+        print('Picker closed');
+      },
+      bottomPickerTheme: BottomPickerTheme.orange,
+      use24hFormat: true,
+      initialTime: Time(
+        minutes: 23,
+      ),
+      maxTime: Time(
+        hours: 17,
+      ),
+  ).show(context);
 
 
 

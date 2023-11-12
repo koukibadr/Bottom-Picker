@@ -273,14 +273,10 @@ class ExampleApp extends StatelessWidget {
       bottomPickerTheme: BottomPickerTheme.orange,
       use24hFormat: true,
       initialTime: Time(
-        hours: 44,
         minutes: 23,
       ),
       maxTime: Time(
         hours: 17,
-      ),
-      minTime: Time(
-        hours: 8,
       ),
     ).show(context);
   }
