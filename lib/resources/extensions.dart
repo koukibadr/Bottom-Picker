@@ -1,6 +1,5 @@
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
-import 'package:bottom_picker/resources/time.dart';
 import 'package:flutter/material.dart';
 
 extension BottomPickerExtension on BottomPicker {
