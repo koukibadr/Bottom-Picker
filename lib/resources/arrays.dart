@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-enum BottomPickerType { simple, dateTime, rangeDateTime }
+enum BottomPickerType {
+  simple,
+  time,
+  dateTime,
+  rangeDateTime,
+}
 
 enum BottomPickerTheme {
   blue,
