@@ -181,6 +181,9 @@ class ExampleApp extends StatelessWidget {
     BottomPicker.date(
       title: 'Set your Birthday',
       dateOrder: DatePickerDateOrder.dmy,
+      initialDateTime: DateTime(1996, 10, 22),
+      maxDateTime: DateTime(1998),
+      minDateTime: DateTime(1980),
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,

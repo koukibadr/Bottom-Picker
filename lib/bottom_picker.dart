@@ -211,7 +211,7 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
-    bottomPickerType = BottomPickerType.dateTime;
+    bottomPickerType = BottomPickerType.time;
     dateOrder = null;
     itemExtent = 0;
     onSubmitPressed = null;
@@ -592,7 +592,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       itemExtent: widget.itemExtent,
                       selectionOverlay: widget.selectionOverlay,
                     )
-                  : widget.bottomPickerType == BottomPickerType.dateTime
+                  : widget.bottomPickerType == BottomPickerType.time
                       ? DatePicker(
                           initialDateTime: widget.initialTime.toDateTime,
                           minuteInterval: widget.minuteInterval ?? 1,
@@ -607,22 +607,37 @@ class _BottomPickerState extends State<BottomPicker> {
                           dateOrder: widget.dateOrder,
                           textStyle: widget.pickerTextStyle,
                         )
-                      : RangePicker(
-                          initialFirstDateTime: widget.initialFirstDate,
-                          initialSecondDateTime: widget.initialSecondDate,
-                          maxFirstDate: widget.maxFirstDate,
-                          minFirstDate: widget.minFirstDate,
-                          maxSecondDate: widget.maxSecondDate,
-                          minSecondDate: widget.minSecondDate,
-                          onFirstDateChanged: (DateTime date) {
-                            selectedFirstDateTime = date;
-                          },
-                          onSecondDateChanged: (DateTime date) {
-                            selectedSecondDateTime = date;
-                          },
-                          dateOrder: widget.dateOrder,
-                          textStyle: widget.pickerTextStyle,
-                        ),
+                      : widget.bottomPickerType == BottomPickerType.dateTime
+                          ? DatePicker(
+                              initialDateTime: widget.initialDateTime,
+                              minuteInterval: widget.minuteInterval ?? 1,
+                              maxDateTime: widget.maxDateTime,
+                              minDateTime: widget.minDateTime,
+                              mode: widget.datePickerMode,
+                              onDateChanged: (DateTime date) {
+                                selectedDateTime = date;
+                                widget.onChange?.call(date);
+                              },
+                              use24hFormat: widget.use24hFormat,
+                              dateOrder: widget.dateOrder,
+                              textStyle: widget.pickerTextStyle,
+                            )
+                          : RangePicker(
+                              initialFirstDateTime: widget.initialFirstDate,
+                              initialSecondDateTime: widget.initialSecondDate,
+                              maxFirstDate: widget.maxFirstDate,
+                              minFirstDate: widget.minFirstDate,
+                              maxSecondDate: widget.maxSecondDate,
+                              minSecondDate: widget.minSecondDate,
+                              onFirstDateChanged: (DateTime date) {
+                                selectedFirstDateTime = date;
+                              },
+                              onSecondDateChanged: (DateTime date) {
+                                selectedSecondDateTime = date;
+                              },
+                              dateOrder: widget.dateOrder,
+                              textStyle: widget.pickerTextStyle,
+                            ),
             ),
             if (widget.displaySubmitButton)
               Padding(
