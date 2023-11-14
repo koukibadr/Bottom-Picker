@@ -9,6 +9,7 @@ import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_picker/resources/extensions.dart';
+export 'package:bottom_picker/resources/time.dart';
 
 // ignore: must_be_immutable
 class BottomPicker extends StatefulWidget {

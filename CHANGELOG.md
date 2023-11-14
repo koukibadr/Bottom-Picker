@@ -1,3 +1,7 @@
+## [2.3.2] - 14/11/2023
+
+- Fix date picker date initlization (`initialDateTime`, `maxDateTime`, `minDateTime`) [issue-76](https://github.com/koukibadr/Bottom-Picker/issues/76)
+
 ## [2.3.1] - 12/11/2023
 
 - Fix minutes set value in the `time` constructor
