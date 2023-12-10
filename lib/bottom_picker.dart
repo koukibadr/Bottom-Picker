@@ -67,7 +67,7 @@ class BottomPicker extends StatefulWidget {
     this.selectionOverlay,
   }) : super(key: key) {
     dateOrder = null;
-    onSubmitPressed = null;
+    onRangeDateSubmitPressed = null;
     bottomPickerType = BottomPickerType.simple;
     assert(items != null && items!.isNotEmpty);
     assert(selectedItemIndex >= 0);
@@ -119,7 +119,7 @@ class BottomPicker extends StatefulWidget {
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
     itemExtent = 0;
-    onSubmitPressed = null;
+    onRangeDateSubmitPressed = null;
     assertInitialValues();
   }
 
@@ -167,7 +167,7 @@ class BottomPicker extends StatefulWidget {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
     itemExtent = 0;
-    onSubmitPressed = null;
+    onRangeDateSubmitPressed = null;
     assertInitialValues();
   }
 
@@ -215,7 +215,7 @@ class BottomPicker extends StatefulWidget {
     bottomPickerType = BottomPickerType.time;
     dateOrder = null;
     itemExtent = 0;
-    onSubmitPressed = null;
+    onRangeDateSubmitPressed = null;
     initialDateTime = null;
     assertInitialValues();
   }
@@ -223,7 +223,7 @@ class BottomPicker extends StatefulWidget {
   BottomPicker.range({
     Key? key,
     required this.title,
-    required this.onSubmitPressed,
+    required this.onRangeDateSubmitPressed,
     this.description = '',
     this.titleStyle = const TextStyle(),
     this.titlePadding = const EdgeInsets.all(0),
@@ -267,7 +267,7 @@ class BottomPicker extends StatefulWidget {
     onChange = null;
     onSubmit = null;
     displaySubmitButton = true;
-    assert(onSubmitPressed != null);
+    assert(onRangeDateSubmitPressed != null);
     assertInitialValues();
     if (minSecondDate != null && initialSecondDate != null) {
       assert(initialSecondDate!.isAfter(minSecondDate!));
@@ -474,7 +474,7 @@ class BottomPicker extends StatefulWidget {
   ///invoked when pressing on the submit button when using range picker
   ///it return two dates (first date, end date)
   ///required when using [BottomPicker.range]
-  late Function(DateTime, DateTime)? onSubmitPressed;
+  late Function(DateTime, DateTime)? onRangeDateSubmitPressed;
 
   ///the minimum first date in the date range picker
   ///not required if null no minimum will be set in the date picker
@@ -547,6 +547,8 @@ class _BottomPickerState extends State<BottomPicker> {
     super.initState();
     if (widget.bottomPickerType == BottomPickerType.simple) {
       selectedItemIndex = widget.selectedItemIndex;
+    } else if (widget.bottomPickerType == BottomPickerType.time) {
+      selectedDateTime = (widget.initialTime ?? Time.now()).toDateTime;
     } else {
       selectedDateTime = widget.initialDateTime ?? DateTime.now();
     }
@@ -652,16 +654,17 @@ class _BottomPickerState extends State<BottomPicker> {
                     BottomPickerButton(
                       onClick: () {
                         if (widget.bottomPickerType ==
-                            BottomPickerType.simple) {
-                          widget.onSubmit?.call(selectedItemIndex);
-                        } else if (widget.bottomPickerType ==
-                            BottomPickerType.dateTime) {
-                          widget.onSubmit?.call(selectedDateTime);
-                        } else {
-                          widget.onSubmitPressed?.call(
+                            BottomPickerType.rangeDateTime) {
+                          widget.onRangeDateSubmitPressed?.call(
                             selectedFirstDateTime,
                             selectedSecondDateTime,
                           );
+                        } else if (widget.bottomPickerType ==
+                                BottomPickerType.dateTime ||
+                            widget.bottomPickerType == BottomPickerType.time) {
+                          widget.onSubmit?.call(selectedDateTime);
+                        } else {
+                          widget.onSubmit?.call(selectedItemIndex);
                         }
 
                         Navigator.pop(context);

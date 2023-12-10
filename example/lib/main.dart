@@ -223,7 +223,7 @@ class ExampleApp extends StatelessWidget {
       descriptionStyle: TextStyle(
         color: Colors.black,
       ),
-      onSubmitPressed: (firstDate, secondDate) {
+      onRangeDateSubmitPressed: (firstDate, secondDate) {
         print(firstDate);
         print(secondDate);
       },
@@ -250,7 +250,7 @@ class ExampleApp extends StatelessWidget {
       descriptionStyle: TextStyle(
         color: Colors.black,
       ),
-      onSubmitPressed: (firstDate, secondDate) {
+      onRangeDateSubmitPressed: (firstDate, secondDate) {
         print(firstDate);
         print(secondDate);
       },
