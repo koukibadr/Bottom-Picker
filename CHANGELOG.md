@@ -1,3 +1,7 @@
+## [2.3.3] - 10/12/2023
+
+- Fix `onSubmit` attribute callback code and selected value retrieval from date and time picker [issue link](https://github.com/koukibadr/Bottom-Picker/issues/80)
+
 ## [2.3.2] - 14/11/2023
 
 - Fix date picker date initlization (`initialDateTime`, `maxDateTime`, `minDateTime`) [issue-76](https://github.com/koukibadr/Bottom-Picker/issues/76)

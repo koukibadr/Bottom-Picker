@@ -39,7 +39,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.3.2
+	bottom_picker: ^2.3.3
 ```
 
 ## Parameters
@@ -242,7 +242,7 @@ dependencies:
   ///invoked when pressing on the submit button when using range picker
   ///it return two dates (first date, end date)
   ///required when using [BottomPicker.range]
-  late Function(DateTime, DateTime)? onSubmitPressed;
+  late Function(DateTime, DateTime)? onRangeDateSubmitPressed;
 
   ///the minimum first date in the date range picker
   ///not required if null no minimum will be set in the date picker
