@@ -1,3 +1,10 @@
+## [2.4.0] - 04/02/2024
+
+- **Layout enhancement:** Update confirmation button design and attributes
+- `iconColor` , `buttonText` , `buttonTextStyle`, `displayButtonIcon`, `buttonTextAlignment` removed
+- Added `buttonContent`, `buttonStyle` attributes
+- Picker content padding updated
+
 ## [2.3.3] - 10/12/2023
 
 - Fix `onSubmit` attribute callback code and selected value retrieval from date and time picker [issue link](https://github.com/koukibadr/Bottom-Picker/issues/80)

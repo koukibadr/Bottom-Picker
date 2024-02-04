@@ -28,9 +28,7 @@
 - Customize picker text style (color, font size, font weight...)
 - Customize close button style and display
 - Customize layout orientation (LTR / RTL )
-- Customize button alignment
 - Customizable bottom picker height
-- Customizable button display and visibility
 - Customizable minuteInterval attribute
 
 ## Getting Started
@@ -39,7 +37,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.3.3
+	bottom_picker: ^2.4.0
 ```
 
 ## Parameters
@@ -110,16 +108,6 @@ dependencies:
   ///```
   final BottomPickerTheme bottomPickerTheme;
 
-  ///to set a custom button theme color use this list
-  ///when it's not null it will be applied
-  ///
-  final List<Color>? gradientColors;
-
-  ///define the icon color on the button
-  ///by default it's White
-  ///
-  final Color iconColor;
-
   ///used for simple bottom picker
   ///by default it's 0, needs to be in the range [0, this.items.length-1]
   ///otherwise an exception will be thrown
@@ -160,10 +148,6 @@ dependencies:
   ///
   late bool use24hFormat;
 
-  ///the text that will be applied to the button
-  ///if the text is null the button will be rendered with an icon
-  final String? buttonText;
-
   ///the padding that will be applied to the button
   ///if the padding is null the button will be rendered null
   final double? buttonPadding;
@@ -171,19 +155,6 @@ dependencies:
   ///the width that will be applied to the button
   ///if the buttonWidth is null the button will be rendered with null
   final double? buttonWidth;
-
-  ///the button text style, will be applied on the button's text
-  final TextStyle? buttonTextStyle;
-
-  ///display button icon
-  ///by default it's true
-  ///if you want to display a text you can set [displayButtonIcon] to false
-  final bool displayButtonIcon;
-
-  ///a single color will be applied to the button instead of the gradient
-  ///themes
-  ///
-  final Color? buttonSingleColor;
 
   ///the bottom picker background color,
   ///by default it's white
@@ -226,18 +197,10 @@ dependencies:
   ///by default it's `MainAxisAlignment.center`
   final MainAxisAlignment buttonAlignment;
 
-  ///The alignment of the bottom picker button text
-  ///by default it's `MainAxisAlignment.center`
-  final MainAxisAlignment buttonTextAlignment;
-
   ///bottom picker main widget height
   ///if it's null the bottom picker will get the height from
   ///[bottomPickerHeight] extension on context
   final double? height;
-
-  ///indicates if the submit button will be displayed or not
-  ///by default the submit button is shown
-  late bool displaySubmitButton;
 
   ///invoked when pressing on the submit button when using range picker
   ///it return two dates (first date, end date)
@@ -272,8 +235,33 @@ dependencies:
   /// The [selectionOverlay] widget drawn above the [CupertinoPicker]'s picker
   /// wheel.
   Widget? selectionOverlay;
-```
 
+  ///The button's widget that will be displayed
+  ///if null the button will have a simple 'Select' text in the center
+  final Widget? buttonContent;
+
+  ///indicates if the submit button will be displayed or not
+  ///by default the submit button is shown
+  late bool displaySubmitButton;
+
+  ///a single color will be applied to the button instead of the gradient
+  ///themes
+  ///
+  final Color? buttonSingleColor;
+
+  ///to set a custom button theme color use this list
+  ///when it's not null it will be applied
+  ///
+  final List<Color>? gradientColors;
+
+  ///the style that will be applied on the button's widget
+  final BoxDecoration? buttonStyle;
+```
+<hr/>
+
+**Migrate from 2.3.3 to 2.4.0:** `iconColor` , `buttonText` , `buttonTextStyle`, `displayButtonIcon`, `buttonTextAlignment` has been replaced with `buttonContent`, `buttonStyle` attributes to see the new attributes usage check the latest example in this documentation
+
+<hr/>
 ## Examples
 
 Simple item picker
@@ -362,7 +350,6 @@ BottomPicker.dateTime(
 	onClose: () {
 		print('Picker closed');
 	},
-	iconColor:  Colors.black,
 	minDateTime:  DateTime(2021, 5, 1),
 	maxDateTime:  DateTime(2021, 8, 2),
 	initialDateTime:  DateTime(2021, 5, 1),
@@ -390,9 +377,6 @@ BottomPicker.dateTime(
 		print("Picker closed");
 	},
 	buttonText:  'Confirm',
-	buttonTextStyle:  const  TextStyle(
-		color:  Colors.white
-	),
 	buttonSingleColor:  Colors.pink,
 	minDateTime:  DateTime(2021, 5, 1),
 	maxDateTime:  DateTime(2021, 8, 2),
@@ -518,6 +502,73 @@ BottomPicker.range(
 
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker.png?raw=true"  width="200"/>
+
+</p>
+
+
+<hr>
+Custom button style
+
+```dart
+BottomPicker.date(
+    title: 'Set your Birthday',
+    dateOrder: DatePickerDateOrder.dmy,
+    initialDateTime: DateTime(1996, 10, 22),
+    maxDateTime: DateTime(1998),
+    minDateTime: DateTime(1980),
+    pickerTextStyle: TextStyle(
+      color: Colors.blue,
+      fontWeight: FontWeight.bold,
+      fontSize: 12,
+    ),
+    titleStyle: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 15,
+      color: Colors.blue,
+    ),
+    onChange: (index) {
+      print(index);
+    },
+    onSubmit: (index) {
+      print(index);
+    },
+    bottomPickerTheme: BottomPickerTheme.plumPlate,
+    buttonStyle: BoxDecoration(
+      color: Colors.blue,
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(
+        color: Colors.blue[200]!,
+      ),
+    ),
+    buttonWidth: 200,
+    buttonContent: Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Select date',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+            size: 15,
+          )
+        ],
+      ),
+    ),
+  ).show(context);
+
+
+```
+
+<p  align="center">
+<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_with_button_style.png?raw=true"  width="200"/>
 
 </p>
 
