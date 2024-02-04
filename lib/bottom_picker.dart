@@ -42,13 +42,9 @@ class BottomPicker extends StatefulWidget {
     this.onClose,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
-    this.iconColor = Colors.white,
     this.selectedItemIndex = 0,
-    this.buttonText,
     this.buttonPadding,
     this.buttonWidth,
-    this.buttonTextStyle,
-    this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerTextStyle = const TextStyle(
@@ -61,10 +57,11 @@ class BottomPicker extends StatefulWidget {
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
-    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
     this.selectionOverlay,
+    this.buttonContent,
+    this.buttonStyle,
   }) : super(key: key) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -90,15 +87,11 @@ class BottomPicker extends StatefulWidget {
     this.onClose,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
-    this.iconColor = Colors.white,
     this.initialDateTime,
     this.minDateTime,
     this.maxDateTime,
-    this.buttonText,
     this.buttonPadding,
     this.buttonWidth,
-    this.buttonTextStyle,
-    this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
@@ -111,9 +104,10 @@ class BottomPicker extends StatefulWidget {
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
-    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
+    this.buttonContent,
+    this.buttonStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
@@ -137,17 +131,13 @@ class BottomPicker extends StatefulWidget {
     this.onClose,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
-    this.iconColor = Colors.white,
     this.initialDateTime,
     this.minuteInterval,
     this.minDateTime,
     this.maxDateTime,
     this.use24hFormat = false,
-    this.buttonText,
     this.buttonPadding,
     this.buttonWidth,
-    this.buttonTextStyle,
-    this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
@@ -160,9 +150,10 @@ class BottomPicker extends StatefulWidget {
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
-    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
+    this.buttonContent,
+    this.buttonStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -188,14 +179,10 @@ class BottomPicker extends StatefulWidget {
     this.onClose,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
-    this.iconColor = Colors.white,
     this.minuteInterval = 1,
     this.use24hFormat = false,
-    this.buttonText,
     this.buttonPadding,
     this.buttonWidth,
-    this.buttonTextStyle,
-    this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerTextStyle = const TextStyle(
@@ -207,9 +194,10 @@ class BottomPicker extends StatefulWidget {
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
-    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
+    this.buttonContent,
+    this.buttonStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
@@ -233,12 +221,8 @@ class BottomPicker extends StatefulWidget {
     this.onClose,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
-    this.iconColor = Colors.white,
-    this.buttonText,
     this.buttonPadding,
     this.buttonWidth,
-    this.buttonTextStyle,
-    this.displayButtonIcon = true,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerTextStyle = const TextStyle(
@@ -250,7 +234,6 @@ class BottomPicker extends StatefulWidget {
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
-    this.buttonTextAlignment = MainAxisAlignment.center,
     this.height,
     this.initialSecondDate,
     this.initialFirstDate,
@@ -259,6 +242,8 @@ class BottomPicker extends StatefulWidget {
     this.maxFirstDate,
     this.maxSecondDate,
     this.dateOrder = DatePickerDateOrder.ymd,
+    this.buttonContent,
+    this.buttonStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDateTime;
@@ -342,16 +327,6 @@ class BottomPicker extends StatefulWidget {
   ///```
   final BottomPickerTheme bottomPickerTheme;
 
-  ///to set a custom button theme color use this list
-  ///when it's not null it will be applied
-  ///
-  final List<Color>? gradientColors;
-
-  ///define the icon color on the button
-  ///by default it's White
-  ///
-  final Color iconColor;
-
   ///used for simple bottom picker
   ///by default it's 0, needs to be in the range [0, this.items.length-1]
   ///otherwise an exception will be thrown
@@ -392,10 +367,6 @@ class BottomPicker extends StatefulWidget {
   ///
   late bool use24hFormat;
 
-  ///the text that will be applied to the button
-  ///if the text is null the button will be rendered with an icon
-  final String? buttonText;
-
   ///the padding that will be applied to the button
   ///if the padding is null the button will be rendered null
   final double? buttonPadding;
@@ -403,19 +374,6 @@ class BottomPicker extends StatefulWidget {
   ///the width that will be applied to the button
   ///if the buttonWidth is null the button will be rendered with null
   final double? buttonWidth;
-
-  ///the button text style, will be applied on the button's text
-  final TextStyle? buttonTextStyle;
-
-  ///display button icon
-  ///by default it's true
-  ///if you want to display a text you can set [displayButtonIcon] to false
-  final bool displayButtonIcon;
-
-  ///a single color will be applied to the button instead of the gradient
-  ///themes
-  ///
-  final Color? buttonSingleColor;
 
   ///the bottom picker background color,
   ///by default it's white
@@ -458,18 +416,10 @@ class BottomPicker extends StatefulWidget {
   ///by default it's `MainAxisAlignment.center`
   final MainAxisAlignment buttonAlignment;
 
-  ///The alignment of the bottom picker button text
-  ///by default it's `MainAxisAlignment.center`
-  final MainAxisAlignment buttonTextAlignment;
-
   ///bottom picker main widget height
   ///if it's null the bottom picker will get the height from
   ///[bottomPickerHeight] extension on context
   final double? height;
-
-  ///indicates if the submit button will be displayed or not
-  ///by default the submit button is shown
-  late bool displaySubmitButton;
 
   ///invoked when pressing on the submit button when using range picker
   ///it return two dates (first date, end date)
@@ -504,6 +454,27 @@ class BottomPicker extends StatefulWidget {
   /// The [selectionOverlay] widget drawn above the [CupertinoPicker]'s picker
   /// wheel.
   Widget? selectionOverlay;
+
+  ///The button's widget that will be displayed
+  ///if null the button will have a simple 'Select' text in the center
+  final Widget? buttonContent;
+
+  ///indicates if the submit button will be displayed or not
+  ///by default the submit button is shown
+  late bool displaySubmitButton;
+
+  ///a single color will be applied to the button instead of the gradient
+  ///themes
+  ///
+  final Color? buttonSingleColor;
+
+  ///to set a custom button theme color use this list
+  ///when it's not null it will be applied
+  ///
+  final List<Color>? gradientColors;
+
+  ///the style that will be applied on the button's widget
+  final BoxDecoration? buttonStyle;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -570,10 +541,8 @@ class _BottomPickerState extends State<BottomPicker> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-                right: 20,
-                bottom: 20,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -645,7 +614,6 @@ class _BottomPickerState extends State<BottomPicker> {
             if (widget.displaySubmitButton)
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
                   vertical: 20,
                 ),
                 child: Row(
@@ -669,15 +637,12 @@ class _BottomPickerState extends State<BottomPicker> {
 
                         Navigator.pop(context);
                       },
-                      buttonTextAlignment: widget.buttonTextAlignment,
-                      iconColor: widget.iconColor,
                       gradientColors: widget.gradientColor,
-                      text: widget.buttonText,
                       buttonPadding: widget.buttonPadding,
                       buttonWidth: widget.buttonWidth,
-                      textStyle: widget.buttonTextStyle,
-                      displayIcon: widget.displayButtonIcon,
                       solidColor: widget.buttonSingleColor,
+                      buttonChild: widget.buttonContent,
+                      style: widget.buttonStyle,
                     ),
                   ],
                 ),

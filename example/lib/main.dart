@@ -83,6 +83,15 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openDatePickerWithButtonStyle(context);
+              },
+              child: Text('Date Picker with button style'),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openRangeDatePicker(context);
               },
               child: Text('Range Date Picker'),
@@ -154,7 +163,6 @@ class ExampleApp extends StatelessWidget {
         print(index);
       },
       buttonAlignment: MainAxisAlignment.start,
-      displayButtonIcon: false,
       displaySubmitButton: false,
     ).show(context);
   }
@@ -200,6 +208,62 @@ class ExampleApp extends StatelessWidget {
         print(index);
       },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
+  void _openDatePickerWithButtonStyle(BuildContext context) {
+    BottomPicker.date(
+      title: 'Set your Birthday',
+      dateOrder: DatePickerDateOrder.dmy,
+      initialDateTime: DateTime(1996, 10, 22),
+      maxDateTime: DateTime(1998),
+      minDateTime: DateTime(1980),
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      titleStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: Colors.blue,
+      ),
+      onChange: (index) {
+        print(index);
+      },
+      onSubmit: (index) {
+        print(index);
+      },
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
+      buttonStyle: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: Colors.blue[200]!,
+        ),
+      ),
+      buttonWidth: 200,
+      buttonContent: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Select date',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+              size: 15,
+            )
+          ],
+        ),
+      ),
     ).show(context);
   }
 
@@ -297,11 +361,13 @@ class ExampleApp extends StatelessWidget {
       onClose: () {
         print('Picker closed');
       },
-      iconColor: Colors.black,
       minDateTime: DateTime(2021, 5, 1),
       maxDateTime: DateTime(2021, 8, 2),
       initialDateTime: DateTime(2021, 5, 1),
-      gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)],
+      gradientColors: [
+        Color(0xfffdcbf1),
+        Color(0xffe6dee9),
+      ],
     ).show(context);
   }
 
@@ -319,13 +385,13 @@ class ExampleApp extends StatelessWidget {
       onClose: () {
         print('Picker closed');
       },
-      buttonText: 'Confirm',
-      buttonTextStyle: const TextStyle(color: Colors.white),
       buttonSingleColor: Colors.pink,
-      iconColor: Colors.black,
       minDateTime: DateTime(2021, 5, 1),
       maxDateTime: DateTime(2021, 8, 2),
-      gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)],
+      gradientColors: [
+        Color(0xfffdcbf1),
+        Color(0xffe6dee9),
+      ],
     ).show(context);
   }
 

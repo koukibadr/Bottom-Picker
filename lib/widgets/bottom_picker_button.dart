@@ -4,32 +4,22 @@ import 'package:flutter/material.dart';
 class BottomPickerButton extends StatelessWidget {
   final Function onClick;
   final List<Color> gradientColors;
-  final Color iconColor;
-  final String? text;
-  final bool displayIcon;
-  final TextStyle? textStyle;
   final Color? solidColor;
   final double? buttonPadding;
   final double? buttonWidth;
-  final MainAxisAlignment buttonTextAlignment;
+  final Widget? buttonChild;
+  final BoxDecoration? style;
 
-  BottomPickerButton({
+  const BottomPickerButton({
     Key? key,
     required this.onClick,
-    required this.iconColor,
-    required this.buttonTextAlignment,
-    this.text,
-    this.textStyle,
-    this.displayIcon = true,
     this.gradientColors = blueThemeColor,
     this.solidColor,
     this.buttonPadding,
     this.buttonWidth,
-  }) : super(key: key) {
-    if (!displayIcon) {
-      assert(text != null);
-    }
-  }
+    this.buttonChild,
+    this.style,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,33 +28,31 @@ class BottomPickerButton extends StatelessWidget {
         onClick.call();
       },
       child: Container(
-        width: buttonWidth,
+        width: buttonWidth ?? 100,
         padding: EdgeInsets.all(buttonPadding ?? 8.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: solidColor,
-          gradient: solidColor == null
-              ? LinearGradient(
-                  colors: gradientColors,
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(1.0, 0.0),
-                  stops: const [0.0, 1.0],
-                  tileMode: TileMode.clamp,
-                )
-              : null,
-        ),
-        child: Row(
-          mainAxisAlignment: buttonTextAlignment,
-          children: [
-            if (text != null) Text(text!, style: textStyle),
-            if (displayIcon)
-              Icon(
-                Icons.done,
-                color: iconColor,
-                size: 20,
+        decoration: style ??
+            BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: solidColor,
+              gradient: solidColor == null
+                  ? LinearGradient(
+                      colors: gradientColors,
+                      begin: const FractionalOffset(0.0, 0.0),
+                      end: const FractionalOffset(1.0, 0.0),
+                      stops: const [0.0, 1.0],
+                      tileMode: TileMode.clamp,
+                    )
+                  : null,
+            ),
+        child: buttonChild ??
+            const Center(
+              child: Text(
+                'Select',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-          ],
-        ),
+            ),
       ),
     );
   }
