@@ -53,6 +53,7 @@ class BottomPicker extends StatefulWidget {
     ),
     this.itemExtent = 35.0,
     this.displayCloseIcon = true,
+    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
@@ -100,6 +101,7 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
@@ -146,6 +148,7 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
@@ -190,6 +193,7 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
@@ -230,6 +234,7 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = LayoutOrientation.ltr,
@@ -395,6 +400,11 @@ class BottomPicker extends StatefulWidget {
   ///indicate whether the close icon will be rendred or not
   /// by default `displayCloseIcon = true`
   final bool displayCloseIcon;
+
+  ///Permits to not call `Navigator.pop(context)` when clicking on the close button only if [onClose] is not null.
+  ///If [onClose] is null, the close button will always call pop.
+  ///By default `popOnClose = true`
+  final bool popOnClose;
 
   ///the close icon color
   ///by default `closeIconColor = Colors.black`
@@ -717,7 +727,10 @@ class _BottomPickerState extends State<BottomPicker> {
   }
 
   void _closeBottomPicker() {
-    Navigator.pop(context);
+    if(widget.popOnClose || widget.onClose == null) {
+      Navigator.pop(context);
+    }
+
     widget.onClose?.call();
   }
 }
