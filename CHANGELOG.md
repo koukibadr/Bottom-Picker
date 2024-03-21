@@ -1,3 +1,8 @@
+## [2.5.0] - 21/03/2024
+
+- **Enhancement:** 
+- `popOnClose` added to indicate whether the bottom picker will pop when closing or not, useful when using the bottom picker as layout widget
+
 ## [2.4.0] - 04/02/2024
 
 - **Layout enhancement:** Update confirmation button design and attributes

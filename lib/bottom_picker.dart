@@ -727,7 +727,7 @@ class _BottomPickerState extends State<BottomPicker> {
   }
 
   void _closeBottomPicker() {
-    if(widget.popOnClose || widget.onClose == null) {
+    if (widget.popOnClose || widget.onClose == null) {
       Navigator.pop(context);
     }
 

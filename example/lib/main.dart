@@ -34,7 +34,7 @@ class ExampleApp extends StatelessWidget {
     Text('Egypt 🇪🇬'),
     Text('Syria 🇸🇾'),
     Text('Irak 🇮🇶'),
-    Text('Mauritania 🇲🇷')
+    Text('Mauritania 🇲🇷'),
   ];
 
   final buttonWidth = 300.0;
@@ -260,7 +260,7 @@ class ExampleApp extends StatelessWidget {
               Icons.arrow_forward_ios,
               color: Colors.white,
               size: 15,
-            )
+            ),
           ],
         ),
       ),
