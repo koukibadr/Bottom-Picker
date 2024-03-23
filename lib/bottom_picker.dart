@@ -29,13 +29,17 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker({
     Key? key,
-    required this.title,
-    required this.items,
-    this.description = '',
+    this.pickerTitle,
+    this.pickerDescription,
+    @Deprecated('use pickerTitle widget instead') this.title = '',
+    @Deprecated('use pickerDescription widget instead') this.description,
+    @Deprecated('use pickerTitle widget instead')
     this.titleStyle = const TextStyle(),
-    this.titleAlignment = CrossAxisAlignment.start,
-    this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('use pickerDescription widget instead')
     this.descriptionStyle = const TextStyle(),
+    required this.items,
+    this.titleAlignment,
+    this.titlePadding = const EdgeInsets.all(0),
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -76,12 +80,16 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.date({
     Key? key,
-    required this.title,
-    this.description = '',
+    this.pickerTitle,
+    this.pickerDescription,
+    @Deprecated('use pickerTitle widget instead') this.title = '',
+    @Deprecated('use pickerDescription widget instead') this.description,
+    @Deprecated('use pickerTitle widget instead')
     this.titleStyle = const TextStyle(),
-    this.titlePadding = const EdgeInsets.all(0),
-    this.titleAlignment = CrossAxisAlignment.start,
+    @Deprecated('use pickerDescription widget instead')
     this.descriptionStyle = const TextStyle(),
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment,
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -121,12 +129,16 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.dateTime({
     Key? key,
-    required this.title,
-    this.description = '',
+    this.pickerDescription,
+    this.pickerTitle,
+    @Deprecated('use pickerTitle widget instead') this.title = '',
+    @Deprecated('use pickerDescription widget instead') this.description,
+    @Deprecated('use pickerTitle widget instead')
     this.titleStyle = const TextStyle(),
-    this.titlePadding = const EdgeInsets.all(0),
-    this.titleAlignment = CrossAxisAlignment.start,
+    @Deprecated('use pickerDescription widget instead')
     this.descriptionStyle = const TextStyle(),
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment,
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -167,15 +179,19 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.time({
     Key? key,
-    required this.title,
+    this.pickerDescription,
+    this.pickerTitle,
+    @Deprecated('use pickerTitle widget instead') this.title = '',
+    @Deprecated('use pickerDescription widget instead') this.description,
+    @Deprecated('use pickerTitle widget instead')
+    this.titleStyle = const TextStyle(),
+    @Deprecated('use pickerDescription widget instead')
+    this.descriptionStyle = const TextStyle(),
     required this.initialTime,
     this.maxTime,
     this.minTime,
-    this.description = '',
-    this.titleStyle = const TextStyle(),
     this.titlePadding = const EdgeInsets.all(0),
-    this.titleAlignment = CrossAxisAlignment.start,
-    this.descriptionStyle = const TextStyle(),
+    this.titleAlignment,
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -214,13 +230,17 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.range({
     Key? key,
-    required this.title,
-    required this.onRangeDateSubmitPressed,
-    this.description = '',
+    this.pickerTitle,
+    this.pickerDescription,
+    @Deprecated('use pickerTitle widget instead') this.title = '',
+    @Deprecated('use pickerDescription widget instead') this.description,
+    @Deprecated('use pickerTitle widget instead')
     this.titleStyle = const TextStyle(),
-    this.titlePadding = const EdgeInsets.all(0),
-    this.titleAlignment = CrossAxisAlignment.start,
+    @Deprecated('use pickerDescription widget instead')
     this.descriptionStyle = const TextStyle(),
+    required this.onRangeDateSubmitPressed,
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment,
     this.dismissable = false,
     this.onClose,
     this.bottomPickerTheme = BottomPickerTheme.blue,
@@ -267,17 +287,16 @@ class BottomPicker extends StatefulWidget {
     }
   }
 
-  ///The title of the bottom picker
-  ///it's required for all bottom picker types
   final String title;
-
-  ///The description of the bottom picker (displayed below the text)
-  ///by default it's an empty text
-  final String description;
-
-  ///The text style applied on the title
-  ///by default it applies simple text style
   final TextStyle titleStyle;
+  final String? description;
+  final TextStyle descriptionStyle;
+
+  ///Bottom picker title widget
+  final Widget? pickerTitle;
+
+  ///Bottom picker description widget
+  final Widget? pickerDescription;
 
   ///The padding applied on the title
   ///by default it is set with zero values
@@ -285,11 +304,7 @@ class BottomPicker extends StatefulWidget {
 
   ///Title and description alignment
   ///The default value is `MainAxisAlignment.center`
-  final CrossAxisAlignment titleAlignment;
-
-  ///The text style applied on the description
-  ///by default it applies simple text style
-  final TextStyle descriptionStyle;
+  final Alignment? titleAlignment;
 
   ///defines whether the bottom picker is dismissable or not
   ///by default it's set to false
@@ -554,12 +569,9 @@ class _BottomPickerState extends State<BottomPicker> {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: widget.layoutOrientation == LayoutOrientation.rtl
-                    ? _displayRTLOrientationLayout()
-                    : _displayLTROrientationLayout(),
-              ),
+              child: widget.layoutOrientation == LayoutOrientation.rtl
+                  ? _displayRTLOrientationLayout()
+                  : _displayLTROrientationLayout(),
             ),
             Expanded(
               child: widget.bottomPickerType == BottomPickerType.simple
@@ -664,66 +676,82 @@ class _BottomPickerState extends State<BottomPicker> {
   }
 
   ///render list widgets for RTL orientation
-  List<Widget> _displayRTLOrientationLayout() {
-    return [
-      if (widget.displayCloseIcon)
-        CloseIcon(
-          onPress: _closeBottomPicker,
-          iconColor: widget.closeIconColor,
-          closeIconSize: widget.closeIconSize,
+  Widget _displayRTLOrientationLayout() {
+    return Column(
+      children: [
+        Padding(
+          padding: widget.titlePadding,
+          child: Stack(
+            children: [
+              if (widget.displayCloseIcon)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: CloseIcon(
+                    onPress: _closeBottomPicker,
+                    iconColor: widget.closeIconColor,
+                    closeIconSize: widget.closeIconSize,
+                  ),
+                ),
+              Align(
+                alignment: widget.titleAlignment ?? Alignment.centerRight,
+                child: widget.pickerTitle ??
+                    Text(
+                      widget.title,
+                      style: widget.titleStyle,
+                      textAlign: TextAlign.end,
+                    ),
+              ),
+            ],
+          ),
         ),
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: widget.titlePadding,
-              child: Text(
-                widget.title,
-                style: widget.titleStyle,
+        if (widget.description != null || widget.pickerDescription != null)
+          widget.pickerDescription ??
+              Text(
+                widget.description!,
+                style: widget.descriptionStyle,
                 textAlign: TextAlign.end,
               ),
-            ),
-            Text(
-              widget.description,
-              style: widget.descriptionStyle,
-              textAlign: TextAlign.end,
-            ),
-          ],
-        ),
-      ),
-    ];
+      ],
+    );
   }
 
   ///render list widgets for LTR orientation
-  List<Widget> _displayLTROrientationLayout() {
-    return [
-      Expanded(
-        child: Column(
-          crossAxisAlignment: widget.titleAlignment,
-          children: [
-            Padding(
-              padding: widget.titlePadding,
-              child: Text(
-                widget.title,
-                style: widget.titleStyle,
+  Widget _displayLTROrientationLayout() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Padding(
+          padding: widget.titlePadding,
+          child: Stack(
+            children: [
+              Align(
+                alignment: widget.titleAlignment ?? Alignment.centerLeft,
+                child: widget.pickerTitle ??
+                    Text(
+                      widget.title,
+                      style: widget.titleStyle,
+                    ),
               ),
-            ),
-            Text(
-              widget.description,
-              style: widget.descriptionStyle,
-            ),
-          ],
+              if (widget.displayCloseIcon)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: CloseIcon(
+                    onPress: _closeBottomPicker,
+                    iconColor: widget.closeIconColor,
+                    closeIconSize: widget.closeIconSize,
+                  ),
+                ),
+            ],
+          ),
         ),
-      ),
-      if (widget.displayCloseIcon)
-        CloseIcon(
-          onPress: _closeBottomPicker,
-          iconColor: widget.closeIconColor,
-          closeIconSize: widget.closeIconSize,
-        ),
-    ];
+        if (widget.description != null || widget.pickerDescription != null)
+          widget.pickerDescription ??
+              Text(
+                widget.description!,
+                style: widget.descriptionStyle,
+              ),
+      ],
+    );
   }
 
   void _closeBottomPicker() {
