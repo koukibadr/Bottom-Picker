@@ -301,7 +301,7 @@ class BottomPicker extends StatefulWidget {
   ///
   ///for date/dateTime/time items parameter is not available
   ///
-  late List<Text>? items;
+  late List<Widget>? items;
 
   ///Nullable function, invoked when navigating between picker items
   ///whether it's date picker or simple item picker it will return a value DateTime or int(index)

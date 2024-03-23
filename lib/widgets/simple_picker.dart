@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class SimplePicker extends StatelessWidget {
   final int selectedItemIndex;
   final Function(int)? onChange;
-  final List<Text> items;
+  final List<Widget> items;
   final TextStyle textStyle;
   final double itemExtent;
   final Widget? selectionOverlay;
