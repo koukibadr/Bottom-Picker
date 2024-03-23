@@ -1,3 +1,13 @@
+## [2.6.0] - 23/03/2024
+
+**Enhancement:** 
+- Create `pickerTitle` and `pickerDescription` instead of `title`, `description`, `titleStyle` and `descriptionStyle`
+- Use stack widget to display title and close icon in same line rather than columns and rows, for better alignement
+- Change `titleAlignment` type to `Alignment` instead of `MainAxisAlignment`
+
+**Bug fixes**
+- Update `items` from List<Text> to List<Widget> for better rendering
+
 ## [2.5.0] - 21/03/2024
 
 - **Enhancement:** 
@@ -37,7 +47,7 @@
 
 ## [2.1.0] - 12/09/2023
 
-- ** Enhancements: **
+- **Enhancements:**
     - Added title padding to title widget
     - Added title alignement
     - Button padding, button width, Button text alignement and Button alignement  parameters
