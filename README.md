@@ -37,35 +37,25 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.5.0
+	bottom_picker: ^2.6.0
 ```
 
 ## Parameters
 
 ```dart
-	///The title of the bottom picker
-  ///it's required for all bottom picker types
-  final String title;
+	///Bottom picker title widget
+  final Widget? pickerTitle;
 
-  ///The description of the bottom picker (displayed below the text)
-  ///by default it's an empty text
-  final String description;
-
-  ///The text style applied on the title
-  ///by default it applies simple text style
-  final TextStyle titleStyle;
+  ///Bottom picker description widget
+  final Widget? pickerDescription;
 
   ///The padding applied on the title
   ///by default it is set with zero values
   final EdgeInsetsGeometry titlePadding;
 
-  ///Title and description alignment
-  ///The default value is `MainAxisAlignment.center`
-  final CrossAxisAlignment titleAlignment;
-
-  ///The text style applied on the description
-  ///by default it applies simple text style
-  final TextStyle descriptionStyle;
+  ///Title widget alignment inside the stack
+  ///by default the title will be aligned left/right depends on `layoutOrientation`
+  final Alignment? titleAlignment;
 
   ///defines whether the bottom picker is dismissable or not
   ///by default it's set to false
@@ -77,7 +67,7 @@ dependencies:
   ///
   ///for date/dateTime/time items parameter is not available
   ///
-  late List<Text>? items;
+  late List<Widget>? items;
 
   ///Nullable function, invoked when navigating between picker items
   ///whether it's date picker or simple item picker it will return a value DateTime or int(index)
@@ -272,11 +262,9 @@ dependencies:
 Simple item picker
 
 ```dart
-
 BottomPicker(
 	items: items,
-	title:  "Choose your country",
-	titleStyle:  TextStyle(fontWeight:  FontWeight.bold, fontSize:  15)
+	title:  Text("Choose your country", style: TextStyle(fontWeight:  FontWeight.bold, fontSize:  15)),
 ).show(context);
 ```
 
@@ -285,21 +273,31 @@ BottomPicker(
 Date picker
 
 ```dart
-
 BottomPicker.date(
-	title:  "Set your Birthday",
-	titleStyle:  TextStyle(
-		fontWeight:  FontWeight.bold,
-		fontSize:  15,
-		color:  Colors.blue
-	),
-	onChange: (index) {
-		print(index);
-	},
-	onSubmit: (index) {
-		print(index);
-	},
-	bottomPickerTheme:  BOTTOM_PICKER_THEME.plumPlate
+	pickerTitle: Text(
+        'Set your Birthday',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.blue,
+        ),
+      ),
+      dateOrder: DatePickerDateOrder.dmy,
+      initialDateTime: DateTime(1996, 10, 22),
+      maxDateTime: DateTime(1998),
+      minDateTime: DateTime(1980),
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      onChange: (index) {
+        print(index);
+      },
+      onSubmit: (index) {
+        print(index);
+      },
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
 ).show(context);
 
 ```
@@ -311,11 +309,13 @@ Time picker
 ```dart
 
 BottomPicker.time(
-      title: 'Set your next meeting time',
-      titleStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 15,
-        color: Colors.orange,
+      pickerTitle: Text(
+        'Set your next meeting time',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.orange,
+        ),
       ),
       onSubmit: (index) {
         print(index);
@@ -343,80 +343,29 @@ Date & Time picker
 
 ```dart
 BottomPicker.dateTime(
-	title:  'Set the event exact time and date',
-	titleStyle:  TextStyle(
-		fontWeight:  FontWeight.bold,
-		fontSize:  15,
-		color:  Colors.black,
-	),
-	onSubmit: (date) {
-		print(date);
-	},
-	onClose: () {
-		print('Picker closed');
-	},
-	minDateTime:  DateTime(2021, 5, 1),
-	maxDateTime:  DateTime(2021, 8, 2),
-	initialDateTime:  DateTime(2021, 5, 1),
-	gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)],
+	pickerTitle: Text(
+        'Set the event exact time and date',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.black,
+        ),
+      ),
+      onSubmit: (date) {
+        print(date);
+      },
+      onClose: () {
+        print('Picker closed');
+      },
+      minDateTime: DateTime(2021, 5, 1),
+      maxDateTime: DateTime(2021, 8, 2),
+      initialDateTime: DateTime(2021, 5, 1),
+      gradientColors: [
+        Color(0xfffdcbf1),
+        Color(0xffe6dee9),
+      ],
 ).show(context);
 ```
-
-<hr>
-
-With custom button design
-
-```dart
-
-BottomPicker.dateTime(
-	title:  "Set the event exact time and date",
-	titleStyle:  TextStyle(
-		fontWeight:  FontWeight.bold,
-		fontSize:  15,
-		color:  Colors.black
-	),
-	onSubmit: (date) {
-		print(date);
-	},
-	onClose: () {
-		print("Picker closed");
-	},
-	buttonText:  'Confirm',
-	buttonSingleColor:  Colors.pink,
-	minDateTime:  DateTime(2021, 5, 1),
-	maxDateTime:  DateTime(2021, 8, 2),
-).show(context);
-
-
-
-```
-
-<hr>
-
-With custom background
-
-```dart
-
-BottomPicker(
-	items: items,
-	title:  'Choose your country',
-	titleStyle:  TextStyle(fontWeight:  FontWeight.bold, fontSize:  15),
-	backgroundColor:  Colors.yellow.withOpacity(0.6),
-	bottomPickerTheme:  BOTTOM_PICKER_THEME.morningSalad,
-	onSubmit: (index) {
-		print(index);
-	},
-).show(context);
-
-
-
-```
-
-<p  align="center">
-
-<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_background.png?raw=true"  width="200"/>
-
-</p>
 
 <hr>
 
@@ -425,18 +374,29 @@ With custom picker text style
 ```dart
 BottomPicker(
 	items: [
-		Text('Leonardo DiCaprio'),
-		Text('Johnny Depp'),
-		Text('Robert De Niro'),
-		Text('Tom Hardy'),
-		Text('Ben Affleck'),
-	],
-	title:  'Select the actor',
-	pickerTextStyle:  TextStyle(
-		color:  Colors.blue,
-		fontSize:  12,
-		fontWeight:  FontWeight.bold,
-	),
+        Center(
+          child: Text('Leonardo DiCaprio'),
+        ),
+        Center(
+          child: Text('Johnny Depp'),
+        ),
+        Center(
+          child: Text('Robert De Niro'),
+        ),
+        Center(
+          child: Text('Tom Hardy'),
+        ),
+        Center(
+          child: Text('Ben Affleck'),
+        ),
+      ],
+      pickerTitle: Text('Choose an actor'),
+      titleAlignment: Alignment.center,
+      pickerTextStyle: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
+      closeIconColor: Colors.red,
 ).show(context);
 
 
@@ -449,57 +409,37 @@ BottomPicker(
 </p>
 
 <hr>
-With custom close button style
-
-```dart
-BottomPicker(
-	items: [
-		Text('Leonardo DiCaprio'),
-		Text('Johnny Depp'),
-		Text('Robert De Niro'),
-		Text('Tom Hardy'),
-		Text('Ben Affleck'),
-	],
-	title:  'Select the actor',
-	pickerTextStyle:  TextStyle(
-		color:  Colors.blue,
-		fontSize:  12,
-		fontWeight:  FontWeight.bold,
-	),
-	closeIconColor:  Colors.red
-).show(context);
-
-
-```
-
-<hr>
 Range date picker
 
 ```dart
 BottomPicker.range(
-	title:  'Set date range',
-	description:  'Please select a first date and an end date',
-	dateOrder:  DatePickerDateOrder.dmy,
-	minFirstDate:  DateTime.now(),
-	minSecondDate:  DateTime.now().add(const  Duration(days:  1)),
-	pickerTextStyle:  TextStyle(
-		color:  Colors.blue,
-		fontWeight:  FontWeight.bold,
-		fontSize:  12,
-	),
-	titleStyle:  TextStyle(
-		fontWeight:  FontWeight.bold,
-		fontSize:  15,
-		color:  Colors.black,
-	),
-	descriptionStyle:  TextStyle(
-		color:  Colors.black,
-	),
-	onSubmitPressed: (firstDate, secondDate) {
-		print(firstDate);
-		print(secondDate);
-	},
-	bottomPickerTheme:  BottomPickerTheme.plumPlate,
+	 pickerTitle: Text(
+        'Set date range',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.black,
+        ),
+      ),
+      pickerDescription: Text(
+        'Please select a first date and an end date',
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      dateOrder: DatePickerDateOrder.dmy,
+      minFirstDate: DateTime.now(),
+      initialFirstDate: DateTime.now().add(Duration(days: 1)),
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      onRangeDateSubmitPressed: (firstDate, secondDate) {
+        print(firstDate);
+        print(secondDate);
+      },
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
 ).show(context);
 
 
@@ -510,72 +450,6 @@ BottomPicker.range(
 
 </p>
 
-
-<hr>
-Custom button style
-
-```dart
-BottomPicker.date(
-    title: 'Set your Birthday',
-    dateOrder: DatePickerDateOrder.dmy,
-    initialDateTime: DateTime(1996, 10, 22),
-    maxDateTime: DateTime(1998),
-    minDateTime: DateTime(1980),
-    pickerTextStyle: TextStyle(
-      color: Colors.blue,
-      fontWeight: FontWeight.bold,
-      fontSize: 12,
-    ),
-    titleStyle: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 15,
-      color: Colors.blue,
-    ),
-    onChange: (index) {
-      print(index);
-    },
-    onSubmit: (index) {
-      print(index);
-    },
-    bottomPickerTheme: BottomPickerTheme.plumPlate,
-    buttonStyle: BoxDecoration(
-      color: Colors.blue,
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(
-        color: Colors.blue[200]!,
-      ),
-    ),
-    buttonWidth: 200,
-    buttonContent: Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Select date',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
-            size: 15,
-          )
-        ],
-      ),
-    ),
-  ).show(context);
-
-
-```
-
-<p  align="center">
-<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_with_button_style.png?raw=true"  width="200"/>
-
-</p>
 
 ## Contribution
 

@@ -302,8 +302,8 @@ class BottomPicker extends StatefulWidget {
   ///by default it is set with zero values
   final EdgeInsetsGeometry titlePadding;
 
-  ///Title and description alignment
-  ///The default value is `MainAxisAlignment.center`
+  ///Title widget alignment inside the stack
+  ///by default the title will be aligned left/right depends on `layoutOrientation`
   final Alignment? titleAlignment;
 
   ///defines whether the bottom picker is dismissable or not
@@ -311,7 +311,7 @@ class BottomPicker extends StatefulWidget {
   ///
   final bool dismissable;
 
-  ///list of items (List of text) used to create simple item picker (required)
+  ///list of items (List of widgets) used to create simple item picker (required)
   ///and should not be empty or null
   ///
   ///for date/dateTime/time items parameter is not available
