@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+LC_ALL=C
+
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+jira_branch_name_template="^(closes|resolves|fixes)-MAL-[0-9]+-[a-z0-9-]+$"
+valid_github_branch_template="^(hotfix|fix|enhance|feature)-#[0-9]+-[a-z0-9-]+$"
+refactor_branch_template="^refactor(-[a-z]+)+$"
+test_branch_template="^test(-[a-z]+)+$"
+build_branch_template="^build(-[a-z]+)+$"
+design_branch_template="^design(-[a-z]+)+$"
+config_branch_template="^config(-[a-z]+)+$"
+
+jira_branch_name_template="^($jira_branch_name_template)$"
+test_branch_regex="^($test_branch_template)$"
+valid_github_branch_template="^($valid_github_branch_template)$"
+
+message="There is something wrong with your branch name. Branch names in this project must adhere to this contract: \n $jira_branch_name_template \n $valid_github_branch_template \n $test_branch_template  \n examples: \n"
+message+="\033[32m-fix-#3-update-login-screen-ui\033[0m \n\033[32m-resolves-MAL-3-update-login-screen-ui\033[0m \n\033[32m-test-calendar-widget-time-tracking\033[0m \n"
+message+="\033[31mYour commit will be rejected. You should rename your branch to a valid name and try again.\033[0m"
+
+if ! [[ $local_branch =~ $jira_branch_name_template ]] && ! [[ $local_branch =~ $config_branch_template ]] && ! [[ $local_branch =~ $test_branch_template ]] && ! [[ $local_branch =~ $valid_github_branch_template ]] && ! [[ $local_branch =~ $refactor_branch_template ]] && ! [[ $local_branch =~ $build_branch_template ]] && ! [[ $local_branch =~ $design_branch_template ]]
+then
+    echo -e "$message"
+    exit 1
+fi
+
+exit 0
