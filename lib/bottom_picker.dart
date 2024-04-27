@@ -29,14 +29,8 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker({
     Key? key,
-    this.pickerTitle,
+    required this.pickerTitle,
     this.pickerDescription,
-    @Deprecated('use pickerTitle widget instead') this.title = '',
-    @Deprecated('use pickerDescription widget instead') this.description,
-    @Deprecated('use pickerTitle widget instead')
-    this.titleStyle = const TextStyle(),
-    @Deprecated('use pickerDescription widget instead')
-    this.descriptionStyle = const TextStyle(),
     required this.items,
     this.titleAlignment,
     this.titlePadding = const EdgeInsets.all(0),
@@ -57,6 +51,9 @@ class BottomPicker extends StatefulWidget {
     ),
     this.itemExtent = 35.0,
     this.displayCloseIcon = true,
+    @Deprecated(
+      'Will be removed, if not null `onClose` will override the close button onTap function',
+    )
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
@@ -80,14 +77,8 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.date({
     Key? key,
-    this.pickerTitle,
+    required this.pickerTitle,
     this.pickerDescription,
-    @Deprecated('use pickerTitle widget instead') this.title = '',
-    @Deprecated('use pickerDescription widget instead') this.description,
-    @Deprecated('use pickerTitle widget instead')
-    this.titleStyle = const TextStyle(),
-    @Deprecated('use pickerDescription widget instead')
-    this.descriptionStyle = const TextStyle(),
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
@@ -109,6 +100,9 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    @Deprecated(
+      'Will be removed, if not null `onClose` will override the close button onTap function',
+    )
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
@@ -129,14 +123,8 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.dateTime({
     Key? key,
+    required this.pickerTitle,
     this.pickerDescription,
-    this.pickerTitle,
-    @Deprecated('use pickerTitle widget instead') this.title = '',
-    @Deprecated('use pickerDescription widget instead') this.description,
-    @Deprecated('use pickerTitle widget instead')
-    this.titleStyle = const TextStyle(),
-    @Deprecated('use pickerDescription widget instead')
-    this.descriptionStyle = const TextStyle(),
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
@@ -160,6 +148,9 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    @Deprecated(
+      'Will be removed, if not null `onClose` will override the close button onTap function',
+    )
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
@@ -179,14 +170,8 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.time({
     Key? key,
+    required this.pickerTitle,
     this.pickerDescription,
-    this.pickerTitle,
-    @Deprecated('use pickerTitle widget instead') this.title = '',
-    @Deprecated('use pickerDescription widget instead') this.description,
-    @Deprecated('use pickerTitle widget instead')
-    this.titleStyle = const TextStyle(),
-    @Deprecated('use pickerDescription widget instead')
-    this.descriptionStyle = const TextStyle(),
     required this.initialTime,
     this.maxTime,
     this.minTime,
@@ -209,6 +194,9 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    @Deprecated(
+      'Will be removed, if not null `onClose` will override the close button onTap function',
+    )
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
@@ -230,14 +218,8 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.range({
     Key? key,
-    this.pickerTitle,
+    required this.pickerTitle,
     this.pickerDescription,
-    @Deprecated('use pickerTitle widget instead') this.title = '',
-    @Deprecated('use pickerDescription widget instead') this.description,
-    @Deprecated('use pickerTitle widget instead')
-    this.titleStyle = const TextStyle(),
-    @Deprecated('use pickerDescription widget instead')
-    this.descriptionStyle = const TextStyle(),
     required this.onRangeDateSubmitPressed,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
@@ -254,6 +236,9 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
+    @Deprecated(
+      'Will be removed, if not null `onClose` will override the close button onTap function',
+    )
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
@@ -287,13 +272,10 @@ class BottomPicker extends StatefulWidget {
     }
   }
 
-  final String title;
-  final TextStyle titleStyle;
-  final String? description;
-  final TextStyle descriptionStyle;
+  //! will be removed on the next version
+  final bool popOnClose;
 
-  ///Bottom picker title widget
-  final Widget? pickerTitle;
+  final Widget pickerTitle;
 
   ///Bottom picker description widget
   final Widget? pickerDescription;
@@ -415,11 +397,6 @@ class BottomPicker extends StatefulWidget {
   ///indicate whether the close icon will be rendred or not
   /// by default `displayCloseIcon = true`
   final bool displayCloseIcon;
-
-  ///Permits to not call `Navigator.pop(context)` when clicking on the close button only if [onClose] is not null.
-  ///If [onClose] is null, the close button will always call pop.
-  ///By default `popOnClose = true`
-  final bool popOnClose;
 
   ///the close icon color
   ///by default `closeIconColor = Colors.black`
@@ -694,23 +671,12 @@ class _BottomPickerState extends State<BottomPicker> {
                 ),
               Align(
                 alignment: widget.titleAlignment ?? Alignment.centerRight,
-                child: widget.pickerTitle ??
-                    Text(
-                      widget.title,
-                      style: widget.titleStyle,
-                      textAlign: TextAlign.end,
-                    ),
+                child: widget.pickerTitle,
               ),
             ],
           ),
         ),
-        if (widget.description != null || widget.pickerDescription != null)
-          widget.pickerDescription ??
-              Text(
-                widget.description!,
-                style: widget.descriptionStyle,
-                textAlign: TextAlign.end,
-              ),
+        if (widget.pickerDescription != null) widget.pickerDescription!,
       ],
     );
   }
@@ -726,11 +692,7 @@ class _BottomPickerState extends State<BottomPicker> {
             children: [
               Align(
                 alignment: widget.titleAlignment ?? Alignment.centerLeft,
-                child: widget.pickerTitle ??
-                    Text(
-                      widget.title,
-                      style: widget.titleStyle,
-                    ),
+                child: widget.pickerTitle,
               ),
               if (widget.displayCloseIcon)
                 Align(
@@ -744,21 +706,16 @@ class _BottomPickerState extends State<BottomPicker> {
             ],
           ),
         ),
-        if (widget.description != null || widget.pickerDescription != null)
-          widget.pickerDescription ??
-              Text(
-                widget.description!,
-                style: widget.descriptionStyle,
-              ),
+        if (widget.pickerDescription != null) widget.pickerDescription!,
       ],
     );
   }
 
   void _closeBottomPicker() {
-    if (widget.popOnClose || widget.onClose == null) {
+    if (widget.onClose == null) {
       Navigator.pop(context);
+    } else {
+      widget.onClose?.call();
     }
-
-    widget.onClose?.call();
   }
 }
