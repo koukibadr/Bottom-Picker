@@ -3,7 +3,6 @@ LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-jira_branch_name_template="^(closes|resolves|fixes)-MAL-[0-9]+-[a-z0-9-]+$"
 valid_github_branch_template="^(hotfix|fix|enhance|feature)-#[0-9]+-[a-z0-9-]+$"
 refactor_branch_template="^refactor(-[a-z]+)+$"
 test_branch_template="^test(-[a-z]+)+$"

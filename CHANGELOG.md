@@ -1,3 +1,10 @@
+## [2.7.0] - 27/04/2024
+
+**Enhancement:** 
+- Remove deprecated `title`, `description`, `titleStyle` and `descriptionStyle` attributes and replaced by `pickerTitle` and `pickerDesciption` of widget type
+- Mark `pickerTitle` as deprecated
+- `onClose` will override the close button onTap function
+
 ## [2.6.0] - 23/03/2024
 
 **Enhancement:** 

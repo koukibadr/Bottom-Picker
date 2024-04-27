@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 INPUT_FILE=$1
 START_LINE=$(head -n1 "$INPUT_FILE")
-JIRA_PATTERN="^(Resolves|Closes|Fixes) MAL-[0-9]+: "
 MERGE_COMMIT_PATTERN="^Merge branch+"
 GITLAB_PATTERN="^(Fix|Feature) #[0-9]+: "
 SECOND_PATTERN="^(Test): "
@@ -13,13 +12,13 @@ FIX_BUG_PATTERN="^(Fix Bug): "
 
 message="\033[31mCannot commit changes.\033[0m\n"
 message+="Commit messages should follow this format example:\n"
-message+="- $JIRA_PATTERN\n- $GITLAB_PATTERN\n- $SECOND_PATTERN\n- $REFACTOR_PATTERN\n- $BUILD_PATTERN\n- $DESIGN_PATTERN\n"
+message+="- $GITLAB_PATTERN\n- $SECOND_PATTERN\n- $REFACTOR_PATTERN\n- $BUILD_PATTERN\n- $DESIGN_PATTERN\n"
 message+="Examples:\n"
 message+="\033[32m-Fixes MAL-9: Update user creation process (For jira ticket)\033[0m\n"
 message+="\033[32m-Fix #9: Update user creation process (For gitlab issue)\033[0m\n"
 message+="\033[32m-WIP: user creation process (For Work in progress)\033[0m \n"
 
-if ! [[ "$START_LINE" =~ $JIRA_PATTERN ]] && ! [[ "$START_LINE" =~ $CONFIG_PATTERN ]] && ! [[ "$START_LINE" =~ $FIX_BUG_PATTERN ]] && ! [[ "$START_LINE" =~ $GITLAB_PATTERN ]] && ! [[ "$START_LINE" =~ $SECOND_PATTERN ]] && ! [[ "$START_LINE" =~ $MERGE_COMMIT_PATTERN ]] && ! [[ "$START_LINE" =~ $REFACTOR_PATTERN ]] && ! [[ "$START_LINE" =~ $BUILD_PATTERN ]] && ! [[ "$START_LINE" =~ $DESIGN_PATTERN ]]; then
+if ! [[ "$START_LINE" =~ $CONFIG_PATTERN ]] && ! [[ "$START_LINE" =~ $FIX_BUG_PATTERN ]] && ! [[ "$START_LINE" =~ $GITLAB_PATTERN ]] && ! [[ "$START_LINE" =~ $SECOND_PATTERN ]] && ! [[ "$START_LINE" =~ $MERGE_COMMIT_PATTERN ]] && ! [[ "$START_LINE" =~ $REFACTOR_PATTERN ]] && ! [[ "$START_LINE" =~ $BUILD_PATTERN ]] && ! [[ "$START_LINE" =~ $DESIGN_PATTERN ]]; then
   echo -e "$message"
   exit 1
 fi

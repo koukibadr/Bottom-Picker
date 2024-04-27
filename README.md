@@ -37,7 +37,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.6.0
+	bottom_picker: ^2.7.0
 ```
 
 ## Parameters
@@ -166,11 +166,6 @@ dependencies:
   ///indicate whether the close icon will be rendred or not
   /// by default `displayCloseIcon = true`
   final bool displayCloseIcon;
-
-  ///Permits to not call `Navigator.pop(context)` when clicking on the close button only if [onClose] is not null.
-  ///If [onClose] is null, the close button will always call pop.
-  ///By default `popOnClose = true`
-  final bool popOnClose;
 
   ///the close icon color
   ///by default `closeIconColor = Colors.black`
