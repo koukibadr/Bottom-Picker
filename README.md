@@ -42,7 +42,7 @@ dependencies:
 
 ## Parameters
 
-```dart
+````dart
 	///Bottom picker title widget
   final Widget? pickerTitle;
 
@@ -246,7 +246,8 @@ dependencies:
 
   ///the style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
-```
+````
+
 <hr/>
 
 **Migrate from 2.3.3 to 2.4.0:** `iconColor` , `buttonText` , `buttonTextStyle`, `displayButtonIcon`, `buttonTextAlignment` has been replaced with `buttonContent`, `buttonStyle` attributes to see the new attributes usage check the latest example in this documentation
@@ -444,7 +445,6 @@ BottomPicker.range(
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker.png?raw=true"  width="200"/>
 
 </p>
-
 
 ## Contribution
 
