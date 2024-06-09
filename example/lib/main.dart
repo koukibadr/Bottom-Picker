@@ -213,7 +213,7 @@ class ExampleApp extends StatelessWidget {
         print(index);
       },
       bottomPickerTheme: BottomPickerTheme.morningSalad,
-      layoutOrientation: LayoutOrientation.rtl,
+      layoutOrientation: TextDirection.rtl,
     ).show(context);
   }
 
@@ -353,7 +353,7 @@ class ExampleApp extends StatelessWidget {
         ),
       ),
       dateOrder: DatePickerDateOrder.dmy,
-      layoutOrientation: LayoutOrientation.rtl,
+      layoutOrientation: TextDirection.rtl,
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,

@@ -57,7 +57,7 @@ class BottomPicker extends StatefulWidget {
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
-    this.layoutOrientation = LayoutOrientation.ltr,
+    this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
@@ -106,7 +106,7 @@ class BottomPicker extends StatefulWidget {
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
-    this.layoutOrientation = LayoutOrientation.ltr,
+    this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
@@ -154,7 +154,7 @@ class BottomPicker extends StatefulWidget {
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
-    this.layoutOrientation = LayoutOrientation.ltr,
+    this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
@@ -200,7 +200,7 @@ class BottomPicker extends StatefulWidget {
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
-    this.layoutOrientation = LayoutOrientation.ltr,
+    this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
@@ -242,7 +242,7 @@ class BottomPicker extends StatefulWidget {
     this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
-    this.layoutOrientation = LayoutOrientation.ltr,
+    this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.initialSecondDate,
@@ -412,7 +412,7 @@ class BottomPicker extends StatefulWidget {
   ///LAYOUT_ORIENTATION.ltr,
   ///LAYOUT_ORIENTATION.rtl
   ///```
-  final LayoutOrientation layoutOrientation;
+  final TextDirection layoutOrientation;
 
   ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
@@ -546,9 +546,30 @@ class _BottomPickerState extends State<BottomPicker> {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: widget.layoutOrientation == LayoutOrientation.rtl
-                  ? _displayRTLOrientationLayout()
-                  : _displayLTROrientationLayout(),
+              child: Directionality(
+                textDirection: widget.layoutOrientation,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: widget.titlePadding,
+                      child: Row(
+                        children: [
+                          Expanded(child: widget.pickerTitle),
+                          if (widget.displayCloseIcon)
+                            CloseIcon(
+                              onPress: _closeBottomPicker,
+                              iconColor: widget.closeIconColor,
+                              closeIconSize: widget.closeIconSize,
+                            ),
+                        ],
+                      ),
+                    ),
+                    if (widget.pickerDescription != null)
+                      widget.pickerDescription!,
+                  ],
+                ),
+              ),
             ),
             Expanded(
               child: widget.bottomPickerType == BottomPickerType.simple
@@ -649,65 +670,6 @@ class _BottomPickerState extends State<BottomPicker> {
           ],
         ),
       ),
-    );
-  }
-
-  ///render list widgets for RTL orientation
-  Widget _displayRTLOrientationLayout() {
-    return Column(
-      children: [
-        Padding(
-          padding: widget.titlePadding,
-          child: Stack(
-            children: [
-              if (widget.displayCloseIcon)
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: CloseIcon(
-                    onPress: _closeBottomPicker,
-                    iconColor: widget.closeIconColor,
-                    closeIconSize: widget.closeIconSize,
-                  ),
-                ),
-              Align(
-                alignment: widget.titleAlignment ?? Alignment.centerRight,
-                child: widget.pickerTitle,
-              ),
-            ],
-          ),
-        ),
-        if (widget.pickerDescription != null) widget.pickerDescription!,
-      ],
-    );
-  }
-
-  ///render list widgets for LTR orientation
-  Widget _displayLTROrientationLayout() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Padding(
-          padding: widget.titlePadding,
-          child: Stack(
-            children: [
-              Align(
-                alignment: widget.titleAlignment ?? Alignment.centerLeft,
-                child: widget.pickerTitle,
-              ),
-              if (widget.displayCloseIcon)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: CloseIcon(
-                    onPress: _closeBottomPicker,
-                    iconColor: widget.closeIconColor,
-                    closeIconSize: widget.closeIconSize,
-                  ),
-                ),
-            ],
-          ),
-        ),
-        if (widget.pickerDescription != null) widget.pickerDescription!,
-      ],
     );
   }
 
