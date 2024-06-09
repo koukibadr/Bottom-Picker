@@ -1,3 +1,13 @@
+## [2.8.0] - 09/06/2024
+
+**Enhancement:** 
+- `layoutOrientation` is now of type `textDirection` rather than custom `LayoutOrientation` enum.
+- Update package examples with new `layoutOrientation` attribute type.
+  
+**Changes:** 
+- Remove `onPopClose` deprecated attribute
+
+
 ## [2.7.0] - 27/04/2024
 
 **Enhancement:** 

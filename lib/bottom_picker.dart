@@ -51,10 +51,6 @@ class BottomPicker extends StatefulWidget {
     ),
     this.itemExtent = 35.0,
     this.displayCloseIcon = true,
-    @Deprecated(
-      'Will be removed, if not null `onClose` will override the close button onTap function',
-    )
-    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
@@ -100,10 +96,6 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
-    @Deprecated(
-      'Will be removed, if not null `onClose` will override the close button onTap function',
-    )
-    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
@@ -148,10 +140,6 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
-    @Deprecated(
-      'Will be removed, if not null `onClose` will override the close button onTap function',
-    )
-    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
@@ -194,10 +182,6 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
-    @Deprecated(
-      'Will be removed, if not null `onClose` will override the close button onTap function',
-    )
-    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
@@ -236,10 +220,6 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.displayCloseIcon = true,
-    @Deprecated(
-      'Will be removed, if not null `onClose` will override the close button onTap function',
-    )
-    this.popOnClose = true,
     this.closeIconColor = Colors.black,
     this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
@@ -271,9 +251,6 @@ class BottomPicker extends StatefulWidget {
       assert(initialFirstDate!.isAfter(minFirstDate!));
     }
   }
-
-  //! will be removed on the next version
-  final bool popOnClose;
 
   final Widget pickerTitle;
 
