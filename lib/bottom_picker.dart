@@ -297,11 +297,11 @@ class BottomPicker extends StatefulWidget {
     displaySubmitButton = true;
     assert(onRangeTimeSubmitPressed != null);
     assertInitialValues();
-    if (minSecondDate != null && initialSecondDate != null) {
-      assert(initialSecondDate!.isAfter(minSecondDate!));
+    if (minSecondTime != null && initialSecondTime != null) {
+      assert(initialSecondTime!.isAfter(minSecondTime!));
     }
-    if (minFirstDate != null && initialFirstDate != null) {
-      assert(initialFirstDate!.isAfter(minFirstDate!));
+    if (minFirstTime != null && initialFirstTime != null) {
+      assert(initialFirstTime!.isAfter(minFirstTime!));
     }
   }
 
