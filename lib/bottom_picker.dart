@@ -279,17 +279,17 @@ class BottomPicker extends StatefulWidget {
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.initialSecondDate,
-    this.initialFirstDate,
-    this.minFirstDate,
-    this.minSecondDate,
-    this.maxFirstDate,
-    this.maxSecondDate,
+    this.initialSecondTime,
+    this.initialFirstTime,
+    this.minFirstTime,
+    this.minSecondTime,
+    this.maxFirstTime,
+    this.maxSecondTime,
     this.buttonContent,
     this.buttonStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
-    bottomPickerType = BottomPickerType.rangeDateTime;
+    bottomPickerType = BottomPickerType.rangeTime;
     dateOrder = null;
     itemExtent = 0;
     onChange = null;
@@ -508,6 +508,30 @@ class BottomPicker extends StatefulWidget {
   ///the style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
 
+  ///the minimum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minFirstTime;
+
+  ///the minimum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minSecondTime;
+
+  ///the maximum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxFirstTime;
+
+  ///the maximum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxSecondTime;
+
+  ///the initial first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialFirstTime;
+
+  ///the initial last time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialSecondTime;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
@@ -644,8 +668,25 @@ class _BottomPickerState extends State<BottomPicker> {
                 dateOrder: widget.dateOrder,
                 textStyle: widget.pickerTextStyle,
               )
-                  : RangePicker(
-                mode: widget.datePickerMode,
+                  : widget.bottomPickerType == BottomPickerType.rangeTime ?  RangePicker(
+                mode: CupertinoDatePickerMode.time,
+                use24hFormat: widget.use24hFormat,
+                initialFirstDateTime: widget.initialFirstTime,
+                initialSecondDateTime: widget.initialSecondTime,
+                maxFirstDate: widget.maxFirstTime,
+                minFirstDateTime: widget.minFirstTime,
+                maxSecondDate: widget.maxSecondTime,
+                minSecondDateTime: widget.minSecondTime,
+                onFirstDateChanged: (DateTime date) {
+                  selectedFirstDateTime = date;
+                },
+                onSecondDateChanged: (DateTime date) {
+                  selectedSecondDateTime = date;
+                },
+                dateOrder: widget.dateOrder,
+                textStyle: widget.pickerTextStyle,
+              ) : RangePicker(
+                mode: CupertinoDatePickerMode.date,
                 use24hFormat: widget.use24hFormat,
                 initialFirstDateTime: widget.initialFirstDate,
                 initialSecondDateTime: widget.initialSecondDate,
@@ -674,7 +715,7 @@ class _BottomPickerState extends State<BottomPicker> {
                     BottomPickerButton(
                       onClick: () {
                         if (widget.bottomPickerType ==
-                            BottomPickerType.rangeDateTime) {
+                            BottomPickerType.rangeDateTime || widget.bottomPickerType == BottomPickerType.rangeTime) {
                           widget.onRangeDateSubmitPressed?.call(
                             selectedFirstDateTime,
                             selectedSecondDateTime,
