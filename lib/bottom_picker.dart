@@ -236,7 +236,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
-    bottomPickerType = BottomPickerType.rangeDateTime;
+    bottomPickerType = BottomPickerType.rangeDate;
     dateOrder = null;
     itemExtent = 0;
     onChange = null;
@@ -715,7 +715,7 @@ class _BottomPickerState extends State<BottomPicker> {
                     BottomPickerButton(
                       onClick: () {
                         if (widget.bottomPickerType ==
-                            BottomPickerType.rangeDateTime || widget.bottomPickerType == BottomPickerType.rangeTime) {
+                            BottomPickerType.rangeDate || widget.bottomPickerType == BottomPickerType.rangeTime) {
                           widget.onRangeDateSubmitPressed?.call(
                             selectedFirstDateTime,
                             selectedSecondDateTime,
