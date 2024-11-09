@@ -5,7 +5,6 @@ enum BottomPickerType {
   time,
   dateTime,
   rangeDateTime,
-  rangeTime,
 }
 
 enum BottomPickerTheme {
