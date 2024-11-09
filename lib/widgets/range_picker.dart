@@ -55,9 +55,7 @@ class _RangePickerState extends State<RangePicker> {
             DateTime.now().day,
           );
       initialFirstDateTime = widget.initialFirstDateTime ??
-          minFirstDateTime.add(
-            const Duration(seconds: 1),
-          );
+          minFirstDateTime;
       minSecondDateTime = widget.minSecondDateTime ??
           DateTime(
             DateTime.now().year,
@@ -65,9 +63,7 @@ class _RangePickerState extends State<RangePicker> {
             DateTime.now().day,
           );
       initialSecondDateTime = widget.initialSecondDateTime ??
-          minSecondDateTime.add(
-            const Duration(seconds: 1),
-          );
+          minSecondDateTime;
 
       widget.onFirstDateChanged(initialFirstDateTime);
       widget.onSecondDateChanged(initialSecondDateTime);
