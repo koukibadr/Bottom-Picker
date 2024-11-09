@@ -285,7 +285,6 @@ class BottomPicker extends StatefulWidget {
     this.minSecondDate,
     this.maxFirstDate,
     this.maxSecondDate,
-    this.dateOrder = DatePickerDateOrder.ymd,
     this.buttonContent,
     this.buttonStyle,
   }) : super(key: key) {
