@@ -257,7 +257,7 @@ class BottomPicker extends StatefulWidget {
     Key? key,
     required this.pickerTitle,
     this.pickerDescription,
-    required this.onRangeDateSubmitPressed,
+    required this.onRangeTimeSubmitPressed,
     this.use24hFormat = true,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
@@ -295,7 +295,7 @@ class BottomPicker extends StatefulWidget {
     onChange = null;
     onSubmit = null;
     displaySubmitButton = true;
-    assert(onRangeDateSubmitPressed != null);
+    assert(onRangeTimeSubmitPressed != null);
     assertInitialValues();
     if (minSecondDate != null && initialSecondDate != null) {
       assert(initialSecondDate!.isAfter(minSecondDate!));
@@ -508,6 +508,11 @@ class BottomPicker extends StatefulWidget {
   ///the style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
 
+  ///invoked when pressing on the submit button when using range picker
+  ///it return two dates (first time, end time)
+  ///required when using [BottomPicker.rangeTime]
+  late Function(DateTime, DateTime)? onRangeTimeSubmitPressed;
+
   ///the minimum first time in the time range picker
   ///not required if null no minimum will be set in the time picker
   DateTime? minFirstTime;
@@ -628,81 +633,86 @@ class _BottomPickerState extends State<BottomPicker> {
             Expanded(
               child: widget.bottomPickerType == BottomPickerType.simple
                   ? SimplePicker(
-                items: widget.items!,
-                onChange: (int index) {
-                  selectedItemIndex = index;
-                  widget.onChange?.call(index);
-                },
-                selectedItemIndex: widget.selectedItemIndex,
-                textStyle: widget.pickerTextStyle,
-                itemExtent: widget.itemExtent,
-                selectionOverlay: widget.selectionOverlay,
-              )
+                      items: widget.items!,
+                      onChange: (int index) {
+                        selectedItemIndex = index;
+                        widget.onChange?.call(index);
+                      },
+                      selectedItemIndex: widget.selectedItemIndex,
+                      textStyle: widget.pickerTextStyle,
+                      itemExtent: widget.itemExtent,
+                      selectionOverlay: widget.selectionOverlay,
+                    )
                   : widget.bottomPickerType == BottomPickerType.time
-                  ? DatePicker(
-                initialDateTime: widget.initialTime.toDateTime,
-                minuteInterval: widget.minuteInterval ?? 1,
-                maxDateTime: widget.maxTime.toDateTime,
-                minDateTime: widget.minTime.toDateTime,
-                mode: widget.datePickerMode,
-                onDateChanged: (DateTime date) {
-                  selectedDateTime = date;
-                  widget.onChange?.call(date);
-                },
-                use24hFormat: widget.use24hFormat,
-                dateOrder: widget.dateOrder,
-                textStyle: widget.pickerTextStyle,
-              )
-                  : widget.bottomPickerType == BottomPickerType.dateTime
-                  ? DatePicker(
-                initialDateTime: widget.initialDateTime,
-                minuteInterval: widget.minuteInterval ?? 1,
-                maxDateTime: widget.maxDateTime,
-                minDateTime: widget.minDateTime,
-                mode: widget.datePickerMode,
-                onDateChanged: (DateTime date) {
-                  selectedDateTime = date;
-                  widget.onChange?.call(date);
-                },
-                use24hFormat: widget.use24hFormat,
-                dateOrder: widget.dateOrder,
-                textStyle: widget.pickerTextStyle,
-              )
-                  : widget.bottomPickerType == BottomPickerType.rangeTime ?  RangePicker(
-                mode: CupertinoDatePickerMode.time,
-                use24hFormat: widget.use24hFormat,
-                initialFirstDateTime: widget.initialFirstTime,
-                initialSecondDateTime: widget.initialSecondTime,
-                maxFirstDate: widget.maxFirstTime,
-                minFirstDateTime: widget.minFirstTime,
-                maxSecondDate: widget.maxSecondTime,
-                minSecondDateTime: widget.minSecondTime,
-                onFirstDateChanged: (DateTime date) {
-                  selectedFirstDateTime = date;
-                },
-                onSecondDateChanged: (DateTime date) {
-                  selectedSecondDateTime = date;
-                },
-                dateOrder: widget.dateOrder,
-                textStyle: widget.pickerTextStyle,
-              ) : RangePicker(
-                mode: CupertinoDatePickerMode.date,
-                use24hFormat: widget.use24hFormat,
-                initialFirstDateTime: widget.initialFirstDate,
-                initialSecondDateTime: widget.initialSecondDate,
-                maxFirstDate: widget.maxFirstDate,
-                minFirstDateTime: widget.minFirstDate,
-                maxSecondDate: widget.maxSecondDate,
-                minSecondDateTime: widget.minSecondDate,
-                onFirstDateChanged: (DateTime date) {
-                  selectedFirstDateTime = date;
-                },
-                onSecondDateChanged: (DateTime date) {
-                  selectedSecondDateTime = date;
-                },
-                dateOrder: widget.dateOrder,
-                textStyle: widget.pickerTextStyle,
-              ),
+                      ? DatePicker(
+                          initialDateTime: widget.initialTime.toDateTime,
+                          minuteInterval: widget.minuteInterval ?? 1,
+                          maxDateTime: widget.maxTime.toDateTime,
+                          minDateTime: widget.minTime.toDateTime,
+                          mode: widget.datePickerMode,
+                          onDateChanged: (DateTime date) {
+                            selectedDateTime = date;
+                            widget.onChange?.call(date);
+                          },
+                          use24hFormat: widget.use24hFormat,
+                          dateOrder: widget.dateOrder,
+                          textStyle: widget.pickerTextStyle,
+                        )
+                      : widget.bottomPickerType == BottomPickerType.dateTime
+                          ? DatePicker(
+                              initialDateTime: widget.initialDateTime,
+                              minuteInterval: widget.minuteInterval ?? 1,
+                              maxDateTime: widget.maxDateTime,
+                              minDateTime: widget.minDateTime,
+                              mode: widget.datePickerMode,
+                              onDateChanged: (DateTime date) {
+                                selectedDateTime = date;
+                                widget.onChange?.call(date);
+                              },
+                              use24hFormat: widget.use24hFormat,
+                              dateOrder: widget.dateOrder,
+                              textStyle: widget.pickerTextStyle,
+                            )
+                          : widget.bottomPickerType ==
+                                  BottomPickerType.rangeTime
+                              ? RangePicker(
+                                  mode: CupertinoDatePickerMode.time,
+                                  use24hFormat: widget.use24hFormat,
+                                  initialFirstDateTime: widget.initialFirstTime,
+                                  initialSecondDateTime:
+                                      widget.initialSecondTime,
+                                  maxFirstDate: widget.maxFirstTime,
+                                  minFirstDateTime: widget.minFirstTime,
+                                  maxSecondDate: widget.maxSecondTime,
+                                  minSecondDateTime: widget.minSecondTime,
+                                  onFirstDateChanged: (DateTime date) {
+                                    selectedFirstDateTime = date;
+                                  },
+                                  onSecondDateChanged: (DateTime date) {
+                                    selectedSecondDateTime = date;
+                                  },
+                                  dateOrder: widget.dateOrder,
+                                  textStyle: widget.pickerTextStyle,
+                                )
+                              : RangePicker(
+                                  mode: CupertinoDatePickerMode.date,
+                                  use24hFormat: widget.use24hFormat,
+                                  initialFirstDateTime: widget.initialFirstDate,
+                                  initialSecondDateTime:
+                                      widget.initialSecondDate,
+                                  maxFirstDate: widget.maxFirstDate,
+                                  minFirstDateTime: widget.minFirstDate,
+                                  maxSecondDate: widget.maxSecondDate,
+                                  minSecondDateTime: widget.minSecondDate,
+                                  onFirstDateChanged: (DateTime date) {
+                                    selectedFirstDateTime = date;
+                                  },
+                                  onSecondDateChanged: (DateTime date) {
+                                    selectedSecondDateTime = date;
+                                  },
+                                  dateOrder: widget.dateOrder,
+                                  textStyle: widget.pickerTextStyle,
+                                ),
             ),
             if (widget.displaySubmitButton)
               Padding(
@@ -715,13 +725,19 @@ class _BottomPickerState extends State<BottomPicker> {
                     BottomPickerButton(
                       onClick: () {
                         if (widget.bottomPickerType ==
-                            BottomPickerType.rangeDate || widget.bottomPickerType == BottomPickerType.rangeTime) {
+                            BottomPickerType.rangeDate) {
                           widget.onRangeDateSubmitPressed?.call(
                             selectedFirstDateTime,
                             selectedSecondDateTime,
                           );
                         } else if (widget.bottomPickerType ==
-                            BottomPickerType.dateTime ||
+                            BottomPickerType.rangeTime) {
+                          widget.onRangeTimeSubmitPressed?.call(
+                            selectedFirstDateTime,
+                            selectedSecondDateTime,
+                          );
+                        } else if (widget.bottomPickerType ==
+                                BottomPickerType.dateTime ||
                             widget.bottomPickerType == BottomPickerType.time) {
                           widget.onSubmit?.call(selectedDateTime);
                         } else {

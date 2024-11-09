@@ -368,7 +368,7 @@ class ExampleApp extends StatelessWidget {
         fontSize: 12,
       ),
       bottomPickerTheme: BottomPickerTheme.plumPlate,
-      onRangeDateSubmitPressed: (firstDate, secondDate) {
+      onRangeTimeSubmitPressed: (firstDate, secondDate) {
         print(firstDate);
         print(secondDate);
       },
