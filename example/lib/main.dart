@@ -117,6 +117,15 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openRangeTimePicker(context);
+              },
+              child: Text('Range Time Picker'),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openArabicRangeDatePicker(context);
               },
               child: Text('Arabic Range Date Picker'),
@@ -333,6 +342,36 @@ class ExampleApp extends StatelessWidget {
         print(secondDate);
       },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
+  void _openRangeTimePicker(BuildContext context) {
+    BottomPicker.rangeTime(
+      use24hFormat: true,
+      pickerTitle: Text(
+        'Set Time range',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.black,
+        ),
+      ),
+      pickerDescription: Text(
+        'Please select a first time and an end time',
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
+      onRangeTimeSubmitPressed: (firstDate, secondDate) {
+        print(firstDate);
+        print(secondDate);
+      },
     ).show(context);
   }
 

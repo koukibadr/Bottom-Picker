@@ -8,23 +8,27 @@ class RangePicker extends StatefulWidget {
   final DateTime? initialSecondDateTime;
   final DateTime? maxFirstDate;
   final DateTime? maxSecondDate;
-  final DateTime? minFirstDate;
-  final DateTime? minSecondDate;
+  final DateTime? minFirstDateTime;
+  final DateTime? minSecondDateTime;
   final DatePickerDateOrder? dateOrder;
   final TextStyle textStyle;
+  final CupertinoDatePickerMode mode;
+  final bool use24hFormat;
 
   const RangePicker({
     Key? key,
     required this.initialFirstDateTime,
     required this.initialSecondDateTime,
     required this.maxFirstDate,
-    required this.minFirstDate,
+    required this.minFirstDateTime,
     required this.maxSecondDate,
-    required this.minSecondDate,
+    required this.minSecondDateTime,
     required this.onFirstDateChanged,
     required this.onSecondDateChanged,
-    required this.textStyle,
     this.dateOrder,
+    required this.textStyle,
+    required this.mode,
+    required this.use24hFormat,
   }) : super(key: key);
 
   @override
@@ -32,31 +36,55 @@ class RangePicker extends StatefulWidget {
 }
 
 class _RangePickerState extends State<RangePicker> {
-  late DateTime minSecondDate;
-  late DateTime initialSecondDate;
+  late DateTime minSecondDateTime;
+  late DateTime initialSecondDateTime;
 
-  late DateTime initialFirstDate;
-  late DateTime minFirstDate;
+  late DateTime initialFirstDateTime;
+  late DateTime minFirstDateTime;
 
   @override
   void initState() {
     super.initState();
-    minFirstDate = widget.minFirstDate ??
-        DateTime.now().add(
-          const Duration(days: 1),
-        );
-    initialFirstDate = widget.initialFirstDateTime ??
-        minFirstDate.add(
-          const Duration(days: 1),
-        );
-    minSecondDate = widget.minSecondDate ??
-        DateTime.now().add(
-          const Duration(days: 1),
-        );
-    initialSecondDate = widget.initialSecondDateTime ??
-        minSecondDate.add(
-          const Duration(days: 1),
-        );
+    if (widget.mode == CupertinoDatePickerMode.time) {
+      // If it is a time range, the minimum time uses the date of the day, ignores the date, and only needs the time
+      // The default is 0:0:0
+      minFirstDateTime = widget.minFirstDateTime ??
+          DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          );
+      initialFirstDateTime = widget.initialFirstDateTime ??
+          minFirstDateTime;
+      minSecondDateTime = widget.minSecondDateTime ??
+          DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          );
+      initialSecondDateTime = widget.initialSecondDateTime ??
+          minSecondDateTime;
+
+      widget.onFirstDateChanged(initialFirstDateTime);
+      widget.onSecondDateChanged(initialSecondDateTime);
+    } else {
+      minFirstDateTime = widget.minFirstDateTime ??
+          DateTime.now().add(
+            const Duration(days: 1),
+          );
+      initialFirstDateTime = widget.initialFirstDateTime ??
+          minFirstDateTime.add(
+            const Duration(days: 1),
+          );
+      minSecondDateTime = widget.minSecondDateTime ??
+          DateTime.now().add(
+            const Duration(days: 1),
+          );
+      initialSecondDateTime = widget.initialSecondDateTime ??
+          minSecondDateTime.add(
+            const Duration(days: 1),
+          );
+    }
   }
 
   @override
@@ -65,21 +93,22 @@ class _RangePickerState extends State<RangePicker> {
       children: [
         Expanded(
           child: DatePicker(
-            initialDateTime: initialFirstDate,
+            use24hFormat: widget.use24hFormat,
+            initialDateTime: initialFirstDateTime,
             maxDateTime: widget.maxFirstDate,
-            minDateTime: minFirstDate,
-            mode: CupertinoDatePickerMode.date,
+            minDateTime: minFirstDateTime,
+            mode: widget.mode,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);
-              if (initialSecondDate.isBefore(date)) {
+              if (initialSecondDateTime.isBefore(date)) {
                 widget.onSecondDateChanged.call(date);
                 setState(() {
-                  initialSecondDate = date;
-                  minSecondDate = date;
+                  initialSecondDateTime = date;
+                  minSecondDateTime = date;
                 });
               } else {
                 setState(() {
-                  minSecondDate = date;
+                  minSecondDateTime = date;
                 });
               }
             },
@@ -90,10 +119,11 @@ class _RangePickerState extends State<RangePicker> {
         Expanded(
           child: DatePicker(
             key: UniqueKey(),
-            initialDateTime: initialSecondDate,
+            use24hFormat: widget.use24hFormat,
+            initialDateTime: initialSecondDateTime,
             maxDateTime: widget.maxSecondDate,
-            minDateTime: minSecondDate,
-            mode: CupertinoDatePickerMode.date,
+            minDateTime: minSecondDateTime,
+            mode: widget.mode,
             onDateChanged: widget.onSecondDateChanged,
             dateOrder: widget.dateOrder,
             textStyle: widget.textStyle,
