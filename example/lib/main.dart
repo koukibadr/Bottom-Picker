@@ -346,7 +346,6 @@ class ExampleApp extends StatelessWidget {
 
   void _openRangeTimePicker(BuildContext context) {
     BottomPicker.rangeTime(
-      use24hFormat: true,
       pickerTitle: Text(
         'Set Time range',
         style: TextStyle(

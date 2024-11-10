@@ -1,3 +1,14 @@
+## [2.9.0] - 10/11/2024
+
+**Enhancement:** 
+- Update inital date and min date check when using range date picker.
+  
+**Changes:** 
+- Add `rangeTime` constructor to display time range picker
+
+**Bug Fix:** 
+- Fix `initialFirstDate` initialization in date range picker
+
 ## [2.8.0] - 09/06/2024
 
 **Enhancement:** 
