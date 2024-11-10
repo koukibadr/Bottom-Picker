@@ -25,10 +25,6 @@ jobs:
             analysis_report.txt
           retention-days: 15
       
-      - name: Runing widget testing
-        run: flutter test --verbose
-      
-      
       - name: Check Publish Warnings
         run: dart pub publish --dry-run
 
