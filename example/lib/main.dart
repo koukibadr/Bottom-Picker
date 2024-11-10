@@ -330,12 +330,7 @@ class ExampleApp extends StatelessWidget {
         ),
       ),
       dateOrder: DatePickerDateOrder.dmy,
-      minFirstDate: DateTime.now(),
-      initialFirstDate: DateTime.now().add(Duration(days: 1)),
-      maxFirstDate: DateTime.now().add(Duration(days: 20)),
-      initialSecondDate: DateTime.now().add(Duration(days: 1)),
-      minSecondDate: DateTime.now().add(Duration(days: 2)),
-      maxSecondDate: DateTime.now().add(Duration(days: 40)),
+      initialSecondDate: DateTime.now().add(Duration(days: 230)),
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,
@@ -351,7 +346,6 @@ class ExampleApp extends StatelessWidget {
 
   void _openRangeTimePicker(BuildContext context) {
     BottomPicker.rangeTime(
-      use24hFormat: true,
       pickerTitle: Text(
         'Set Time range',
         style: TextStyle(

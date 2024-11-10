@@ -36,11 +36,11 @@ class RangePicker extends StatefulWidget {
 }
 
 class _RangePickerState extends State<RangePicker> {
-  late DateTime minSecondDateTime;
-  late DateTime initialSecondDateTime;
+  late DateTime? minSecondDateTime = widget.minSecondDateTime;
+  late DateTime? initialSecondDateTime = widget.initialSecondDateTime;
 
-  late DateTime initialFirstDateTime;
-  late DateTime minFirstDateTime;
+  late DateTime? initialFirstDateTime = widget.initialFirstDateTime;
+  late DateTime? minFirstDateTime = widget.minFirstDateTime;
 
   @override
   void initState() {
@@ -54,36 +54,17 @@ class _RangePickerState extends State<RangePicker> {
             DateTime.now().month,
             DateTime.now().day,
           );
-      initialFirstDateTime = widget.initialFirstDateTime ??
-          minFirstDateTime;
+      initialFirstDateTime = widget.initialFirstDateTime ?? minFirstDateTime;
       minSecondDateTime = widget.minSecondDateTime ??
           DateTime(
             DateTime.now().year,
             DateTime.now().month,
             DateTime.now().day,
           );
-      initialSecondDateTime = widget.initialSecondDateTime ??
-          minSecondDateTime;
+      initialSecondDateTime = widget.initialSecondDateTime ?? minSecondDateTime;
 
-      widget.onFirstDateChanged(initialFirstDateTime);
-      widget.onSecondDateChanged(initialSecondDateTime);
-    } else {
-      minFirstDateTime = widget.minFirstDateTime ??
-          DateTime.now().add(
-            const Duration(days: 1),
-          );
-      initialFirstDateTime = widget.initialFirstDateTime ??
-          minFirstDateTime.add(
-            const Duration(days: 1),
-          );
-      minSecondDateTime = widget.minSecondDateTime ??
-          DateTime.now().add(
-            const Duration(days: 1),
-          );
-      initialSecondDateTime = widget.initialSecondDateTime ??
-          minSecondDateTime.add(
-            const Duration(days: 1),
-          );
+      widget.onFirstDateChanged(initialFirstDateTime!);
+      widget.onSecondDateChanged(initialSecondDateTime!);
     }
   }
 
@@ -100,7 +81,7 @@ class _RangePickerState extends State<RangePicker> {
             mode: widget.mode,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);
-              if (initialSecondDateTime.isBefore(date)) {
+              if (initialSecondDateTime!.isBefore(date)) {
                 widget.onSecondDateChanged.call(date);
                 setState(() {
                   initialSecondDateTime = date;

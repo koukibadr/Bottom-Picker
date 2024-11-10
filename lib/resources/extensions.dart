@@ -36,3 +36,9 @@ extension TimeClassExtensions on Time? {
           this!.minutes,
         );
 }
+
+extension DateTimeExtions on DateTime {
+  bool isAtSameMomentOrAfter(DateTime secondDateTime) {
+    return this == secondDateTime || isAfter(secondDateTime);
+  }
+}

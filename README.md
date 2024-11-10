@@ -37,14 +37,14 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.8.0
+	bottom_picker: ^2.9.0
 ```
 
 ## Parameters
 
 ````dart
 	///Bottom picker title widget
-  final Widget? pickerTitle;
+  final Widget pickerTitle;
 
   ///Bottom picker description widget
   final Widget? pickerDescription;
@@ -62,7 +62,7 @@ dependencies:
   ///
   final bool dismissable;
 
-  ///list of items (List of text) used to create simple item picker (required)
+  ///list of items (List of widgets) used to create simple item picker (required)
   ///and should not be empty or null
   ///
   ///for date/dateTime/time items parameter is not available
@@ -181,7 +181,7 @@ dependencies:
   ///LAYOUT_ORIENTATION.ltr,
   ///LAYOUT_ORIENTATION.rtl
   ///```
-  final LayoutOrientation layoutOrientation;
+  final TextDirection layoutOrientation;
 
   ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
@@ -246,6 +246,35 @@ dependencies:
 
   ///the style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
+
+  ///invoked when pressing on the submit button when using range picker
+  ///it return two dates (first time, end time)
+  ///required when using [BottomPicker.rangeTime]
+  late Function(DateTime, DateTime)? onRangeTimeSubmitPressed;
+
+  ///the minimum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minFirstTime;
+
+  ///the minimum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minSecondTime;
+
+  ///the maximum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxFirstTime;
+
+  ///the maximum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxSecondTime;
+
+  ///the initial first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialFirstTime;
+
+  ///the initial last time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialSecondTime;
 ````
 
 <hr/>
@@ -436,6 +465,40 @@ BottomPicker.range(
         print(secondDate);
       },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
+).show(context);
+
+
+```
+
+<hr>
+Time range picker
+
+```dart
+BottomPicker.rangeTime(
+	 pickerTitle: Text(
+    'Set Time range',
+    style: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 15,
+      color: Colors.black,
+    ),
+  ),
+  pickerDescription: Text(
+    'Please select a first time and an end time',
+    style: TextStyle(
+      color: Colors.black,
+    ),
+  ),
+  pickerTextStyle: TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+    fontSize: 12,
+  ),
+  bottomPickerTheme: BottomPickerTheme.plumPlate,
+  onRangeTimeSubmitPressed: (firstDate, secondDate) {
+    print(firstDate);
+    print(secondDate);
+  },
 ).show(context);
 
 
