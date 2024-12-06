@@ -113,6 +113,48 @@ class BottomPicker extends StatefulWidget {
     assertInitialValues();
   }
 
+  BottomPicker.monthYear({
+    Key? key,
+    required this.pickerTitle,
+    this.pickerDescription,
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment,
+    this.dismissable = false,
+    this.onChange,
+    this.onSubmit,
+    this.onClose,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
+    this.gradientColors,
+    this.initialDateTime,
+    this.minDateTime,
+    this.maxDateTime,
+    this.buttonPadding,
+    this.buttonWidth,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+    this.dateOrder = DatePickerDateOrder.ymd,
+    this.pickerTextStyle = const TextStyle(
+      fontSize: 14,
+      color: Colors.black,
+    ),
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
+    this.layoutOrientation = TextDirection.ltr,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.height,
+    this.displaySubmitButton = true,
+    this.buttonContent,
+    this.buttonStyle,
+  }) : super(key: key) {
+    datePickerMode = CupertinoDatePickerMode.monthYear;
+    bottomPickerType = BottomPickerType.dateTime;
+    use24hFormat = false;
+    itemExtent = 0;
+    onRangeDateSubmitPressed = null;
+    assertInitialValues();
+  }
+
   BottomPicker.dateTime({
     Key? key,
     required this.pickerTitle,
