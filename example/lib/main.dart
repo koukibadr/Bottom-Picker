@@ -108,6 +108,15 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openMonthYearPicker(context);
+              },
+              child: Text('Month Year Picker'),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openRangeDatePicker(context);
               },
               child: Text('Range Date Picker'),
@@ -254,6 +263,36 @@ class ExampleApp extends StatelessWidget {
       bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(context);
   }
+
+  void _openMonthYearPicker(BuildContext context) {
+    BottomPicker.monthYear(
+      pickerTitle: Text(
+        'Set your Birth Month',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.blue,
+        ),
+      ),
+      dateOrder: DatePickerDateOrder.dmy,
+      initialDateTime: DateTime(1996, 10, 22),
+      maxDateTime: DateTime(1998),
+      minDateTime: DateTime(1980),
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      onChange: (index) {
+        print(index);
+      },
+      onSubmit: (index) {
+        print(index);
+      },
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
 
   void _openDatePickerWithButtonStyle(BuildContext context) {
     BottomPicker.date(
