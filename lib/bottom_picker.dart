@@ -132,7 +132,6 @@ class BottomPicker extends StatefulWidget {
     this.buttonWidth,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
-    this.dateOrder = DatePickerDateOrder.ymd,
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -152,6 +151,7 @@ class BottomPicker extends StatefulWidget {
     use24hFormat = false;
     itemExtent = 0;
     onRangeDateSubmitPressed = null;
+    dateOrder = DatePickerDateOrder.mdy;
     assertInitialValues();
   }
 
