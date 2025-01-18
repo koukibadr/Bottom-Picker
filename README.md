@@ -16,6 +16,7 @@
 - Simple list picker wheel
 - Date range picker (RTL and LTR)
 - Date picker
+- Month and year picker
 - Time picker
 - Date and Time picker
 - 24h / 12h time format
@@ -37,7 +38,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.9.0
+	bottom_picker: ^2.10.0
 ```
 
 ## Parameters
@@ -282,9 +283,10 @@ dependencies:
 **Migrate from 2.3.3 to 2.4.0:** `iconColor` , `buttonText` , `buttonTextStyle`, `displayButtonIcon`, `buttonTextAlignment` has been replaced with `buttonContent`, `buttonStyle` attributes to see the new attributes usage check the latest example in this documentation
 
 <hr/>
+
 ## Examples
 
-Simple item picker
+### Simple item picker
 
 ```dart
 BottomPicker(
@@ -295,7 +297,7 @@ BottomPicker(
 
 <hr>
 
-Date picker
+### Date picker
 
 ```dart
 BottomPicker.date(
@@ -329,7 +331,7 @@ BottomPicker.date(
 
 <hr>
 
-Time picker
+### Time picker
 
 ```dart
 
@@ -364,7 +366,7 @@ BottomPicker.time(
 
 <hr>
 
-Date & Time picker
+### Date & Time picker
 
 ```dart
 BottomPicker.dateTime(
@@ -391,10 +393,26 @@ BottomPicker.dateTime(
       ],
 ).show(context);
 ```
+<hr>
+
+### Date picker with only month and year
+
+```dart
+BottomPicker.monthYear(
+  pickerTitle: Text(
+    'Set your Birth Month',
+  ),
+  initialDateTime: DateTime(1996, 10, 22),
+  onChange: (index) {
+    print(index);
+  },
+).show(context);
+```
+
 
 <hr>
 
-With custom picker text style
+### With custom picker text style
 
 ```dart
 BottomPicker(
@@ -434,7 +452,8 @@ BottomPicker(
 </p>
 
 <hr>
-Range date picker
+
+### Range date picker
 
 ```dart
 BottomPicker.range(
@@ -471,7 +490,8 @@ BottomPicker.range(
 ```
 
 <hr>
-Time range picker
+
+### Time range picker
 
 ```dart
 BottomPicker.rangeTime(

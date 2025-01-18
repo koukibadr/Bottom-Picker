@@ -4,6 +4,7 @@ import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,6 +19,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'),
+        Locale('ar'),
+      ],
       home: Scaffold(
         body: ExampleApp(),
       ),
@@ -268,31 +278,13 @@ class ExampleApp extends StatelessWidget {
     BottomPicker.monthYear(
       pickerTitle: Text(
         'Set your Birth Month',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-          color: Colors.blue,
-        ),
       ),
-      dateOrder: DatePickerDateOrder.dmy,
       initialDateTime: DateTime(1996, 10, 22),
-      maxDateTime: DateTime(1998),
-      minDateTime: DateTime(1980),
-      pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
       onChange: (index) {
         print(index);
       },
-      onSubmit: (index) {
-        print(index);
-      },
-      bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(context);
   }
-
 
   void _openDatePickerWithButtonStyle(BuildContext context) {
     BottomPicker.date(
