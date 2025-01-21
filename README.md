@@ -38,7 +38,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.10.0
+	bottom_picker: ^2.10.1
 ```
 
 ## Parameters
@@ -83,7 +83,7 @@ dependencies:
 
   ///Invoked when clicking on the close button
   ///
-  final Function? onClose;
+  final Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
   ///possible values
@@ -123,7 +123,7 @@ dependencies:
 
   ///The gap between two minutes
   ///by default it's 1 minute
-  int? minuteInterval;
+  int minuteInterval = 1;
 
   ///the max date time on the date picker
   ///by default it's null
@@ -347,7 +347,7 @@ BottomPicker.time(
       onSubmit: (index) {
         print(index);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       bottomPickerTheme: BottomPickerTheme.orange,
@@ -381,7 +381,7 @@ BottomPicker.dateTime(
       onSubmit: (date) {
         print(date);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       minDateTime: DateTime(2021, 5, 1),
