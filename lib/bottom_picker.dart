@@ -37,7 +37,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.selectedItemIndex = 0,
@@ -80,7 +80,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
@@ -122,7 +122,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
@@ -164,7 +164,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
@@ -210,7 +210,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.minuteInterval = 1,
@@ -250,7 +250,7 @@ class BottomPicker extends StatefulWidget {
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.buttonPadding,
@@ -308,7 +308,7 @@ class BottomPicker extends StatefulWidget {
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.buttonPadding,
@@ -390,7 +390,7 @@ class BottomPicker extends StatefulWidget {
 
   ///Invoked when clicking on the close button
   ///
-  final Function? onClose;
+  final Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
   ///possible values
@@ -430,7 +430,7 @@ class BottomPicker extends StatefulWidget {
 
   ///The gap between two minutes
   ///by default it's 1 minute
-  late int minuteInterval;
+  int minuteInterval = 1;
 
   ///the max date time on the date picker
   ///by default it's null
@@ -810,10 +810,10 @@ class _BottomPickerState extends State<BottomPicker> {
   }
 
   void _closeBottomPicker() {
-    if (widget.onClose == null) {
+    if (widget.onCloseButtonPressed == null) {
       Navigator.pop(context);
     } else {
-      widget.onClose?.call();
+      widget.onCloseButtonPressed?.call();
     }
   }
 }
