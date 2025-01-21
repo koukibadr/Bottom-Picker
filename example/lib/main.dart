@@ -448,7 +448,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       bottomPickerTheme: BottomPickerTheme.orange,
@@ -464,6 +464,7 @@ class ExampleApp extends StatelessWidget {
 
   void _openDateTimePicker(BuildContext context) {
     BottomPicker.dateTime(
+      minuteInterval: 2,
       pickerTitle: Text(
         'Set the event exact time and date',
         style: TextStyle(
@@ -475,7 +476,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (date) {
         print(date);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       minDateTime: DateTime(2021, 5, 1),
@@ -501,7 +502,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (date) {
         print(date);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       buttonSingleColor: Colors.pink,

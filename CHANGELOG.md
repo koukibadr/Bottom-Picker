@@ -1,3 +1,11 @@
+## [2.10.1] - 21/01/2025
+
+**Changes:** 
+- `onClose` is renamed to `onCloseButtonPressed`.
+
+**Bug Fixes:** 
+- remove late keyword from `minuteInterval` definition.
+
 ## [2.10.0] - 08/12/2024
 
 **Changes:** 
