@@ -206,7 +206,9 @@ class ExampleApp extends StatelessWidget {
           fontSize: 15,
         ),
       ),
-      backgroundColor: Colors.yellow.withOpacity(0.6),
+      backgroundColor: Colors.yellow.withValues(
+        alpha: 0.6,
+      ),
       bottomPickerTheme: BottomPickerTheme.morningSalad,
       onSubmit: (index) {
         print(index);
@@ -453,6 +455,8 @@ class ExampleApp extends StatelessWidget {
       },
       bottomPickerTheme: BottomPickerTheme.orange,
       use24hFormat: true,
+      showTimeSperator: true,
+      itemExtent: 40,
       initialTime: Time(
         minutes: 23,
       ),
