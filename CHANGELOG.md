@@ -1,3 +1,9 @@
+## [2.12.0] - 01/02/2025
+
+**Changes:** 
+- Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSperator`.
+- Add `itemExtent` attribute to time and range constructors for more picker customization.
+
 ## [2.11.0] - 01/02/2025
 
 **Changes:** 
