@@ -1,3 +1,8 @@
+## [2.11.0] - 01/02/2025
+
+**Changes:** 
+- enable `minutesInterval` feature for range time picker.
+
 ## [2.10.1] - 21/01/2025
 
 **Changes:** 

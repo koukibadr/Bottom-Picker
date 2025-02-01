@@ -333,6 +333,7 @@ class BottomPicker extends StatefulWidget {
     this.maxSecondTime,
     this.buttonContent,
     this.buttonStyle,
+    this.minuteInterval = 1,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
@@ -740,6 +741,7 @@ class _BottomPickerState extends State<BottomPicker> {
                                   },
                                   dateOrder: widget.dateOrder,
                                   textStyle: widget.pickerTextStyle,
+                                  minuteInterval: widget.minuteInterval,
                                 )
                               : RangePicker(
                                   mode: CupertinoDatePickerMode.date,

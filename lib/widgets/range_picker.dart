@@ -14,6 +14,7 @@ class RangePicker extends StatefulWidget {
   final TextStyle textStyle;
   final CupertinoDatePickerMode mode;
   final bool use24hFormat;
+  final int? minuteInterval;
 
   const RangePicker({
     Key? key,
@@ -29,6 +30,7 @@ class RangePicker extends StatefulWidget {
     required this.textStyle,
     required this.mode,
     required this.use24hFormat,
+    this.minuteInterval,
   }) : super(key: key);
 
   @override
@@ -78,6 +80,7 @@ class _RangePickerState extends State<RangePicker> {
             initialDateTime: initialFirstDateTime,
             maxDateTime: widget.maxFirstDate,
             minDateTime: minFirstDateTime,
+            minuteInterval: widget.minuteInterval ?? 1,
             mode: widget.mode,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);
@@ -108,6 +111,7 @@ class _RangePickerState extends State<RangePicker> {
             onDateChanged: widget.onSecondDateChanged,
             dateOrder: widget.dateOrder,
             textStyle: widget.textStyle,
+            minuteInterval: widget.minuteInterval ?? 1,
           ),
         ),
       ],
