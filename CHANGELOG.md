@@ -1,4 +1,4 @@
-## [2.12.0] - 01/02/2025
+## [2.12.0-0.1.dev] - 01/02/2025
 
 **Changes:** 
 - Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSperator`.
