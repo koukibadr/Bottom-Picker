@@ -1205,6 +1205,7 @@ class _CupertinoDatePickerDateTimeState
           pickerBuilders.add(_buildAmPmPicker);
           columnWidths
               .add(_getEstimatedColumnWidth(_PickerColumnType.dayPeriod));
+          break;
         case DatePickerDateTimeOrder.date_dayPeriod_time:
         case DatePickerDateTimeOrder.dayPeriod_time_date:
           pickerBuilders.insert(0, _buildAmPmPicker);
@@ -1222,6 +1223,7 @@ class _CupertinoDatePickerDateTimeState
         case DatePickerDateTimeOrder.dayPeriod_time_date:
           pickerBuilders.add(_buildMediumDatePicker);
           columnWidths.add(_getEstimatedColumnWidth(_PickerColumnType.date));
+          break;
         case DatePickerDateTimeOrder.date_time_dayPeriod:
         case DatePickerDateTimeOrder.date_dayPeriod_time:
           pickerBuilders.insert(0, _buildMediumDatePicker);

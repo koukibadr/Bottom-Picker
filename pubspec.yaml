@@ -3,7 +3,7 @@ description: A new flutter package that let you create a bottom item picker or d
 version: 2.12.0-0.1.dev
 homepage: 'https://github.com/koukibadr/Bottom-Picker'
 environment:
-  sdk: '>=3.3.0-0 <4.0.0'
+  sdk: '>=2.12.0-0 <4.0.0'
   flutter: '>=1.17.0'
 dependencies:
   flutter:
