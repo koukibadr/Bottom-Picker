@@ -25,7 +25,7 @@ class DatePicker extends StatelessWidget {
     this.use24hFormat = true,
     required this.textStyle,
     this.dateOrder,
-    this.itemExtent,
+    this.itemExtent = 0,
     this.showTimeSeperator = false,
   }) : super(key: key);
 

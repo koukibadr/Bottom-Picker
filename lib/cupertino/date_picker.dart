@@ -1024,33 +1024,24 @@ class _CupertinoDatePickerDateTimeState
     TransitionBuilder itemPositioningBuilder,
     Widget? selectionOverlay,
   ) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: (ScrollNotification notification) {
-        return false;
-      },
-      child: CupertinoPicker(
-        scrollController: meridiemController,
-        offAxisFraction: offAxisFraction,
-        itemExtent: widget.itemExtent,
-        useMagnifier: _kUseMagnifier,
-        magnification: _kMagnification,
-        backgroundColor: widget.backgroundColor,
-        squeeze: _kSqueeze,
-        onSelectedItemChanged: (int index) {},
-        selectionOverlay: selectionOverlay,
-        children: List<Widget>.generate(1, (int index) {
-          return itemPositioningBuilder(
-            context,
-            Text(
-              ':',
-              style: _themeTextStyle(
-                context,
-                isValid: _isValidHour(index, _selectedHourIndex),
-              ),
-            ),
-          );
-        }),
-      ),
+    return CupertinoPicker(
+      offAxisFraction: offAxisFraction,
+      itemExtent: widget.itemExtent,
+      useMagnifier: _kUseMagnifier,
+      magnification: _kMagnification,
+      backgroundColor: widget.backgroundColor,
+      squeeze: _kSqueeze,
+      onSelectedItemChanged: (int index) {},
+      selectionOverlay: selectionOverlay,
+      children: List<Widget>.generate(1, (int index) {
+        return itemPositioningBuilder(
+          context,
+          Text(
+            ':',
+            style: _themeTextStyle(context),
+          ),
+        );
+      }),
     );
   }
 

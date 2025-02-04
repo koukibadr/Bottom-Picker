@@ -193,7 +193,7 @@ class BottomPicker extends StatefulWidget {
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
-    itemExtent = 0;
+    itemExtent = 30;
     onRangeDateSubmitPressed = null;
     assertInitialValues();
   }
@@ -233,7 +233,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.showTimeSperator = false,
-    this.itemExtent = 0,
+    this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
@@ -277,7 +277,7 @@ class BottomPicker extends StatefulWidget {
     this.dateOrder = DatePickerDateOrder.ymd,
     this.buttonContent,
     this.buttonStyle,
-    this.itemExtent = 0,
+    this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
@@ -336,7 +336,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.minuteInterval = 1,
     this.showTimeSperator = false,
-    this.itemExtent = 0,
+    this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;

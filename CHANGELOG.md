@@ -1,3 +1,11 @@
+## [2.12.0-0.2.dev] - 04/02/2025
+
+**Changes:** 
+- Update default `itemExtent` value to 30 for all time and date pickers
+
+**Bug Fixes:** 
+- Fix cupertino picker time seperator rendering and text style.
+
 ## [2.12.0-0.1.dev] - 01/02/2025
 
 **Changes:** 
