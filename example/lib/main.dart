@@ -206,13 +206,19 @@ class ExampleApp extends StatelessWidget {
           fontSize: 15,
         ),
       ),
-      backgroundColor: Colors.yellow.withOpacity(0.6),
+      backgroundColor: Colors.yellow.withValues(
+        alpha: 0.6,
+      ),
       bottomPickerTheme: BottomPickerTheme.morningSalad,
       onSubmit: (index) {
         print(index);
       },
+      onCloseButtonPressed: () {
+        print('This message is displayed when close button is pressed');
+      },
       buttonAlignment: MainAxisAlignment.start,
       displaySubmitButton: false,
+      dismissable: true,
     ).show(context);
   }
 
