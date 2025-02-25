@@ -1,3 +1,9 @@
+## [2.11.1] - 25/02/2025
+
+**Changes:** 
+- enable bottom picker dismiss with escape keyboard key for web and desktop.
+- enable MacOS support for bottom picker example project.
+
 ## [2.11.0] - 01/02/2025
 
 **Changes:** 
