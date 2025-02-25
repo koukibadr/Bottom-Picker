@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/resources/time.dart';
@@ -7,8 +10,10 @@ import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:bottom_picker/widgets/range_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_picker/resources/extensions.dart';
+import 'package:flutter/services.dart';
 export 'package:bottom_picker/resources/time.dart';
 
 // ignore: must_be_immutable
@@ -621,6 +626,8 @@ class _BottomPickerState extends State<BottomPicker> {
   late DateTime selectedSecondDateTime =
       widget.initialSecondDate ?? DateTime.now();
 
+  bool disposed = false;
+
   @override
   void initState() {
     super.initState();
@@ -631,6 +638,18 @@ class _BottomPickerState extends State<BottomPicker> {
     } else {
       selectedDateTime = widget.initialDateTime ?? DateTime.now();
     }
+
+    if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        View.of(context).platformDispatcher.onKeyData = _onKeyPressed;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    View.of(context).platformDispatcher.onKeyData = null;
+    super.dispose();
   }
 
   @override
@@ -809,11 +828,21 @@ class _BottomPickerState extends State<BottomPicker> {
     );
   }
 
-  void _closeBottomPicker() {
-    if (widget.onCloseButtonPressed == null) {
+  /// Handle the key press event
+  bool _onKeyPressed(final keyData) {
+    if (keyData.logical == LogicalKeyboardKey.escape.keyId &&
+        !disposed &&
+        widget.dismissable) {
+      disposed = true;
       Navigator.pop(context);
-    } else {
-      widget.onCloseButtonPressed?.call();
+      return disposed;
     }
+    return false;
+  }
+
+  /// Close the bottom picker
+  void _closeBottomPicker() {
+    Navigator.pop(context);
+    widget.onCloseButtonPressed?.call();
   }
 }
