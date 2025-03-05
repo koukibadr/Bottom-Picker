@@ -649,7 +649,9 @@ class _BottomPickerState extends State<BottomPicker> {
 
   @override
   void dispose() {
-    View.of(context).platformDispatcher.onKeyData = null;
+    if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
+      View.of(context).platformDispatcher.onKeyData = null;
+    }
     super.dispose();
   }
 

@@ -1,3 +1,11 @@
+## [2.11.2] - 05/03/2025
+
+**Bug Fix:** 
+- Resolve dismiss issue when using bottom picker on mobile platforms iOS and Android [Issue#114](https://github.com/koukibadr/Bottom-Picker/issues/114#issuecomment-2698135228).
+
+**Changes**
+- Update package description on pub.dev
+
 ## [2.11.1] - 25/02/2025
 
 **Changes:** 
