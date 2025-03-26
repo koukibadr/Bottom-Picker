@@ -219,6 +219,9 @@ class ExampleApp extends StatelessWidget {
       buttonAlignment: MainAxisAlignment.start,
       displaySubmitButton: false,
       dismissable: true,
+      onDismiss: (p0) {
+        print(p0);
+      },
     ).show(context);
   }
 
@@ -245,6 +248,9 @@ class ExampleApp extends StatelessWidget {
       },
       onSubmit: (index) {
         print(index);
+      },
+      onDismiss: (p0) {
+        print(p0);
       },
       bottomPickerTheme: BottomPickerTheme.morningSalad,
       layoutOrientation: TextDirection.rtl,
@@ -276,6 +282,9 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
+      onDismiss: (p0) {
+        print(p0);
+      },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(context);
   }
@@ -288,6 +297,9 @@ class ExampleApp extends StatelessWidget {
       initialDateTime: DateTime(1996, 10, 22),
       onChange: (index) {
         print(index);
+      },
+      onDismiss: (p0) {
+        print(p0);
       },
     ).show(context);
   }
@@ -377,6 +389,10 @@ class ExampleApp extends StatelessWidget {
         print(firstDate);
         print(secondDate);
       },
+      onRangePickerDismissed: (p0, p1) {
+        print(p0);
+        print(p1);
+      },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(context);
   }
@@ -406,6 +422,10 @@ class ExampleApp extends StatelessWidget {
       onRangeTimeSubmitPressed: (firstDate, secondDate) {
         print(firstDate);
         print(secondDate);
+      },
+      onRangePickerDismissed: (p0, p1) {
+        print(p0);
+        print(p1);
       },
     ).show(context);
   }

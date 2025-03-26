@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
@@ -42,6 +41,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
+    this.onDismiss,
     this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
@@ -85,6 +85,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
+    this.onDismiss,
     this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
@@ -127,6 +128,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
+    this.onDismiss,
     this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
@@ -169,6 +171,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
+    this.onDismiss,
     this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
@@ -215,6 +218,7 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
+    this.onDismiss,
     this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
@@ -252,6 +256,7 @@ class BottomPicker extends StatefulWidget {
     required this.pickerTitle,
     this.pickerDescription,
     required this.onRangeDateSubmitPressed,
+    this.onRangePickerDismissed,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
@@ -288,6 +293,7 @@ class BottomPicker extends StatefulWidget {
     itemExtent = 0;
     onChange = null;
     onSubmit = null;
+    onDismiss = null;
     displaySubmitButton = true;
     use24hFormat = true;
     assert(onRangeDateSubmitPressed != null);
@@ -309,6 +315,7 @@ class BottomPicker extends StatefulWidget {
     required this.pickerTitle,
     this.pickerDescription,
     required this.onRangeTimeSubmitPressed,
+    this.onRangePickerDismissed,
     this.use24hFormat = true,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
@@ -346,6 +353,7 @@ class BottomPicker extends StatefulWidget {
     itemExtent = 0;
     onChange = null;
     onSubmit = null;
+    onDismiss = null;
     displaySubmitButton = true;
     assert(onRangeTimeSubmitPressed != null);
     assertInitialValues();
@@ -393,6 +401,10 @@ class BottomPicker extends StatefulWidget {
   ///else it will return the index of the selected item
   ///
   late Function(dynamic)? onSubmit;
+
+  /// Nullable function invoked when the picker get dismissed
+  /// it will return the selected value
+  late Function(dynamic)? onDismiss;
 
   ///Invoked when clicking on the close button
   ///
@@ -558,13 +570,17 @@ class BottomPicker extends StatefulWidget {
   ///
   final List<Color>? gradientColors;
 
-  ///the style that will be applied on the button's widget
+  /// The style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
 
-  ///invoked when pressing on the submit button when using range picker
-  ///it return two dates (first time, end time)
-  ///required when using [BottomPicker.rangeTime]
+  /// Invoked when pressing on the submit button when using range picker
+  /// it return two dates (first time, end time)
+  /// required when using [BottomPicker.rangeTime]
   late Function(DateTime, DateTime)? onRangeTimeSubmitPressed;
+
+  /// Function invoked when the picker is dismissed used with range picker
+  /// and time range picker.
+  late Function(DateTime, DateTime)? onRangePickerDismissed;
 
   ///the minimum first time in the time range picker
   ///not required if null no minimum will be set in the time picker
@@ -652,6 +668,20 @@ class _BottomPickerState extends State<BottomPicker> {
     if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
       View.of(context).platformDispatcher.onKeyData = null;
     }
+
+    // invoke the onDismissed callback when the bottom picker is dismissed
+    if (widget.bottomPickerType == BottomPickerType.rangeDate ||
+        widget.bottomPickerType == BottomPickerType.rangeTime) {
+      widget.onRangePickerDismissed?.call(
+        selectedFirstDateTime,
+        selectedSecondDateTime,
+      );
+    } else if (widget.bottomPickerType == BottomPickerType.simple) {
+      widget.onDismiss?.call(selectedItemIndex);
+    } else {
+      widget.onDismiss?.call(selectedDateTime);
+    }
+
     super.dispose();
   }
 
