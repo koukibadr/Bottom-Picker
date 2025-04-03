@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class SimplePicker extends StatelessWidget {
   final int selectedItemIndex;
@@ -20,22 +23,33 @@ class SimplePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTheme(
-      data: CupertinoThemeData(
-        textTheme: CupertinoTextThemeData(
-          pickerTextStyle: textStyle,
+    if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
+      return CupertinoTheme(
+        data: CupertinoThemeData(
+          textTheme: CupertinoTextThemeData(
+            pickerTextStyle: textStyle,
+          ),
         ),
-      ),
-      child: CupertinoPicker(
+        child: CupertinoPicker(
+          offAxisFraction: 2.0,
+          itemExtent: itemExtent,
+          selectionOverlay: selectionOverlay ??
+              const CupertinoPickerDefaultSelectionOverlay(),
+          scrollController: FixedExtentScrollController(
+            initialItem: selectedItemIndex,
+          ),
+          onSelectedItemChanged: onChange,
+          children: items,
+        ),
+      );
+    } else {
+      return ListWheelScrollView(
         itemExtent: itemExtent,
-        selectionOverlay:
-            selectionOverlay ?? const CupertinoPickerDefaultSelectionOverlay(),
-        scrollController: FixedExtentScrollController(
-          initialItem: selectedItemIndex,
-        ),
-        onSelectedItemChanged: onChange,
         children: items,
-      ),
-    );
+        useMagnifier: true,
+        magnification: 1.5,
+        onSelectedItemChanged: onChange,
+      );
+    }
   }
 }
