@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class SimplePicker extends StatelessWidget {
   final int selectedItemIndex;
@@ -22,7 +23,7 @@ class SimplePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS || Platform.isAndroid) {
+    if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
       return CupertinoTheme(
         data: CupertinoThemeData(
           textTheme: CupertinoTextThemeData(
@@ -42,16 +43,12 @@ class SimplePicker extends StatelessWidget {
         ),
       );
     } else {
-      return ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 50,
-            ),
-            child: items[index],
-          );
-        },
+      return ListWheelScrollView(
+        itemExtent: itemExtent,
+        children: items,
+        useMagnifier: true,
+        magnification: 1.5,
+        onSelectedItemChanged: onChange,
       );
     }
   }

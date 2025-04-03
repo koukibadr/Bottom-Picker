@@ -61,20 +61,20 @@ class ExampleApp extends StatelessWidget {
       color: Color(0xffF6F2F2),
       width: double.infinity,
       child: Column(
+        spacing: 10,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.network(
-            'https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true',
-            width: 200,
-          ),
           SizedBox(
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
                 _openSimpleItemPicker(context, countryList);
               },
-              child: Text('Simple Item picker'),
+              child: Text(
+                'Simple Item picker',
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           SizedBox(
@@ -83,7 +83,8 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openSecondSimpleItemPicker(context, countryList);
               },
-              child: Text('Simple Item picker with different theme'),
+              child: Text('Simple Item picker with different theme',
+                  textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -92,7 +93,7 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openDatePicker(context);
               },
-              child: Text('Date Picker'),
+              child: Text('Date Picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -101,7 +102,8 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openDatePickerWithButtonStyle(context);
               },
-              child: Text('Date Picker with button style'),
+              child: Text('Date Picker with button style',
+                  textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -110,7 +112,7 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openRangeDatePicker(context);
               },
-              child: Text('Range Date Picker'),
+              child: Text('Range Date Picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -119,7 +121,8 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openArabicRangeDatePicker(context);
               },
-              child: Text('Arabic Range Date Picker'),
+              child:
+                  Text('Arabic Range Date Picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -128,7 +131,7 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openTimePicker(context);
               },
-              child: Text('Time Picker'),
+              child: Text('Time Picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -137,7 +140,7 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openDateTimePicker(context);
               },
-              child: Text('Date and Time Picker'),
+              child: Text('Date and Time Picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -146,7 +149,8 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openDateTimePickerWithCustomButton(context);
               },
-              child: Text('Bottom picker with custom button'),
+              child: Text('Bottom picker with custom button',
+                  textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -157,6 +161,7 @@ class ExampleApp extends StatelessWidget {
               },
               child: Text(
                 'Bottom picker with custom picker text style',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12,
                 ),
@@ -448,29 +453,21 @@ class ExampleApp extends StatelessWidget {
 
   void _openPickerWithCustomPickerTextStyle(BuildContext context) {
     BottomPicker(
-      items: [
-        Center(
-          child: Text('Leonardo DiCaprio'),
+      items: List.generate(
+        20,
+        (i) => Center(
+          child: Text('Actor $i'),
         ),
-        Center(
-          child: Text('Johnny Depp'),
-        ),
-        Center(
-          child: Text('Robert De Niro'),
-        ),
-        Center(
-          child: Text('Tom Hardy'),
-        ),
-        Center(
-          child: Text('Ben Affleck'),
-        ),
-      ],
+      ),
       pickerTitle: Text('Choose an actor'),
       titleAlignment: Alignment.center,
       pickerTextStyle: TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.bold,
       ),
+      onChange: (p0) {
+        print(p0);
+      },
       closeIconColor: Colors.red,
     ).show(context);
   }
