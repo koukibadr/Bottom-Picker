@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class BottomPickerButton extends StatelessWidget {
   final Function onClick;
-  final List<Color> gradientColors;
+  final BottomPickerTheme theme;
+  final List<Color>? gradients;
   final Color? solidColor;
   final double? buttonPadding;
   final double? buttonWidth;
@@ -13,7 +14,8 @@ class BottomPickerButton extends StatelessWidget {
   const BottomPickerButton({
     Key? key,
     required this.onClick,
-    this.gradientColors = blueThemeColor,
+    this.theme = BottomPickerTheme.blue,
+    this.gradients,
     this.solidColor,
     this.buttonPadding,
     this.buttonWidth,
@@ -36,7 +38,7 @@ class BottomPickerButton extends StatelessWidget {
               color: solidColor,
               gradient: solidColor == null
                   ? LinearGradient(
-                      colors: gradientColors,
+                      colors: gradients ?? theme.gradientColors,
                       begin: const FractionalOffset(0.0, 0.0),
                       end: const FractionalOffset(1.0, 0.0),
                       stops: const [0.0, 1.0],
