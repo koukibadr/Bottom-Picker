@@ -4,6 +4,7 @@ import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,6 +19,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'),
+        Locale('ar'),
+      ],
       home: Scaffold(
         body: ExampleApp(),
       ),
@@ -110,9 +120,27 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openMonthYearPicker(context);
+              },
+              child: Text('Month Year Picker'),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openRangeDatePicker(context);
               },
               child: Text('Range Date Picker', textAlign: TextAlign.center),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openRangeTimePicker(context);
+              },
+              child: Text('Range Time Picker'),
             ),
           ),
           SizedBox(
@@ -183,13 +211,22 @@ class ExampleApp extends StatelessWidget {
           fontSize: 15,
         ),
       ),
-      backgroundColor: Colors.yellow.withOpacity(0.6),
+      backgroundColor: Colors.yellow.withValues(
+        alpha: 0.6,
+      ),
       bottomPickerTheme: BottomPickerTheme.morningSalad,
       onSubmit: (index) {
         print(index);
       },
+      onCloseButtonPressed: () {
+        print('This message is displayed when close button is pressed');
+      },
       buttonAlignment: MainAxisAlignment.start,
       displaySubmitButton: false,
+      dismissable: true,
+      onDismiss: (p0) {
+        print(p0);
+      },
     ).show(context);
   }
 
@@ -216,6 +253,9 @@ class ExampleApp extends StatelessWidget {
       },
       onSubmit: (index) {
         print(index);
+      },
+      onDismiss: (p0) {
+        print(p0);
       },
       bottomPickerTheme: BottomPickerTheme.morningSalad,
       layoutOrientation: TextDirection.rtl,
@@ -247,7 +287,25 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
+      onDismiss: (p0) {
+        print(p0);
+      },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
+  void _openMonthYearPicker(BuildContext context) {
+    BottomPicker.monthYear(
+      pickerTitle: Text(
+        'Set your Birth Month',
+      ),
+      initialDateTime: DateTime(1996, 10, 22),
+      onChange: (index) {
+        print(index);
+      },
+      onDismiss: (p0) {
+        print(p0);
+      },
     ).show(context);
   }
 
@@ -326,8 +384,7 @@ class ExampleApp extends StatelessWidget {
         ),
       ),
       dateOrder: DatePickerDateOrder.dmy,
-      minFirstDate: DateTime.now(),
-      initialFirstDate: DateTime.now().add(Duration(days: 1)),
+      initialSecondDate: DateTime.now().add(Duration(days: 230)),
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,
@@ -337,7 +394,44 @@ class ExampleApp extends StatelessWidget {
         print(firstDate);
         print(secondDate);
       },
+      onRangePickerDismissed: (p0, p1) {
+        print(p0);
+        print(p1);
+      },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
+  void _openRangeTimePicker(BuildContext context) {
+    BottomPicker.rangeTime(
+      pickerTitle: Text(
+        'Set Time range',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.black,
+        ),
+      ),
+      pickerDescription: Text(
+        'Please select a first time and an end time',
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      pickerTextStyle: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
+      onRangeTimeSubmitPressed: (firstDate, secondDate) {
+        print(firstDate);
+        print(secondDate);
+      },
+      onRangePickerDismissed: (p0, p1) {
+        print(p0);
+        print(p1);
+      },
     ).show(context);
   }
 
@@ -385,7 +479,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       bottomPickerTheme: BottomPickerTheme.orange,
@@ -401,6 +495,7 @@ class ExampleApp extends StatelessWidget {
 
   void _openDateTimePicker(BuildContext context) {
     BottomPicker.dateTime(
+      minuteInterval: 2,
       pickerTitle: Text(
         'Set the event exact time and date',
         style: TextStyle(
@@ -412,7 +507,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (date) {
         print(date);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       minDateTime: DateTime(2021, 5, 1),
@@ -438,7 +533,7 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (date) {
         print(date);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       buttonSingleColor: Colors.pink,

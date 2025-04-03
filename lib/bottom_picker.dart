@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/resources/time.dart';
@@ -7,8 +9,10 @@ import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:bottom_picker/widgets/range_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_picker/resources/extensions.dart';
+import 'package:flutter/services.dart';
 export 'package:bottom_picker/resources/time.dart';
 
 // ignore: must_be_immutable
@@ -37,7 +41,8 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onDismiss,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.selectedItemIndex = 0,
@@ -80,7 +85,8 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onDismiss,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
@@ -113,6 +119,49 @@ class BottomPicker extends StatefulWidget {
     assertInitialValues();
   }
 
+  BottomPicker.monthYear({
+    Key? key,
+    required this.pickerTitle,
+    this.pickerDescription,
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment,
+    this.dismissable = false,
+    this.onChange,
+    this.onSubmit,
+    this.onDismiss,
+    this.onCloseButtonPressed,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
+    this.gradientColors,
+    this.initialDateTime,
+    this.minDateTime,
+    this.maxDateTime,
+    this.buttonPadding,
+    this.buttonWidth,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+    this.pickerTextStyle = const TextStyle(
+      fontSize: 14,
+      color: Colors.black,
+    ),
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
+    this.layoutOrientation = TextDirection.ltr,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.height,
+    this.displaySubmitButton = true,
+    this.buttonContent,
+    this.buttonStyle,
+  }) : super(key: key) {
+    datePickerMode = CupertinoDatePickerMode.monthYear;
+    bottomPickerType = BottomPickerType.dateTime;
+    use24hFormat = false;
+    itemExtent = 0;
+    onRangeDateSubmitPressed = null;
+    dateOrder = DatePickerDateOrder.mdy;
+    assertInitialValues();
+  }
+
   BottomPicker.dateTime({
     Key? key,
     required this.pickerTitle,
@@ -122,11 +171,12 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onDismiss,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
-    this.minuteInterval,
+    this.minuteInterval = 1,
     this.minDateTime,
     this.maxDateTime,
     this.use24hFormat = false,
@@ -168,7 +218,8 @@ class BottomPicker extends StatefulWidget {
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
-    this.onClose,
+    this.onDismiss,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.minuteInterval = 1,
@@ -205,10 +256,11 @@ class BottomPicker extends StatefulWidget {
     required this.pickerTitle,
     this.pickerDescription,
     required this.onRangeDateSubmitPressed,
+    this.onRangePickerDismissed,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
-    this.onClose,
+    this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.buttonPadding,
@@ -236,22 +288,84 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
-    bottomPickerType = BottomPickerType.rangeDateTime;
+    bottomPickerType = BottomPickerType.rangeDate;
     dateOrder = null;
     itemExtent = 0;
     onChange = null;
     onSubmit = null;
+    onDismiss = null;
     displaySubmitButton = true;
+    use24hFormat = true;
     assert(onRangeDateSubmitPressed != null);
     assertInitialValues();
     if (minSecondDate != null && initialSecondDate != null) {
-      assert(initialSecondDate!.isAfter(minSecondDate!));
+      assert(
+        initialSecondDate!.isAtSameMomentOrAfter(minSecondDate!),
+      );
     }
     if (minFirstDate != null && initialFirstDate != null) {
-      assert(initialFirstDate!.isAfter(minFirstDate!));
+      assert(
+        initialFirstDate!.isAtSameMomentOrAfter(minFirstDate!),
+      );
     }
   }
 
+  BottomPicker.rangeTime({
+    Key? key,
+    required this.pickerTitle,
+    this.pickerDescription,
+    required this.onRangeTimeSubmitPressed,
+    this.onRangePickerDismissed,
+    this.use24hFormat = true,
+    this.titlePadding = const EdgeInsets.all(0),
+    this.titleAlignment,
+    this.dismissable = false,
+    this.onCloseButtonPressed,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
+    this.gradientColors,
+    this.buttonPadding,
+    this.buttonWidth,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+    this.pickerTextStyle = const TextStyle(
+      fontSize: 14,
+      color: Colors.black,
+    ),
+    this.displayCloseIcon = true,
+    this.closeIconColor = Colors.black,
+    this.closeIconSize = 20,
+    this.layoutOrientation = TextDirection.ltr,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.height,
+    this.initialSecondTime,
+    this.initialFirstTime,
+    this.minFirstTime,
+    this.minSecondTime,
+    this.maxFirstTime,
+    this.maxSecondTime,
+    this.buttonContent,
+    this.buttonStyle,
+    this.minuteInterval = 1,
+  }) : super(key: key) {
+    datePickerMode = CupertinoDatePickerMode.time;
+    bottomPickerType = BottomPickerType.rangeTime;
+    dateOrder = null;
+    itemExtent = 0;
+    onChange = null;
+    onSubmit = null;
+    onDismiss = null;
+    displaySubmitButton = true;
+    assert(onRangeTimeSubmitPressed != null);
+    assertInitialValues();
+    if (minSecondTime != null && initialSecondTime != null) {
+      assert(initialSecondTime!.isAfter(minSecondTime!));
+    }
+    if (minFirstTime != null && initialFirstTime != null) {
+      assert(initialFirstTime!.isAfter(minFirstTime!));
+    }
+  }
+
+  /// Bottom picker title widget
   final Widget pickerTitle;
 
   ///Bottom picker description widget
@@ -288,9 +402,13 @@ class BottomPicker extends StatefulWidget {
   ///
   late Function(dynamic)? onSubmit;
 
+  /// Nullable function invoked when the picker get dismissed
+  /// it will return the selected value
+  late Function(dynamic)? onDismiss;
+
   ///Invoked when clicking on the close button
   ///
-  final Function? onClose;
+  final Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
   ///possible values
@@ -330,7 +448,7 @@ class BottomPicker extends StatefulWidget {
 
   ///The gap between two minutes
   ///by default it's 1 minute
-  int? minuteInterval;
+  int minuteInterval = 1;
 
   ///the max date time on the date picker
   ///by default it's null
@@ -452,8 +570,41 @@ class BottomPicker extends StatefulWidget {
   ///
   final List<Color>? gradientColors;
 
-  ///the style that will be applied on the button's widget
+  /// The style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
+
+  /// Invoked when pressing on the submit button when using range picker
+  /// it return two dates (first time, end time)
+  /// required when using [BottomPicker.rangeTime]
+  late Function(DateTime, DateTime)? onRangeTimeSubmitPressed;
+
+  /// Function invoked when the picker is dismissed used with range picker
+  /// and time range picker.
+  late Function(DateTime, DateTime)? onRangePickerDismissed;
+
+  ///the minimum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minFirstTime;
+
+  ///the minimum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minSecondTime;
+
+  ///the maximum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxFirstTime;
+
+  ///the maximum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxSecondTime;
+
+  ///the initial first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialFirstTime;
+
+  ///the initial last time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialSecondTime;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -492,6 +643,8 @@ class _BottomPickerState extends State<BottomPicker> {
   late DateTime selectedSecondDateTime =
       widget.initialSecondDate ?? DateTime.now();
 
+  bool disposed = false;
+
   @override
   void initState() {
     super.initState();
@@ -502,6 +655,34 @@ class _BottomPickerState extends State<BottomPicker> {
     } else {
       selectedDateTime = widget.initialDateTime ?? DateTime.now();
     }
+
+    if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        View.of(context).platformDispatcher.onKeyData = _onKeyPressed;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
+      View.of(context).platformDispatcher.onKeyData = null;
+    }
+
+    // invoke the onDismissed callback when the bottom picker is dismissed
+    if (widget.bottomPickerType == BottomPickerType.rangeDate ||
+        widget.bottomPickerType == BottomPickerType.rangeTime) {
+      widget.onRangePickerDismissed?.call(
+        selectedFirstDateTime,
+        selectedSecondDateTime,
+      );
+    } else if (widget.bottomPickerType == BottomPickerType.simple) {
+      widget.onDismiss?.call(selectedItemIndex);
+    } else {
+      widget.onDismiss?.call(selectedDateTime);
+    }
+
+    super.dispose();
   }
 
   @override
@@ -564,7 +745,7 @@ class _BottomPickerState extends State<BottomPicker> {
                   : widget.bottomPickerType == BottomPickerType.time
                       ? DatePicker(
                           initialDateTime: widget.initialTime.toDateTime,
-                          minuteInterval: widget.minuteInterval ?? 1,
+                          minuteInterval: widget.minuteInterval,
                           maxDateTime: widget.maxTime.toDateTime,
                           minDateTime: widget.minTime.toDateTime,
                           mode: widget.datePickerMode,
@@ -579,7 +760,7 @@ class _BottomPickerState extends State<BottomPicker> {
                       : widget.bottomPickerType == BottomPickerType.dateTime
                           ? DatePicker(
                               initialDateTime: widget.initialDateTime,
-                              minuteInterval: widget.minuteInterval ?? 1,
+                              minuteInterval: widget.minuteInterval,
                               maxDateTime: widget.maxDateTime,
                               minDateTime: widget.minDateTime,
                               mode: widget.datePickerMode,
@@ -591,22 +772,47 @@ class _BottomPickerState extends State<BottomPicker> {
                               dateOrder: widget.dateOrder,
                               textStyle: widget.pickerTextStyle,
                             )
-                          : RangePicker(
-                              initialFirstDateTime: widget.initialFirstDate,
-                              initialSecondDateTime: widget.initialSecondDate,
-                              maxFirstDate: widget.maxFirstDate,
-                              minFirstDate: widget.minFirstDate,
-                              maxSecondDate: widget.maxSecondDate,
-                              minSecondDate: widget.minSecondDate,
-                              onFirstDateChanged: (DateTime date) {
-                                selectedFirstDateTime = date;
-                              },
-                              onSecondDateChanged: (DateTime date) {
-                                selectedSecondDateTime = date;
-                              },
-                              dateOrder: widget.dateOrder,
-                              textStyle: widget.pickerTextStyle,
-                            ),
+                          : widget.bottomPickerType ==
+                                  BottomPickerType.rangeTime
+                              ? RangePicker(
+                                  mode: CupertinoDatePickerMode.time,
+                                  use24hFormat: widget.use24hFormat,
+                                  initialFirstDateTime: widget.initialFirstTime,
+                                  initialSecondDateTime:
+                                      widget.initialSecondTime,
+                                  maxFirstDate: widget.maxFirstTime,
+                                  minFirstDateTime: widget.minFirstTime,
+                                  maxSecondDate: widget.maxSecondTime,
+                                  minSecondDateTime: widget.minSecondTime,
+                                  onFirstDateChanged: (DateTime date) {
+                                    selectedFirstDateTime = date;
+                                  },
+                                  onSecondDateChanged: (DateTime date) {
+                                    selectedSecondDateTime = date;
+                                  },
+                                  dateOrder: widget.dateOrder,
+                                  textStyle: widget.pickerTextStyle,
+                                  minuteInterval: widget.minuteInterval,
+                                )
+                              : RangePicker(
+                                  mode: CupertinoDatePickerMode.date,
+                                  use24hFormat: widget.use24hFormat,
+                                  initialFirstDateTime: widget.initialFirstDate,
+                                  initialSecondDateTime:
+                                      widget.initialSecondDate,
+                                  maxFirstDate: widget.maxFirstDate,
+                                  minFirstDateTime: widget.minFirstDate,
+                                  maxSecondDate: widget.maxSecondDate,
+                                  minSecondDateTime: widget.minSecondDate,
+                                  onFirstDateChanged: (DateTime date) {
+                                    selectedFirstDateTime = date;
+                                  },
+                                  onSecondDateChanged: (DateTime date) {
+                                    selectedSecondDateTime = date;
+                                  },
+                                  dateOrder: widget.dateOrder,
+                                  textStyle: widget.pickerTextStyle,
+                                ),
             ),
             if (widget.displaySubmitButton)
               Padding(
@@ -619,8 +825,14 @@ class _BottomPickerState extends State<BottomPicker> {
                     BottomPickerButton(
                       onClick: () {
                         if (widget.bottomPickerType ==
-                            BottomPickerType.rangeDateTime) {
+                            BottomPickerType.rangeDate) {
                           widget.onRangeDateSubmitPressed?.call(
+                            selectedFirstDateTime,
+                            selectedSecondDateTime,
+                          );
+                        } else if (widget.bottomPickerType ==
+                            BottomPickerType.rangeTime) {
+                          widget.onRangeTimeSubmitPressed?.call(
                             selectedFirstDateTime,
                             selectedSecondDateTime,
                           );
@@ -650,11 +862,21 @@ class _BottomPickerState extends State<BottomPicker> {
     );
   }
 
-  void _closeBottomPicker() {
-    if (widget.onClose == null) {
+  /// Handle the key press event
+  bool _onKeyPressed(final keyData) {
+    if (keyData.logical == LogicalKeyboardKey.escape.keyId &&
+        !disposed &&
+        widget.dismissable) {
+      disposed = true;
       Navigator.pop(context);
-    } else {
-      widget.onClose?.call();
+      return disposed;
     }
+    return false;
+  }
+
+  /// Close the bottom picker
+  void _closeBottomPicker() {
+    Navigator.pop(context);
+    widget.onCloseButtonPressed?.call();
   }
 }

@@ -16,6 +16,7 @@
 - Simple list picker wheel
 - Date range picker (RTL and LTR)
 - Date picker
+- Month and year picker
 - Time picker
 - Date and Time picker
 - 24h / 12h time format
@@ -37,14 +38,14 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.8.0
+	bottom_picker: ^2.11.2
 ```
 
 ## Parameters
 
 ````dart
 	///Bottom picker title widget
-  final Widget? pickerTitle;
+  final Widget pickerTitle;
 
   ///Bottom picker description widget
   final Widget? pickerDescription;
@@ -62,7 +63,7 @@ dependencies:
   ///
   final bool dismissable;
 
-  ///list of items (List of text) used to create simple item picker (required)
+  ///list of items (List of widgets) used to create simple item picker (required)
   ///and should not be empty or null
   ///
   ///for date/dateTime/time items parameter is not available
@@ -82,7 +83,7 @@ dependencies:
 
   ///Invoked when clicking on the close button
   ///
-  final Function? onClose;
+  final Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
   ///possible values
@@ -122,7 +123,7 @@ dependencies:
 
   ///The gap between two minutes
   ///by default it's 1 minute
-  int? minuteInterval;
+  int minuteInterval = 1;
 
   ///the max date time on the date picker
   ///by default it's null
@@ -181,7 +182,7 @@ dependencies:
   ///LAYOUT_ORIENTATION.ltr,
   ///LAYOUT_ORIENTATION.rtl
   ///```
-  final LayoutOrientation layoutOrientation;
+  final TextDirection layoutOrientation;
 
   ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
@@ -246,6 +247,35 @@ dependencies:
 
   ///the style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
+
+  ///invoked when pressing on the submit button when using range picker
+  ///it return two dates (first time, end time)
+  ///required when using [BottomPicker.rangeTime]
+  late Function(DateTime, DateTime)? onRangeTimeSubmitPressed;
+
+  ///the minimum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minFirstTime;
+
+  ///the minimum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? minSecondTime;
+
+  ///the maximum first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxFirstTime;
+
+  ///the maximum second time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? maxSecondTime;
+
+  ///the initial first time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialFirstTime;
+
+  ///the initial last time in the time range picker
+  ///not required if null no minimum will be set in the time picker
+  DateTime? initialSecondTime;
 ````
 
 <hr/>
@@ -253,9 +283,10 @@ dependencies:
 **Migrate from 2.3.3 to 2.4.0:** `iconColor` , `buttonText` , `buttonTextStyle`, `displayButtonIcon`, `buttonTextAlignment` has been replaced with `buttonContent`, `buttonStyle` attributes to see the new attributes usage check the latest example in this documentation
 
 <hr/>
+
 ## Examples
 
-Simple item picker
+### Simple item picker
 
 ```dart
 BottomPicker(
@@ -266,7 +297,7 @@ BottomPicker(
 
 <hr>
 
-Date picker
+### Date picker
 
 ```dart
 BottomPicker.date(
@@ -300,7 +331,7 @@ BottomPicker.date(
 
 <hr>
 
-Time picker
+### Time picker
 
 ```dart
 
@@ -316,7 +347,7 @@ BottomPicker.time(
       onSubmit: (index) {
         print(index);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       bottomPickerTheme: BottomPickerTheme.orange,
@@ -335,7 +366,7 @@ BottomPicker.time(
 
 <hr>
 
-Date & Time picker
+### Date & Time picker
 
 ```dart
 BottomPicker.dateTime(
@@ -350,7 +381,7 @@ BottomPicker.dateTime(
       onSubmit: (date) {
         print(date);
       },
-      onClose: () {
+      onCloseButtonPressed: () {
         print('Picker closed');
       },
       minDateTime: DateTime(2021, 5, 1),
@@ -362,10 +393,26 @@ BottomPicker.dateTime(
       ],
 ).show(context);
 ```
+<hr>
+
+### Date picker with only month and year
+
+```dart
+BottomPicker.monthYear(
+  pickerTitle: Text(
+    'Set your Birth Month',
+  ),
+  initialDateTime: DateTime(1996, 10, 22),
+  onChange: (index) {
+    print(index);
+  },
+).show(context);
+```
+
 
 <hr>
 
-With custom picker text style
+### With custom picker text style
 
 ```dart
 BottomPicker(
@@ -405,7 +452,8 @@ BottomPicker(
 </p>
 
 <hr>
-Range date picker
+
+### Range date picker
 
 ```dart
 BottomPicker.range(
@@ -436,6 +484,41 @@ BottomPicker.range(
         print(secondDate);
       },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
+).show(context);
+
+
+```
+
+<hr>
+
+### Time range picker
+
+```dart
+BottomPicker.rangeTime(
+	 pickerTitle: Text(
+    'Set Time range',
+    style: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 15,
+      color: Colors.black,
+    ),
+  ),
+  pickerDescription: Text(
+    'Please select a first time and an end time',
+    style: TextStyle(
+      color: Colors.black,
+    ),
+  ),
+  pickerTextStyle: TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+    fontSize: 12,
+  ),
+  bottomPickerTheme: BottomPickerTheme.plumPlate,
+  onRangeTimeSubmitPressed: (firstDate, secondDate) {
+    print(firstDate);
+    print(secondDate);
+  },
 ).show(context);
 
 
