@@ -846,7 +846,8 @@ class _BottomPickerState extends State<BottomPicker> {
 
                         Navigator.pop(context);
                       },
-                      gradientColors: widget.gradientColor,
+                      gradients: widget.gradientColors,
+                      theme: widget.bottomPickerTheme,
                       buttonPadding: widget.buttonPadding,
                       buttonWidth: widget.buttonWidth,
                       solidColor: widget.buttonSingleColor,
