@@ -10,6 +10,11 @@
 **Enhancement**
 - Refactoring colors mapping to bottom picker themes using new enum definitions [PR#120](https://github.com/koukibadr/Bottom-Picker/pull/120)
 
+## [2.11.2] - 05/03/2025
+
+**Bug Fix:** 
+- Resolve dismiss issue when using bottom picker on mobile platforms iOS and Android [Issue#114](https://github.com/koukibadr/Bottom-Picker/issues/114#issuecomment-2698135228).
+
 ## [2.11.1] - 25/02/2025
 
 **Changes:** 

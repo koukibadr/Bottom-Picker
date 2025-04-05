@@ -597,7 +597,7 @@ We warmly welcome contributions to the `bottom_picker` package! Your help in mak
 
 We'll review your contributions and provide feedback as soon as possible. Thank you for your interest in improving `bottom_picker`!
 
-## Heros
+## Bottom Picker Heros
 
 <a  href  =  "https://github.com/koukibadr/Bottom-Picker/graphs/contributors">
 <img  src  =  "https://contrib.rocks/image?repo=koukibadr/Bottom-Picker"/>
