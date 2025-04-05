@@ -3,7 +3,7 @@
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true"/>
 <br>
-<b>Easy way to display bottom picker item or date/time picker</b>
+<b>Bring beautiful bottom pickers to all your Flutter apps! Version 3.0.0 now supports desktop and web, alongside mobile.</b>
 </p>
 
 | ![simple item picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true)    | ![date_time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true)   |
@@ -18,8 +18,10 @@
 - Date picker
 - Month and year picker
 - Time picker
+- Duration Timer picker
 - Date and Time picker
 - 24h / 12h time format
+- Fully support Web and Desktop platforms (using wheel views)
 - Built-in themes
 - Customize confirm button
 - Customize first selected item
@@ -38,13 +40,13 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^2.11.2
+	bottom_picker: ^3.0.0
 ```
 
 ## Parameters
 
 ````dart
-	///Bottom picker title widget
+	/// Bottom picker title widget
   final Widget pickerTitle;
 
   ///Bottom picker description widget
@@ -81,6 +83,10 @@ dependencies:
   ///
   late Function(dynamic)? onSubmit;
 
+  /// Nullable function invoked when the picker get dismissed
+  /// it will return the selected value
+  late Function(dynamic)? onDismiss;
+
   ///Invoked when clicking on the close button
   ///
   final Function? onCloseButtonPressed;
@@ -114,6 +120,20 @@ dependencies:
   ///The initial time set in the time picker widget
   ///required only when using the `time` constructor
   Time? initialTime;
+
+  /// The initial duration set for the timer picker
+  /// By default it's set to null so it's `Duration.zero`
+  Duration? initialTimerDuration;
+
+  /// The time picker mode "hm", "hms" or "ms"
+  /// By default it's set to "hm"
+  CupertinoTimerPickerMode? timerPickerMode;
+
+  /// The timer seconds interval
+  /// Cannot be less then 1
+  ///
+  /// Default value is 1.
+  int timerSecondsInterval = 1;
 
   ///The max time can be set in the time picker widget
   Time? maxTime;
@@ -245,13 +265,17 @@ dependencies:
   ///
   final List<Color>? gradientColors;
 
-  ///the style that will be applied on the button's widget
+  /// The style that will be applied on the button's widget
   final BoxDecoration? buttonStyle;
 
-  ///invoked when pressing on the submit button when using range picker
-  ///it return two dates (first time, end time)
-  ///required when using [BottomPicker.rangeTime]
+  /// Invoked when pressing on the submit button when using range picker
+  /// it return two dates (first time, end time)
+  /// required when using [BottomPicker.rangeTime]
   late Function(DateTime, DateTime)? onRangeTimeSubmitPressed;
+
+  /// Function invoked when the picker is dismissed used with range picker
+  /// and time range picker.
+  late Function(DateTime, DateTime)? onRangePickerDismissed;
 
   ///the minimum first time in the time range picker
   ///not required if null no minimum will be set in the time picker
@@ -362,6 +386,33 @@ BottomPicker.time(
 
 
 
+```
+
+<hr>
+
+### Duration Timer picker
+
+```dart
+
+BottomPicker.timer(
+  pickerTitle: Text(
+    'Set your next meeting time',
+    style: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 15,
+      color: Colors.orange,
+    ),
+  ),
+  onChange: (p0) => print(p0),
+  onSubmit: (index) {
+    print(index);
+  },
+  initialTimerDuration: Duration(
+    hours: 6,
+    minutes: 30,
+  ),
+  timerPickerMode: CupertinoTimerPickerMode.hms,
+).show(context);
 ```
 
 <hr>
@@ -529,15 +580,24 @@ BottomPicker.rangeTime(
 
 </p>
 
-## Contribution
+## Contributing
 
-You can contribute to it [https://github.com/koukibadr/Bottom-Picker](https://github.com/koukibadr/Bottom-Picker)
+We warmly welcome contributions to the `bottom_picker` package! Your help in making it even better is highly appreciated.
 
-- If you **finda bug**, open an issue.
-- If you **have a feature request**, open an issue.
-- If you **want to contribute**, submit your pull request.
+**How you can contribute:**
 
-## Contributors
+* **Found a bug?** Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with clear steps to reproduce the problem. The more detail you provide, the easier it will be to fix.
+* **Have a great idea for a new feature?** We'd love to hear it! Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) to discuss your suggestion. Explain the use case and how it would benefit users.
+* **Want to get your hands dirty and contribute code?** Fantastic! Here's how:
+    1.  Fork the [repository](https://github.com/koukibadr/Bottom-Picker).
+    2.  Create a new branch for your feature or bug fix.
+    3.  Make your changes, ensuring you follow the project's coding style and conventions.
+    4.  Write clear and concise commit messages.
+    5.  Submit a [pull request](https://github.com/koukibadr/Bottom-Picker/pulls) with a detailed description of your changes and why they should be merged.
+
+We'll review your contributions and provide feedback as soon as possible. Thank you for your interest in improving `bottom_picker`!
+
+## Heros
 
 <a  href  =  "https://github.com/koukibadr/Bottom-Picker/graphs/contributors">
 <img  src  =  "https://contrib.rocks/image?repo=koukibadr/Bottom-Picker"/>
