@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 enum BottomPickerType {
   simple,
   time,
+  timer,
   dateTime,
   rangeDate,
   rangeTime,

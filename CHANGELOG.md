@@ -1,10 +1,19 @@
+## [3.0.0] - 06/03/2025
+
+**Changes**
+- Create new timer picker using `CupertinoTimerPicker` under the hood with `onChange` and `onSubmit` supporting the `Duration` result type [PR#123](https://github.com/koukibadr/Bottom-Picker/pull/123).
+
+- Update desktop and web platforms picker rendering using `WheelView` instead of the basic `Listview` [PR#92](https://github.com/koukibadr/Bottom-Picker/pull/92) [Issue#82](https://github.com/koukibadr/Bottom-Picker/issues/82).
+
+- Adding onDismiss callback which is triggered everytime the picker widget is disposed (no matter the disposing main triggering event) [PR#118](https://github.com/koukibadr/Bottom-Picker/pull/118) [Issue#117](https://github.com/koukibadr/Bottom-Picker/issues/117).
+
+**Enhancement**
+- Refactoring colors mapping to bottom picker themes using new enum definitions [PR#120](https://github.com/koukibadr/Bottom-Picker/pull/120)
+
 ## [2.11.2] - 05/03/2025
 
 **Bug Fix:** 
 - Resolve dismiss issue when using bottom picker on mobile platforms iOS and Android [Issue#114](https://github.com/koukibadr/Bottom-Picker/issues/114#issuecomment-2698135228).
-
-**Changes**
-- Update package description on pub.dev
 
 ## [2.11.1] - 25/02/2025
 
