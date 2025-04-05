@@ -166,6 +166,15 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openTimerPicker(context);
+              },
+              child: Text('Timer Picker', textAlign: TextAlign.center),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openDateTimePicker(context);
               },
               child: Text('Date and Time Picker', textAlign: TextAlign.center),
@@ -490,6 +499,31 @@ class ExampleApp extends StatelessWidget {
       maxTime: Time(
         hours: 17,
       ),
+    ).show(context);
+  }
+
+  void _openTimerPicker(BuildContext context) {
+    BottomPicker.timer(
+      pickerTitle: Text(
+        'Set your next meeting time',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.orange,
+        ),
+      ),
+      onChange: (p0) => print(p0),
+      onSubmit: (index) {
+        print(index);
+      },
+      initialTimerDuration: Duration(
+        hours: 6,
+        minutes: 30,
+      ),
+      onCloseButtonPressed: () {
+        print('Picker closed');
+      },
+      timerPickerMode: CupertinoTimerPickerMode.hms,
     ).show(context);
   }
 
