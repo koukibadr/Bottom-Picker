@@ -168,7 +168,7 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openTimerPicker(context);
               },
-              child: Text('Timer Picker', textAlign: TextAlign.center),
+              child: Text('Countdown picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
@@ -485,6 +485,7 @@ class ExampleApp extends StatelessWidget {
           color: Colors.orange,
         ),
       ),
+      use24hFormat: false,
       onSubmit: (index) {
         print(index);
       },
@@ -492,7 +493,6 @@ class ExampleApp extends StatelessWidget {
         print('Picker closed');
       },
       bottomPickerTheme: BottomPickerTheme.orange,
-      use24hFormat: true,
       initialTime: Time(
         minutes: 23,
       ),
