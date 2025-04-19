@@ -1,6 +1,6 @@
 on:
-  release:
-    types: [published]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   
   analyze-code:
@@ -39,7 +39,7 @@ jobs:
       
       - name: Run unit tests
         run: flutter test
-  upload-package:
+  dry-run-upload:
     needs: [analyze-code, unit-test]
     runs-on: ubuntu-latest
     steps:
@@ -54,9 +54,3 @@ jobs:
       
       - name: Check Publish Warnings
         run: dart pub publish --dry-run
-
-      - name: Publish new package version
-        uses: k-paxian/dart-package-publisher@master
-        with:
-          credentialJson: ${{ secrets.CREDENTIAL_JSON }}
-          flutter: true
