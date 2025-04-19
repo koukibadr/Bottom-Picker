@@ -39,7 +39,7 @@ jobs:
       
       - name: Run unit tests
         run: flutter test
-  upload-package:
+  dry-run-upload:
     needs: [analyze-code, unit-test]
     runs-on: ubuntu-latest
     steps:
