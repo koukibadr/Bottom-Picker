@@ -727,7 +727,9 @@ class _BottomPickerState extends State<BottomPicker> {
   @override
   void dispose() {
     if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
-      View.of(context).platformDispatcher.onKeyData = null;
+      try {
+        View.of(context).platformDispatcher.onKeyData = null;
+      } catch (e) {}
     }
 
     // invoke the onDismissed callback when the bottom picker is dismissed
@@ -958,7 +960,7 @@ class _BottomPickerState extends State<BottomPicker> {
 
   /// Close the bottom picker
   void _closeBottomPicker() {
-    Navigator.pop(context);
     widget.onCloseButtonPressed?.call();
+    Navigator.pop(context);
   }
 }
