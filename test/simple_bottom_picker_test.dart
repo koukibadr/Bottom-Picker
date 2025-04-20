@@ -35,6 +35,7 @@ void main() {
 
     testWidgets('On change callback should be called when an item is selected',
         (tester) async {
+      // Arrange
       int itemIndex = -1;
       await tester.pumpWidget(
         MaterialApp(
@@ -50,6 +51,7 @@ void main() {
         ),
       );
 
+      // Act
       expect(itemIndex, -1);
 
       await tester.drag(
