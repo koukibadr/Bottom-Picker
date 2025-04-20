@@ -729,7 +729,10 @@ class _BottomPickerState extends State<BottomPicker> {
     if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
       try {
         View.of(context).platformDispatcher.onKeyData = null;
-      } catch (e) {}
+      } catch (e) {
+        // ignore: avoid_print
+        print('Error while removing the key event listener: $e');
+      }
     }
 
     // invoke the onDismissed callback when the bottom picker is dismissed

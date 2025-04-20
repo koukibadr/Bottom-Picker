@@ -1,4 +1,5 @@
 import 'package:bottom_picker/bottom_picker.dart';
+import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/widgets/bottom_picker_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,13 +13,14 @@ void main() {
 
     testWidgets('Simple use case: picker should function properly',
         (tester) async {
+      var bottomPicker = BottomPicker(
+        pickerTitle: Text('Item picker'),
+        items: items,
+      );
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: BottomPicker(
-              pickerTitle: Text('Item picker'),
-              items: items,
-            ),
+            body: bottomPicker,
           ),
         ),
       );
@@ -27,6 +29,8 @@ void main() {
       expect(find.text('Item picker'), findsOneWidget);
       // Verify that the items are displayed
       expect(find.text('Item 1'), findsOneWidget);
+
+      expect(bottomPicker.bottomPickerType, BottomPickerType.simple);
     });
 
     testWidgets('On change callback should be called when an item is selected',
@@ -161,6 +165,89 @@ void main() {
 
       // Test that the picker is closed after submit
       expect(find.byType(BottomPicker), findsNothing);
+    });
+
+    testWidgets('Testing picker widgets display  flags', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: BottomPicker(
+              displayCloseIcon: false,
+              displaySubmitButton: false,
+              pickerTitle: Text('Item picker'),
+              items: items,
+            ),
+          ),
+        ),
+      );
+
+      // Verify that the close button and submit button are not rendered
+      expect(find.byType(CloseButton), findsNothing);
+      expect(find.byType(BottomPickerButton), findsNothing);
+    });
+
+    test('Testing bottom picker assertions', () async {
+      expect(
+        () => MaterialApp(
+          home: Scaffold(
+            body: BottomPicker(
+              pickerTitle: Text('Item picker'),
+              items: items,
+            ),
+          ),
+        ),
+        returnsNormally,
+      );
+
+      expect(
+        () => MaterialApp(
+          home: Scaffold(
+            body: BottomPicker(
+              displayCloseIcon: false,
+              displaySubmitButton: false,
+              pickerTitle: Text('Item picker'),
+              items: [],
+            ),
+          ),
+        ),
+        throwsA(
+          isA<AssertionError>(),
+        ),
+      );
+
+      expect(
+        () => MaterialApp(
+          home: Scaffold(
+            body: BottomPicker(
+              displayCloseIcon: false,
+              displaySubmitButton: false,
+              pickerTitle: Text('Item picker'),
+              items: items,
+              selectedItemIndex: 12,
+            ),
+          ),
+        ),
+        throwsA(
+          isA<AssertionError>(),
+        ),
+      );
+
+      expect(
+        () => MaterialApp(
+          home: Scaffold(
+            body: BottomPicker(
+              displayCloseIcon: false,
+              displaySubmitButton: false,
+              pickerTitle: Text('Item picker'),
+              items: items,
+              selectedItemIndex: -4,
+            ),
+          ),
+        ),
+        throwsA(
+          isA<AssertionError>(),
+        ),
+      );
     });
   });
 }
