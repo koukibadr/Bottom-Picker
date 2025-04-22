@@ -300,6 +300,9 @@ dependencies:
   ///the initial last time in the time range picker
   ///not required if null no minimum will be set in the time picker
   DateTime? initialSecondTime;
+
+  /// Indicates whether the time seperator (":") will be shown or not.
+  bool showTimeSperator = false;
 ````
 
 <hr/>

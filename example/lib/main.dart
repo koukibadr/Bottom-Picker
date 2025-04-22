@@ -394,6 +394,7 @@ class ExampleApp extends StatelessWidget {
       ),
       dateOrder: DatePickerDateOrder.dmy,
       initialSecondDate: DateTime.now().add(Duration(days: 230)),
+      itemExtent: 10,
       pickerTextStyle: TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.bold,
@@ -432,6 +433,7 @@ class ExampleApp extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontSize: 12,
       ),
+      showTimeSperator: true,
       bottomPickerTheme: BottomPickerTheme.plumPlate,
       onRangeTimeSubmitPressed: (firstDate, secondDate) {
         print(firstDate);

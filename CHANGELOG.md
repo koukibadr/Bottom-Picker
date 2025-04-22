@@ -26,6 +26,25 @@
 **Changes:** 
 - enable `minutesInterval` feature for range time picker.
 
+## [2.12.0-0.2.dev] - 04/02/2025
+
+**Changes:** 
+- Update default `itemExtent` value to 30 for all time and date pickers
+
+**Bug Fixes:** 
+- Fix cupertino picker time seperator rendering and text style.
+
+## [2.12.0-0.1.dev] - 01/02/2025
+
+**Changes:** 
+- Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSperator`.
+- Add `itemExtent` attribute to time and range constructors for more picker customization.
+
+## [2.11.0] - 01/02/2025
+
+**Changes:** 
+- enable `minutesInterval` feature for range time picker.
+
 ## [2.10.1] - 21/01/2025
 
 **Changes:** 
