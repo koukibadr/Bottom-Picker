@@ -111,11 +111,11 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
+    this.itemExtent = 35.0,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
-    itemExtent = 0;
     onRangeDateSubmitPressed = null;
     assertInitialValues();
   }
@@ -153,11 +153,11 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
+    this.itemExtent = 35.0,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
-    itemExtent = 0;
     onRangeDateSubmitPressed = null;
     dateOrder = DatePickerDateOrder.mdy;
     assertInitialValues();
@@ -199,10 +199,11 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
+    this.itemExtent = 30,
+    this.showTimeSeparator = false,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
-    itemExtent = 0;
     onRangeDateSubmitPressed = null;
     assertInitialValues();
   }
@@ -242,11 +243,12 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
+    this.showTimeSeparator = false,
+    this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
     dateOrder = null;
-    itemExtent = 0;
     onRangeDateSubmitPressed = null;
     initialDateTime = null;
     assertInitialValues();
@@ -331,11 +333,11 @@ class BottomPicker extends StatefulWidget {
     this.dateOrder = DatePickerDateOrder.ymd,
     this.buttonContent,
     this.buttonStyle,
+    this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
     dateOrder = null;
-    itemExtent = 0;
     onChange = null;
     onSubmit = null;
     onDismiss = null;
@@ -391,11 +393,12 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.minuteInterval = 1,
+    this.showTimeSeparator = false,
+    this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
     dateOrder = null;
-    itemExtent = 0;
     onChange = null;
     onSubmit = null;
     onDismiss = null;
@@ -665,6 +668,9 @@ class BottomPicker extends StatefulWidget {
   ///not required if null no minimum will be set in the time picker
   DateTime? initialSecondTime;
 
+  /// Indicates whether the time seperator (":") will be shown or not.
+  bool showTimeSeparator = false;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
@@ -837,6 +843,8 @@ class _BottomPickerState extends State<BottomPicker> {
                               use24hFormat: widget.use24hFormat,
                               dateOrder: widget.dateOrder,
                               textStyle: widget.pickerTextStyle,
+                              itemExtent: widget.itemExtent,
+                              showTimeSeparator: widget.showTimeSeparator,
                             )
                           : widget.bottomPickerType == BottomPickerType.dateTime
                               ? DatePicker(
@@ -852,6 +860,8 @@ class _BottomPickerState extends State<BottomPicker> {
                                   use24hFormat: widget.use24hFormat,
                                   dateOrder: widget.dateOrder,
                                   textStyle: widget.pickerTextStyle,
+                                  itemExtent: widget.itemExtent,
+                                  showTimeSeparator: widget.showTimeSeparator,
                                 )
                               : widget.bottomPickerType ==
                                       BottomPickerType.rangeTime
@@ -875,6 +885,9 @@ class _BottomPickerState extends State<BottomPicker> {
                                       dateOrder: widget.dateOrder,
                                       textStyle: widget.pickerTextStyle,
                                       minuteInterval: widget.minuteInterval,
+                                      itemExtent: widget.itemExtent,
+                                      showTimeSeperator:
+                                          widget.showTimeSeparator,
                                     )
                                   : RangePicker(
                                       mode: CupertinoDatePickerMode.date,
@@ -895,6 +908,9 @@ class _BottomPickerState extends State<BottomPicker> {
                                       },
                                       dateOrder: widget.dateOrder,
                                       textStyle: widget.pickerTextStyle,
+                                      itemExtent: widget.itemExtent,
+                                      showTimeSeperator:
+                                          widget.showTimeSeparator,
                                     ),
             ),
             if (widget.displaySubmitButton)

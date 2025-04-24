@@ -1,3 +1,4 @@
+import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 
 class DatePicker extends StatelessWidget {
@@ -10,6 +11,8 @@ class DatePicker extends StatelessWidget {
   final bool use24hFormat;
   final DatePickerDateOrder? dateOrder;
   final TextStyle textStyle;
+  final double? itemExtent;
+  final bool showTimeSeparator;
 
   const DatePicker({
     Key? key,
@@ -22,6 +25,8 @@ class DatePicker extends StatelessWidget {
     this.use24hFormat = true,
     required this.textStyle,
     this.dateOrder,
+    this.itemExtent = 0,
+    this.showTimeSeparator = false,
   }) : super(key: key);
 
   @override
@@ -32,7 +37,9 @@ class DatePicker extends StatelessWidget {
           dateTimePickerTextStyle: textStyle,
         ),
       ),
-      child: CupertinoDatePicker(
+      child: CupertinoDatePickerWidget(
+        itemExtent: itemExtent ?? 0,
+        showTimeSeparator: showTimeSeparator,
         mode: mode,
         onDateTimeChanged: onDateChanged,
         initialDateTime: initialDateTime,

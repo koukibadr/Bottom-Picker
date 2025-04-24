@@ -1,4 +1,14 @@
-## [3.0.0] - 06/03/2025
+## [3.1.0] - 22/04/2025
+
+**Changes:** 
+- Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSeparator`.
+- Update default `itemExtent` value to 30 for all time and date pickers
+- Add `itemExtent` attribute to time and range constructors for more picker customization.
+
+**Bug Fixes:** 
+- Fix cupertino picker time seperator rendering and text style.
+
+## [3.0.0] - 06/04/2025
 
 **Changes**
 - Create new timer picker using `CupertinoTimerPicker` under the hood with `onChange` and `onSubmit` supporting the `Duration` result type [PR#123](https://github.com/koukibadr/Bottom-Picker/pull/123).
@@ -20,6 +30,11 @@
 **Changes:** 
 - enable bottom picker dismiss with escape keyboard key for web and desktop.
 - enable MacOS support for bottom picker example project.
+
+## [2.11.0] - 01/02/2025
+
+**Changes:** 
+- enable `minutesInterval` feature for range time picker.
 
 ## [2.11.0] - 01/02/2025
 

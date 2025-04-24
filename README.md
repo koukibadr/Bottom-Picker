@@ -40,7 +40,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^3.0.0
+	bottom_picker: ^3.1.0
 ```
 
 ## Parameters
@@ -300,6 +300,9 @@ dependencies:
   ///the initial last time in the time range picker
   ///not required if null no minimum will be set in the time picker
   DateTime? initialSecondTime;
+
+  /// Indicates whether the time seperator (":") will be shown or not.
+  bool showTimeSeparator = false;
 ````
 
 <hr/>
