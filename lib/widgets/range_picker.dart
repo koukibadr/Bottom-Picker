@@ -87,7 +87,7 @@ class _RangePickerState extends State<RangePicker> {
             minuteInterval: widget.minuteInterval ?? 1,
             mode: widget.mode,
             itemExtent: widget.itemExtent,
-            showTimeSeperator: widget.showTimeSeperator,
+            showTimeSeparator: widget.showTimeSeperator,
             onDateChanged: (date) {
               widget.onFirstDateChanged.call(date);
               if (initialSecondDateTime!.isBefore(date)) {
@@ -119,7 +119,7 @@ class _RangePickerState extends State<RangePicker> {
             textStyle: widget.textStyle,
             minuteInterval: widget.minuteInterval ?? 1,
             itemExtent: widget.itemExtent,
-            showTimeSeperator: widget.showTimeSeperator,
+            showTimeSeparator: widget.showTimeSeperator,
           ),
         ),
       ],

@@ -268,7 +268,6 @@ class CupertinoDatePickerWidget extends StatefulWidget {
   /// [DatePickerDateOrder.mdy] will result in the month|year order.
   /// Defaults to the locale's default date format/order.
   CupertinoDatePickerWidget({
-    super.key,
     this.mode = CupertinoDatePickerMode.dateAndTime,
     required this.onDateTimeChanged,
     DateTime? initialDateTime,
@@ -283,7 +282,7 @@ class CupertinoDatePickerWidget extends StatefulWidget {
     this.showDayOfWeek = false,
     this.itemExtent = _kItemExtent,
     this.selectionOverlayBuilder,
-    this.showTimeSeperator = false,
+    this.showTimeSeparator = false,
   })  : initialDateTime = initialDateTime ?? DateTime.now(),
         assert(
           itemExtent > 0,
@@ -417,7 +416,7 @@ class CupertinoDatePickerWidget extends StatefulWidget {
   final bool showDayOfWeek;
 
   /// Whether show the time seperator or not. Defaults to false.
-  final bool showTimeSeperator;
+  final bool showTimeSeparator;
 
   /// {@macro flutter.cupertino.picker.itemExtent}
   ///
@@ -1187,7 +1186,7 @@ class _CupertinoDatePickerDateTimeState
       _getEstimatedColumnWidth(_PickerColumnType.minute),
     ];
 
-    if (widget.showTimeSeperator) {
+    if (widget.showTimeSeparator) {
       columnWidths.insert(
         1,
         _getEstimatedColumnWidth(_PickerColumnType.twoPoints),
@@ -1200,7 +1199,7 @@ class _CupertinoDatePickerDateTimeState
             ? <_ColumnBuilder>[_buildMinutePicker, _buildHourPicker]
             : <_ColumnBuilder>[_buildHourPicker, _buildMinutePicker];
 
-    if (widget.showTimeSeperator) {
+    if (widget.showTimeSeparator) {
       pickerBuilders.insert(1, _buildTimeSeperatorWidget);
     }
 
@@ -1248,8 +1247,8 @@ class _CupertinoDatePickerDateTimeState
     final List<Widget> pickers = <Widget>[];
     double totalColumnWidths = 4 * _kDatePickerPadSize;
 
-    for (final width in columnWidths) {
-      var i = columnWidths.indexOf(width);
+    for (var i = 0; i < columnWidths.length; i++) {
+      var width = columnWidths[i];
       bool firstColumn = i == 0;
       bool lastColumn = i == columnWidths.length - 1;
 
@@ -1754,8 +1753,8 @@ class _CupertinoDatePickerDateState extends State<CupertinoDatePickerWidget> {
     final List<Widget> pickers = <Widget>[];
     double totalColumnWidths = 4 * _kDatePickerPadSize;
 
-    for (final width in columnWidths) {
-      var i = columnWidths.indexOf(width);
+    for (var i = 0; i < columnWidths.length; i++) {
+      var width = columnWidths[i];
       bool firstColumn = i == 0;
       bool lastColumn = i == columnWidths.length - 1;
 
@@ -2125,8 +2124,8 @@ class _CupertinoDatePickerMonthYearState
     final List<Widget> pickers = <Widget>[];
     double totalColumnWidths = 3 * _kDatePickerPadSize;
 
-    for (final width in columnWidths) {
-      var i = columnWidths.indexOf(width);
+    for (var i = 0; i < columnWidths.length; i++) {
+      var width = columnWidths[i];
       bool firstColumn = i == 0;
       bool lastColumn = i == columnWidths.length - 1;
 
@@ -2283,7 +2282,6 @@ class CupertinoTimerPicker extends StatefulWidget {
   /// [secondInterval] is the granularity of the second spinner. Must be a
   /// positive integer factor of 60.
   CupertinoTimerPicker({
-    super.key,
     this.mode = CupertinoTimerPickerMode.hms,
     this.initialTimerDuration = Duration.zero,
     this.minuteInterval = 1,

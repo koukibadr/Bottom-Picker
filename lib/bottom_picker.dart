@@ -111,11 +111,11 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
+    this.itemExtent = 35.0,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
-    itemExtent = 0;
     onRangeDateSubmitPressed = null;
     assertInitialValues();
   }
@@ -153,11 +153,11 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
+    this.itemExtent = 35.0,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
-    itemExtent = 0;
     onRangeDateSubmitPressed = null;
     dateOrder = DatePickerDateOrder.mdy;
     assertInitialValues();
@@ -199,10 +199,10 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
+    this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
-    itemExtent = 30;
     onRangeDateSubmitPressed = null;
     assertInitialValues();
   }
@@ -843,7 +843,7 @@ class _BottomPickerState extends State<BottomPicker> {
                               dateOrder: widget.dateOrder,
                               textStyle: widget.pickerTextStyle,
                               itemExtent: widget.itemExtent,
-                              showTimeSeperator: widget.showTimeSperator,
+                              showTimeSeparator: widget.showTimeSperator,
                             )
                           : widget.bottomPickerType == BottomPickerType.dateTime
                               ? DatePicker(
@@ -860,7 +860,7 @@ class _BottomPickerState extends State<BottomPicker> {
                                   dateOrder: widget.dateOrder,
                                   textStyle: widget.pickerTextStyle,
                                   itemExtent: widget.itemExtent,
-                                  showTimeSeperator: widget.showTimeSperator,
+                                  showTimeSeparator: widget.showTimeSperator,
                                 )
                               : widget.bottomPickerType ==
                                       BottomPickerType.rangeTime
