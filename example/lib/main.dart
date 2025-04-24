@@ -433,7 +433,7 @@ class ExampleApp extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontSize: 12,
       ),
-      showTimeSperator: true,
+      showTimeSeparator: true,
       bottomPickerTheme: BottomPickerTheme.plumPlate,
       onRangeTimeSubmitPressed: (firstDate, secondDate) {
         print(firstDate);

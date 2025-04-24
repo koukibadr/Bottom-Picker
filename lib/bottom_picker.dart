@@ -200,6 +200,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.itemExtent = 30,
+    this.showTimeSeparator = false,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -242,7 +243,7 @@ class BottomPicker extends StatefulWidget {
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
-    this.showTimeSperator = false,
+    this.showTimeSeparator = false,
     this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
@@ -392,7 +393,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.minuteInterval = 1,
-    this.showTimeSperator = false,
+    this.showTimeSeparator = false,
     this.itemExtent = 30,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
@@ -668,7 +669,7 @@ class BottomPicker extends StatefulWidget {
   DateTime? initialSecondTime;
 
   /// Indicates whether the time seperator (":") will be shown or not.
-  bool showTimeSperator = false;
+  bool showTimeSeparator = false;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -843,7 +844,7 @@ class _BottomPickerState extends State<BottomPicker> {
                               dateOrder: widget.dateOrder,
                               textStyle: widget.pickerTextStyle,
                               itemExtent: widget.itemExtent,
-                              showTimeSeparator: widget.showTimeSperator,
+                              showTimeSeparator: widget.showTimeSeparator,
                             )
                           : widget.bottomPickerType == BottomPickerType.dateTime
                               ? DatePicker(
@@ -860,7 +861,7 @@ class _BottomPickerState extends State<BottomPicker> {
                                   dateOrder: widget.dateOrder,
                                   textStyle: widget.pickerTextStyle,
                                   itemExtent: widget.itemExtent,
-                                  showTimeSeparator: widget.showTimeSperator,
+                                  showTimeSeparator: widget.showTimeSeparator,
                                 )
                               : widget.bottomPickerType ==
                                       BottomPickerType.rangeTime
@@ -886,7 +887,7 @@ class _BottomPickerState extends State<BottomPicker> {
                                       minuteInterval: widget.minuteInterval,
                                       itemExtent: widget.itemExtent,
                                       showTimeSeperator:
-                                          widget.showTimeSperator,
+                                          widget.showTimeSeparator,
                                     )
                                   : RangePicker(
                                       mode: CupertinoDatePickerMode.date,
@@ -909,7 +910,7 @@ class _BottomPickerState extends State<BottomPicker> {
                                       textStyle: widget.pickerTextStyle,
                                       itemExtent: widget.itemExtent,
                                       showTimeSeperator:
-                                          widget.showTimeSperator,
+                                          widget.showTimeSeparator,
                                     ),
             ),
             if (widget.displaySubmitButton)

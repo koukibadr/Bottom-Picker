@@ -1,7 +1,7 @@
 ## [3.1.0] - 22/04/2025
 
 **Changes:** 
-- Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSperator`.
+- Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSeparator`.
 - Update default `itemExtent` value to 30 for all time and date pickers
 - Add `itemExtent` attribute to time and range constructors for more picker customization.
 

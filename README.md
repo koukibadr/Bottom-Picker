@@ -302,7 +302,7 @@ dependencies:
   DateTime? initialSecondTime;
 
   /// Indicates whether the time seperator (":") will be shown or not.
-  bool showTimeSperator = false;
+  bool showTimeSeparator = false;
 ````
 
 <hr/>
