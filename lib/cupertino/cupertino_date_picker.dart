@@ -474,12 +474,13 @@ class CupertinoDatePickerWidget extends StatefulWidget {
       // columns, so they are placed together to one state.
       // The `date` mode has different children and is implemented in a different
       // state.
-      case CupertinoDatePickerMode.time : return _CupertinoDatePickerDateTimeState();
-      case CupertinoDatePickerMode.dateAndTime :
+      case CupertinoDatePickerMode.time:
         return _CupertinoDatePickerDateTimeState();
-      case CupertinoDatePickerMode.date :
+      case CupertinoDatePickerMode.dateAndTime:
+        return _CupertinoDatePickerDateTimeState();
+      case CupertinoDatePickerMode.date:
         return _CupertinoDatePickerDateState(dateOrder: dateOrder);
-      case CupertinoDatePickerMode.monthYear :
+      case CupertinoDatePickerMode.monthYear:
         return _CupertinoDatePickerMonthYearState(dateOrder: dateOrder);
     }
   }
@@ -528,7 +529,7 @@ class CupertinoDatePickerWidget extends StatefulWidget {
           longTexts.add(dayOfMonth);
           longestDayOfMonth = i;
         }
-        
+
         if (showDayOfWeek) {
           for (int wd = 1; wd < DateTime.daysPerWeek; wd++) {
             final String dayOfMonth =
@@ -554,7 +555,6 @@ class CupertinoDatePickerWidget extends StatefulWidget {
       case _PickerColumnType.twoPoints:
         longTexts.add(':');
         break;
-
     }
 
     assert(
@@ -1212,8 +1212,8 @@ class _CupertinoDatePickerDateTimeState
           pickerBuilders.add(_buildAmPmPicker);
           columnWidths
               .add(_getEstimatedColumnWidth(_PickerColumnType.dayPeriod));
-        break;
-          
+          break;
+
         case DatePickerDateTimeOrder.date_dayPeriod_time:
         case DatePickerDateTimeOrder.dayPeriod_time_date:
           pickerBuilders.insert(0, _buildAmPmPicker);
@@ -1221,8 +1221,7 @@ class _CupertinoDatePickerDateTimeState
             0,
             _getEstimatedColumnWidth(_PickerColumnType.dayPeriod),
           );
-        break;
-
+          break;
       }
     }
 
@@ -1233,7 +1232,7 @@ class _CupertinoDatePickerDateTimeState
         case DatePickerDateTimeOrder.dayPeriod_time_date:
           pickerBuilders.add(_buildMediumDatePicker);
           columnWidths.add(_getEstimatedColumnWidth(_PickerColumnType.date));
-        break;
+          break;
 
         case DatePickerDateTimeOrder.date_time_dayPeriod:
         case DatePickerDateTimeOrder.date_dayPeriod_time:
@@ -1242,17 +1241,18 @@ class _CupertinoDatePickerDateTimeState
             0,
             _getEstimatedColumnWidth(_PickerColumnType.date),
           );
-        break;
-
+          break;
       }
     }
 
     final List<Widget> pickers = <Widget>[];
     double totalColumnWidths = 4 * _kDatePickerPadSize;
 
-    for (final (int i, double width) in columnWidths.indexed) {
-      final (bool firstColumn, bool lastColumn) =
-          (i == 0, i == columnWidths.length - 1);
+    for (final width in columnWidths) {
+      var i = columnWidths.indexOf(width);
+      bool firstColumn = i == 0;
+      bool lastColumn = i == columnWidths.length - 1;
+
       double offAxisFraction = 0.0;
       Widget? selectionOverlay = _centerSelectionOverlay;
 
@@ -1749,15 +1749,16 @@ class _CupertinoDatePickerDateState extends State<CupertinoDatePickerWidget> {
           estimatedColumnWidths[_PickerColumnType.month.index]!,
         ];
         break;
-
     }
 
     final List<Widget> pickers = <Widget>[];
     double totalColumnWidths = 4 * _kDatePickerPadSize;
 
-    for (final (int i, double width) in columnWidths.indexed) {
-      final (bool firstColumn, bool lastColumn) =
-          (i == 0, i == columnWidths.length - 1);
+    for (final width in columnWidths) {
+      var i = columnWidths.indexOf(width);
+      bool firstColumn = i == 0;
+      bool lastColumn = i == columnWidths.length - 1;
+
       final double offAxisFraction = (i - 1) * 0.3 * textDirectionFactor;
 
       EdgeInsets padding = const EdgeInsets.only(right: _kDatePickerPadSize);
@@ -2110,6 +2111,7 @@ class _CupertinoDatePickerMonthYearState
           estimatedColumnWidths[_PickerColumnType.month.index]!,
           estimatedColumnWidths[_PickerColumnType.year.index]!,
         ];
+        break;
       case DatePickerDateOrder.ymd:
       case DatePickerDateOrder.ydm:
         pickerBuilders = <_ColumnBuilder>[_buildYearPicker, _buildMonthPicker];
@@ -2117,14 +2119,17 @@ class _CupertinoDatePickerMonthYearState
           estimatedColumnWidths[_PickerColumnType.year.index]!,
           estimatedColumnWidths[_PickerColumnType.month.index]!,
         ];
+        break;
     }
 
     final List<Widget> pickers = <Widget>[];
     double totalColumnWidths = 3 * _kDatePickerPadSize;
 
-    for (final (int i, double width) in columnWidths.indexed) {
-      final (bool firstColumn, bool lastColumn) =
-          (i == 0, i == columnWidths.length - 1);
+    for (final width in columnWidths) {
+      var i = columnWidths.indexOf(width);
+      bool firstColumn = i == 0;
+      bool lastColumn = i == columnWidths.length - 1;
+
       final double offAxisFraction =
           textDirectionFactor * (firstColumn ? -0.3 : 0.5);
 
@@ -2377,8 +2382,10 @@ class _CupertinoTimerPickerState extends State<CupertinoTimerPicker> {
   late CupertinoLocalizations localizations;
   int get textDirectionFactor {
     switch (textDirection) {
-      case TextDirection.ltr : return 1;
-      case TextDirection.rtl : return -1;
+      case TextDirection.ltr:
+        return 1;
+      case TextDirection.rtl:
+        return -1;
     }
   }
 

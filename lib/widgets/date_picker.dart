@@ -1,4 +1,3 @@
-import 'package:bottom_picker/cupertino/date_picker.dart';
 import 'package:flutter/cupertino.dart';
 
 class DatePicker extends StatelessWidget {
@@ -37,9 +36,9 @@ class DatePicker extends StatelessWidget {
           dateTimePickerTextStyle: textStyle,
         ),
       ),
-      child: CupertinoDatePickerWidget(
+      child: CupertinoDatePicker(
         itemExtent: itemExtent ?? 0,
-        showTimeSeperator: showTimeSeperator,
+        showTimeSeparator: showTimeSeperator,
         mode: mode,
         onDateTimeChanged: onDateChanged,
         initialDateTime: initialDateTime,
