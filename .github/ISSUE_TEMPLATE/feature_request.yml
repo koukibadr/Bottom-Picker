@@ -35,4 +35,4 @@ body:
          * videos
          * code samples
     validations:
-      required: true
+      required: false
