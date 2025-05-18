@@ -30,13 +30,13 @@ body:
       label: Actual results
       description: Please tell us what is actually happening.
     validations:
-      required: true
+      required: false
   - type: textarea
     attributes:
       label: Expected results
       description: Please tell us what is expected to happen.
     validations:
-      required: true
+      required: false
   - type: textarea
     attributes:
       label: Code sample
@@ -52,7 +52,7 @@ body:
 
         </details>
     validations:
-      required: true
+      required: false
   - type: textarea
     attributes:
       label: Screenshots or Video
@@ -92,4 +92,4 @@ body:
 
         </details>
     validations:
-      required: true
+      required: false
