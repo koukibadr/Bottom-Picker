@@ -40,13 +40,13 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^3.1.0
+	bottom_picker: ^3.2.0
 ```
 
 ## Parameters
 
 ````dart
-	/// Bottom picker title widget
+/// Bottom picker title widget
   final Widget pickerTitle;
 
   ///Bottom picker description widget
@@ -187,6 +187,12 @@ dependencies:
   ///indicate whether the close icon will be rendred or not
   /// by default `displayCloseIcon = true`
   final bool displayCloseIcon;
+
+  /// Renders the close widget if it's null and [displayCloseIcon] is true
+  /// the default close icon is rendered.
+  /// Note if closeWidget is provided onClosePressed won't be triggered
+  /// since you need to handle all actions on the provided widget.
+  final Widget? closeWidget;
 
   ///the close icon color
   ///by default `closeIconColor = Colors.black`
@@ -447,6 +453,7 @@ BottomPicker.dateTime(
       ],
 ).show(context);
 ```
+
 <hr>
 
 ### Date picker with only month and year
@@ -462,7 +469,6 @@ BottomPicker.monthYear(
   },
 ).show(context);
 ```
-
 
 <hr>
 
@@ -589,14 +595,14 @@ We warmly welcome contributions to the `bottom_picker` package! Your help in mak
 
 **How you can contribute:**
 
-* **Found a bug?** Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with clear steps to reproduce the problem. The more detail you provide, the easier it will be to fix.
-* **Have a great idea for a new feature?** We'd love to hear it! Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) to discuss your suggestion. Explain the use case and how it would benefit users.
-* **Want to get your hands dirty and contribute code?** Fantastic! Here's how:
-    1.  Fork the [repository](https://github.com/koukibadr/Bottom-Picker).
-    2.  Create a new branch for your feature or bug fix.
-    3.  Make your changes, ensuring you follow the project's coding style and conventions.
-    4.  Write clear and concise commit messages.
-    5.  Submit a [pull request](https://github.com/koukibadr/Bottom-Picker/pulls) with a detailed description of your changes and why they should be merged.
+- **Found a bug?** Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with clear steps to reproduce the problem. The more detail you provide, the easier it will be to fix.
+- **Have a great idea for a new feature?** We'd love to hear it! Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) to discuss your suggestion. Explain the use case and how it would benefit users.
+- **Want to get your hands dirty and contribute code?** Fantastic! Here's how:
+  1.  Fork the [repository](https://github.com/koukibadr/Bottom-Picker).
+  2.  Create a new branch for your feature or bug fix.
+  3.  Make your changes, ensuring you follow the project's coding style and conventions.
+  4.  Write clear and concise commit messages.
+  5.  Submit a [pull request](https://github.com/koukibadr/Bottom-Picker/pulls) with a detailed description of your changes and why they should be merged.
 
 We'll review your contributions and provide feedback as soon as possible. Thank you for your interest in improving `bottom_picker`!
 

@@ -1,16 +1,25 @@
+## [3.2.0] - 18/05/2025
+
+**Changes:**
+
+- Add `closeWidget` attribute to replace default close widget icon [PR#128](https://github.com/koukibadr/Bottom-Picker/issues/128) [PR#133](https://github.com/koukibadr/Bottom-Picker/pull/133).
+
 ## [3.1.0] - 22/04/2025
 
-**Changes:** 
+**Changes:**
+
 - Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSeparator`.
 - Update default `itemExtent` value to 30 for all time and date pickers
 - Add `itemExtent` attribute to time and range constructors for more picker customization.
 
-**Bug Fixes:** 
+**Bug Fixes:**
+
 - Fix cupertino picker time seperator rendering and text style.
 
 ## [3.0.0] - 06/04/2025
 
 **Changes**
+
 - Create new timer picker using `CupertinoTimerPicker` under the hood with `onChange` and `onSubmit` supporting the `Duration` result type [PR#123](https://github.com/koukibadr/Bottom-Picker/pull/123).
 
 - Update desktop and web platforms picker rendering using `WheelView` instead of the basic `Listview` [PR#92](https://github.com/koukibadr/Bottom-Picker/pull/92) [Issue#82](https://github.com/koukibadr/Bottom-Picker/issues/82).
@@ -18,83 +27,98 @@
 - Adding onDismiss callback which is triggered everytime the picker widget is disposed (no matter the disposing main triggering event) [PR#118](https://github.com/koukibadr/Bottom-Picker/pull/118) [Issue#117](https://github.com/koukibadr/Bottom-Picker/issues/117).
 
 **Enhancement**
+
 - Refactoring colors mapping to bottom picker themes using new enum definitions [PR#120](https://github.com/koukibadr/Bottom-Picker/pull/120)
 
 ## [2.11.2] - 05/03/2025
 
-**Bug Fix:** 
+**Bug Fix:**
+
 - Resolve dismiss issue when using bottom picker on mobile platforms iOS and Android [Issue#114](https://github.com/koukibadr/Bottom-Picker/issues/114#issuecomment-2698135228).
 
 ## [2.11.1] - 25/02/2025
 
-**Changes:** 
+**Changes:**
+
 - enable bottom picker dismiss with escape keyboard key for web and desktop.
 - enable MacOS support for bottom picker example project.
 
 ## [2.11.0] - 01/02/2025
 
-**Changes:** 
+**Changes:**
+
 - enable `minutesInterval` feature for range time picker.
 
 ## [2.11.0] - 01/02/2025
 
-**Changes:** 
+**Changes:**
+
 - enable `minutesInterval` feature for range time picker.
 
 ## [2.10.1] - 21/01/2025
 
-**Changes:** 
+**Changes:**
+
 - `onClose` is renamed to `onCloseButtonPressed`.
 
-**Bug Fixes:** 
+**Bug Fixes:**
+
 - remove late keyword from `minuteInterval` definition.
 
 ## [2.10.0] - 08/12/2024
 
-**Changes:** 
+**Changes:**
+
 - Add `monthYear` constructor to display date range with only month and year.
 
 ## [2.9.0] - 10/11/2024
 
-**Enhancement:** 
+**Enhancement:**
+
 - Update inital date and min date check when using range date picker.
-  
-**Changes:** 
+
+**Changes:**
+
 - Add `rangeTime` constructor to display time range picker.
 
-**Bug Fix:** 
+**Bug Fix:**
+
 - Fix `initialFirstDate` initialization in date range picker.
 
 ## [2.8.0] - 09/06/2024
 
-**Enhancement:** 
+**Enhancement:**
+
 - `layoutOrientation` is now of type `textDirection` rather than custom `LayoutOrientation` enum.
 - Update package examples with new `layoutOrientation` attribute type.
-  
-**Changes:** 
-- Remove `onPopClose` deprecated attribute.
 
+**Changes:**
+
+- Remove `onPopClose` deprecated attribute.
 
 ## [2.7.0] - 27/04/2024
 
-**Enhancement:** 
+**Enhancement:**
+
 - Remove deprecated `title`, `description`, `titleStyle` and `descriptionStyle` attributes and replaced by `pickerTitle` and `pickerDesciption` of widget type.
 - Mark `pickerTitle` as deprecated.
 - `onClose` will override the close button onTap function.
 
 ## [2.6.0] - 23/03/2024
 
-**Enhancement:** 
+**Enhancement:**
+
 - Create `pickerTitle` and `pickerDescription` instead of `title`, `description`, `titleStyle` and `descriptionStyle`.
 - Use stack widget to display title and close icon in same line rather than columns and rows, for better alignement.
 - Change `titleAlignment` type to `Alignment` instead of `MainAxisAlignment`.
 
 **Bug fixes**
+
 - Update `items` from List<Text> to List<Widget> for better rendering.
 
 ## [2.5.0] - 21/03/2024
 
-- **Enhancement:** 
+- **Enhancement:**
 - `popOnClose` added to indicate whether the bottom picker will pop when closing or not, useful when using the bottom picker as layout widget.
 
 ## [2.4.0] - 04/02/2024
@@ -132,15 +156,15 @@
 ## [2.1.0] - 12/09/2023
 
 - **Enhancements:**
-    - Added title padding to title widget.
-    - Added title alignement.
-    - Button padding, button width, Button text alignement and Button alignement  parameters.
-    - Customizable close icon size.
-    - Added `selectionOverlay` parameter.
-    - Date range picker dates attributes assertion.
+  - Added title padding to title widget.
+  - Added title alignement.
+  - Button padding, button width, Button text alignement and Button alignement parameters.
+  - Customizable close icon size.
+  - Added `selectionOverlay` parameter.
+  - Date range picker dates attributes assertion.
 - **Bug fixes**
-    - Date range picker initial dates error.
-    - Button padding issue.
+  - Date range picker initial dates error.
+  - Button padding issue.
 
 ## [2.0.4] - 30/05/2023
 
@@ -150,7 +174,6 @@
 
 - Fix automatic refresh issue when the second date was smaller than the first date.
 - Fix: Inability to decrease the second date even if the first date was smaller ([PR link](https://github.com/koukibadr/Bottom-Picker/pull/65)).
-
 
 ## [2.0.2] - 02/04/2023
 
