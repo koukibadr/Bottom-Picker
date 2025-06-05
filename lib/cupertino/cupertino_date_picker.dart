@@ -1174,7 +1174,6 @@ class _CupertinoDatePickerDateTimeState
           _animateColumnControllerToItem(minuteController, position);
         }
       },
-      debugLabel: 'DatePicker.scrollToDate',
     );
   }
 
@@ -1684,7 +1683,6 @@ class _CupertinoDatePickerDateState extends State<CupertinoDatePickerWidget> {
           _animateColumnControllerToItem(dayController, newDate.day - 1);
         }
       },
-      debugLabel: 'DatePicker.scrollToDate',
     );
   }
 
@@ -2090,7 +2088,6 @@ class _CupertinoDatePickerMonthYearState
           _animateColumnControllerToItem(monthController, newDate.month - 1);
         }
       },
-      debugLabel: 'DatePicker.scrollToDate',
     );
   }
 
