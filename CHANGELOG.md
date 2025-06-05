@@ -1,3 +1,9 @@
+## [3.2.1] - 05/06/2025
+
+**Bug Fix**
+
+- Remove `debugLabel` attribute from `CupertinoDatePickerWidget` to support older flutter versions [PR#136](https://github.com/koukibadr/Bottom-Picker/pull/136) [Issue#135](https://github.com/koukibadr/Bottom-Picker/issues/135)
+
 ## [3.2.0] - 18/05/2025
 
 **Changes:**
