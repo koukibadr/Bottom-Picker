@@ -262,12 +262,14 @@ class ExampleApp extends StatelessWidget {
       },
       onSubmit: (index) {
         print(index);
+        Navigator.pop(context);
       },
       onDismiss: (p0) {
         print(p0);
       },
       bottomPickerTheme: BottomPickerTheme.morningSalad,
       layoutOrientation: TextDirection.rtl,
+      closeOnSubmit: false,
     ).show(context);
   }
 
