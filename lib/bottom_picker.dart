@@ -67,6 +67,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -114,6 +115,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.itemExtent = 35.0,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
@@ -157,6 +159,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.itemExtent = 35.0,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
@@ -205,6 +208,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 30,
     this.showTimeSeparator = false,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -250,6 +254,7 @@ class BottomPicker extends StatefulWidget {
     this.showTimeSeparator = false,
     this.itemExtent = 30,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
@@ -295,6 +300,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -341,6 +347,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.itemExtent = 30,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
@@ -403,6 +410,7 @@ class BottomPicker extends StatefulWidget {
     this.showTimeSeparator = false,
     this.itemExtent = 30,
     this.closeWidget,
+    this.closeOnSubmit = true,
   }) : super(key: key) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
@@ -685,6 +693,12 @@ class BottomPicker extends StatefulWidget {
   /// Indicates whether the time seperator (":") will be shown or not.
   bool showTimeSeparator = false;
 
+  /// Indiacate whether the bottom picker will be closed (poped out of the Navigator) 
+  /// when the submit button is pressed.
+  /// 
+  /// By default closeOnSubmit = true.
+  final bool closeOnSubmit;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
@@ -961,7 +975,9 @@ class _BottomPickerState extends State<BottomPicker> {
                           widget.onSubmit?.call(selectedItemIndex);
                         }
 
-                        Navigator.pop(context);
+                        if (widget.closeOnSubmit) {
+                          Navigator.pop(context);
+                        }
                       },
                       gradients: widget.gradientColors,
                       theme: widget.bottomPickerTheme,
