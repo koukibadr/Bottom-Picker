@@ -15,7 +15,7 @@ class DatePicker extends StatelessWidget {
   final bool showTimeSeparator;
 
   const DatePicker({
-    Key? key,
+    super.key,
     required this.initialDateTime,
     this.minuteInterval = 1,
     this.maxDateTime,
@@ -27,7 +27,7 @@ class DatePicker extends StatelessWidget {
     this.dateOrder,
     this.itemExtent = 0,
     this.showTimeSeparator = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

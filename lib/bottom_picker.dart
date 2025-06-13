@@ -33,7 +33,7 @@ class BottomPicker extends StatefulWidget {
   late BottomPickerType bottomPickerType;
 
   BottomPicker({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.pickerDescription,
     required this.items,
@@ -68,7 +68,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
     bottomPickerType = BottomPickerType.simple;
@@ -80,7 +80,7 @@ class BottomPicker extends StatefulWidget {
   }
 
   BottomPicker.date({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.pickerDescription,
     this.titlePadding = const EdgeInsets.all(0),
@@ -116,7 +116,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 35.0,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
@@ -125,7 +125,7 @@ class BottomPicker extends StatefulWidget {
   }
 
   BottomPicker.monthYear({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.pickerDescription,
     this.titlePadding = const EdgeInsets.all(0),
@@ -160,7 +160,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 35.0,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
@@ -170,7 +170,7 @@ class BottomPicker extends StatefulWidget {
   }
 
   BottomPicker.dateTime({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.pickerDescription,
     this.titlePadding = const EdgeInsets.all(0),
@@ -209,7 +209,7 @@ class BottomPicker extends StatefulWidget {
     this.showTimeSeparator = false,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
     onRangeDateSubmitPressed = null;
@@ -217,7 +217,7 @@ class BottomPicker extends StatefulWidget {
   }
 
   BottomPicker.time({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.pickerDescription,
     required this.initialTime,
@@ -255,7 +255,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 30,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
     dateOrder = null;
@@ -265,7 +265,7 @@ class BottomPicker extends StatefulWidget {
   }
 
   BottomPicker.timer({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.timerPickerMode = CupertinoTimerPickerMode.hm,
     this.timerSecondsInterval = 1,
@@ -301,7 +301,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
     bottomPickerType = BottomPickerType.timer;
@@ -311,7 +311,7 @@ class BottomPicker extends StatefulWidget {
   }
 
   BottomPicker.range({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.pickerDescription,
     required this.onRangeDateSubmitPressed,
@@ -348,7 +348,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 30,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
     dateOrder = null;
@@ -372,7 +372,7 @@ class BottomPicker extends StatefulWidget {
   }
 
   BottomPicker.rangeTime({
-    Key? key,
+    super.key,
     required this.pickerTitle,
     this.pickerDescription,
     required this.onRangeTimeSubmitPressed,
@@ -411,7 +411,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 30,
     this.closeWidget,
     this.closeOnSubmit = true,
-  }) : super(key: key) {
+  }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
     dateOrder = null;
@@ -693,9 +693,9 @@ class BottomPicker extends StatefulWidget {
   /// Indicates whether the time seperator (":") will be shown or not.
   bool showTimeSeparator = false;
 
-  /// Indiacate whether the bottom picker will be closed (poped out of the Navigator) 
+  /// Indiacate whether the bottom picker will be closed (poped out of the Navigator)
   /// when the submit button is pressed.
-  /// 
+  ///
   /// By default closeOnSubmit = true.
   final bool closeOnSubmit;
 
@@ -724,10 +724,10 @@ class BottomPicker extends StatefulWidget {
   }
 
   @override
-  _BottomPickerState createState() => _BottomPickerState();
+  BottomPickerState createState() => BottomPickerState();
 }
 
-class _BottomPickerState extends State<BottomPicker> {
+class BottomPickerState extends State<BottomPicker> {
   late int selectedItemIndex;
   late DateTime selectedDateTime;
 
@@ -997,7 +997,7 @@ class _BottomPickerState extends State<BottomPicker> {
   }
 
   /// Handle the key press event
-  bool _onKeyPressed(final keyData) {
+  bool _onKeyPressed(KeyData keyData) {
     if (keyData.logical == LogicalKeyboardKey.escape.keyId &&
         !disposed &&
         widget.dismissable) {

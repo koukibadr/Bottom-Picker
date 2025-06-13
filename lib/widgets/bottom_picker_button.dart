@@ -12,7 +12,7 @@ class BottomPickerButton extends StatelessWidget {
   final BoxDecoration? style;
 
   const BottomPickerButton({
-    Key? key,
+    super.key,
     required this.onClick,
     this.theme = BottomPickerTheme.blue,
     this.gradients,
@@ -21,7 +21,7 @@ class BottomPickerButton extends StatelessWidget {
     this.buttonWidth,
     this.buttonChild,
     this.style,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

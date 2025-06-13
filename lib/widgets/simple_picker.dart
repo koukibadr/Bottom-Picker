@@ -12,14 +12,14 @@ class SimplePicker extends StatelessWidget {
   final Widget? selectionOverlay;
 
   const SimplePicker({
-    Key? key,
+    super.key,
     required this.items,
     required this.onChange,
     required this.selectedItemIndex,
     required this.textStyle,
     required this.itemExtent,
     this.selectionOverlay,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
