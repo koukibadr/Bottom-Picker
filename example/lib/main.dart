@@ -93,8 +93,10 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openSecondSimpleItemPicker(context, countryList);
               },
-              child: Text('Simple Item picker with different theme',
-                  textAlign: TextAlign.center),
+              child: Text(
+                'Simple Item picker with different theme',
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           SizedBox(
@@ -112,8 +114,10 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openDatePickerWithButtonStyle(context);
               },
-              child: Text('Date Picker with button style',
-                  textAlign: TextAlign.center),
+              child: Text(
+                'Date Picker with button style',
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           SizedBox(
@@ -186,8 +190,10 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openDateTimePickerWithCustomButton(context);
               },
-              child: Text('Bottom picker with custom button',
-                  textAlign: TextAlign.center),
+              child: Text(
+                'Bottom picker with custom button',
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           SizedBox(

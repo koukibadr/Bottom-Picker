@@ -19,7 +19,7 @@ class RangePicker extends StatefulWidget {
   final bool showTimeSeperator;
 
   const RangePicker({
-    Key? key,
+    super.key,
     required this.initialFirstDateTime,
     required this.initialSecondDateTime,
     required this.maxFirstDate,
@@ -35,7 +35,7 @@ class RangePicker extends StatefulWidget {
     this.minuteInterval,
     this.itemExtent,
     this.showTimeSeperator = false,
-  }) : super(key: key);
+  });
 
   @override
   State<RangePicker> createState() => _RangePickerState();

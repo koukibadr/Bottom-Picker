@@ -11,7 +11,7 @@ class TimePicker extends StatelessWidget {
   final int secondInterval;
 
   const TimePicker({
-    Key? key,
+    super.key,
     this.minuteInterval = 1,
     required this.mode,
     required this.textStyle,
@@ -19,7 +19,7 @@ class TimePicker extends StatelessWidget {
     required this.onChange,
     required this.initialDuration,
     this.secondInterval = 1,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
