@@ -48,6 +48,9 @@ class SimplePicker extends StatelessWidget {
         children: items,
         useMagnifier: true,
         magnification: 1.5,
+        controller: FixedExtentScrollController(
+          initialItem: selectedItemIndex,
+        ),
         onSelectedItemChanged: onChange,
       );
     }
