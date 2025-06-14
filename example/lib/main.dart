@@ -249,10 +249,24 @@ class ExampleApp extends StatelessWidget {
     BottomPicker(
       items: items,
       selectedItemIndex: 1,
-      pickerTitle: Text(
-        'اختر بلدك',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-      ),
+      titleBuilder: (context, index) {
+        return Container(
+          color: Colors.red,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Column(
+                children: [
+                  Text('Choose country', style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),),
+                  Text('Current selected : $index'),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
       pickerDescription: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
