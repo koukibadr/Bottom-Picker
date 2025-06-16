@@ -249,7 +249,7 @@ class ExampleApp extends StatelessWidget {
     BottomPicker(
       items: items,
       selectedItemIndex: 1,
-      titleBuilder: (context, index) {
+      headerBuilder: (context, index) {
         return Container(
           color: Colors.red,
           child: Row(
@@ -267,16 +267,6 @@ class ExampleApp extends StatelessWidget {
           ),
         );
       },
-      pickerDescription: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Icon(Icons.flag),
-          Text(
-            'اختر جنسيتك من القائمة الموجودة تحت',
-            textAlign: TextAlign.end,
-          ),
-        ],
-      ),
       onChange: (index) {
         print(index);
       },
