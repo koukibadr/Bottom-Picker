@@ -14,7 +14,9 @@ void main() {
     testWidgets('Simple use case: picker should function properly',
         (tester) async {
       var bottomPicker = BottomPicker(
-        pickerTitle: Text('Item picker'),
+        headerBuilder: (context) {
+          return Text('Item picker');
+        },
         items: items,
       );
       await tester.pumpWidget(
@@ -41,7 +43,9 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              pickerTitle: Text('Item picker'),
+              headerBuilder: (context) {
+                return Text('Item picker');
+              },
               items: items,
               onChange: (index) {
                 itemIndex = index;
@@ -84,7 +88,9 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              pickerTitle: Text('Item picker'),
+              headerBuilder: (context) {
+                return Text('Item picker');
+              },
               items: items,
               onSubmit: (p0) {
                 index = p0;
@@ -114,7 +120,9 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              pickerTitle: Text('Item picker'),
+              headerBuilder: (context) {
+                return Text('Item picker');
+              },
               items: items,
               onDismiss: (p0) {
                 index = 9;
@@ -145,12 +153,21 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              displayCloseIcon: true,
-              pickerTitle: Text('Item picker'),
-              items: items,
-              onCloseButtonPressed: () {
-                index = 9;
+              headerBuilder: (context) {
+                return Row(
+                  children: [
+                    Text('Item picker'),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        index = 9;
+                      },
+                      child: Icon(Icons.close),
+                    ),
+                  ],
+                );
               },
+              items: items,
             ),
           ),
         ),
@@ -174,9 +191,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              displayCloseIcon: false,
               displaySubmitButton: false,
-              pickerTitle: Text('Item picker'),
               items: items,
             ),
           ),
@@ -193,7 +208,6 @@ void main() {
         () => MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              pickerTitle: Text('Item picker'),
               items: items,
             ),
           ),
@@ -205,9 +219,7 @@ void main() {
         () => MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              displayCloseIcon: false,
               displaySubmitButton: false,
-              pickerTitle: Text('Item picker'),
               items: [],
             ),
           ),
@@ -221,9 +233,7 @@ void main() {
         () => MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              displayCloseIcon: false,
               displaySubmitButton: false,
-              pickerTitle: Text('Item picker'),
               items: items,
               selectedItemIndex: 12,
             ),
@@ -238,9 +248,7 @@ void main() {
         () => MaterialApp(
           home: Scaffold(
             body: BottomPicker(
-              displayCloseIcon: false,
               displaySubmitButton: false,
-              pickerTitle: Text('Item picker'),
               items: items,
               selectedItemIndex: -4,
             ),
