@@ -34,8 +34,8 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     required this.items,
     this.titleAlignment,
     this.titlePadding = const EdgeInsets.all(0),
@@ -43,7 +43,7 @@ class BottomPicker extends StatefulWidget {
     this.onChange,
     this.onSubmit,
     this.onDismiss,
-    @Deprecated("should use headerBuilder instead") this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.selectedItemIndex = 0,
@@ -56,11 +56,11 @@ class BottomPicker extends StatefulWidget {
       color: Colors.black,
     ),
     this.itemExtent = 35.0,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    @Deprecated("should use headerBuilder instead") this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
@@ -68,7 +68,7 @@ class BottomPicker extends StatefulWidget {
     this.selectionOverlay,
     this.buttonContent,
     this.buttonStyle,
-    @Deprecated("should use headerBuilder instead") this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -84,15 +84,15 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.date({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
     this.onDismiss,
-    @Deprecated("should use headerBuilder instead") this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
@@ -107,11 +107,11 @@ class BottomPicker extends StatefulWidget {
       fontSize: 14,
       color: Colors.black,
     ),
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    @Deprecated("should use headerBuilder instead") this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
@@ -119,7 +119,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.itemExtent = 35.0,
-    @Deprecated("should use headerBuilder instead") this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -132,15 +132,15 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.monthYear({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
     this.onDismiss,
-    @Deprecated("should use headerBuilder instead") this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
@@ -154,11 +154,11 @@ class BottomPicker extends StatefulWidget {
       fontSize: 14,
       color: Colors.black,
     ),
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    @Deprecated("should use headerBuilder instead") this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
@@ -166,7 +166,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.itemExtent = 35.0,
-    @Deprecated("should use headerBuilder instead") this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -180,15 +180,15 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.dateTime({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
     this.onDismiss,
-    @Deprecated("should use headerBuilder instead") this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
@@ -205,11 +205,11 @@ class BottomPicker extends StatefulWidget {
       fontSize: 14,
       color: Colors.black,
     ),
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    @Deprecated("should use headerBuilder instead") this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
@@ -218,7 +218,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.itemExtent = 30,
     this.showTimeSeparator = false,
-    @Deprecated("should use headerBuilder instead") this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -230,8 +230,8 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.time({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     required this.initialTime,
     this.maxTime,
     this.minTime,
@@ -241,7 +241,7 @@ class BottomPicker extends StatefulWidget {
     this.onChange,
     this.onSubmit,
     this.onDismiss,
-    @Deprecated("should use headerBuilder instead") this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.minuteInterval = 1,
@@ -254,11 +254,11 @@ class BottomPicker extends StatefulWidget {
       fontSize: 14,
       color: Colors.black,
     ),
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    @Deprecated("should use headerBuilder instead") this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
@@ -267,7 +267,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonStyle,
     this.showTimeSeparator = false,
     this.itemExtent = 30,
-    @Deprecated("should use headerBuilder instead") this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -281,10 +281,10 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.timer({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
     this.timerPickerMode = CupertinoTimerPickerMode.hm,
     this.timerSecondsInterval = 1,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     this.initialTimerDuration,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
@@ -293,7 +293,7 @@ class BottomPicker extends StatefulWidget {
     this.onSubmit,
     this.onDismiss,
     this.itemExtent = 30,
-    @Deprecated("should use headerBuilder instead") this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.minuteInterval = 1,
@@ -305,18 +305,18 @@ class BottomPicker extends StatefulWidget {
       fontSize: 14,
       color: Colors.black,
     ),
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    @Deprecated("should use headerBuilder instead") this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.displaySubmitButton = true,
     this.buttonContent,
     this.buttonStyle,
-    @Deprecated("should use headerBuilder instead") this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -330,14 +330,14 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.range({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     required this.onRangeDateSubmitPressed,
     this.onRangePickerDismissed,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
-    @Deprecated("should use headerBuilder instead") this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.buttonPadding,
@@ -348,11 +348,11 @@ class BottomPicker extends StatefulWidget {
       fontSize: 14,
       color: Colors.black,
     ),
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
-    @Deprecated("should use headerBuilder instead")
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    @Deprecated("should use headerBuilder instead") this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
@@ -366,7 +366,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonContent,
     this.buttonStyle,
     this.itemExtent = 30,
-    @Deprecated("should use headerBuilder instead") this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -394,15 +394,15 @@ class BottomPicker extends StatefulWidget {
 
   BottomPicker.rangeTime({
     super.key,
-    @Deprecated("should use headerBuilder instead") this.pickerTitle,
-    @Deprecated("should use headerBuilder instead") this.pickerDescription,
+    @Deprecated('should use headerBuilder instead') this.pickerTitle,
+    @Deprecated('should use headerBuilder instead') this.pickerDescription,
     required this.onRangeTimeSubmitPressed,
     this.onRangePickerDismissed,
     this.use24hFormat = true,
     this.titlePadding = const EdgeInsets.all(0),
     this.titleAlignment,
     this.dismissable = false,
-    this.onCloseButtonPressed,
+    @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.buttonPadding,
@@ -413,9 +413,11 @@ class BottomPicker extends StatefulWidget {
       fontSize: 14,
       color: Colors.black,
     ),
+    @Deprecated('should use headerBuilder instead')
     this.displayCloseIcon = true,
+    @Deprecated('should use headerBuilder instead')
     this.closeIconColor = Colors.black,
-    this.closeIconSize = 20,
+    @Deprecated('should use headerBuilder instead') this.closeIconSize = 20,
     this.layoutOrientation = TextDirection.ltr,
     this.buttonAlignment = MainAxisAlignment.center,
     this.height,
@@ -430,7 +432,7 @@ class BottomPicker extends StatefulWidget {
     this.minuteInterval = 1,
     this.showTimeSeparator = false,
     this.itemExtent = 30,
-    this.closeWidget,
+    @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
   }) {
@@ -454,8 +456,8 @@ class BottomPicker extends StatefulWidget {
   /// Bottom picker title widget
   final Widget? pickerTitle;
 
-  // TODO add docs
-  final Widget Function(BuildContext, int)? headerBuilder;
+  /// Renders the header component of the bottom picker
+  final Widget Function(BuildContext context)? headerBuilder;
 
   ///Bottom picker description widget
   final Widget? pickerDescription;
@@ -842,8 +844,10 @@ class BottomPickerState extends State<BottomPicker> {
                         children: [
                           if (widget.headerBuilder != null)
                             Expanded(
-                                child: widget.headerBuilder!(
-                                    context, selectedItemIndex)),
+                              child: widget.headerBuilder!(
+                                context,
+                              ),
+                            ),
                           if (widget.headerBuilder == null &&
                               widget.pickerTitle != null)
                             Expanded(child: widget.pickerTitle!),
