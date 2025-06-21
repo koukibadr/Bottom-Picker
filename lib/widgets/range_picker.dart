@@ -1,3 +1,4 @@
+import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
 import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -104,6 +105,8 @@ class _RangePickerState extends State<RangePicker> {
             },
             dateOrder: widget.dateOrder,
             textStyle: widget.textStyle,
+            //TODO check this to be dynamic
+            calendarType: CupertinoDatePickerCalendarType.fullWeek,
           ),
         ),
         Expanded(
@@ -120,6 +123,8 @@ class _RangePickerState extends State<RangePicker> {
             minuteInterval: widget.minuteInterval ?? 1,
             itemExtent: widget.itemExtent,
             showTimeSeparator: widget.showTimeSeperator,
+            //TODO check this to be dynamic
+            calendarType: CupertinoDatePickerCalendarType.fullWeek,
           ),
         ),
       ],
