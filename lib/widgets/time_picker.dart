@@ -9,6 +9,7 @@ class TimePicker extends StatelessWidget {
   final Function(Duration) onChange;
   final Duration? initialDuration;
   final int secondInterval;
+  final CupertinoTextThemeData? pickerThemeData;
 
   const TimePicker({
     super.key,
@@ -19,13 +20,14 @@ class TimePicker extends StatelessWidget {
     required this.onChange,
     required this.initialDuration,
     this.secondInterval = 1,
+    this.pickerThemeData,
   });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTheme(
       data: CupertinoThemeData(
-        textTheme: CupertinoTextThemeData(
+        textTheme: pickerThemeData ?? CupertinoTextThemeData(
           dateTimePickerTextStyle: textStyle,
         ),
       ),

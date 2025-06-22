@@ -14,6 +14,7 @@ class DatePicker extends StatelessWidget {
   final double? itemExtent;
   final bool showTimeSeparator;
   final CupertinoDatePickerCalendarType calendarType;
+  final CupertinoTextThemeData? pickerThemeData;
 
   const DatePicker({
     super.key,
@@ -29,13 +30,14 @@ class DatePicker extends StatelessWidget {
     this.itemExtent = 0,
     this.showTimeSeparator = false,
     required this.calendarType,
+    this.pickerThemeData,
   });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTheme(
       data: CupertinoThemeData(
-        textTheme: CupertinoTextThemeData(
+        textTheme: pickerThemeData ?? CupertinoTextThemeData(
           dateTimePickerTextStyle: textStyle,
         ),
       ),

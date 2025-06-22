@@ -10,6 +10,7 @@ class SimplePicker extends StatelessWidget {
   final TextStyle textStyle;
   final double itemExtent;
   final Widget? selectionOverlay;
+  final CupertinoTextThemeData? pickerThemeData;
 
   const SimplePicker({
     super.key,
@@ -19,6 +20,7 @@ class SimplePicker extends StatelessWidget {
     required this.textStyle,
     required this.itemExtent,
     this.selectionOverlay,
+    this.pickerThemeData,
   });
 
   @override
@@ -26,7 +28,7 @@ class SimplePicker extends StatelessWidget {
     if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
       return CupertinoTheme(
         data: CupertinoThemeData(
-          textTheme: CupertinoTextThemeData(
+          textTheme: pickerThemeData ?? CupertinoTextThemeData(
             pickerTextStyle: textStyle,
           ),
         ),

@@ -53,6 +53,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonWidth,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -107,6 +109,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -156,6 +160,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonWidth,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -209,6 +215,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -260,6 +268,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonWidth,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -313,6 +323,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonWidth,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -358,6 +370,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonWidth,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -425,6 +439,8 @@ class BottomPicker extends StatefulWidget {
     this.buttonWidth,
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
+    this.pickerThemeData,
+    @Deprecated("should use pickerThemeData instead")
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -606,6 +622,9 @@ class BottomPicker extends StatefulWidget {
   ///the picker text style applied on all types of bottom picker
   ///by default `TextStyle(fontSize: 14)`
   final TextStyle pickerTextStyle;
+
+  /// The picker theme data
+  final CupertinoTextThemeData? pickerThemeData;
 
   ///define the picker item extent available only for list items picker
   ///by default it's 35
@@ -903,6 +922,7 @@ class BottomPickerState extends State<BottomPicker> {
                       textStyle: widget.pickerTextStyle,
                       itemExtent: widget.itemExtent,
                       selectionOverlay: widget.selectionOverlay,
+                      pickerThemeData: widget.pickerThemeData,
                     )
                   : widget.bottomPickerType == BottomPickerType.timer
                       ? TimePicker(
@@ -916,6 +936,7 @@ class BottomPickerState extends State<BottomPicker> {
                             selectedTimerDuration = p0;
                           },
                           secondInterval: widget.timerSecondsInterval,
+                          pickerThemeData: widget.pickerThemeData,
                         )
                       : widget.bottomPickerType == BottomPickerType.time
                           ? DatePicker(
@@ -934,6 +955,7 @@ class BottomPickerState extends State<BottomPicker> {
                               itemExtent: widget.itemExtent,
                               showTimeSeparator: widget.showTimeSeparator,
                               calendarType: widget.calendarType,
+                              pickerThemeData: widget.pickerThemeData,
                             )
                           : widget.bottomPickerType == BottomPickerType.dateTime
                               ? DatePicker(
@@ -952,6 +974,7 @@ class BottomPickerState extends State<BottomPicker> {
                                   itemExtent: widget.itemExtent,
                                   showTimeSeparator: widget.showTimeSeparator,
                                   calendarType: widget.calendarType,
+                                  pickerThemeData: widget.pickerThemeData,
                                 )
                               : widget.bottomPickerType ==
                                       BottomPickerType.rangeTime
@@ -978,6 +1001,7 @@ class BottomPickerState extends State<BottomPicker> {
                                       itemExtent: widget.itemExtent,
                                       showTimeSeperator:
                                           widget.showTimeSeparator,
+                                      pickerThemeData: widget.pickerThemeData,
                                     )
                                   : RangePicker(
                                       mode: CupertinoDatePickerMode.date,
@@ -1001,6 +1025,7 @@ class BottomPickerState extends State<BottomPicker> {
                                       itemExtent: widget.itemExtent,
                                       showTimeSeperator:
                                           widget.showTimeSeparator,
+                                      pickerThemeData: widget.pickerThemeData,
                                     ),
             ),
             if (widget.displaySubmitButton)
