@@ -18,6 +18,7 @@ class RangePicker extends StatefulWidget {
   final int? minuteInterval;
   final double? itemExtent;
   final bool showTimeSeperator;
+  final CupertinoTextThemeData? pickerThemeData;
 
   const RangePicker({
     super.key,
@@ -36,6 +37,7 @@ class RangePicker extends StatefulWidget {
     this.minuteInterval,
     this.itemExtent,
     this.showTimeSeperator = false,
+    this.pickerThemeData,
   });
 
   @override
@@ -106,6 +108,7 @@ class _RangePickerState extends State<RangePicker> {
             dateOrder: widget.dateOrder,
             textStyle: widget.textStyle,
             calendarType: CupertinoDatePickerCalendarType.fullWeek,
+            pickerThemeData: widget.pickerThemeData,
           ),
         ),
         Expanded(
@@ -123,6 +126,7 @@ class _RangePickerState extends State<RangePicker> {
             itemExtent: widget.itemExtent,
             showTimeSeparator: widget.showTimeSeperator,
             calendarType: CupertinoDatePickerCalendarType.fullWeek,
+            pickerThemeData: widget.pickerThemeData,
           ),
         ),
       ],

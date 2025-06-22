@@ -587,7 +587,9 @@ class ExampleApp extends StatelessWidget {
   }
 
   void _openDateTimePicker(
-      BuildContext context, CupertinoDatePickerCalendarType calendarType,) {
+    BuildContext context,
+    CupertinoDatePickerCalendarType calendarType,
+  ) {
     BottomPicker.dateTime(
       minuteInterval: 2,
       headerBuilder: (context) {
