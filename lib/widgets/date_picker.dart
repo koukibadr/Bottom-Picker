@@ -13,6 +13,7 @@ class DatePicker extends StatelessWidget {
   final TextStyle textStyle;
   final double? itemExtent;
   final bool showTimeSeparator;
+  final CupertinoDatePickerCalendarType calendarType;
 
   const DatePicker({
     super.key,
@@ -27,6 +28,7 @@ class DatePicker extends StatelessWidget {
     this.dateOrder,
     this.itemExtent = 0,
     this.showTimeSeparator = false,
+    required this.calendarType,
   });
 
   @override
@@ -48,6 +50,7 @@ class DatePicker extends StatelessWidget {
         minimumDate: minDateTime,
         use24hFormat: use24hFormat,
         dateOrder: dateOrder,
+        calendarType: calendarType,
       ),
     );
   }

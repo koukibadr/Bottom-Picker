@@ -187,6 +187,12 @@ enum _PickerColumnType {
   twoPoints,
 }
 
+enum CupertinoDatePickerCalendarType {
+  fullWeek,
+  workDays,
+  weekend,
+}
+
 /// A date picker widget in iOS style.
 ///
 /// There are several modes of the date picker listed in [CupertinoDatePickerMode].
@@ -283,6 +289,7 @@ class CupertinoDatePickerWidget extends StatefulWidget {
     this.itemExtent = _kItemExtent,
     this.selectionOverlayBuilder,
     this.showTimeSeparator = false,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   })  : initialDateTime = initialDateTime ?? DateTime.now(),
         assert(
           itemExtent > 0,
@@ -422,6 +429,8 @@ class CupertinoDatePickerWidget extends StatefulWidget {
   ///
   /// Defaults to a value that matches the default iOS date picker wheel.
   final double itemExtent;
+
+  final CupertinoDatePickerCalendarType calendarType;
 
   /// A function that returns a widget that is overlaid on the picker
   /// to highlight the currently selected entry.
@@ -707,6 +716,16 @@ class _CupertinoDatePickerDateTimeState
     super.initState();
     initialDateTime = widget.initialDateTime;
 
+    switch (widget.calendarType) {
+      case CupertinoDatePickerCalendarType.workDays:
+        _handleWorkDaysInitialDateTime();
+        break;
+      case CupertinoDatePickerCalendarType.weekend:
+        _handleWeekendInitialDateTime();
+        break;
+      default:
+    }
+
     // Initially each of the "physical" regions is mapped to the meridiem region
     // with the same number, e.g., the first 12 items are mapped to the first 12
     // hours of a day. Such mapping is flipped when the meridiem picker is scrolled
@@ -723,6 +742,37 @@ class _CupertinoDatePickerDateTimeState
     dateController = FixedExtentScrollController();
 
     PaintingBinding.instance.systemFonts.addListener(_handleSystemFontsChange);
+  }
+
+  void _handleWorkDaysInitialDateTime() {
+    int daysToBeAdded = 0;
+    if (widget.calendarType == CupertinoDatePickerCalendarType.workDays &&
+        initialDateTime.weekday == DateTime.saturday) {
+      daysToBeAdded = 2;
+    } else if (widget.calendarType ==
+            CupertinoDatePickerCalendarType.workDays &&
+        initialDateTime.weekday == DateTime.sunday) {
+      daysToBeAdded = 1;
+    }
+    initialDateTime = DateTime(
+      initialDateTime.year,
+      initialDateTime.month,
+      initialDateTime.day + daysToBeAdded,
+    );
+  }
+
+  void _handleWeekendInitialDateTime() {
+    int daysToBeAdded = 0;
+    if (widget.calendarType == CupertinoDatePickerCalendarType.weekend &&
+        (initialDateTime.weekday != DateTime.saturday &&
+            initialDateTime.weekday != DateTime.saturday)) {
+      daysToBeAdded = DateTime.saturday - initialDateTime.weekday;
+    }
+    initialDateTime = DateTime(
+      initialDateTime.year,
+      initialDateTime.month,
+      initialDateTime.day + daysToBeAdded,
+    );
   }
 
   void _handleSystemFontsChange() {
@@ -808,9 +858,8 @@ class _CupertinoDatePickerDateTimeState
   void _onSelectedItemChange(int index) {
     final DateTime selected = selectedDateTime;
 
-    final bool isDateInvalid =
-        (widget.minimumDate?.isAfter(selected) ?? false) ||
-            (widget.maximumDate?.isBefore(selected) ?? false);
+    bool isDateInvalid = (widget.minimumDate?.isAfter(selected) ?? false) ||
+        (widget.maximumDate?.isBefore(selected) ?? false);
 
     if (isDateInvalid) {
       return;
@@ -848,6 +897,27 @@ class _CupertinoDatePickerDateTimeState
           _onSelectedItemChange(index);
         },
         itemBuilder: (BuildContext context, int index) {
+          DateTime tempDateTime = DateTime(
+            initialDateTime.year,
+            initialDateTime.month,
+            initialDateTime.day + index,
+          );
+
+          bool isValidDate = true;
+
+          if (widget.calendarType == CupertinoDatePickerCalendarType.workDays) {
+            if (tempDateTime.weekday == DateTime.saturday ||
+                tempDateTime.weekday == DateTime.sunday) {
+              isValidDate = false;
+            }
+          } else if (widget.calendarType ==
+              CupertinoDatePickerCalendarType.weekend) {
+            if (tempDateTime.weekday != DateTime.saturday &&
+                tempDateTime.weekday != DateTime.sunday) {
+              isValidDate = false;
+            }
+          }
+
           final DateTime rangeStart = DateTime(
             initialDateTime.year,
             initialDateTime.month,
@@ -877,7 +947,10 @@ class _CupertinoDatePickerDateTimeState
 
           return itemPositioningBuilder(
             context,
-            Text(dateText, style: _themeTextStyle(context)),
+            Text(
+              dateText,
+              style: _themeTextStyle(context, isValid: isValidDate),
+            ),
           );
         },
         selectionOverlay: selectionOverlay,
@@ -1124,6 +1197,42 @@ class _CupertinoDatePickerDateTimeState
     final bool minCheck = widget.minimumDate?.isAfter(selectedDate) ?? false;
     final bool maxCheck = widget.maximumDate?.isBefore(selectedDate) ?? false;
 
+    if (widget.calendarType == CupertinoDatePickerCalendarType.workDays) {
+      int daysThreshold = 0;
+      if (selectedDate.weekday == DateTime.saturday) {
+        daysThreshold = -1;
+      } else if (selectedDate.weekday == DateTime.sunday) {
+        daysThreshold = -2;
+      }
+
+      if ((selectedDate.weekday == DateTime.sunday ||
+              selectedDate.weekday == DateTime.saturday) &&
+          (_isDateBeforeMinDate(selectedDate))) {
+        daysThreshold = selectedDate.weekday == DateTime.sunday ? 1 : 2;
+      }
+      DateTime targetDate = selectedDate.add(Duration(days: daysThreshold));
+
+      _scrollToDate(
+        targetDate,
+        selectedDate,
+        minCheck,
+        newItemIndex: dateController.selectedItem + daysThreshold,
+      );
+    } else if (widget.calendarType == CupertinoDatePickerCalendarType.weekend) {
+      if (selectedDate.weekday != DateTime.sunday &&
+          selectedDate.weekday != DateTime.saturday) {
+        int daysThreshold = DateTime.saturday - selectedDate.weekday;
+        DateTime targetDate = selectedDate.add(Duration(days: daysThreshold));
+
+        _scrollToDate(
+          targetDate,
+          selectedDate,
+          minCheck,
+          newItemIndex: dateController.selectedItem + daysThreshold,
+        );
+      }
+    }
+
     if (minCheck || maxCheck) {
       // We have minCheck === !maxCheck.
       final DateTime targetDate =
@@ -1132,7 +1241,19 @@ class _CupertinoDatePickerDateTimeState
     }
   }
 
-  void _scrollToDate(DateTime newDate, DateTime fromDate, bool minCheck) {
+  bool _isDateBeforeMinDate(DateTime dateTime) {
+    if (widget.minimumDate == null) return false;
+    return widget.minimumDate!.day >= dateTime.day &&
+        widget.minimumDate!.month >= dateTime.month &&
+        widget.minimumDate!.year >= dateTime.year;
+  }
+
+  void _scrollToDate(
+    DateTime newDate,
+    DateTime fromDate,
+    bool minCheck, {
+    int? newItemIndex,
+  }) {
     SchedulerBinding.instance.addPostFrameCallback(
       (Duration timestamp) {
         if (fromDate.year != newDate.year ||
@@ -1140,7 +1261,9 @@ class _CupertinoDatePickerDateTimeState
             fromDate.day != newDate.day) {
           _animateColumnControllerToItem(
             dateController,
-            selectedDayFromInitial,
+            widget.calendarType != CupertinoDatePickerCalendarType.fullWeek
+                ? newItemIndex!
+                : selectedDayFromInitial,
           );
         }
 
@@ -2213,29 +2336,6 @@ class _CupertinoDatePickerMonthYearState
 //
 // If the maximum width given to the picker is smaller than 320.0, the picker's
 // layout will be broken.
-
-/// Different modes of [CupertinoTimerPicker].
-///
-/// See also:
-///
-///  * [CupertinoTimerPicker], the class that implements the iOS-style timer picker.
-///  * [CupertinoPicker], the class that implements a content agnostic spinner UI.
-enum CupertinoTimerPickerMode {
-  /// Mode that shows the timer duration in hour and minute.
-  ///
-  /// Examples: 16 hours | 14 min.
-  hm,
-
-  /// Mode that shows the timer duration in minute and second.
-  ///
-  /// Examples: 14 min | 43 sec.
-  ms,
-
-  /// Mode that shows the timer duration in hour, minute, and second.
-  ///
-  /// Examples: 16 hours | 14 min | 43 sec.
-  hms,
-}
 
 /// A countdown timer picker in iOS style.
 ///

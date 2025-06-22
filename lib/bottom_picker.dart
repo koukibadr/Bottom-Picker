@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/resources/time.dart';
@@ -38,7 +39,8 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.pickerDescription,
     required this.items,
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -71,6 +73,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -86,7 +89,8 @@ class BottomPicker extends StatefulWidget {
     super.key,
     @Deprecated('should use headerBuilder instead') this.pickerTitle,
     @Deprecated('should use headerBuilder instead') this.pickerDescription,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
     this.dismissable = false,
     this.onChange,
@@ -122,6 +126,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
@@ -134,7 +139,8 @@ class BottomPicker extends StatefulWidget {
     super.key,
     @Deprecated('should use headerBuilder instead') this.pickerTitle,
     @Deprecated('should use headerBuilder instead') this.pickerDescription,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
     this.dismissable = false,
     this.onChange,
@@ -169,6 +175,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
@@ -182,7 +189,8 @@ class BottomPicker extends StatefulWidget {
     super.key,
     @Deprecated('should use headerBuilder instead') this.pickerTitle,
     @Deprecated('should use headerBuilder instead') this.pickerDescription,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
     this.dismissable = false,
     this.onChange,
@@ -221,6 +229,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -235,7 +244,8 @@ class BottomPicker extends StatefulWidget {
     required this.initialTime,
     this.maxTime,
     this.minTime,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
     this.dismissable = false,
     this.onChange,
@@ -270,6 +280,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
@@ -286,7 +297,8 @@ class BottomPicker extends StatefulWidget {
     this.timerSecondsInterval = 1,
     @Deprecated('should use headerBuilder instead') this.pickerDescription,
     this.initialTimerDuration,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
     this.dismissable = false,
     this.onChange,
@@ -319,6 +331,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -334,7 +347,8 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.pickerDescription,
     required this.onRangeDateSubmitPressed,
     this.onRangePickerDismissed,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
     this.dismissable = false,
     @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
@@ -369,6 +383,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
@@ -399,7 +414,8 @@ class BottomPicker extends StatefulWidget {
     required this.onRangeTimeSubmitPressed,
     this.onRangePickerDismissed,
     this.use24hFormat = true,
-    @Deprecated('should use headerBuilder instead') this.titlePadding = const EdgeInsets.all(0),
+    @Deprecated('should use headerBuilder instead')
+    this.titlePadding = const EdgeInsets.all(0),
     @Deprecated('should use headerBuilder instead') this.titleAlignment,
     this.dismissable = false,
     @Deprecated('should use headerBuilder instead') this.onCloseButtonPressed,
@@ -435,6 +451,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
+    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
@@ -726,6 +743,9 @@ class BottomPicker extends StatefulWidget {
   /// By default closeOnSubmit = true.
   final bool closeOnSubmit;
 
+  /// The datepicker calendar type
+  final CupertinoDatePickerCalendarType calendarType;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
@@ -839,7 +859,9 @@ class BottomPickerState extends State<BottomPicker> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: widget.headerBuilder == null ? widget.titlePadding : EdgeInsetsGeometry.zero,
+                      padding: widget.headerBuilder == null
+                          ? widget.titlePadding
+                          : EdgeInsetsGeometry.zero,
                       child: Row(
                         children: [
                           if (widget.headerBuilder != null)
@@ -911,6 +933,7 @@ class BottomPickerState extends State<BottomPicker> {
                               textStyle: widget.pickerTextStyle,
                               itemExtent: widget.itemExtent,
                               showTimeSeparator: widget.showTimeSeparator,
+                              calendarType: widget.calendarType,
                             )
                           : widget.bottomPickerType == BottomPickerType.dateTime
                               ? DatePicker(
@@ -928,6 +951,7 @@ class BottomPickerState extends State<BottomPicker> {
                                   textStyle: widget.pickerTextStyle,
                                   itemExtent: widget.itemExtent,
                                   showTimeSeparator: widget.showTimeSeparator,
+                                  calendarType: widget.calendarType,
                                 )
                               : widget.bottomPickerType ==
                                       BottomPickerType.rangeTime
