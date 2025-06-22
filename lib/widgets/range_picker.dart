@@ -105,7 +105,6 @@ class _RangePickerState extends State<RangePicker> {
             },
             dateOrder: widget.dateOrder,
             textStyle: widget.textStyle,
-            //TODO check this to be dynamic
             calendarType: CupertinoDatePickerCalendarType.fullWeek,
           ),
         ),
@@ -123,7 +122,6 @@ class _RangePickerState extends State<RangePicker> {
             minuteInterval: widget.minuteInterval ?? 1,
             itemExtent: widget.itemExtent,
             showTimeSeparator: widget.showTimeSeperator,
-            //TODO check this to be dynamic
             calendarType: CupertinoDatePickerCalendarType.fullWeek,
           ),
         ),

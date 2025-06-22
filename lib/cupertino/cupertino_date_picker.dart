@@ -764,7 +764,8 @@ class _CupertinoDatePickerDateTimeState
   void _handleWeekendInitialDateTime() {
     int daysToBeAdded = 0;
     if (widget.calendarType == CupertinoDatePickerCalendarType.weekend &&
-        (initialDateTime.weekday != DateTime.saturday && initialDateTime.weekday != DateTime.saturday)) {
+        (initialDateTime.weekday != DateTime.saturday &&
+            initialDateTime.weekday != DateTime.saturday)) {
       daysToBeAdded = DateTime.saturday - initialDateTime.weekday;
     }
     initialDateTime = DateTime(
@@ -916,7 +917,6 @@ class _CupertinoDatePickerDateTimeState
               isValidDate = false;
             }
           }
-          
 
           final DateTime rangeStart = DateTime(
             initialDateTime.year,
@@ -1218,7 +1218,6 @@ class _CupertinoDatePickerDateTimeState
         minCheck,
         newItemIndex: dateController.selectedItem + daysThreshold,
       );
-
     } else if (widget.calendarType == CupertinoDatePickerCalendarType.weekend) {
       if (selectedDate.weekday != DateTime.sunday &&
           selectedDate.weekday != DateTime.saturday) {
@@ -2337,29 +2336,6 @@ class _CupertinoDatePickerMonthYearState
 //
 // If the maximum width given to the picker is smaller than 320.0, the picker's
 // layout will be broken.
-
-/// Different modes of [CupertinoTimerPicker].
-///
-/// See also:
-///
-///  * [CupertinoTimerPicker], the class that implements the iOS-style timer picker.
-///  * [CupertinoPicker], the class that implements a content agnostic spinner UI.
-enum CupertinoTimerPickerMode {
-  /// Mode that shows the timer duration in hour and minute.
-  ///
-  /// Examples: 16 hours | 14 min.
-  hm,
-
-  /// Mode that shows the timer duration in minute and second.
-  ///
-  /// Examples: 14 min | 43 sec.
-  ms,
-
-  /// Mode that shows the timer duration in hour, minute, and second.
-  ///
-  /// Examples: 16 hours | 14 min | 43 sec.
-  hms,
-}
 
 /// A countdown timer picker in iOS style.
 ///

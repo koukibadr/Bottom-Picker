@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:bottom_picker/bottom_picker.dart';
+import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -169,9 +170,36 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
-                _openDateTimePicker(context);
+                _openDateTimePicker(
+                  context,
+                  CupertinoDatePickerCalendarType.fullWeek,
+                );
               },
               child: Text('Date and Time Picker', textAlign: TextAlign.center),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openDateTimePicker(
+                  context,
+                  CupertinoDatePickerCalendarType.workDays,
+                );
+              },
+              child: Text('Workday Picker', textAlign: TextAlign.center),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
+                _openDateTimePicker(
+                  context,
+                  CupertinoDatePickerCalendarType.weekend,
+                );
+              },
+              child: Text('Weekend Day Picker', textAlign: TextAlign.center),
             ),
           ),
         ],
@@ -558,7 +586,8 @@ class ExampleApp extends StatelessWidget {
     ).show(context);
   }
 
-  void _openDateTimePicker(BuildContext context) {
+  void _openDateTimePicker(
+      BuildContext context, CupertinoDatePickerCalendarType calendarType,) {
     BottomPicker.dateTime(
       minuteInterval: 2,
       headerBuilder: (context) {
@@ -598,6 +627,7 @@ class ExampleApp extends StatelessWidget {
         Color(0xfffdcbf1),
         Color(0xffe6dee9),
       ],
+      calendarType: calendarType,
     ).show(context);
   }
 }

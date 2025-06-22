@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:bottom_picker/cupertino/cupertino_date_picker.dart'
-    hide CupertinoTimerPickerMode;
+import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:bottom_picker/resources/context_extension.dart';
 import 'package:bottom_picker/resources/time.dart';

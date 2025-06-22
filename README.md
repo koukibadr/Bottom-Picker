@@ -40,7 +40,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
-	bottom_picker: ^3.2.1
+ bottom_picker: ^3.2.1
 ```
 
 ## Parameters
@@ -323,8 +323,8 @@ dependencies:
 
 ```dart
 BottomPicker(
-	items: items,
-	title:  Text("Choose your country", style: TextStyle(fontWeight:  FontWeight.bold, fontSize:  15)),
+ items: items,
+ title:  Text("Choose your country", style: TextStyle(fontWeight:  FontWeight.bold, fontSize:  15)),
 ).show(context);
 ```
 
@@ -334,7 +334,7 @@ BottomPicker(
 
 ```dart
 BottomPicker.date(
-	pickerTitle: Text(
+ pickerTitle: Text(
         'Set your Birthday',
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -430,7 +430,7 @@ BottomPicker.timer(
 
 ```dart
 BottomPicker.dateTime(
-	pickerTitle: Text(
+ pickerTitle: Text(
         'Set the event exact time and date',
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -476,7 +476,7 @@ BottomPicker.monthYear(
 
 ```dart
 BottomPicker(
-	items: [
+ items: [
         Center(
           child: Text('Leonardo DiCaprio'),
         ),
@@ -517,7 +517,7 @@ BottomPicker(
 
 ```dart
 BottomPicker.range(
-	 pickerTitle: Text(
+  pickerTitle: Text(
         'Set date range',
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -555,7 +555,7 @@ BottomPicker.range(
 
 ```dart
 BottomPicker.rangeTime(
-	 pickerTitle: Text(
+  pickerTitle: Text(
     'Set Time range',
     style: TextStyle(
       fontWeight: FontWeight.bold,
@@ -598,11 +598,11 @@ We warmly welcome contributions to the `bottom_picker` package! Your help in mak
 - **Found a bug?** Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with clear steps to reproduce the problem. The more detail you provide, the easier it will be to fix.
 - **Have a great idea for a new feature?** We'd love to hear it! Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) to discuss your suggestion. Explain the use case and how it would benefit users.
 - **Want to get your hands dirty and contribute code?** Fantastic! Here's how:
-  1.  Fork the [repository](https://github.com/koukibadr/Bottom-Picker).
-  2.  Create a new branch for your feature or bug fix.
-  3.  Make your changes, ensuring you follow the project's coding style and conventions.
-  4.  Write clear and concise commit messages.
-  5.  Submit a [pull request](https://github.com/koukibadr/Bottom-Picker/pulls) with a detailed description of your changes and why they should be merged.
+  1. Fork the [repository](https://github.com/koukibadr/Bottom-Picker).
+  2. Create a new branch for your feature or bug fix.
+  3. Make your changes, ensuring you follow the project's coding style and conventions.
+  4. Write clear and concise commit messages.
+  5. Submit a [pull request](https://github.com/koukibadr/Bottom-Picker/pulls) with a detailed description of your changes and why they should be merged.
 
 We'll review your contributions and provide feedback as soon as possible. Thank you for your interest in improving `bottom_picker`!
 
