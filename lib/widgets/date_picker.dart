@@ -13,7 +13,7 @@ class DatePicker extends StatelessWidget {
   final TextStyle textStyle;
   final double? itemExtent;
   final bool showTimeSeparator;
-  final CupertinoDatePickerCalendarType calendarType;
+  final List<int> calendarDays;
   final CupertinoTextThemeData? pickerThemeData;
 
   const DatePicker({
@@ -29,7 +29,7 @@ class DatePicker extends StatelessWidget {
     this.dateOrder,
     this.itemExtent = 0,
     this.showTimeSeparator = false,
-    required this.calendarType,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.pickerThemeData,
   });
 
@@ -37,9 +37,10 @@ class DatePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoTheme(
       data: CupertinoThemeData(
-        textTheme: pickerThemeData ?? CupertinoTextThemeData(
-          dateTimePickerTextStyle: textStyle,
-        ),
+        textTheme: pickerThemeData ??
+            CupertinoTextThemeData(
+              dateTimePickerTextStyle: textStyle,
+            ),
       ),
       child: CupertinoDatePickerWidget(
         itemExtent: itemExtent ?? 0,
@@ -52,7 +53,7 @@ class DatePicker extends StatelessWidget {
         minimumDate: minDateTime,
         use24hFormat: use24hFormat,
         dateOrder: dateOrder,
-        calendarType: calendarType,
+        calendarDays: calendarDays,
       ),
     );
   }
