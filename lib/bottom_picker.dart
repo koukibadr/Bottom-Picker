@@ -54,7 +54,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -75,7 +75,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -110,7 +110,7 @@ class BottomPicker extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -130,7 +130,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
@@ -161,7 +161,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -181,7 +181,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
@@ -216,7 +216,7 @@ class BottomPicker extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -237,7 +237,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -269,7 +269,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -290,7 +290,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
@@ -324,7 +324,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -343,7 +343,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -371,7 +371,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -397,7 +397,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
@@ -440,7 +440,7 @@ class BottomPicker extends StatefulWidget {
     this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
-    @Deprecated("should use pickerThemeData instead")
+    @Deprecated('should use pickerThemeData instead')
     this.pickerTextStyle = const TextStyle(
       fontSize: 14,
       color: Colors.black,
@@ -467,7 +467,7 @@ class BottomPicker extends StatefulWidget {
     @Deprecated('should use headerBuilder instead') this.closeWidget,
     this.closeOnSubmit = true,
     this.headerBuilder,
-    this.calendarType = CupertinoDatePickerCalendarType.fullWeek,
+    this.calendarDays = CupertinoDatePickerWidget.fullWeek,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
@@ -763,7 +763,7 @@ class BottomPicker extends StatefulWidget {
   final bool closeOnSubmit;
 
   /// The datepicker calendar type
-  final CupertinoDatePickerCalendarType calendarType;
+  final List<int> calendarDays;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -954,7 +954,6 @@ class BottomPickerState extends State<BottomPicker> {
                               textStyle: widget.pickerTextStyle,
                               itemExtent: widget.itemExtent,
                               showTimeSeparator: widget.showTimeSeparator,
-                              calendarType: widget.calendarType,
                               pickerThemeData: widget.pickerThemeData,
                             )
                           : widget.bottomPickerType == BottomPickerType.dateTime
@@ -973,7 +972,6 @@ class BottomPickerState extends State<BottomPicker> {
                                   textStyle: widget.pickerTextStyle,
                                   itemExtent: widget.itemExtent,
                                   showTimeSeparator: widget.showTimeSeparator,
-                                  calendarType: widget.calendarType,
                                   pickerThemeData: widget.pickerThemeData,
                                 )
                               : widget.bottomPickerType ==

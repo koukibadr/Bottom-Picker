@@ -172,19 +172,6 @@ class ExampleApp extends StatelessWidget {
               onPressed: () {
                 _openDateTimePicker(
                   context,
-                  CupertinoDatePickerCalendarType.fullWeek,
-                );
-              },
-              child: Text('Date and Time Picker', textAlign: TextAlign.center),
-            ),
-          ),
-          SizedBox(
-            width: buttonWidth,
-            child: ElevatedButton(
-              onPressed: () {
-                _openDateTimePicker(
-                  context,
-                  CupertinoDatePickerCalendarType.workDays,
                 );
               },
               child: Text('Workday Picker', textAlign: TextAlign.center),
@@ -194,9 +181,8 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
-                _openDateTimePicker(
+                _openDateTimePickerWeekend(
                   context,
-                  CupertinoDatePickerCalendarType.weekend,
                 );
               },
               child: Text('Weekend Day Picker', textAlign: TextAlign.center),
@@ -312,11 +298,6 @@ class ExampleApp extends StatelessWidget {
       initialDateTime: DateTime(1996, 10, 22),
       maxDateTime: DateTime(1998),
       minDateTime: DateTime(1980),
-      pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
       onChange: (index) {
         print(index);
       },
@@ -376,11 +357,6 @@ class ExampleApp extends StatelessWidget {
       initialDateTime: DateTime(1996, 10, 22),
       maxDateTime: DateTime(1998),
       minDateTime: DateTime(1980),
-      pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
       onChange: (index) {
         print(index);
       },
@@ -445,11 +421,6 @@ class ExampleApp extends StatelessWidget {
       dateOrder: DatePickerDateOrder.dmy,
       initialSecondDate: DateTime.now().add(Duration(days: 230)),
       itemExtent: 20,
-      pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
       onRangeDateSubmitPressed: (firstDate, secondDate) {
         print(firstDate);
         print(secondDate);
@@ -484,11 +455,6 @@ class ExampleApp extends StatelessWidget {
           ],
         );
       },
-      pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
       showTimeSeparator: true,
       bottomPickerTheme: BottomPickerTheme.plumPlate,
       onRangeTimeSubmitPressed: (firstDate, secondDate) {
@@ -588,7 +554,6 @@ class ExampleApp extends StatelessWidget {
 
   void _openDateTimePicker(
     BuildContext context,
-    CupertinoDatePickerCalendarType calendarType,
   ) {
     BottomPicker.dateTime(
       minuteInterval: 2,
@@ -629,7 +594,53 @@ class ExampleApp extends StatelessWidget {
         Color(0xfffdcbf1),
         Color(0xffe6dee9),
       ],
-      calendarType: calendarType,
+      calendarDays: CupertinoDatePickerWidget.workDays,
+    ).show(context);
+  }
+
+  void _openDateTimePickerWeekend(
+    BuildContext context,
+  ) {
+    BottomPicker.dateTime(
+      minuteInterval: 2,
+      headerBuilder: (context) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Set the event exact time and date',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.black,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                print('Picker closed');
+                Navigator.pop(context);
+              },
+              child: Text(
+                'close',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+      onSubmit: (date) {
+        print(date);
+      },
+      minDateTime: DateTime(2021, 5, 1),
+      maxDateTime: DateTime(2021, 8, 2),
+      initialDateTime: DateTime(2021, 5, 1),
+      gradientColors: [
+        Color(0xfffdcbf1),
+        Color(0xffe6dee9),
+      ],
+      calendarDays: CupertinoDatePickerWidget.weekend,
     ).show(context);
   }
 }
