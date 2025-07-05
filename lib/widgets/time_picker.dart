@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TimePicker extends StatelessWidget {
   final CupertinoTimerPickerMode mode;
   final int minuteInterval;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final double itemExtent;
   final Function(Duration) onChange;
   final Duration? initialDuration;

@@ -5,6 +5,7 @@ enum BottomPickerType {
   time,
   timer,
   dateTime,
+  year,
   rangeDate,
   rangeTime,
 }

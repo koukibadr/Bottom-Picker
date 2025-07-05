@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CloseIcon extends StatelessWidget {
   final Function() onPress;
-  final Color iconColor;
-  final double closeIconSize;
+  final Color? iconColor;
+  final double? closeIconSize;
 
   const CloseIcon({
     super.key,

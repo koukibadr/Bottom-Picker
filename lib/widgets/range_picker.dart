@@ -11,7 +11,7 @@ class RangePicker extends StatefulWidget {
   final DateTime? minFirstDateTime;
   final DateTime? minSecondDateTime;
   final DatePickerDateOrder? dateOrder;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final CupertinoDatePickerMode mode;
   final bool use24hFormat;
   final int? minuteInterval;
