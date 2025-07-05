@@ -10,7 +10,7 @@ class DatePicker extends StatelessWidget {
   final int minuteInterval;
   final bool use24hFormat;
   final DatePickerDateOrder? dateOrder;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final double? itemExtent;
   final bool showTimeSeparator;
   final List<int> calendarDays;

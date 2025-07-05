@@ -104,6 +104,15 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openYearDatePicker(context);
+              },
+              child: Text('Year Picker', textAlign: TextAlign.center),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openDatePicker(context);
               },
               child: Text('Date Picker', textAlign: TextAlign.center),
@@ -303,6 +312,39 @@ class ExampleApp extends StatelessWidget {
       },
       onSubmit: (index) {
         print(index);
+      },
+      onDismiss: (p0) {
+        print(p0);
+      },
+      bottomPickerTheme: BottomPickerTheme.plumPlate,
+    ).show(context);
+  }
+
+  void _openYearDatePicker(BuildContext context) {
+    BottomPicker.year(
+      headerBuilder: (context) {
+        return Row(
+          children: [
+            Text(
+              'Set your Birthday Year',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.blue,
+              ),
+            ),
+          ],
+        );
+      },
+      initialDateTime: DateTime(1996),
+      maxDateTime: DateTime(1998),
+      minDateTime: DateTime(1980),
+      onChange: (index) {
+        print(index);
+      },
+      onSubmit: (index) {
+        print(index);
+        Navigator.pop(context);
       },
       onDismiss: (p0) {
         print(p0);

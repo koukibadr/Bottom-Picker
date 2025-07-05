@@ -7,7 +7,7 @@ class SimplePicker extends StatelessWidget {
   final int selectedItemIndex;
   final Function(int)? onChange;
   final List<Widget> items;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final double itemExtent;
   final Widget? selectionOverlay;
   final CupertinoTextThemeData? pickerThemeData;
@@ -17,7 +17,7 @@ class SimplePicker extends StatelessWidget {
     required this.items,
     required this.onChange,
     required this.selectedItemIndex,
-    required this.textStyle,
+    this.textStyle,
     required this.itemExtent,
     this.selectionOverlay,
     this.pickerThemeData,
@@ -28,9 +28,10 @@ class SimplePicker extends StatelessWidget {
     if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
       return CupertinoTheme(
         data: CupertinoThemeData(
-          textTheme: pickerThemeData ?? CupertinoTextThemeData(
-            pickerTextStyle: textStyle,
-          ),
+          textTheme: pickerThemeData ??
+              CupertinoTextThemeData(
+                pickerTextStyle: textStyle,
+              ),
         ),
         child: CupertinoPicker(
           offAxisFraction: 2.0,

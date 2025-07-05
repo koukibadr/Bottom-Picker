@@ -10,6 +10,7 @@ import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:bottom_picker/widgets/range_picker.dart';
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:bottom_picker/widgets/time_picker.dart';
+import 'package:bottom_picker/widgets/year_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -136,6 +137,39 @@ class BottomPicker extends StatefulWidget {
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
     onRangeDateSubmitPressed = null;
+    assertInitialValues();
+  }
+
+  /// Creates a bottom picker for selecting a year.
+  BottomPicker.year({
+    super.key,
+    this.dismissable = false,
+    this.onChange,
+    this.onSubmit,
+    this.onDismiss,
+    this.bottomPickerTheme = BottomPickerTheme.blue,
+    this.gradientColors,
+    this.initialDateTime,
+    this.minDateTime,
+    this.maxDateTime,
+    this.buttonPadding,
+    this.buttonWidth,
+    this.buttonSingleColor,
+    this.backgroundColor = Colors.white,
+    this.pickerThemeData,
+    this.buttonAlignment = MainAxisAlignment.center,
+    this.height,
+    this.displaySubmitButton = true,
+    this.buttonContent,
+    this.buttonStyle,
+    this.itemExtent = 35.0,
+    this.headerBuilder,
+  }) {
+    datePickerMode = CupertinoDatePickerMode.date;
+    bottomPickerType = BottomPickerType.year;
+    use24hFormat = false;
+    onRangeDateSubmitPressed = null;
+    displayCloseIcon = false;
     assertInitialValues();
   }
 
@@ -487,21 +521,21 @@ class BottomPicker extends StatefulWidget {
   }
 
   /// Bottom picker title widget
-  final Widget? pickerTitle;
+  Widget? pickerTitle;
 
   /// Renders the header component of the bottom picker
   final Widget Function(BuildContext context)? headerBuilder;
 
   ///Bottom picker description widget
-  final Widget? pickerDescription;
+  Widget? pickerDescription;
 
   ///The padding applied on the title
   ///by default it is set with zero values
-  final EdgeInsetsGeometry titlePadding;
+  EdgeInsetsGeometry? titlePadding;
 
   ///Title widget alignment inside the stack
   ///by default the title will be aligned left/right depends on `layoutOrientation`
-  final Alignment? titleAlignment;
+  Alignment? titleAlignment;
 
   ///defines whether the bottom picker is dismissable or not
   ///by default it's set to false
@@ -532,7 +566,7 @@ class BottomPicker extends StatefulWidget {
 
   ///Invoked when clicking on the close button
   ///
-  final Function? onCloseButtonPressed;
+  Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
   ///possible values
@@ -617,11 +651,11 @@ class BottomPicker extends StatefulWidget {
 
   ///date order applied on date picker or date time picker
   ///by default it's YYYY/MM/DD
-  late DatePickerDateOrder? dateOrder;
+  DatePickerDateOrder? dateOrder;
 
   ///the picker text style applied on all types of bottom picker
   ///by default `TextStyle(fontSize: 14)`
-  final TextStyle pickerTextStyle;
+  TextStyle? pickerTextStyle;
 
   /// The picker theme data
   final CupertinoTextThemeData? pickerThemeData;
@@ -632,21 +666,21 @@ class BottomPicker extends StatefulWidget {
 
   ///indicate whether the close icon will be rendred or not
   /// by default `displayCloseIcon = true`
-  final bool displayCloseIcon;
+  bool? displayCloseIcon;
 
   /// Renders the close widget if it's null and [displayCloseIcon] is true
   /// the default close icon is rendered.
   /// Note if closeWidget is provided onClosePressed won't be triggered
   /// since you need to handle all actions on the provided widget.
-  final Widget? closeWidget;
+  Widget? closeWidget;
 
   ///the close icon color
   ///by default `closeIconColor = Colors.black`
-  final Color closeIconColor;
+  Color? closeIconColor;
 
   ///the close icon size
   ///by default `closeIconSize = 20`
-  final double closeIconSize;
+  double? closeIconSize;
 
   ///the layout orientation of the bottom picker
   ///by default the orientation is set to LTR
@@ -654,7 +688,7 @@ class BottomPicker extends StatefulWidget {
   ///LAYOUT_ORIENTATION.ltr,
   ///LAYOUT_ORIENTATION.rtl
   ///```
-  final TextDirection layoutOrientation;
+  TextDirection? layoutOrientation;
 
   ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
@@ -760,10 +794,10 @@ class BottomPicker extends StatefulWidget {
   /// when the submit button is pressed.
   ///
   /// By default closeOnSubmit = true.
-  final bool closeOnSubmit;
+  bool? closeOnSubmit;
 
   /// The datepicker calendar type
-  final List<int> calendarDays;
+  List<int> calendarDays = CupertinoDatePickerWidget.fullWeek;
 
   ///display the bottom picker popup
   ///[context] the app context to display the popup
@@ -873,13 +907,13 @@ class BottomPickerState extends State<BottomPicker> {
                 horizontal: 20,
               ),
               child: Directionality(
-                textDirection: widget.layoutOrientation,
+                textDirection: widget.layoutOrientation ?? TextDirection.ltr,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
                       padding: widget.headerBuilder == null
-                          ? widget.titlePadding
+                          ? widget.titlePadding ?? const EdgeInsets.all(0)
                           : EdgeInsetsGeometry.zero,
                       child: Row(
                         children: [
@@ -893,7 +927,7 @@ class BottomPickerState extends State<BottomPicker> {
                               widget.pickerTitle != null)
                             Expanded(child: widget.pickerTitle!),
                           if (widget.headerBuilder == null &&
-                              widget.displayCloseIcon)
+                              (widget.displayCloseIcon ?? true))
                             widget.closeWidget ??
                                 CloseIcon(
                                   onPress: _closeBottomPicker,
@@ -974,8 +1008,20 @@ class BottomPickerState extends State<BottomPicker> {
                                   showTimeSeparator: widget.showTimeSeparator,
                                   pickerThemeData: widget.pickerThemeData,
                                 )
-                              : widget.bottomPickerType ==
-                                      BottomPickerType.rangeTime
+                              : widget.bottomPickerType == BottomPickerType.year
+                                  ? BottomYearDatePicker(
+                                      initialDateTime: widget.initialDateTime,
+                                      maxDateTime: widget.maxDateTime,
+                                      minDateTime: widget.minDateTime,
+                                      onDateChanged: (DateTime date) {
+                                        selectedDateTime = date;
+                                        widget.onChange?.call(date);
+                                      },
+                                      itemExtent: widget.itemExtent,
+                                      pickerThemeData: widget.pickerThemeData,
+                                    )
+                                  : widget.bottomPickerType ==
+                                          BottomPickerType.rangeTime
                                   ? RangePicker(
                                       mode: CupertinoDatePickerMode.time,
                                       use24hFormat: widget.use24hFormat,
@@ -1050,7 +1096,8 @@ class BottomPickerState extends State<BottomPicker> {
                           );
                         } else if (widget.bottomPickerType ==
                                 BottomPickerType.dateTime ||
-                            widget.bottomPickerType == BottomPickerType.time) {
+                            widget.bottomPickerType == BottomPickerType.time ||
+                            widget.bottomPickerType == BottomPickerType.year) {
                           widget.onSubmit?.call(selectedDateTime);
                         } else if (widget.bottomPickerType ==
                             BottomPickerType.timer) {
@@ -1059,7 +1106,7 @@ class BottomPickerState extends State<BottomPicker> {
                           widget.onSubmit?.call(selectedItemIndex);
                         }
 
-                        if (widget.closeOnSubmit) {
+                        if (widget.closeOnSubmit ?? false) {
                           Navigator.pop(context);
                         }
                       },
