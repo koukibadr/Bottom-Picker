@@ -246,6 +246,7 @@ class ExampleApp extends StatelessWidget {
     BottomPicker(
       items: items,
       selectedItemIndex: 1,
+      diameterRatio: 200,
       headerBuilder: (context) {
         return Container(
           child: Row(
