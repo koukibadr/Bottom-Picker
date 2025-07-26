@@ -11,6 +11,7 @@ class SimplePicker extends StatelessWidget {
   final double itemExtent;
   final Widget? selectionOverlay;
   final CupertinoTextThemeData? pickerThemeData;
+  final double diameterRatio;
 
   const SimplePicker({
     super.key,
@@ -21,6 +22,7 @@ class SimplePicker extends StatelessWidget {
     required this.itemExtent,
     this.selectionOverlay,
     this.pickerThemeData,
+    required this.diameterRatio,
   });
 
   @override
@@ -35,6 +37,7 @@ class SimplePicker extends StatelessWidget {
         ),
         child: CupertinoPicker(
           offAxisFraction: 2.0,
+          diameterRatio: diameterRatio,
           itemExtent: itemExtent,
           selectionOverlay: selectionOverlay ??
               const CupertinoPickerDefaultSelectionOverlay(),

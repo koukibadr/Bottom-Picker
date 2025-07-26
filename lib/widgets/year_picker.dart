@@ -71,6 +71,7 @@ class _BottomYearDatePicker extends State<BottomYearDatePicker> {
       selectedItemIndex: 0,
       itemExtent: widget.itemExtent ?? 0,
       pickerThemeData: widget.pickerThemeData,
+      diameterRatio: 1.1,
     );
   }
 }
