@@ -599,7 +599,6 @@ class ExampleApp extends StatelessWidget {
     BuildContext context,
   ) {
     BottomPicker.dateTime(
-      minuteInterval: 2,
       headerBuilder: (context) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -630,13 +629,6 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (date) {
         print(date);
       },
-      minDateTime: DateTime(2021, 5, 1),
-      maxDateTime: DateTime(2021, 8, 2),
-      initialDateTime: DateTime(2021, 5, 1),
-      gradientColors: [
-        Color(0xfffdcbf1),
-        Color(0xffe6dee9),
-      ],
       calendarDays: CupertinoDatePickerWidget.workDays,
     ).show(context);
   }

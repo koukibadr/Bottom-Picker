@@ -490,7 +490,6 @@ class CupertinoDatePickerWidget extends StatefulWidget {
     DateTime.friday,
   ];
 
-
   @override
   State<StatefulWidget> createState() {
     // ignore: no_logic_in_create_state, https://github.com/flutter/flutter/issues/70499

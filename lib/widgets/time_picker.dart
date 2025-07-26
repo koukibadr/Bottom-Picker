@@ -27,9 +27,10 @@ class TimePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoTheme(
       data: CupertinoThemeData(
-        textTheme: pickerThemeData ?? CupertinoTextThemeData(
-          dateTimePickerTextStyle: textStyle,
-        ),
+        textTheme: pickerThemeData ??
+            CupertinoTextThemeData(
+              dateTimePickerTextStyle: textStyle,
+            ),
       ),
       child: CupertinoTimerPicker(
         itemExtent: itemExtent,
