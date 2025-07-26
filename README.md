@@ -3,7 +3,7 @@
 <p  align="center">
 <img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true"/>
 <br>
-<b>Bring beautiful bottom pickers to all your Flutter apps! Version 3.0.0 now supports desktop and web, alongside mobile.</b>
+<b>Bring beautiful bottom pickers to all your Flutter apps! Version 4.0.0 offer full customization alongside more advanced features for cupertino picker.</b>
 </p>
 
 | ![simple item picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true)    | ![date_time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true)   |
@@ -13,26 +13,38 @@
 
 ## Features
 
-- Simple list picker wheel
-- Date range picker (RTL and LTR)
-- Date picker
-- Month and year picker
-- Time picker
-- Duration Timer picker
-- Date and Time picker
-- 24h / 12h time format
-- Fully support Web and Desktop platforms (using wheel views)
-- Built-in themes
-- Customize confirm button
-- Customize first selected item
-- Enhanced tablet view
-- Customize background color
-- Customize date format order
-- Customize picker text style (color, font size, font weight...)
-- Customize close button style and display
-- Customize layout orientation (LTR / RTL )
-- Customizable bottom picker height
-- Customizable minuteInterval attribute
+### Core Picker Types
+
+* Simple list picker wheel
+* Date picker
+* Dedicated Year picker
+* Month and year picker
+* Date range picker (RTL and LTR)
+* Time picker
+* Duration Timer picker
+* Date and Time picker
+
+### Customization & Behavior
+
+* 24h / 12h time format support
+* Filter options for unpickable or blocked dates
+* Customizable header/title via an optional builder callback
+* Control auto-closing of the picker on submit
+* Customize confirm button
+* Customize first selected item
+* Customize background color
+* Customize date format order
+* Customize picker text style (color, font size, font weight, etc.)
+* Customize close button style and display
+* Customize layout orientation (LTR / RTL)
+* Customizable bottom picker height
+* Customizable `minuteInterval` attribute
+
+### Platform Support & Theming
+
+* Fully support Web and Desktop platforms (using wheel views)
+* Built-in themes
+* Enhanced tablet view
 
 ## Getting Started
 
@@ -40,25 +52,14 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
- bottom_picker: ^3.2.1
+ bottom_picker: ^4.0.0
 ```
 
 ## Parameters
 
 ````dart
-/// Bottom picker title widget
-  final Widget pickerTitle;
-
-  ///Bottom picker description widget
-  final Widget? pickerDescription;
-
-  ///The padding applied on the title
-  ///by default it is set with zero values
-  final EdgeInsetsGeometry titlePadding;
-
-  ///Title widget alignment inside the stack
-  ///by default the title will be aligned left/right depends on `layoutOrientation`
-  final Alignment? titleAlignment;
+  /// Renders the header component of the bottom picker
+  final Widget Function(BuildContext context)? headerBuilder;
 
   ///defines whether the bottom picker is dismissable or not
   ///by default it's set to false
@@ -86,10 +87,6 @@ dependencies:
   /// Nullable function invoked when the picker get dismissed
   /// it will return the selected value
   late Function(dynamic)? onDismiss;
-
-  ///Invoked when clicking on the close button
-  ///
-  final Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
   ///possible values
@@ -174,33 +171,14 @@ dependencies:
 
   ///date order applied on date picker or date time picker
   ///by default it's YYYY/MM/DD
-  late DatePickerDateOrder? dateOrder;
+  DatePickerDateOrder? dateOrder;
 
-  ///the picker text style applied on all types of bottom picker
-  ///by default `TextStyle(fontSize: 14)`
-  final TextStyle pickerTextStyle;
+  /// The picker theme data
+  final CupertinoTextThemeData? pickerThemeData;
 
   ///define the picker item extent available only for list items picker
   ///by default it's 35
   late double itemExtent;
-
-  ///indicate whether the close icon will be rendred or not
-  /// by default `displayCloseIcon = true`
-  final bool displayCloseIcon;
-
-  /// Renders the close widget if it's null and [displayCloseIcon] is true
-  /// the default close icon is rendered.
-  /// Note if closeWidget is provided onClosePressed won't be triggered
-  /// since you need to handle all actions on the provided widget.
-  final Widget? closeWidget;
-
-  ///the close icon color
-  ///by default `closeIconColor = Colors.black`
-  final Color closeIconColor;
-
-  ///the close icon size
-  ///by default `closeIconSize = 20`
-  final double closeIconSize;
 
   ///the layout orientation of the bottom picker
   ///by default the orientation is set to LTR
@@ -208,7 +186,7 @@ dependencies:
   ///LAYOUT_ORIENTATION.ltr,
   ///LAYOUT_ORIENTATION.rtl
   ///```
-  final TextDirection layoutOrientation;
+  TextDirection? layoutOrientation;
 
   ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
@@ -309,13 +287,19 @@ dependencies:
 
   /// Indicates whether the time seperator (":") will be shown or not.
   bool showTimeSeparator = false;
+
+  /// Indiacate whether the bottom picker will be closed (poped out of the Navigator)
+  /// when the submit button is pressed.
+  ///
+  /// By default closeOnSubmit = true.
+  bool? closeOnSubmit;
+
+  /// The datepicker calendar type
+  List<int> calendarDays = CupertinoDatePickerWidget.fullWeek;
+
+  /// The bottom picker selector diameter ratio.
+  final double diameterRatio;
 ````
-
-<hr/>
-
-**Migrate from 2.3.3 to 2.4.0:** `iconColor` , `buttonText` , `buttonTextStyle`, `displayButtonIcon`, `buttonTextAlignment` has been replaced with `buttonContent`, `buttonStyle` attributes to see the new attributes usage check the latest example in this documentation
-
-<hr/>
 
 ## Examples
 
@@ -323,271 +307,138 @@ dependencies:
 
 ```dart
 BottomPicker(
- items: items,
- title:  Text("Choose your country", style: TextStyle(fontWeight:  FontWeight.bold, fontSize:  15)),
+  items: items,
+  headerBuilder: (context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            'Choose your country',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.close),
+        ),
+      ],
+    );
+  },
 ).show(context);
 ```
 
-<hr>
-
-### Date picker
+### DateTime picker
 
 ```dart
 BottomPicker.date(
- pickerTitle: Text(
-        'Set your Birthday',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-          color: Colors.blue,
+  headerBuilder: (context) {
+    return Row(
+      children: [
+        Text(
+          'Set your Birthday',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: Colors.blue,
+          ),
         ),
-      ),
-      dateOrder: DatePickerDateOrder.dmy,
-      initialDateTime: DateTime(1996, 10, 22),
-      maxDateTime: DateTime(1998),
-      minDateTime: DateTime(1980),
-      pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
-      onChange: (index) {
-        print(index);
-      },
-      onSubmit: (index) {
-        print(index);
-      },
-      bottomPickerTheme: BottomPickerTheme.plumPlate,
-).show(context);
-
-```
-
-<hr>
-
-### Time picker
-
-```dart
-
-BottomPicker.time(
-      pickerTitle: Text(
-        'Set your next meeting time',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-          color: Colors.orange,
-        ),
-      ),
-      onSubmit: (index) {
-        print(index);
-      },
-      onCloseButtonPressed: () {
-        print('Picker closed');
-      },
-      bottomPickerTheme: BottomPickerTheme.orange,
-      use24hFormat: true,
-      initialTime: Time(
-        minutes: 23,
-      ),
-      maxTime: Time(
-        hours: 17,
-      ),
-  ).show(context);
-
-
-
-```
-
-<hr>
-
-### Duration Timer picker
-
-```dart
-
-BottomPicker.timer(
-  pickerTitle: Text(
-    'Set your next meeting time',
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 15,
-      color: Colors.orange,
-    ),
-  ),
-  onChange: (p0) => print(p0),
-  onSubmit: (index) {
-    print(index);
-  },
-  initialTimerDuration: Duration(
-    hours: 6,
-    minutes: 30,
-  ),
-  timerPickerMode: CupertinoTimerPickerMode.hms,
-).show(context);
-```
-
-<hr>
-
-### Date & Time picker
-
-```dart
-BottomPicker.dateTime(
- pickerTitle: Text(
-        'Set the event exact time and date',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-          color: Colors.black,
-        ),
-      ),
-      onSubmit: (date) {
-        print(date);
-      },
-      onCloseButtonPressed: () {
-        print('Picker closed');
-      },
-      minDateTime: DateTime(2021, 5, 1),
-      maxDateTime: DateTime(2021, 8, 2),
-      initialDateTime: DateTime(2021, 5, 1),
-      gradientColors: [
-        Color(0xfffdcbf1),
-        Color(0xffe6dee9),
       ],
-).show(context);
-```
-
-<hr>
-
-### Date picker with only month and year
-
-```dart
-BottomPicker.monthYear(
-  pickerTitle: Text(
-    'Set your Birth Month',
-  ),
+    );
+  },
+  dateOrder: DatePickerDateOrder.dmy,
   initialDateTime: DateTime(1996, 10, 22),
+  maxDateTime: DateTime(1998),
+  minDateTime: DateTime(1980),
   onChange: (index) {
     print(index);
   },
+  onSubmit: (index) {
+    print(index);
+  },
+  onDismiss: (p0) {
+    print(p0);
+  },
+  bottomPickerTheme: BottomPickerTheme.plumPlate,
 ).show(context);
 ```
 
-<hr>
-
-### With custom picker text style
+### Year picker
 
 ```dart
-BottomPicker(
- items: [
-        Center(
-          child: Text('Leonardo DiCaprio'),
-        ),
-        Center(
-          child: Text('Johnny Depp'),
-        ),
-        Center(
-          child: Text('Robert De Niro'),
-        ),
-        Center(
-          child: Text('Tom Hardy'),
-        ),
-        Center(
-          child: Text('Ben Affleck'),
+BottomPicker.year(
+  headerBuilder: (context) {
+    return Row(
+      children: [
+        Text(
+          'Set your Birthday Year',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: Colors.blue,
+          ),
         ),
       ],
-      pickerTitle: Text('Choose an actor'),
-      titleAlignment: Alignment.center,
-      pickerTextStyle: TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.bold,
-      ),
-      closeIconColor: Colors.red,
-).show(context);
-
-
-```
-
-<p  align="center">
-
-<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_custom_picker_text_style.png?raw=true"  width="200"/>
-
-</p>
-
-<hr>
-
-### Range date picker
-
-```dart
-BottomPicker.range(
-  pickerTitle: Text(
-        'Set date range',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-          color: Colors.black,
-        ),
-      ),
-      pickerDescription: Text(
-        'Please select a first date and an end date',
-        style: TextStyle(
-          color: Colors.black,
-        ),
-      ),
-      dateOrder: DatePickerDateOrder.dmy,
-      minFirstDate: DateTime.now(),
-      initialFirstDate: DateTime.now().add(Duration(days: 1)),
-      pickerTextStyle: TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
-      onRangeDateSubmitPressed: (firstDate, secondDate) {
-        print(firstDate);
-        print(secondDate);
-      },
-      bottomPickerTheme: BottomPickerTheme.plumPlate,
-).show(context);
-
-
-```
-
-<hr>
-
-### Time range picker
-
-```dart
-BottomPicker.rangeTime(
-  pickerTitle: Text(
-    'Set Time range',
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 15,
-      color: Colors.black,
-    ),
-  ),
-  pickerDescription: Text(
-    'Please select a first time and an end time',
-    style: TextStyle(
-      color: Colors.black,
-    ),
-  ),
-  pickerTextStyle: TextStyle(
-    color: Colors.blue,
-    fontWeight: FontWeight.bold,
-    fontSize: 12,
-  ),
-  bottomPickerTheme: BottomPickerTheme.plumPlate,
-  onRangeTimeSubmitPressed: (firstDate, secondDate) {
-    print(firstDate);
-    print(secondDate);
+    );
   },
+  initialDateTime: DateTime(1996),
+  maxDateTime: DateTime(1998),
+  minDateTime: DateTime(1980),
+  onChange: (index) {
+    print(index);
+  },
+  onSubmit: (index) {
+    print(index);
+    Navigator.pop(context);
+  },
+  onDismiss: (p0) {
+    print(p0);
+  },
+  bottomPickerTheme: BottomPickerTheme.plumPlate,
 ).show(context);
-
-
 ```
 
-<p  align="center">
-<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker.png?raw=true"  width="200"/>
+### Custom days picker
 
-</p>
+```dart
+BottomPicker.dateTime(
+  headerBuilder: (context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'Set the event exact time and date',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: Colors.black,
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            print('Picker closed');
+            Navigator.pop(context);
+          },
+          child: Text(
+            'close',
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+      ],
+    );
+  },
+  onSubmit: (date) {
+    print(date);
+  },
+  calendarDays: CupertinoDatePickerWidget.workDays,
+).show(context);
+```
 
 ## Contributing
 
@@ -595,9 +446,9 @@ We warmly welcome contributions to the `bottom_picker` package! Your help in mak
 
 **How you can contribute:**
 
-- **Found a bug?** Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with clear steps to reproduce the problem. The more detail you provide, the easier it will be to fix.
-- **Have a great idea for a new feature?** We'd love to hear it! Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) to discuss your suggestion. Explain the use case and how it would benefit users.
-- **Want to get your hands dirty and contribute code?** Fantastic! Here's how:
+* **Found a bug?** Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with clear steps to reproduce the problem. The more detail you provide, the easier it will be to fix.
+* **Have a great idea for a new feature?** We'd love to hear it! Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) to discuss your suggestion. Explain the use case and how it would benefit users.
+* **Want to get your hands dirty and contribute code?** Fantastic! Here's how:
   1. Fork the [repository](https://github.com/koukibadr/Bottom-Picker).
   2. Create a new branch for your feature or bug fix.
   3. Make your changes, ensuring you follow the project's coding style and conventions.
