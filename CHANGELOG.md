@@ -1,6 +1,13 @@
+## [4.0.1] - 31/07/2025
+
+**Bug Fix**
+
+- Resolve `EdgeInsetsGeometry.zero` build issue [ISSUE#156](https://github.com/koukibadr/Bottom-Picker/issues/156)
+
 ## [4.0.0] - 26/07/2025
 
 **Features**
+
 - Add filter for unpick or block some days [PR#150](https://github.com/koukibadr/Bottom-Picker/pull/150) [ISSUE#148](https://github.com/koukibadr/Bottom-Picker/issues/148)
 - Transform `pickerTitle` into an optional header builder callback [PR#146](https://github.com/koukibadr/Bottom-Picker/pull/146)
 - Add year picker [PR#153](https://github.com/koukibadr/Bottom-Picker/pull/153) [ISSUE#147](https://github.com/koukibadr/Bottom-Picker/issues/147)
@@ -10,6 +17,7 @@
 - Add `diameterRatio` parameter for simple picker display [PR#154](https://github.com/koukibadr/Bottom-Picker/pull/154)
 
 **Bug Fix**
+
 - `selectedItemIndex` parameters does not work for simple picker
 - Resolve issue regarding `seleectedIndex` for Web and desktop platforms
 
