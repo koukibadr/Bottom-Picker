@@ -925,7 +925,7 @@ class BottomPickerState extends State<BottomPicker> {
                     Padding(
                       padding: widget.headerBuilder == null
                           ? widget.titlePadding ?? const EdgeInsets.all(0)
-                          : EdgeInsetsGeometry.zero,
+                          : EdgeInsets.zero,
                       child: Row(
                         children: [
                           if (widget.headerBuilder != null)
