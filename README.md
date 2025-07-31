@@ -52,7 +52,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
- bottom_picker: ^4.0.0
+ bottom_picker: ^4.0.1
 ```
 
 ## Parameters
