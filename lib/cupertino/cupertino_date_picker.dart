@@ -759,6 +759,9 @@ class _CupertinoDatePickerDateTimeState
       initialDateTime.year,
       initialDateTime.month,
       initialDateTime.day + daysToBeAdded,
+      initialDateTime.hour,
+      initialDateTime.minute,
+      initialDateTime.second,
     );
   }
 
