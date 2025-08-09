@@ -1,3 +1,14 @@
+## [4.1.0] - 09/08/2025
+
+**Features**
+
+- Add hour predicate attribute to datetime picker [PR#161](https://github.com/koukibadr/Bottom-Picker/pull/161) [ISSUE#160](https://github.com/koukibadr/Bottom-Picker/issues/160)
+
+**Bug Fix**
+
+- Resolve initial time initialization in date time picker [PR#159](https://github.com/koukibadr/Bottom-Picker/pull/159) [ISSUE#158](https://github.com/koukibadr/Bottom-Picker/issues/158)
+- add SafeArea to prevent content overflow in edge-to-edge mode [PR#159](https://github.com/koukibadr/Bottom-Picker/pull/159)
+
 ## [4.0.1] - 31/07/2025
 
 **Bug Fix**
