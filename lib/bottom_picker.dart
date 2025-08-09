@@ -277,6 +277,7 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.hourPredicate,
   }) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -811,6 +812,9 @@ class BottomPicker extends StatefulWidget {
   /// The bottom picker selector diameter ratio.
   final double diameterRatio;
 
+  /// A predicate that can be used to select which hours are selectable.
+  SelectableHourPredicate? hourPredicate;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
@@ -1023,6 +1027,7 @@ class BottomPickerState extends State<BottomPicker> {
                                     itemExtent: widget.itemExtent,
                                     showTimeSeparator: widget.showTimeSeparator,
                                     pickerThemeData: widget.pickerThemeData,
+                                    hourPredicate: widget.hourPredicate,
                                   )
                                 : widget.bottomPickerType ==
                                         BottomPickerType.year

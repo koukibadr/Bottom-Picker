@@ -15,6 +15,7 @@ class DatePicker extends StatelessWidget {
   final bool showTimeSeparator;
   final List<int> calendarDays;
   final CupertinoTextThemeData? pickerThemeData;
+  final SelectableHourPredicate? hourPredicate;
 
   const DatePicker({
     super.key,
@@ -31,6 +32,7 @@ class DatePicker extends StatelessWidget {
     this.showTimeSeparator = false,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.pickerThemeData,
+    this.hourPredicate,
   });
 
   @override
@@ -46,6 +48,7 @@ class DatePicker extends StatelessWidget {
         itemExtent: itemExtent ?? 0,
         showTimeSeparator: showTimeSeparator,
         mode: mode,
+        selectableHourPredicate: hourPredicate,
         onDateTimeChanged: onDateChanged,
         initialDateTime: initialDateTime,
         minuteInterval: minuteInterval,

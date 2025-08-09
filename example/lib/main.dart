@@ -104,6 +104,17 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
+                _openDateTimePicker(
+                  context,
+                );
+              },
+              child: Text('Date time Picker', textAlign: TextAlign.center),
+            ),
+          ),
+          SizedBox(
+            width: buttonWidth,
+            child: ElevatedButton(
+              onPressed: () {
                 _openYearDatePicker(context);
               },
               child: Text('Year Picker', textAlign: TextAlign.center),
@@ -599,6 +610,9 @@ class ExampleApp extends StatelessWidget {
     BuildContext context,
   ) {
     BottomPicker.dateTime(
+      hourPredicate: (hour) {
+        return hour > 6;
+      },
       headerBuilder: (context) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
