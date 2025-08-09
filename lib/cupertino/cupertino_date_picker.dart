@@ -4,7 +4,6 @@
 library;
 
 import 'dart:math' as math;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -46,6 +45,12 @@ const double _kTimerPickerLabelFontSize = 17.0;
 
 // The width of each column of the countdown time picker.
 const double _kTimerPickerColumnIntrinsicWidth = 106;
+
+/// Signature for predicating dates for enabled date selections.
+///
+/// See [showDatePicker], which has a [SelectableDayPredicate] parameter used
+/// to specify allowable days in the date picker.
+typedef SelectableHourPredicate = bool Function(int hour);
 
 TextStyle _themeTextStyle(BuildContext context, {bool isValid = true}) {
   final TextStyle style =
@@ -284,6 +289,7 @@ class CupertinoDatePickerWidget extends StatefulWidget {
     this.selectionOverlayBuilder,
     this.showTimeSeparator = false,
     this.calendarDays = fullWeek,
+    this.selectableHourPredicate,
   })  : initialDateTime = initialDateTime ?? DateTime.now(),
         assert(
           itemExtent > 0,
@@ -335,6 +341,11 @@ class CupertinoDatePickerWidget extends StatefulWidget {
     assert(
       this.initialDateTime.minute % minuteInterval == 0,
       'initial minute is not divisible by minute interval',
+    );
+    assert(
+      (selectableHourPredicate == null) ||
+          (selectableHourPredicate?.call(this.initialDateTime.hour) == true),
+      'Hour must satisfy the hour predicate',
     );
   }
 
@@ -467,6 +478,9 @@ class CupertinoDatePickerWidget extends StatefulWidget {
   /// ```
   /// {@end-tool}
   final SelectionOverlayBuilder? selectionOverlayBuilder;
+
+  //TODO add docs
+  final SelectableHourPredicate? selectableHourPredicate;
 
   static const List<int> fullWeek = <int>[
     DateTime.monday,
@@ -853,6 +867,8 @@ class _CupertinoDatePickerDateTimeState
 
     if (isDateInvalid) {
       return;
+    } else if (widget.selectableHourPredicate?.call(selected.hour) == false) {
+      return;
     }
 
     widget.onDateTimeChanged(selected);
@@ -939,18 +955,23 @@ class _CupertinoDatePickerDateTimeState
   // `hourIndex`, is it possible to change the value of the minute picker, so
   // that the resulting date stays in the valid range.
   bool _isValidHour(int meridiemIndex, int hourIndex) {
+    int selectedHour = _selectedHour(meridiemIndex, hourIndex);
     final DateTime rangeStart = DateTime(
       initialDateTime.year,
       initialDateTime.month,
       initialDateTime.day + selectedDayFromInitial,
-      _selectedHour(meridiemIndex, hourIndex),
+      selectedHour,
     );
 
     // The end value of the range is exclusive, i.e. [rangeStart, rangeEnd).
     final DateTime rangeEnd = rangeStart.add(const Duration(hours: 1));
 
+    bool hourInIntevalPredicate =
+        widget.selectableHourPredicate?.call(selectedHour) ?? true;
+
     return (widget.minimumDate?.isBefore(rangeEnd) ?? true) &&
-        !(widget.maximumDate?.isBefore(rangeStart) ?? false);
+        !(widget.maximumDate?.isBefore(rangeStart) ?? false) &&
+        hourInIntevalPredicate;
   }
 
   Widget _buildHourPicker(
@@ -1176,6 +1197,24 @@ class _CupertinoDatePickerDateTimeState
     }
   }
 
+  void _checkOnHourDisplay() {
+    final DateTime selectedDate = selectedDateTime;
+    final bool minCheck = widget.minimumDate?.isAfter(selectedDate) ?? false;
+
+    if (widget.selectableHourPredicate?.call(selectedDate.hour) == false) {
+      const int daysThreshold = 1;
+      final DateTime targetDate =
+          selectedDate.add(const Duration(hours: daysThreshold));
+
+      _scrollToDate(
+        targetDate,
+        selectedDate,
+        minCheck,
+        newItemIndex: dateController.selectedItem + daysThreshold,
+      );
+    }
+  }
+
   // One or more pickers have just stopped scrolling.
   void _pickerDidStopScrolling() {
     // Call setState to update the greyed out date/hour/minute/meridiem.
@@ -1193,6 +1232,7 @@ class _CupertinoDatePickerDateTimeState
     final bool maxCheck = widget.maximumDate?.isBefore(selectedDate) ?? false;
 
     _checkOnCustomDaysDisplay();
+    _checkOnHourDisplay();
     if (minCheck || maxCheck) {
       // We have minCheck === !maxCheck.
       final DateTime targetDate =
