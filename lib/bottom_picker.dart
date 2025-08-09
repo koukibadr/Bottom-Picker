@@ -812,6 +812,7 @@ class BottomPicker extends StatefulWidget {
   /// The bottom picker selector diameter ratio.
   final double diameterRatio;
 
+  /// A predicate that can be used to select which hours are selectable.
   SelectableHourPredicate? hourPredicate;
 
   ///display the bottom picker popup

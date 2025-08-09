@@ -46,10 +46,7 @@ const double _kTimerPickerLabelFontSize = 17.0;
 // The width of each column of the countdown time picker.
 const double _kTimerPickerColumnIntrinsicWidth = 106;
 
-/// Signature for predicating dates for enabled date selections.
-///
-/// See [showDatePicker], which has a [SelectableDayPredicate] parameter used
-/// to specify allowable days in the date picker.
+/// Signature for predicating hour for enabled hours selections.
 typedef SelectableHourPredicate = bool Function(int hour);
 
 TextStyle _themeTextStyle(BuildContext context, {bool isValid = true}) {
