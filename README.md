@@ -52,7 +52,7 @@ To add bottom picker to your project add this line to your pubspec.yaml file
 
 ```yaml
 dependencies:
- bottom_picker: ^4.0.1
+ bottom_picker: ^4.1.0
 ```
 
 ## Parameters
@@ -299,6 +299,9 @@ dependencies:
 
   /// The bottom picker selector diameter ratio.
   final double diameterRatio;
+
+  /// A predicate that can be used to select which hours are selectable.
+  SelectableHourPredicate? hourPredicate;
 ````
 
 ## Examples
