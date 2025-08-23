@@ -302,6 +302,9 @@ dependencies:
 
   /// A predicate that can be used to select which hours are selectable.
   SelectableHourPredicate? hourPredicate;
+
+  /// Indicates whether to use SafeArea to avoid content overflow.
+  final bool useSafeArea;
 ````
 
 ## Examples

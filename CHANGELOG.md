@@ -1,3 +1,9 @@
+## [4.1.1] - 23/08/2025
+
+**Bug Fix**
+
+- add SafeArea flag to show or hide safe area widget from bottom picker widget tree and bottom sheet. [ISSUE#163](https://github.com/koukibadr/Bottom-Picker/issues/163)
+
 ## [4.1.0] - 09/08/2025
 
 **Features**
@@ -82,12 +88,6 @@
 
 - enable bottom picker dismiss with escape keyboard key for web and desktop.
 - enable MacOS support for bottom picker example project.
-
-## [2.11.0] - 01/02/2025
-
-**Changes:**
-
-- enable `minutesInterval` feature for range time picker.
 
 ## [2.11.0] - 01/02/2025
 
