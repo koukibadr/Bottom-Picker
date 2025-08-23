@@ -78,6 +78,7 @@ class BottomPicker extends StatefulWidget {
     this.closeOnSubmit = true,
     this.headerBuilder,
     this.diameterRatio = 1.1,
+    this.useSafeArea = false,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -134,6 +135,7 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.useSafeArea = false,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
@@ -167,6 +169,7 @@ class BottomPicker extends StatefulWidget {
     this.itemExtent = 35.0,
     this.diameterRatio = 1.1,
     this.headerBuilder,
+    this.useSafeArea = false,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.year;
@@ -220,6 +223,7 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.useSafeArea = false,
   }) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
@@ -278,6 +282,7 @@ class BottomPicker extends StatefulWidget {
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.hourPredicate,
+    this.useSafeArea = false,
   }) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -332,6 +337,7 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.useSafeArea = false,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
@@ -386,6 +392,7 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.useSafeArea = false,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -441,6 +448,7 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.useSafeArea = false,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
@@ -512,6 +520,7 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.useSafeArea = false,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
@@ -815,11 +824,14 @@ class BottomPicker extends StatefulWidget {
   /// A predicate that can be used to select which hours are selectable.
   SelectableHourPredicate? hourPredicate;
 
+  /// Indicates whether to use SafeArea to avoid content overflow.
+  final bool useSafeArea;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
     showModalBottomSheet(
-      useSafeArea: true,
+      useSafeArea: useSafeArea,
       context: context,
       isDismissible: dismissable,
       enableDrag: false,
@@ -906,258 +918,254 @@ class BottomPickerState extends State<BottomPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        height: widget.height ?? context.bottomPickerHeight,
-        decoration: BoxDecoration(
-          color: widget.backgroundColor,
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-          ),
+    if (widget.useSafeArea) {
+      return SafeArea(
+        child: _bottomPickerWidget(context),
+      );
+    }
+    return _bottomPickerWidget(context);
+  }
+
+  Container _bottomPickerWidget(BuildContext context) {
+    return Container(
+      height: widget.height ?? context.bottomPickerHeight,
+      decoration: BoxDecoration(
+        color: widget.backgroundColor,
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Directionality(
+                textDirection: widget.layoutOrientation ?? TextDirection.ltr,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: widget.headerBuilder == null
+                          ? widget.titlePadding ?? const EdgeInsets.all(0)
+                          : EdgeInsets.zero,
+                      child: Row(
+                        children: [
+                          if (widget.headerBuilder != null)
+                            Expanded(
+                              child: widget.headerBuilder!(
+                                context,
+                              ),
+                            ),
+                          if (widget.headerBuilder == null &&
+                              widget.pickerTitle != null)
+                            Expanded(child: widget.pickerTitle!),
+                          if (widget.headerBuilder == null &&
+                              (widget.displayCloseIcon ?? true))
+                            widget.closeWidget ??
+                                CloseIcon(
+                                  onPress: _closeBottomPicker,
+                                  iconColor: widget.closeIconColor,
+                                  closeIconSize: widget.closeIconSize,
+                                ),
+                        ],
+                      ),
+                    ),
+                    if (widget.headerBuilder == null &&
+                        widget.pickerDescription != null)
+                      widget.pickerDescription!,
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: widget.bottomPickerType == BottomPickerType.simple
+                  ? SimplePicker(
+                      items: widget.items!,
+                      onChange: (int index) {
+                        selectedItemIndex = index;
+                        widget.onChange?.call(index);
+                      },
+                      selectedItemIndex: widget.selectedItemIndex,
+                      textStyle: widget.pickerTextStyle,
+                      itemExtent: widget.itemExtent,
+                      selectionOverlay: widget.selectionOverlay,
+                      pickerThemeData: widget.pickerThemeData,
+                      diameterRatio: widget.diameterRatio,
+                    )
+                  : widget.bottomPickerType == BottomPickerType.timer
+                      ? TimePicker(
+                          mode: widget.timerPickerMode!,
+                          minuteInterval: widget.minuteInterval,
+                          textStyle: widget.pickerTextStyle,
+                          itemExtent: widget.itemExtent,
+                          initialDuration: widget.initialTimerDuration,
+                          onChange: (p0) {
+                            widget.onChange?.call(p0);
+                            selectedTimerDuration = p0;
+                          },
+                          secondInterval: widget.timerSecondsInterval,
+                          pickerThemeData: widget.pickerThemeData,
+                        )
+                      : widget.bottomPickerType == BottomPickerType.time
+                          ? DatePicker(
+                              initialDateTime: widget.initialTime.toDateTime,
+                              minuteInterval: widget.minuteInterval,
+                              maxDateTime: widget.maxTime.toDateTime,
+                              minDateTime: widget.minTime.toDateTime,
+                              mode: widget.datePickerMode,
+                              onDateChanged: (DateTime date) {
+                                selectedDateTime = date;
+                                widget.onChange?.call(date);
+                              },
+                              use24hFormat: widget.use24hFormat,
+                              dateOrder: widget.dateOrder,
+                              textStyle: widget.pickerTextStyle,
+                              itemExtent: widget.itemExtent,
+                              showTimeSeparator: widget.showTimeSeparator,
+                              pickerThemeData: widget.pickerThemeData,
+                            )
+                          : widget.bottomPickerType == BottomPickerType.dateTime
+                              ? DatePicker(
+                                  initialDateTime: widget.initialDateTime,
+                                  minuteInterval: widget.minuteInterval,
+                                  maxDateTime: widget.maxDateTime,
+                                  minDateTime: widget.minDateTime,
+                                  mode: widget.datePickerMode,
+                                  onDateChanged: (DateTime date) {
+                                    selectedDateTime = date;
+                                    widget.onChange?.call(date);
+                                  },
+                                  use24hFormat: widget.use24hFormat,
+                                  dateOrder: widget.dateOrder,
+                                  textStyle: widget.pickerTextStyle,
+                                  itemExtent: widget.itemExtent,
+                                  showTimeSeparator: widget.showTimeSeparator,
+                                  pickerThemeData: widget.pickerThemeData,
+                                  hourPredicate: widget.hourPredicate,
+                                )
+                              : widget.bottomPickerType == BottomPickerType.year
+                                  ? BottomYearDatePicker(
+                                      initialDateTime: widget.initialDateTime,
+                                      maxDateTime: widget.maxDateTime,
+                                      minDateTime: widget.minDateTime,
+                                      onDateChanged: (DateTime date) {
+                                        selectedDateTime = date;
+                                        widget.onChange?.call(date);
+                                      },
+                                      itemExtent: widget.itemExtent,
+                                      pickerThemeData: widget.pickerThemeData,
+                                    )
+                                  : widget.bottomPickerType ==
+                                          BottomPickerType.rangeTime
+                                      ? RangePicker(
+                                          mode: CupertinoDatePickerMode.time,
+                                          use24hFormat: widget.use24hFormat,
+                                          initialFirstDateTime:
+                                              widget.initialFirstTime,
+                                          initialSecondDateTime:
+                                              widget.initialSecondTime,
+                                          maxFirstDate: widget.maxFirstTime,
+                                          minFirstDateTime: widget.minFirstTime,
+                                          maxSecondDate: widget.maxSecondTime,
+                                          minSecondDateTime:
+                                              widget.minSecondTime,
+                                          onFirstDateChanged: (DateTime date) {
+                                            selectedFirstDateTime = date;
+                                          },
+                                          onSecondDateChanged: (DateTime date) {
+                                            selectedSecondDateTime = date;
+                                          },
+                                          dateOrder: widget.dateOrder,
+                                          textStyle: widget.pickerTextStyle,
+                                          minuteInterval: widget.minuteInterval,
+                                          itemExtent: widget.itemExtent,
+                                          showTimeSeperator:
+                                              widget.showTimeSeparator,
+                                          pickerThemeData:
+                                              widget.pickerThemeData,
+                                        )
+                                      : RangePicker(
+                                          mode: CupertinoDatePickerMode.date,
+                                          use24hFormat: widget.use24hFormat,
+                                          initialFirstDateTime:
+                                              widget.initialFirstDate,
+                                          initialSecondDateTime:
+                                              widget.initialSecondDate,
+                                          maxFirstDate: widget.maxFirstDate,
+                                          minFirstDateTime: widget.minFirstDate,
+                                          maxSecondDate: widget.maxSecondDate,
+                                          minSecondDateTime:
+                                              widget.minSecondDate,
+                                          onFirstDateChanged: (DateTime date) {
+                                            selectedFirstDateTime = date;
+                                          },
+                                          onSecondDateChanged: (DateTime date) {
+                                            selectedSecondDateTime = date;
+                                          },
+                                          dateOrder: widget.dateOrder,
+                                          textStyle: widget.pickerTextStyle,
+                                          itemExtent: widget.itemExtent,
+                                          showTimeSeperator:
+                                              widget.showTimeSeparator,
+                                          pickerThemeData:
+                                              widget.pickerThemeData,
+                                        ),
+            ),
+            if (widget.displaySubmitButton)
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                  vertical: 20,
                 ),
-                child: Directionality(
-                  textDirection: widget.layoutOrientation ?? TextDirection.ltr,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: widget.headerBuilder == null
-                            ? widget.titlePadding ?? const EdgeInsets.all(0)
-                            : EdgeInsets.zero,
-                        child: Row(
-                          children: [
-                            if (widget.headerBuilder != null)
-                              Expanded(
-                                child: widget.headerBuilder!(
-                                  context,
-                                ),
-                              ),
-                            if (widget.headerBuilder == null &&
-                                widget.pickerTitle != null)
-                              Expanded(child: widget.pickerTitle!),
-                            if (widget.headerBuilder == null &&
-                                (widget.displayCloseIcon ?? true))
-                              widget.closeWidget ??
-                                  CloseIcon(
-                                    onPress: _closeBottomPicker,
-                                    iconColor: widget.closeIconColor,
-                                    closeIconSize: widget.closeIconSize,
-                                  ),
-                          ],
-                        ),
-                      ),
-                      if (widget.headerBuilder == null &&
-                          widget.pickerDescription != null)
-                        widget.pickerDescription!,
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: widget.bottomPickerType == BottomPickerType.simple
-                    ? SimplePicker(
-                        items: widget.items!,
-                        onChange: (int index) {
-                          selectedItemIndex = index;
-                          widget.onChange?.call(index);
-                        },
-                        selectedItemIndex: widget.selectedItemIndex,
-                        textStyle: widget.pickerTextStyle,
-                        itemExtent: widget.itemExtent,
-                        selectionOverlay: widget.selectionOverlay,
-                        pickerThemeData: widget.pickerThemeData,
-                        diameterRatio: widget.diameterRatio,
-                      )
-                    : widget.bottomPickerType == BottomPickerType.timer
-                        ? TimePicker(
-                            mode: widget.timerPickerMode!,
-                            minuteInterval: widget.minuteInterval,
-                            textStyle: widget.pickerTextStyle,
-                            itemExtent: widget.itemExtent,
-                            initialDuration: widget.initialTimerDuration,
-                            onChange: (p0) {
-                              widget.onChange?.call(p0);
-                              selectedTimerDuration = p0;
-                            },
-                            secondInterval: widget.timerSecondsInterval,
-                            pickerThemeData: widget.pickerThemeData,
-                          )
-                        : widget.bottomPickerType == BottomPickerType.time
-                            ? DatePicker(
-                                initialDateTime: widget.initialTime.toDateTime,
-                                minuteInterval: widget.minuteInterval,
-                                maxDateTime: widget.maxTime.toDateTime,
-                                minDateTime: widget.minTime.toDateTime,
-                                mode: widget.datePickerMode,
-                                onDateChanged: (DateTime date) {
-                                  selectedDateTime = date;
-                                  widget.onChange?.call(date);
-                                },
-                                use24hFormat: widget.use24hFormat,
-                                dateOrder: widget.dateOrder,
-                                textStyle: widget.pickerTextStyle,
-                                itemExtent: widget.itemExtent,
-                                showTimeSeparator: widget.showTimeSeparator,
-                                pickerThemeData: widget.pickerThemeData,
-                              )
-                            : widget.bottomPickerType ==
-                                    BottomPickerType.dateTime
-                                ? DatePicker(
-                                    initialDateTime: widget.initialDateTime,
-                                    minuteInterval: widget.minuteInterval,
-                                    maxDateTime: widget.maxDateTime,
-                                    minDateTime: widget.minDateTime,
-                                    mode: widget.datePickerMode,
-                                    onDateChanged: (DateTime date) {
-                                      selectedDateTime = date;
-                                      widget.onChange?.call(date);
-                                    },
-                                    use24hFormat: widget.use24hFormat,
-                                    dateOrder: widget.dateOrder,
-                                    textStyle: widget.pickerTextStyle,
-                                    itemExtent: widget.itemExtent,
-                                    showTimeSeparator: widget.showTimeSeparator,
-                                    pickerThemeData: widget.pickerThemeData,
-                                    hourPredicate: widget.hourPredicate,
-                                  )
-                                : widget.bottomPickerType ==
-                                        BottomPickerType.year
-                                    ? BottomYearDatePicker(
-                                        initialDateTime: widget.initialDateTime,
-                                        maxDateTime: widget.maxDateTime,
-                                        minDateTime: widget.minDateTime,
-                                        onDateChanged: (DateTime date) {
-                                          selectedDateTime = date;
-                                          widget.onChange?.call(date);
-                                        },
-                                        itemExtent: widget.itemExtent,
-                                        pickerThemeData: widget.pickerThemeData,
-                                      )
-                                    : widget.bottomPickerType ==
-                                            BottomPickerType.rangeTime
-                                        ? RangePicker(
-                                            mode: CupertinoDatePickerMode.time,
-                                            use24hFormat: widget.use24hFormat,
-                                            initialFirstDateTime:
-                                                widget.initialFirstTime,
-                                            initialSecondDateTime:
-                                                widget.initialSecondTime,
-                                            maxFirstDate: widget.maxFirstTime,
-                                            minFirstDateTime:
-                                                widget.minFirstTime,
-                                            maxSecondDate: widget.maxSecondTime,
-                                            minSecondDateTime:
-                                                widget.minSecondTime,
-                                            onFirstDateChanged:
-                                                (DateTime date) {
-                                              selectedFirstDateTime = date;
-                                            },
-                                            onSecondDateChanged:
-                                                (DateTime date) {
-                                              selectedSecondDateTime = date;
-                                            },
-                                            dateOrder: widget.dateOrder,
-                                            textStyle: widget.pickerTextStyle,
-                                            minuteInterval:
-                                                widget.minuteInterval,
-                                            itemExtent: widget.itemExtent,
-                                            showTimeSeperator:
-                                                widget.showTimeSeparator,
-                                            pickerThemeData:
-                                                widget.pickerThemeData,
-                                          )
-                                        : RangePicker(
-                                            mode: CupertinoDatePickerMode.date,
-                                            use24hFormat: widget.use24hFormat,
-                                            initialFirstDateTime:
-                                                widget.initialFirstDate,
-                                            initialSecondDateTime:
-                                                widget.initialSecondDate,
-                                            maxFirstDate: widget.maxFirstDate,
-                                            minFirstDateTime:
-                                                widget.minFirstDate,
-                                            maxSecondDate: widget.maxSecondDate,
-                                            minSecondDateTime:
-                                                widget.minSecondDate,
-                                            onFirstDateChanged:
-                                                (DateTime date) {
-                                              selectedFirstDateTime = date;
-                                            },
-                                            onSecondDateChanged:
-                                                (DateTime date) {
-                                              selectedSecondDateTime = date;
-                                            },
-                                            dateOrder: widget.dateOrder,
-                                            textStyle: widget.pickerTextStyle,
-                                            itemExtent: widget.itemExtent,
-                                            showTimeSeperator:
-                                                widget.showTimeSeparator,
-                                            pickerThemeData:
-                                                widget.pickerThemeData,
-                                          ),
-              ),
-              if (widget.displaySubmitButton)
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: widget.buttonAlignment,
-                    children: [
-                      BottomPickerButton(
-                        onClick: () {
-                          if (widget.bottomPickerType ==
-                              BottomPickerType.rangeDate) {
-                            widget.onRangeDateSubmitPressed?.call(
-                              selectedFirstDateTime,
-                              selectedSecondDateTime,
-                            );
-                          } else if (widget.bottomPickerType ==
-                              BottomPickerType.rangeTime) {
-                            widget.onRangeTimeSubmitPressed?.call(
-                              selectedFirstDateTime,
-                              selectedSecondDateTime,
-                            );
-                          } else if (widget.bottomPickerType ==
-                                  BottomPickerType.dateTime ||
-                              widget.bottomPickerType ==
-                                  BottomPickerType.time ||
-                              widget.bottomPickerType ==
-                                  BottomPickerType.year) {
-                            widget.onSubmit?.call(selectedDateTime);
-                          } else if (widget.bottomPickerType ==
-                              BottomPickerType.timer) {
-                            widget.onSubmit?.call(selectedTimerDuration);
-                          } else {
-                            widget.onSubmit?.call(selectedItemIndex);
-                          }
+                child: Row(
+                  mainAxisAlignment: widget.buttonAlignment,
+                  children: [
+                    BottomPickerButton(
+                      onClick: () {
+                        if (widget.bottomPickerType ==
+                            BottomPickerType.rangeDate) {
+                          widget.onRangeDateSubmitPressed?.call(
+                            selectedFirstDateTime,
+                            selectedSecondDateTime,
+                          );
+                        } else if (widget.bottomPickerType ==
+                            BottomPickerType.rangeTime) {
+                          widget.onRangeTimeSubmitPressed?.call(
+                            selectedFirstDateTime,
+                            selectedSecondDateTime,
+                          );
+                        } else if (widget.bottomPickerType ==
+                                BottomPickerType.dateTime ||
+                            widget.bottomPickerType == BottomPickerType.time ||
+                            widget.bottomPickerType == BottomPickerType.year) {
+                          widget.onSubmit?.call(selectedDateTime);
+                        } else if (widget.bottomPickerType ==
+                            BottomPickerType.timer) {
+                          widget.onSubmit?.call(selectedTimerDuration);
+                        } else {
+                          widget.onSubmit?.call(selectedItemIndex);
+                        }
 
-                          if (widget.closeOnSubmit ?? false) {
-                            Navigator.pop(context);
-                          }
-                        },
-                        gradients: widget.gradientColors,
-                        theme: widget.bottomPickerTheme,
-                        buttonPadding: widget.buttonPadding,
-                        buttonWidth: widget.buttonWidth,
-                        solidColor: widget.buttonSingleColor,
-                        buttonChild: widget.buttonContent,
-                        style: widget.buttonStyle,
-                      ),
-                    ],
-                  ),
+                        if (widget.closeOnSubmit ?? false) {
+                          Navigator.pop(context);
+                        }
+                      },
+                      gradients: widget.gradientColors,
+                      theme: widget.bottomPickerTheme,
+                      buttonPadding: widget.buttonPadding,
+                      buttonWidth: widget.buttonWidth,
+                      solidColor: widget.buttonSingleColor,
+                      buttonChild: widget.buttonContent,
+                      style: widget.buttonStyle,
+                    ),
+                  ],
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );
