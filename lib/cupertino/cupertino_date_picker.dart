@@ -476,7 +476,7 @@ class CupertinoDatePickerWidget extends StatefulWidget {
   /// {@end-tool}
   final SelectionOverlayBuilder? selectionOverlayBuilder;
 
-  //TODO add docs
+  /// A predicate that determines whether a particular hour is selectable.
   final SelectableHourPredicate? selectableHourPredicate;
 
   static const List<int> fullWeek = <int>[
