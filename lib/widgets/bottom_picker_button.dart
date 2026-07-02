@@ -1,14 +1,30 @@
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/material.dart';
 
+/// A button widget that can be used to open the bottom picker.
 class BottomPickerButton extends StatelessWidget {
+  /// The callback function that is called when the button is pressed.
   final Function onClick;
+
+  /// The theme of the button.
   final BottomPickerTheme theme;
+
+  /// The list of colors to be used for the gradient background of the button.
   final List<Color>? gradients;
+
+  /// The solid color to be used for the background of the button.
   final Color? solidColor;
+
+  /// The padding to be used for the button.
   final double? buttonPadding;
+
+  /// The width of the button.
   final double? buttonWidth;
+
+  /// The child widget to be used for the button.
   final Widget? buttonChild;
+
+  /// The style to be used for the button.
   final BoxDecoration? style;
 
   const BottomPickerButton({

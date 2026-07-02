@@ -1,12 +1,24 @@
 import 'package:bottom_picker/widgets/simple_picker.dart';
 import 'package:flutter/cupertino.dart';
 
+/// A year picker widget that can be used to select a year.
 class BottomYearDatePicker extends StatefulWidget {
+  /// The callback function that is called when the selected year changes.
   final Function(DateTime) onDateChanged;
+
+  /// The initial date to be displayed in the picker.
   final DateTime? initialDateTime;
+
+  /// The maximum date that can be selected in the picker.
   final DateTime? maxDateTime;
+
+  /// The minimum date that can be selected in the picker.
   final DateTime? minDateTime;
+
+  /// The height of each item in the picker.
   final double? itemExtent;
+
+  /// The theme data to be used for the picker.
   final CupertinoTextThemeData? pickerThemeData;
 
   const BottomYearDatePicker({

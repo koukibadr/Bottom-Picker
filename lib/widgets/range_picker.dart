@@ -1,22 +1,54 @@
 import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:flutter/cupertino.dart';
 
+/// A range picker widget that can be used to select a range of dates or times.
 class RangePicker extends StatefulWidget {
+  /// The callback function that is called when the first date changes.
   final Function(DateTime) onFirstDateChanged;
+
+  /// The callback function that is called when the second date changes.
   final Function(DateTime) onSecondDateChanged;
+
+  /// The initial date to be displayed in the first picker.
   final DateTime? initialFirstDateTime;
+
+  /// The initial date to be displayed in the second picker.
   final DateTime? initialSecondDateTime;
+
+  /// The maximum date that can be selected in the first picker.
   final DateTime? maxFirstDate;
+
+  /// The maximum date that can be selected in the second picker.
   final DateTime? maxSecondDate;
+
+  /// The minimum date that can be selected in the first picker.
   final DateTime? minFirstDateTime;
+
+  /// The minimum date that can be selected in the second picker.
   final DateTime? minSecondDateTime;
+
+  /// The order in which the date components are displayed in the picker.
   final DatePickerDateOrder? dateOrder;
+
+  /// The text style to be used for the items in the picker.
   final TextStyle? textStyle;
+
+  /// The mode of the date picker [CupertinoDatePickerMode].
   final CupertinoDatePickerMode mode;
+
+  /// Whether to use 24-hour format for the time picker.
   final bool use24hFormat;
+
+  /// The interval of the minutes in the time picker.
   final int? minuteInterval;
+
+  /// The height of each item in the picker.
   final double? itemExtent;
+
+  /// Whether to show the time separator in the time picker.
   final bool showTimeSeperator;
+
+  /// The theme data to be used for the picker.
   final CupertinoTextThemeData? pickerThemeData;
 
   const RangePicker({
