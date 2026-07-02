@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 /// A simple picker widget that can be used to select an item from a list of items.
-class SimplePicker extends StatelessWidget {
+class SimplePicker<T> extends StatelessWidget {
   /// The index of the selected item in the list of items.
   final int selectedItemIndex;
 
@@ -12,7 +12,9 @@ class SimplePicker extends StatelessWidget {
   final Function(int)? onChange;
 
   /// The list of items to be displayed in the picker.
-  final List<Widget> items;
+  final List<T> items;
+
+  final Widget Function(T item, int index)? itemBuilder;
 
   /// The text style to be used for the items in the picker.
   final TextStyle? textStyle;
@@ -32,6 +34,7 @@ class SimplePicker extends StatelessWidget {
   const SimplePicker({
     super.key,
     required this.items,
+    this.itemBuilder,
     required this.onChange,
     required this.selectedItemIndex,
     this.textStyle,
@@ -60,14 +63,33 @@ class SimplePicker extends StatelessWidget {
           scrollController: FixedExtentScrollController(
             initialItem: selectedItemIndex,
           ),
+          useMagnifier: false,
           onSelectedItemChanged: onChange,
-          children: items,
+          children: List.generate(items.length, (index) {
+            if (itemBuilder != null) {
+              return itemBuilder!(items[index], index);
+            } else {
+              return Text(
+                items[index].toString(),
+                style: textStyle,
+              );
+            }
+          }),
         ),
       );
     } else {
       return ListWheelScrollView(
         itemExtent: itemExtent,
-        children: items,
+        children: List.generate(items.length, (index) {
+          if (itemBuilder != null) {
+            return itemBuilder!(items[index], index);
+          } else {
+            return Text(
+              items[index].toString(),
+              style: textStyle,
+            );
+          }
+        }),
         useMagnifier: true,
         magnification: 1.5,
         controller: FixedExtentScrollController(

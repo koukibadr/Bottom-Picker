@@ -3,6 +3,7 @@
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
+import 'package:example/country_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,54 +18,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        Locale('en'),
-        Locale('ar'),
-      ],
-      home: Scaffold(
-        body: ExampleApp(),
-      ),
+      supportedLocales: [Locale('en'), Locale('ar')],
+      home: Scaffold(body: ExampleApp()),
     );
   }
 }
 
 class ExampleApp extends StatelessWidget {
-  final countryList = [
-    Center(
-      child: Text('Algeria 🇩🇿'),
-    ),
-    Center(
-      child: Text('Maroco 🇲🇦'),
-    ),
-    Center(
-      child: Text('Tunisia 🇹🇳'),
-    ),
-    Center(
-      child: Text('Palestine 🇵🇸'),
-    ),
-    Center(
-      child: Text('Egypt 🇪🇬'),
-    ),
-    Center(
-      child: Text('Syria 🇸🇾'),
-    ),
-    Center(
-      child: Text('Irak 🇮🇶'),
-    ),
-    Center(
-      child: Text('Mauritania 🇲🇷'),
-    ),
-  ];
-
   final buttonWidth = 300.0;
+
+  final hugeList = List.generate(10000, (index) => index);
 
   @override
   Widget build(BuildContext context) {
@@ -80,33 +49,25 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
-                _openSimpleItemPicker(context, countryList);
+                _openSimpleItemPicker(context);
               },
-              child: Text(
-                'Simple Item picker',
-                textAlign: TextAlign.center,
-              ),
+              child: Text('Simple Item picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
-                _openSecondSimpleItemPicker(context, countryList);
+                _displayLongListPicker(context);
               },
-              child: Text(
-                'Simple Item picker with different theme',
-                textAlign: TextAlign.center,
-              ),
+              child: Text('Long list item picker', textAlign: TextAlign.center),
             ),
           ),
           SizedBox(
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
-                _openDateTimePicker(
-                  context,
-                );
+                _openDateTimePicker(context);
               },
               child: Text('Date time Picker', textAlign: TextAlign.center),
             ),
@@ -190,9 +151,7 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
-                _openDateTimePicker(
-                  context,
-                );
+                _openDateTimePicker(context);
               },
               child: Text('Workday Picker', textAlign: TextAlign.center),
             ),
@@ -201,9 +160,7 @@ class ExampleApp extends StatelessWidget {
             width: buttonWidth,
             child: ElevatedButton(
               onPressed: () {
-                _openDateTimePickerWeekend(
-                  context,
-                );
+                _openDateTimePickerWeekend(context);
               },
               child: Text('Weekend Day Picker', textAlign: TextAlign.center),
             ),
@@ -213,19 +170,27 @@ class ExampleApp extends StatelessWidget {
     );
   }
 
-  void _openSimpleItemPicker(BuildContext context, List<Widget> items) {
-    BottomPicker(
-      items: items,
+  void _openSimpleItemPicker(BuildContext context) {
+    BottomPicker<CountryModel>(
+      items: countryList,
+      selectedItemIndex: 5,
+      itemBuilder: (item, index) {
+        return ListTile(
+          leading: CircleAvatar(
+            child: Text(item.name.substring(item.name.length - 2)),
+          ),
+          title: Text(item.name),
+          subtitle: Text('Country ID: ${item.id}'),
+        );
+      },
+      itemExtent: 70,
       headerBuilder: (context) {
         return Row(
           children: [
             Expanded(
               child: Text(
                 'Choose your country',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
             InkWell(
@@ -237,27 +202,46 @@ class ExampleApp extends StatelessWidget {
           ],
         );
       },
-      backgroundColor: Colors.yellow.withValues(
-        alpha: 0.6,
-      ),
+      backgroundColor: Colors.yellow.withValues(alpha: 0.6),
       bottomPickerTheme: BottomPickerTheme.morningSalad,
-      onSubmit: (index) {
-        print(index);
+      onChange: (item) {
+        print('== Selected Country: ${item.name}, ID: ${item.id}');
       },
       buttonAlignment: MainAxisAlignment.start,
       displaySubmitButton: false,
       dismissable: true,
+      filterPredicate: (item, value) {
+        if (int.tryParse(value) != null) {
+          return item.id.toString().contains(value);
+        }
+        return item.name.toLowerCase().contains(value.toLowerCase());
+      },
+      searchFieldDecoration: InputDecoration(
+        hintText: 'Search country',
+        prefixIcon: Icon(Icons.search),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      ),
       onDismiss: (p0) {
-        print(p0);
+        print('Picker dismissed');
+        print('== Selected Country: ${p0.name}, ID: ${p0.id}');
       },
     ).show(context);
   }
 
-  void _openSecondSimpleItemPicker(BuildContext context, List<Widget> items) {
-    BottomPicker(
-      items: items,
-      selectedItemIndex: 1,
-      diameterRatio: 200,
+  void _displayLongListPicker(BuildContext context) {
+    BottomPicker<int>(
+      height: MediaQuery.of(context).size.height * 0.5,
+      items: hugeList,
+      itemExtent: 80,
+      diameterRatio: 50,
+      searchFieldDecoration: InputDecoration(
+        hintText: 'Number',
+        prefixIcon: Icon(Icons.search),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
       headerBuilder: (context) {
         return Container(
           child: Row(
@@ -267,12 +251,10 @@ class ExampleApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Choose country',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    'Super long list picker',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text('Select your country of origins'),
+                  Text('Testing a long list of items'),
                 ],
               ),
               InkWell(
@@ -285,10 +267,13 @@ class ExampleApp extends StatelessWidget {
           ),
         );
       },
-      onChange: (index) {
+      onChange: (int index) {
         print(index);
       },
-      onSubmit: (index) {
+      filterPredicate: (item, value) {
+        return item.toString().contains(value);
+      },
+      onSubmit: (int index) {
         print(index);
         Navigator.pop(context);
       },
@@ -421,29 +406,16 @@ class ExampleApp extends StatelessWidget {
       buttonStyle: BoxDecoration(
         color: Colors.blue,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Colors.blue[200]!,
-        ),
+        border: Border.all(color: Colors.blue[200]!),
       ),
       buttonWidth: 200,
       buttonContent: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Select date',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-              size: 15,
-            ),
+            Text('Select date', style: TextStyle(color: Colors.white)),
+            Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15),
           ],
         ),
       ),
@@ -465,9 +437,7 @@ class ExampleApp extends StatelessWidget {
             ),
             Text(
               'Please select a first date and an end date',
-              style: TextStyle(
-                color: Colors.black,
-              ),
+              style: TextStyle(color: Colors.black),
             ),
           ],
         );
@@ -502,9 +472,7 @@ class ExampleApp extends StatelessWidget {
             ),
             Text(
               'Please select a first time and an end time',
-              style: TextStyle(
-                color: Colors.black,
-              ),
+              style: TextStyle(color: Colors.black),
             ),
           ],
         );
@@ -543,9 +511,7 @@ class ExampleApp extends StatelessWidget {
               },
               child: Text(
                 'close',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                ),
+                style: TextStyle(decoration: TextDecoration.underline),
               ),
             ),
           ],
@@ -556,12 +522,8 @@ class ExampleApp extends StatelessWidget {
         print(index);
       },
       bottomPickerTheme: BottomPickerTheme.orange,
-      initialTime: Time(
-        minutes: 23,
-      ),
-      maxTime: Time(
-        hours: 17,
-      ),
+      initialTime: Time(minutes: 23),
+      maxTime: Time(hours: 17),
     ).show(context);
   }
 
@@ -586,9 +548,7 @@ class ExampleApp extends StatelessWidget {
               },
               child: Text(
                 'close',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                ),
+                style: TextStyle(decoration: TextDecoration.underline),
               ),
             ),
           ],
@@ -598,17 +558,12 @@ class ExampleApp extends StatelessWidget {
       onSubmit: (index) {
         print(index);
       },
-      initialTimerDuration: Duration(
-        hours: 6,
-        minutes: 30,
-      ),
+      initialTimerDuration: Duration(hours: 6, minutes: 30),
       timerPickerMode: CupertinoTimerPickerMode.hms,
     ).show(context);
   }
 
-  void _openDateTimePicker(
-    BuildContext context,
-  ) {
+  void _openDateTimePicker(BuildContext context) {
     BottomPicker.dateTime(
       hourPredicate: (hour) {
         return hour > 6;
@@ -632,9 +587,7 @@ class ExampleApp extends StatelessWidget {
               },
               child: Text(
                 'close',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                ),
+                style: TextStyle(decoration: TextDecoration.underline),
               ),
             ),
           ],
@@ -647,9 +600,7 @@ class ExampleApp extends StatelessWidget {
     ).show(context);
   }
 
-  void _openDateTimePickerWeekend(
-    BuildContext context,
-  ) {
+  void _openDateTimePickerWeekend(BuildContext context) {
     BottomPicker.dateTime(
       minuteInterval: 2,
       headerBuilder: (context) {
@@ -671,9 +622,7 @@ class ExampleApp extends StatelessWidget {
               },
               child: Text(
                 'close',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                ),
+                style: TextStyle(decoration: TextDecoration.underline),
               ),
             ),
           ],
@@ -685,10 +634,7 @@ class ExampleApp extends StatelessWidget {
       minDateTime: DateTime(2021, 5, 1),
       maxDateTime: DateTime(2021, 8, 2),
       initialDateTime: DateTime(2021, 5, 1),
-      gradientColors: [
-        Color(0xfffdcbf1),
-        Color(0xffe6dee9),
-      ],
+      gradientColors: [Color(0xfffdcbf1), Color(0xffe6dee9)],
       calendarDays: CupertinoDatePickerWidget.weekend,
     ).show(context);
   }

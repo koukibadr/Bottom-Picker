@@ -6,9 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Simple picker item testing...', () {
-    late List<Widget> items = List.generate(
+    late List<int> items = List.generate(
       10,
-      (index) => Text('Item $index'),
+      (index) => index,
     );
 
     testWidgets('Simple use case: picker should function properly',
@@ -30,7 +30,18 @@ void main() {
       // Verify that the picker title is displayed
       expect(find.text('Item picker'), findsOneWidget);
       // Verify that the items are displayed
-      expect(find.text('Item 1'), findsOneWidget);
+      expect(find.text('1'), findsOneWidget);
+
+      expect(find.text('2'), findsOneWidget);
+
+      // Verify that if the [itemBuilder] is null the picker
+      // will display [Text] widget with the item.toString() value
+      expect(
+        find.byWidgetPredicate(
+          (widget) => widget is Text && widget.data == '1',
+        ),
+        findsOneWidget,
+      );
 
       expect(bottomPicker.bottomPickerType, BottomPickerType.simple);
     });
@@ -47,8 +58,11 @@ void main() {
                 return Text('Item picker');
               },
               items: items,
-              onChange: (index) {
-                itemIndex = index;
+              itemBuilder: (item, index) {
+                return Text('Item $item');
+              },
+              onChange: (item) {
+                itemIndex = item;
               },
             ),
           ),
@@ -101,7 +115,7 @@ void main() {
       );
 
       await tester.drag(
-        find.text('Item 2'),
+        find.text('2'),
         const Offset(0.0, -60.0),
       ); // see top of file
       await tester.pump();
@@ -133,7 +147,7 @@ void main() {
       );
 
       await tester.drag(
-        find.text('Item 2'),
+        find.text('2'),
         const Offset(0.0, -60.0),
       ); // see top of file
       await tester.pump();
@@ -174,7 +188,7 @@ void main() {
       );
 
       await tester.drag(
-        find.text('Item 2'),
+        find.text('2'),
         const Offset(0.0, -60.0),
       ); // see top of file
       await tester.pump();

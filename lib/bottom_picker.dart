@@ -20,7 +20,7 @@ import 'package:flutter/services.dart';
 export 'package:bottom_picker/resources/time.dart';
 
 // ignore: must_be_immutable
-class BottomPicker extends StatefulWidget {
+class BottomPicker<T> extends StatefulWidget {
   ///The dateTime picker mode
   ///[CupertinoDatePickerMode.date] or [CupertinoDatePickerMode.dateAndTime] or [CupertinoDatePickerMode.time]
   ///
@@ -38,6 +38,7 @@ class BottomPicker extends StatefulWidget {
   BottomPicker({
     super.key,
     required this.items,
+    this.itemBuilder,
     this.dismissable = false,
     this.onChange,
     this.onSubmit,
@@ -62,6 +63,9 @@ class BottomPicker extends StatefulWidget {
     this.headerBuilder,
     this.diameterRatio = 1.1,
     this.useSafeArea = false,
+    this.filterPredicate,
+    this.textInputAction,
+    this.searchFieldDecoration,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -429,26 +433,39 @@ class BottomPicker extends StatefulWidget {
   ///and should not be empty or null
   ///
   ///for date/dateTime/time items parameter is not available
-  ///
-  late List<Widget>? items;
+  late List<T>? items;
+
+  /// Callback function used to build the item widget for each item in the list.
+  /// only for simple item picker, for date/time/dateTime picker this parameter is not available
+  /// if Null the picker will display [Text] widget with the item.toString() value
+  Widget Function(T item, int index)? itemBuilder;
 
   ///Nullable function, invoked when navigating between picker items
   ///whether it's date picker or simple item picker it will return a value DateTime or int(index)
-  ///
-  late Function(dynamic)? onChange;
+  late Function(T)? onChange;
+
+  /// Predicate function used to filter items in the search field
+  /// if not null the search field will be displayed and the user can filter the items based on the predicate
+  /// Takes two parameters: the item and the search query, and returns a boolean indicating whether the item should be filtered out or not.
+  bool Function(T, String)? filterPredicate;
+
+  /// The search field text input action, which determines the action button on the keyboard.
+  TextInputAction? textInputAction;
+
+  /// The decoration for the search field, which allows customization of the appearance of the search field.
+  InputDecoration? searchFieldDecoration;
 
   ///Nullable function invoked  when clicking on submit button
   ///if the picker  type is date/time/dateTime it will return DateTime value
   ///else it will return the index of the selected item
   ///
-  late Function(dynamic)? onSubmit;
+  late Function(T)? onSubmit;
 
   /// Nullable function invoked when the picker get dismissed
   /// it will return the selected value
-  late Function(dynamic)? onDismiss;
+  late Function(T)? onDismiss;
 
   ///Invoked when clicking on the close button
-  ///
   Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
@@ -675,7 +692,6 @@ class BottomPicker extends StatefulWidget {
 
   /// Indiacate whether the bottom picker will be closed (poped out of the Navigator)
   /// when the submit button is pressed.
-  ///
   /// By default closeOnSubmit = true.
   bool? closeOnSubmit;
 
@@ -717,29 +733,35 @@ class BottomPicker extends StatefulWidget {
   }
 
   @override
-  BottomPickerState createState() => BottomPickerState();
+  BottomPickerState<T> createState() => BottomPickerState<T>();
 }
 
-class BottomPickerState extends State<BottomPicker> {
+class BottomPickerState<T> extends State<BottomPicker<T>> {
   late int selectedItemIndex;
+  late T selectedItem;
   late DateTime selectedDateTime;
+  Duration? selectedTimerDuration;
 
   late DateTime selectedFirstDateTime =
       widget.initialFirstDate ?? DateTime.now();
   late DateTime selectedSecondDateTime =
       widget.initialSecondDate ?? DateTime.now();
 
-  Duration? selectedTimerDuration;
-
   bool disposed = false;
+
+  late final List<T>? originalItemList = widget.items;
+  late List<T>? displayedItemList = originalItemList;
 
   @override
   void initState() {
     super.initState();
     if (widget.bottomPickerType == BottomPickerType.simple) {
       selectedItemIndex = widget.selectedItemIndex;
+      selectedItem = widget.items![selectedItemIndex];
     } else if (widget.bottomPickerType == BottomPickerType.time) {
       selectedDateTime = (widget.initialTime ?? Time.now()).toDateTime;
+    } else if (widget.bottomPickerType == BottomPickerType.timer) {
+      selectedTimerDuration = widget.initialTimerDuration ?? Duration.zero;
     } else {
       selectedDateTime = widget.initialDateTime ?? DateTime.now();
     }
@@ -770,11 +792,11 @@ class BottomPickerState extends State<BottomPicker> {
         selectedSecondDateTime,
       );
     } else if (widget.bottomPickerType == BottomPickerType.simple) {
-      widget.onDismiss?.call(selectedItemIndex);
+      widget.onDismiss?.call(selectedItem);
     } else if (widget.bottomPickerType == BottomPickerType.timer) {
-      widget.onDismiss?.call(selectedTimerDuration);
+      widget.onDismiss?.call(selectedTimerDuration as T);
     } else {
-      widget.onDismiss?.call(selectedDateTime);
+      widget.onDismiss?.call(selectedDateTime as T);
     }
 
     super.dispose();
@@ -846,13 +868,35 @@ class BottomPickerState extends State<BottomPicker> {
                 ),
               ),
             ),
+            if (widget.filterPredicate != null &&
+                widget.bottomPickerType == BottomPickerType.simple)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: TextField(
+                  onChanged: (value) {
+                    displayedItemList = originalItemList!
+                        .where((item) => widget.filterPredicate!(item, value))
+                        .toList();
+                    setState(() {});
+                  },
+                  textInputAction: widget.textInputAction,
+                  decoration: widget.searchFieldDecoration,
+                ),
+              ),
             Expanded(
               child: widget.bottomPickerType == BottomPickerType.simple
-                  ? SimplePicker(
-                      items: widget.items!,
+                  ? SimplePicker<T>(
+                      items: displayedItemList ?? [],
+                      itemBuilder: widget.itemBuilder,
                       onChange: (int index) {
-                        selectedItemIndex = index;
-                        widget.onChange?.call(index);
+                        if (displayedItemList == null ||
+                            displayedItemList!.isEmpty) {
+                          return;
+                        }
+                        final item = displayedItemList![index];
+                        selectedItem = item;
+                        selectedItemIndex = originalItemList!.indexOf(item);
+                        widget.onChange?.call(item);
                       },
                       selectedItemIndex: widget.selectedItemIndex,
                       textStyle: widget.pickerTextStyle,
@@ -869,7 +913,7 @@ class BottomPickerState extends State<BottomPicker> {
                           itemExtent: widget.itemExtent,
                           initialDuration: widget.initialTimerDuration,
                           onChange: (p0) {
-                            widget.onChange?.call(p0);
+                            widget.onChange?.call(p0 as T);
                             selectedTimerDuration = p0;
                           },
                           secondInterval: widget.timerSecondsInterval,
@@ -884,7 +928,7 @@ class BottomPickerState extends State<BottomPicker> {
                               mode: widget.datePickerMode,
                               onDateChanged: (DateTime date) {
                                 selectedDateTime = date;
-                                widget.onChange?.call(date);
+                                widget.onChange?.call(date as T);
                               },
                               use24hFormat: widget.use24hFormat,
                               dateOrder: widget.dateOrder,
@@ -902,7 +946,7 @@ class BottomPickerState extends State<BottomPicker> {
                                   mode: widget.datePickerMode,
                                   onDateChanged: (DateTime date) {
                                     selectedDateTime = date;
-                                    widget.onChange?.call(date);
+                                    widget.onChange?.call(date as T);
                                   },
                                   use24hFormat: widget.use24hFormat,
                                   dateOrder: widget.dateOrder,
@@ -919,7 +963,7 @@ class BottomPickerState extends State<BottomPicker> {
                                       minDateTime: widget.minDateTime,
                                       onDateChanged: (DateTime date) {
                                         selectedDateTime = date;
-                                        widget.onChange?.call(date);
+                                        widget.onChange?.call(date as T);
                                       },
                                       itemExtent: widget.itemExtent,
                                       pickerThemeData: widget.pickerThemeData,
@@ -1006,12 +1050,12 @@ class BottomPickerState extends State<BottomPicker> {
                                 BottomPickerType.dateTime ||
                             widget.bottomPickerType == BottomPickerType.time ||
                             widget.bottomPickerType == BottomPickerType.year) {
-                          widget.onSubmit?.call(selectedDateTime);
+                          widget.onSubmit?.call(selectedDateTime as T);
                         } else if (widget.bottomPickerType ==
                             BottomPickerType.timer) {
-                          widget.onSubmit?.call(selectedTimerDuration);
+                          widget.onSubmit?.call(selectedTimerDuration as T);
                         } else {
-                          widget.onSubmit?.call(selectedItemIndex);
+                          widget.onSubmit?.call(selectedItem);
                         }
 
                         if (widget.closeOnSubmit ?? false) {
