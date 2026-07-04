@@ -207,8 +207,16 @@ class ExampleApp extends StatelessWidget {
       onChange: (item) {
         print('== Selected Country: ${item.name}, ID: ${item.id}');
       },
-      buttonAlignment: MainAxisAlignment.start,
-      displaySubmitButton: false,
+      buttonBuilder: (instance, context) {
+        return ElevatedButton(
+          onPressed: () {
+            instance.dismiss();
+            print('Submit button pressed');
+          },
+          child: Text('Submit'),
+          style: ElevatedButton.styleFrom(minimumSize: Size(100, 40)),
+        );
+      },
       dismissable: true,
       filterPredicate: (item, value) {
         if (int.tryParse(value) != null) {
@@ -483,6 +491,7 @@ class ExampleApp extends StatelessWidget {
         print(firstDate);
         print(secondDate);
       },
+      closeOnSubmit: true,
       onRangePickerDismissed: (p0, p1) {
         print(p0);
         print(p1);

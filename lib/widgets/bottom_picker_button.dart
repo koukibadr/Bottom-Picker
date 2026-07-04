@@ -2,6 +2,9 @@ import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/material.dart';
 
 /// A button widget that can be used to open the bottom picker.
+@Deprecated(
+  'Will be replaced with button builder callback in the future. check [BottomPicker].',
+)
 class BottomPickerButton extends StatelessWidget {
   /// The callback function that is called when the button is pressed.
   final Function onClick;

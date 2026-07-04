@@ -41,24 +41,23 @@ class BottomPicker<T> extends StatefulWidget {
     this.itemBuilder,
     this.dismissable = false,
     this.onChange,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.onSubmit,
     this.onDismiss,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.selectedItemIndex = 0,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
     this.itemExtent = 35.0,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.displaySubmitButton = true,
     this.selectionOverlay,
-    this.buttonContent,
-    this.buttonStyle,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.closeOnSubmit = true,
     this.headerBuilder,
     this.diameterRatio = 1.1,
@@ -66,6 +65,15 @@ class BottomPicker<T> extends StatefulWidget {
     this.filterPredicate,
     this.textInputAction,
     this.searchFieldDecoration,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -81,31 +89,39 @@ class BottomPicker<T> extends StatefulWidget {
     super.key,
     this.dismissable = false,
     this.onChange,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.onSubmit,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
     this.onDismiss,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
     this.minDateTime,
     this.maxDateTime,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
     this.pickerThemeData,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.displaySubmitButton = true,
-    this.buttonContent,
-    this.buttonStyle,
     this.itemExtent = 35.0,
-    this.closeOnSubmit = true,
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.useSafeArea = false,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.dateTime;
@@ -119,27 +135,36 @@ class BottomPicker<T> extends StatefulWidget {
     super.key,
     this.dismissable = false,
     this.onChange,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.onSubmit,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
     this.onDismiss,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
     this.minDateTime,
     this.maxDateTime,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.displaySubmitButton = true,
-    this.buttonContent,
-    this.buttonStyle,
     this.itemExtent = 35.0,
     this.diameterRatio = 1.1,
     this.headerBuilder,
     this.useSafeArea = false,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.year;
@@ -153,30 +178,38 @@ class BottomPicker<T> extends StatefulWidget {
     super.key,
     this.dismissable = false,
     this.onChange,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.onSubmit,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
     this.onDismiss,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.initialDateTime,
     this.minDateTime,
     this.maxDateTime,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.displaySubmitButton = true,
-    this.buttonContent,
-    this.buttonStyle,
     this.itemExtent = 35.0,
-    this.closeOnSubmit = true,
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.useSafeArea = false,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
@@ -190,7 +223,14 @@ class BottomPicker<T> extends StatefulWidget {
     super.key,
     this.dismissable = false,
     this.onChange,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.onSubmit,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
     this.onDismiss,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
@@ -199,26 +239,27 @@ class BottomPicker<T> extends StatefulWidget {
     this.minDateTime,
     this.maxDateTime,
     this.use24hFormat = false,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.dateOrder = DatePickerDateOrder.ymd,
     this.pickerThemeData,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.displaySubmitButton = true,
-    this.buttonContent,
-    this.buttonStyle,
     this.itemExtent = 30,
     this.showTimeSeparator = false,
-    this.closeOnSubmit = true,
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.hourPredicate,
     this.useSafeArea = false,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     datePickerMode = CupertinoDatePickerMode.dateAndTime;
     bottomPickerType = BottomPickerType.dateTime;
@@ -233,30 +274,38 @@ class BottomPicker<T> extends StatefulWidget {
     this.minTime,
     this.dismissable = false,
     this.onChange,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.onSubmit,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
     this.onDismiss,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.minuteInterval = 1,
     this.use24hFormat = false,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.displaySubmitButton = true,
-    this.buttonContent,
-    this.buttonStyle,
     this.showTimeSeparator = false,
     this.itemExtent = 30,
-    this.closeOnSubmit = true,
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.useSafeArea = false,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.time;
@@ -273,28 +322,36 @@ class BottomPicker<T> extends StatefulWidget {
     this.initialTimerDuration,
     this.dismissable = false,
     this.onChange,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
     this.onSubmit,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
     this.onDismiss,
     this.itemExtent = 30,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
     this.minuteInterval = 1,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
-    this.displaySubmitButton = true,
-    this.buttonContent,
-    this.buttonStyle,
-    this.closeOnSubmit = true,
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
+    this.buttonBuilder,
     this.useSafeArea = false,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     dateOrder = null;
     onRangeDateSubmitPressed = null;
@@ -306,18 +363,21 @@ class BottomPicker<T> extends StatefulWidget {
 
   BottomPicker.range({
     super.key,
-    required this.onRangeDateSubmitPressed,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.onRangeDateSubmitPressed,
     this.onRangePickerDismissed,
     this.dismissable = false,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.initialSecondDate,
     this.initialFirstDate,
@@ -326,14 +386,20 @@ class BottomPicker<T> extends StatefulWidget {
     this.maxFirstDate,
     this.maxSecondDate,
     this.dateOrder = DatePickerDateOrder.ymd,
-    this.buttonContent,
-    this.buttonStyle,
     this.itemExtent = 30,
-    this.closeOnSubmit = true,
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.useSafeArea = false,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     datePickerMode = CupertinoDatePickerMode.date;
     bottomPickerType = BottomPickerType.rangeDate;
@@ -359,19 +425,22 @@ class BottomPicker<T> extends StatefulWidget {
 
   BottomPicker.rangeTime({
     super.key,
-    required this.onRangeTimeSubmitPressed,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.closeOnSubmit = true,
+    @Deprecated(
+      'Use buttonBuilder with a callback widget to handle the onSubmit action instead',
+    )
+    this.onRangeTimeSubmitPressed,
     this.onRangePickerDismissed,
     this.use24hFormat = true,
     this.dismissable = false,
     this.bottomPickerTheme = BottomPickerTheme.blue,
     this.gradientColors,
-    this.buttonPadding,
-    this.buttonWidth,
-    this.buttonSingleColor,
     this.backgroundColor = Colors.white,
     this.pickerThemeData,
     this.layoutOrientation = TextDirection.ltr,
-    this.buttonAlignment = MainAxisAlignment.center,
     this.height,
     this.initialSecondTime,
     this.initialFirstTime,
@@ -379,16 +448,22 @@ class BottomPicker<T> extends StatefulWidget {
     this.minSecondTime,
     this.maxFirstTime,
     this.maxSecondTime,
-    this.buttonContent,
-    this.buttonStyle,
     this.minuteInterval = 1,
     this.showTimeSeparator = false,
     this.itemExtent = 30,
-    this.closeOnSubmit = true,
     this.headerBuilder,
     this.calendarDays = CupertinoDatePickerWidget.fullWeek,
     this.diameterRatio = 1.1,
     this.useSafeArea = false,
+    this.buttonBuilder,
+    @Deprecated('Use buttonBuilder instead') this.displaySubmitButton = true,
+    @Deprecated('Use buttonBuilder instead') this.buttonContent,
+    @Deprecated('Use buttonBuilder instead') this.buttonStyle,
+    @Deprecated('Use buttonBuilder instead')
+    this.buttonAlignment = MainAxisAlignment.center,
+    @Deprecated('Use buttonBuilder instead') this.buttonSingleColor,
+    @Deprecated('Use buttonBuilder instead') this.buttonPadding,
+    @Deprecated('Use buttonBuilder instead') this.buttonWidth,
   }) {
     datePickerMode = CupertinoDatePickerMode.time;
     bottomPickerType = BottomPickerType.rangeTime;
@@ -538,10 +613,12 @@ class BottomPicker<T> extends StatefulWidget {
 
   ///the padding that will be applied to the button
   ///if the padding is null the button will be rendered null
+  @Deprecated('Use buttonBuilder instead')
   final double? buttonPadding;
 
   ///the width that will be applied to the button
   ///if the buttonWidth is null the button will be rendered with null
+  @Deprecated('Use buttonBuilder instead')
   final double? buttonWidth;
 
   ///the bottom picker background color,
@@ -592,6 +669,7 @@ class BottomPicker<T> extends StatefulWidget {
 
   ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
+  @Deprecated('Use buttonBuilder instead')
   final MainAxisAlignment buttonAlignment;
 
   ///bottom picker main widget height
@@ -635,15 +713,17 @@ class BottomPicker<T> extends StatefulWidget {
 
   ///The button's widget that will be displayed
   ///if null the button will have a simple 'Select' text in the center
+  @Deprecated('Use buttonBuilder instead')
   final Widget? buttonContent;
 
   ///indicates if the submit button will be displayed or not
   ///by default the submit button is shown
+  @Deprecated('Use buttonBuilder instead')
   late bool displaySubmitButton;
 
   ///a single color will be applied to the button instead of the gradient
   ///themes
-  ///
+  @Deprecated('Use buttonBuilder instead')
   final Color? buttonSingleColor;
 
   ///to set a custom button theme color use this list
@@ -652,7 +732,15 @@ class BottomPicker<T> extends StatefulWidget {
   final List<Color>? gradientColors;
 
   /// The style that will be applied on the button's widget
+  @Deprecated('Use buttonBuilder instead')
   final BoxDecoration? buttonStyle;
+
+  /// The button builder callback that will be used to build the button widget.
+  /// If this is provided, it will override the default button widget and any other button-related properties
+  /// The callback takes a [BuildContext] and returns a [Widget] that will be used as the button.
+  /// If it's null, the default button widget will be used (will be removed in the future).
+  final Widget Function(BottomPicker instance, BuildContext context)?
+      buttonBuilder;
 
   /// Invoked when pressing on the submit button when using range picker
   /// it return two dates (first time, end time)
@@ -707,9 +795,13 @@ class BottomPicker<T> extends StatefulWidget {
   /// Indicates whether to use SafeArea to avoid content overflow.
   final bool useSafeArea;
 
+  late BuildContext? _context;
+  bool disposed = false;
+
   ///display the bottom picker popup
   ///[context] the app context to display the popup
   void show(BuildContext context) {
+    _context = context;
     showModalBottomSheet(
       useSafeArea: useSafeArea,
       context: context,
@@ -730,6 +822,14 @@ class BottomPicker<T> extends StatefulWidget {
         );
       },
     );
+  }
+
+  /// Dismiss the bottom picker popup
+  void dismiss() {
+    if (_context != null && Navigator.of(_context!).canPop() && !disposed) {
+      Navigator.of(_context!).pop();
+      disposed = true;
+    }
   }
 
   @override
@@ -775,6 +875,7 @@ class BottomPickerState<T> extends State<BottomPicker<T>> {
 
   @override
   void dispose() {
+    widget.disposed = true;
     if (kIsWeb || (!Platform.isIOS && !Platform.isAndroid)) {
       try {
         View.of(context).platformDispatcher.onKeyData = null;
@@ -1024,7 +1125,9 @@ class BottomPickerState<T> extends State<BottomPicker<T>> {
                                               widget.pickerThemeData,
                                         ),
             ),
-            if (widget.displaySubmitButton)
+            if (widget.buttonBuilder != null)
+              widget.buttonBuilder!(widget, context)
+            else if (widget.displaySubmitButton)
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 20,
