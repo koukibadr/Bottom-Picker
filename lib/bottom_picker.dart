@@ -795,7 +795,7 @@ class BottomPicker<T> extends StatefulWidget {
   /// Indicates whether to use SafeArea to avoid content overflow.
   final bool useSafeArea;
 
-  late BuildContext? _context;
+  BuildContext? _context;
   bool disposed = false;
 
   ///display the bottom picker popup
@@ -826,7 +826,10 @@ class BottomPicker<T> extends StatefulWidget {
 
   /// Dismiss the bottom picker popup
   void dismiss() {
-    if (_context != null && Navigator.of(_context!).canPop() && !disposed) {
+    if (_context != null &&
+        _context!.mounted &&
+        Navigator.of(_context!).canPop() &&
+        !disposed) {
       Navigator.of(_context!).pop();
       disposed = true;
     }
@@ -846,8 +849,6 @@ class BottomPickerState<T> extends State<BottomPicker<T>> {
       widget.initialFirstDate ?? DateTime.now();
   late DateTime selectedSecondDateTime =
       widget.initialSecondDate ?? DateTime.now();
-
-  bool disposed = false;
 
   late final List<T>? originalItemList = widget.items;
   late List<T>? displayedItemList = originalItemList;
@@ -1185,11 +1186,11 @@ class BottomPickerState<T> extends State<BottomPicker<T>> {
   /// Handle the key press event
   bool _onKeyPressed(KeyData keyData) {
     if (keyData.logical == LogicalKeyboardKey.escape.keyId &&
-        !disposed &&
+        !widget.disposed &&
         widget.dismissable) {
-      disposed = true;
+      widget.disposed = true;
       Navigator.pop(context);
-      return disposed;
+      return widget.disposed;
     }
     return false;
   }
