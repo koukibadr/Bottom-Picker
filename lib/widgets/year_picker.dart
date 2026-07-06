@@ -66,13 +66,7 @@ class _BottomYearDatePicker extends State<BottomYearDatePicker> {
   @override
   Widget build(BuildContext context) {
     return SimplePicker(
-      items: years
-          .map(
-            (year) => Text(
-              year.toString(),
-            ),
-          )
-          .toList(),
+      items: years,
       onChange: (index) {
         widget.onDateChanged(
           DateTime(

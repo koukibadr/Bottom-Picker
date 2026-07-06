@@ -107,7 +107,9 @@ void main() {
               },
               items: items,
               onSubmit: (p0) {
-                index = p0;
+                if (p0 != null) {
+                  index = p0;
+                }
               },
             ),
           ),
