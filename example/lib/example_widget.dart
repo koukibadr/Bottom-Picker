@@ -149,7 +149,6 @@ class ExampleApp extends StatelessWidget {
   void _openSimpleItemPicker(BuildContext context) {
     BottomPicker<CountryModel>(
       items: countryList,
-      selectedItemIndex: 5,
       itemBuilder: (item, index) {
         return ListTile(
           leading: CircleAvatar(
@@ -159,55 +158,9 @@ class ExampleApp extends StatelessWidget {
           subtitle: Text('Country ID: ${item.id}'),
         );
       },
-      itemExtent: 70,
-      headerBuilder: (context) {
-        return Row(
-          children: [
-            Expanded(
-              child: Text(
-                'Choose your country',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Icon(Icons.close),
-            ),
-          ],
-        );
-      },
-      backgroundColor: Colors.yellow.withValues(alpha: 0.6),
-      bottomPickerTheme: BottomPickerTheme.morningSalad,
-      onChange: (item) {
-        log('== Selected Country: ${item.name}, ID: ${item.id}');
-      },
-      buttonBuilder: (instance, context) {
-        return ElevatedButton(
-          onPressed: () {
-            instance.dismiss();
-            log('Submit button pressed');
-          },
-          child: Text('Submit'),
-          style: ElevatedButton.styleFrom(minimumSize: Size(100, 40)),
-        );
-      },
-      dismissable: true,
+      onChange: (p0) => log('Selected Item: ${p0.name}'),
       filterPredicate: (item, value) {
-        if (int.tryParse(value) != null) {
-          return item.id.toString().contains(value);
-        }
         return item.name.toLowerCase().contains(value.toLowerCase());
-      },
-      searchFieldDecoration: InputDecoration(
-        hintText: 'Search country',
-        prefixIcon: Icon(Icons.search),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-      onDismiss: (p0) {
-        log('Picker dismissed');
-        log('== Selected Country: ${p0?.name}, ID: ${p0?.id}');
       },
     ).show(context);
   }

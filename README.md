@@ -1,63 +1,142 @@
-# Bottom Picker
+# 🎯 Bottom Picker
 
-<p  align="center">
-<img  src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true"/>
-<br>
-<b>Bring beautiful bottom pickers to all your Flutter apps! Version 4.0.0 offer full customization alongside more advanced features for cupertino picker.</b>
-</p>
+<div align="center">
 
-| ![simple item picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true)    | ![date_time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true)   |
-| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| ![time picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/time%20picker.png?raw=true)                    | ![date picker.png](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date%20picker.png?raw=true)             |
-| ![enter image description here](https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker_arabic.png?raw=true) | ![enter image description here](https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker.png?raw=true) |
+A comprehensive and highly customizable bottom sheet picker widget for Flutter that brings beautiful, native-like pickers to all platforms.
 
-## Features
+[![Pub Version](https://img.shields.io/pub/v/bottom_picker.svg)](https://pub.dev/packages/bottom_picker)
+[![License](https://img.shields.io/github/license/koukibadr/Bottom-Picker.svg)](https://github.com/koukibadr/Bottom-Picker/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/koukibadr/Bottom-Picker.svg)](https://github.com/koukibadr/Bottom-Picker)
+
+<img src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true" alt="Bottom Picker Demo" width="300"/>
+
+**Version 4.2.0** — Full customization with advanced Cupertino picker features
+
+</div>
+
+---
+
+## 📱 Screenshots
+
+| Simple Item Picker | Date & Time Picker |
+| :---: | :---: |
+| ![Simple Item Picker](https://github.com/koukibadr/Bottom-Picker/blob/main/example/simple%20item%20picker.png?raw=true) | ![Date Time Picker](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date_time%20picker.png?raw=true) |
+
+| Time Picker | Date Picker |
+| :---: | :---: |
+| ![Time Picker](https://github.com/koukibadr/Bottom-Picker/blob/main/example/time%20picker.png?raw=true) | ![Date Picker](https://github.com/koukibadr/Bottom-Picker/blob/main/example/date%20picker.png?raw=true) |
+
+| Range Picker (Arabic) | Range Picker |
+| :---: | :---: |
+| ![Range Picker Arabic](https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker_arabic.png?raw=true) | ![Range Picker](https://github.com/koukibadr/Bottom-Picker/blob/main/example/range_picker.png?raw=true) |
+
+---
+
+## 📖 Table of Contents
+
+- [✨ Features](#-features)
+- [🚀 Quick Start](#-quick-start)
+- [📦 Installation](#-installation)
+- [🎯 Usage Examples](#-usage-examples)
+- [⚙️ API Reference](#%EF%B8%8F-api-reference)
+- [🛠️ Customization Guide](#%EF%B8%8F-customization-guide)
+- [🤝 Contributing](#-contributing)
+- [👏 Credits](#-credits)
+
+---
+
+## ✨ Features
 
 ### Core Picker Types
 
-* Simple list picker wheel
-* Date picker
-* Dedicated Year picker
-* Month and year picker
-* Date range picker (RTL and LTR)
-* Time picker
-* Duration Timer picker
-* Date and Time picker
+- ✅ Simple list picker wheel with custom objects
+- ✅ Date picker (configurable date order)
+- ✅ Dedicated year picker
+- ✅ Month and year picker
+- ✅ Date range picker (RTL and LTR support)
+- ✅ Time picker (12h/24h formats)
+- ✅ Duration timer picker
+- ✅ Date and time combined picker
+- ✅ Time range picker
+- ✅ Search functionality for item pickers
 
-### Customization & Behavior
+### Customization Options
 
-* 24h / 12h time format support
-* Filter options for unpickable or blocked dates
-* Customizable header/title via an optional builder callback
-* Control auto-closing of the picker on submit
-* Customize confirm button
-* Customize first selected item
-* Customize background color
-* Customize date format order
-* Customize picker text style (color, font size, font weight, etc.)
-* Customize close button style and display
-* Customize layout orientation (LTR / RTL)
-* Customizable bottom picker height
-* Customizable `minuteInterval` attribute
+- 🎨 Fully customizable button, header and items display
+- 🎨 Complete ownership of the rendering of items, buttons and headers
+- 🎨 Multiple built-in themes (Blue, Orange, Azure, Rain, Plum, Salad)
+- 🎨 Custom gradient colors and single color button options
+- 🎨 Customizable text styles (font size, weight, color)
+- 🎨 Custom header and button builders for full control
+- 🎨 Adjustable picker height and item extent
+- 🎨 Background color customization
+- 🎨 Selection overlay widget support
+- 🎨 Layout orientation control (LTR/RTL)
 
-### Platform Support & Theming
+### Advanced Features
 
-* Fully support Web and Desktop platforms (using wheel views)
-* Built-in themes
-* Enhanced tablet view
+- 🔍 Built-in search/filter functionality for item pickers
+- 📅 Date range filtering with min/max constraints
+- ⏰ Time range filtering with minute intervals
+- 🔒 Selectable hours predicate for time pickers
+- 🚀 Auto-closing or manual control on submit
+- 🛡️ SafeArea support
+- 📱 Full support for Web, Desktop, and Mobile platforms
+- 📱 Enhanced tablet view support
+- 🌍 RTL (Right-to-Left) support for international apps
 
-## Getting Started
+---
 
-To add bottom picker to your project add this line to your pubspec.yaml file
+## 🚀 Quick Start
+
+The simplest way to get started with Bottom Picker:
+
+```dart
+import 'package:bottom_picker/bottom_picker.dart';
+
+// Simple item picker
+BottomPicker(
+  items: ['Item 1', 'Item 2', 'Item 3'],
+  onSubmit: (selectedItem) => print('Selected: $selectedItem'),
+).show(context);
+
+// Date picker
+BottomPicker.date(
+  initialDateTime: DateTime.now(),
+  onSubmit: (selectedDate) => print('Selected: $selectedDate'),
+).show(context);
+
+// Time picker
+BottomPicker.time(
+  initialTime: Time(h: 12, m: 0),
+  onSubmit: (time) => print('Selected: ${time.h}:${time.m}'),
+).show(context);
+```
+
+---
+
+## 📦 Installation
+
+Add `bottom_picker` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
- bottom_picker: ^4.1.0
+  bottom_picker: ^4.2.0
 ```
 
-## Parameters
+Then run:
 
-````dart
+```bash
+flutter pub get
+```
+
+---
+
+## 🎯 Usage Examples
+
+### Package Attributes
+
+```dart
   /// Renders the header component of the bottom picker
   final Widget Function(BuildContext context)? headerBuilder;
 
@@ -70,23 +149,39 @@ dependencies:
   ///and should not be empty or null
   ///
   ///for date/dateTime/time items parameter is not available
-  ///
-  late List<Widget>? items;
+  late List<T>? items;
+
+  /// Callback function used to build the item widget for each item in the list.
+  /// only for simple item picker, for date/time/dateTime picker this parameter is not available
+  /// if Null the picker will display [Text] widget with the item.toString() value
+  Widget Function(T item, int index)? itemBuilder;
 
   ///Nullable function, invoked when navigating between picker items
   ///whether it's date picker or simple item picker it will return a value DateTime or int(index)
-  ///
-  late Function(dynamic)? onChange;
+  late Function(T)? onChange;
+
+  /// Predicate function used to filter items in the search field
+  /// if not null the search field will be displayed and the user can filter the items based on the predicate
+  /// Takes two parameters: the item and the search query, and returns a boolean indicating whether the item should be filtered out or not.
+  SearchItemPredicate<T>? filterPredicate;
+
+  /// The search field text input action, which determines the action button on the keyboard.
+  TextInputAction? textInputAction;
+
+  /// The decoration for the search field, which allows customization of the appearance of the search field.
+  InputDecoration? searchFieldDecoration;
 
   ///Nullable function invoked  when clicking on submit button
   ///if the picker  type is date/time/dateTime it will return DateTime value
   ///else it will return the index of the selected item
-  ///
-  late Function(dynamic)? onSubmit;
+  late Function(T?)? onSubmit;
 
   /// Nullable function invoked when the picker get dismissed
   /// it will return the selected value
-  late Function(dynamic)? onDismiss;
+  late Function(T?)? onDismiss;
+
+  ///Invoked when clicking on the close button
+  Function? onCloseButtonPressed;
 
   ///set the theme of the bottom picker (the button theme)
   ///possible values
@@ -158,10 +253,12 @@ dependencies:
 
   ///the padding that will be applied to the button
   ///if the padding is null the button will be rendered null
+  @Deprecated('Use buttonBuilder instead')
   final double? buttonPadding;
 
   ///the width that will be applied to the button
   ///if the buttonWidth is null the button will be rendered with null
+  @Deprecated('Use buttonBuilder instead')
   final double? buttonWidth;
 
   ///the bottom picker background color,
@@ -172,6 +269,10 @@ dependencies:
   ///date order applied on date picker or date time picker
   ///by default it's YYYY/MM/DD
   DatePickerDateOrder? dateOrder;
+
+  ///the picker text style applied on all types of bottom picker
+  ///by default `TextStyle(fontSize: 14)`
+  TextStyle? pickerTextStyle;
 
   /// The picker theme data
   final CupertinoTextThemeData? pickerThemeData;
@@ -190,6 +291,7 @@ dependencies:
 
   ///THe alignment of the bottom picker button
   ///by default it's `MainAxisAlignment.center`
+  @Deprecated('Use buttonBuilder instead')
   final MainAxisAlignment buttonAlignment;
 
   ///bottom picker main widget height
@@ -200,7 +302,7 @@ dependencies:
   ///invoked when pressing on the submit button when using range picker
   ///it return two dates (first date, end date)
   ///required when using [BottomPicker.range]
-  late Function(DateTime, DateTime)? onRangeDateSubmitPressed;
+  late Function(DateTime?, DateTime?)? onRangeDateSubmitPressed;
 
   ///the minimum first date in the date range picker
   ///not required if null no minimum will be set in the date picker
@@ -233,15 +335,17 @@ dependencies:
 
   ///The button's widget that will be displayed
   ///if null the button will have a simple 'Select' text in the center
+  @Deprecated('Use buttonBuilder instead')
   final Widget? buttonContent;
 
   ///indicates if the submit button will be displayed or not
   ///by default the submit button is shown
+  @Deprecated('Use buttonBuilder instead')
   late bool displaySubmitButton;
 
   ///a single color will be applied to the button instead of the gradient
   ///themes
-  ///
+  @Deprecated('Use buttonBuilder instead')
   final Color? buttonSingleColor;
 
   ///to set a custom button theme color use this list
@@ -250,16 +354,27 @@ dependencies:
   final List<Color>? gradientColors;
 
   /// The style that will be applied on the button's widget
+  @Deprecated('Use buttonBuilder instead')
   final BoxDecoration? buttonStyle;
+
+  /// The button builder callback that will be used to build the button widget.
+  /// If this is provided, it will override the default button widget and any other button-related properties
+  /// The callback takes: 
+  /// - [BuildContext] context: The build context of the button.
+  /// - [BottomPicker] instance: The instance of the BottomPicker widget.
+  /// and returns a [Widget] that will be used as the button.
+  /// If it's null, the default button widget will be used (will be removed in the future).
+  final Widget Function(BottomPicker instance, BuildContext context)?
+      buttonBuilder;
 
   /// Invoked when pressing on the submit button when using range picker
   /// it return two dates (first time, end time)
   /// required when using [BottomPicker.rangeTime]
-  late Function(DateTime, DateTime)? onRangeTimeSubmitPressed;
+  late Function(DateTime?, DateTime?)? onRangeTimeSubmitPressed;
 
   /// Function invoked when the picker is dismissed used with range picker
   /// and time range picker.
-  late Function(DateTime, DateTime)? onRangePickerDismissed;
+  late Function(DateTime?, DateTime?)? onRangePickerDismissed;
 
   ///the minimum first time in the time range picker
   ///not required if null no minimum will be set in the time picker
@@ -290,7 +405,6 @@ dependencies:
 
   /// Indiacate whether the bottom picker will be closed (poped out of the Navigator)
   /// when the submit button is pressed.
-  ///
   /// By default closeOnSubmit = true.
   bool? closeOnSubmit;
 
@@ -305,15 +419,26 @@ dependencies:
 
   /// Indicates whether to use SafeArea to avoid content overflow.
   final bool useSafeArea;
-````
+```
 
-## Examples
+---
 
-### Simple item picker
+## ⚙️ API Reference
+
+The above section contains the complete parameter documentation. Refer to it for detailed API information.
+
+---
+
+## 🛠️ Customization Guide
+
+### Example: Simple Item Picker
 
 ```dart
 BottomPicker(
-  items: items,
+  items: List.generate(
+    10,
+    (index) => "Country $index",
+  ),
   headerBuilder: (context) {
     return Row(
       children: [
@@ -335,10 +460,32 @@ BottomPicker(
       ],
     );
   },
-).show(context);
 ```
 
-### DateTime picker
+
+### Example: Item Picker with Search Filter
+```dart
+ BottomPicker<CountryModel>(
+      items: countryList,
+      itemBuilder: (item, index) {
+        return ListTile(
+          leading: CircleAvatar(
+            child: Text(item.name.substring(item.name.length - 2)),
+          ),
+          title: Text(item.name),
+          subtitle: Text('Country ID: ${item.id}'),
+        );
+      },
+      onChange: (p0) => log('Selected Item: ${p0.name}'),
+      filterPredicate: (item, value) {
+        return item.name.toLowerCase().contains(value.toLowerCase());
+      },
+    ).show(context);
+```
+
+---
+
+### Example: Date Picker
 
 ```dart
 BottomPicker.date(
@@ -360,11 +507,11 @@ BottomPicker.date(
   initialDateTime: DateTime(1996, 10, 22),
   maxDateTime: DateTime(1998),
   minDateTime: DateTime(1980),
-  onChange: (index) {
-    print(index);
+  onChange: (date) {
+    print(date);
   },
-  onSubmit: (index) {
-    print(index);
+  onSubmit: (date) {
+    print(date);
   },
   onDismiss: (p0) {
     print(p0);
@@ -373,8 +520,9 @@ BottomPicker.date(
 ).show(context);
 ```
 
-### Year picker
+---
 
+### Example: Year Picker
 ```dart
 BottomPicker.year(
   headerBuilder: (context) {
@@ -394,11 +542,11 @@ BottomPicker.year(
   initialDateTime: DateTime(1996),
   maxDateTime: DateTime(1998),
   minDateTime: DateTime(1980),
-  onChange: (index) {
-    print(index);
+  onChange: (selectedYear) {
+    print(selectedYear);
   },
-  onSubmit: (index) {
-    print(index);
+  onSubmit: (selectedYear) {
+    print(selectedYear);
     Navigator.pop(context);
   },
   onDismiss: (p0) {
@@ -408,63 +556,56 @@ BottomPicker.year(
 ).show(context);
 ```
 
-### Custom days picker
+For more comprehensive examples, visit the [example folder](https://github.com/koukibadr/Bottom-Picker/tree/main/example).
 
-```dart
-BottomPicker.dateTime(
-  headerBuilder: (context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Set the event exact time and date',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-            color: Colors.black,
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            print('Picker closed');
-            Navigator.pop(context);
-          },
-          child: Text(
-            'close',
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-            ),
-          ),
-        ),
-      ],
-    );
-  },
-  onSubmit: (date) {
-    print(date);
-  },
-  calendarDays: CupertinoDatePickerWidget.workDays,
-).show(context);
-```
+---
 
-## Contributing
+## 🤝 Contributing
 
 We warmly welcome contributions to the `bottom_picker` package! Your help in making it even better is highly appreciated.
 
-**How you can contribute:**
+#### Ways to Contribute
 
-* **Found a bug?** Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with clear steps to reproduce the problem. The more detail you provide, the easier it will be to fix.
-* **Have a great idea for a new feature?** We'd love to hear it! Please [open a new issue](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) to discuss your suggestion. Explain the use case and how it would benefit users.
-* **Want to get your hands dirty and contribute code?** Fantastic! Here's how:
-  1. Fork the [repository](https://github.com/koukibadr/Bottom-Picker).
-  2. Create a new branch for your feature or bug fix.
-  3. Make your changes, ensuring you follow the project's coding style and conventions.
-  4. Write clear and concise commit messages.
-  5. Submit a [pull request](https://github.com/koukibadr/Bottom-Picker/pulls) with a detailed description of your changes and why they should be merged.
+**🐛 Bug Reports**
+- [Open a new bug report](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=bug&template=bug_report.md&title=)
+- Include clear steps to reproduce the problem
+- Provide as much detail as possible
 
-We'll review your contributions and provide feedback as soon as possible. Thank you for your interest in improving `bottom_picker`!
+**✨ Feature Requests**
+- [Suggest a new feature](https://github.com/koukibadr/Bottom-Picker/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
+- Explain the use case and benefit to users
+- Open an issue for discussion before implementation
 
-## Bottom Picker Heros
+**💻 Code Contributions**
+1. [Fork the repository](https://github.com/koukibadr/Bottom-Picker)
+2. Create a new feature branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and follow the project's coding conventions
+4. Write clear and descriptive commit messages
+5. Push to your fork: `git push origin feature/your-feature-name`
+6. [Submit a pull request](https://github.com/koukibadr/Bottom-Picker/pulls) with a detailed description
+7. Await feedback and be responsive to review comments
 
-<a  href  =  "https://github.com/koukibadr/Bottom-Picker/graphs/contributors">
-<img  src  =  "https://contrib.rocks/image?repo=koukibadr/Bottom-Picker"/>
+We'll review your contributions promptly and provide constructive feedback. Thank you for helping improve `bottom_picker`!
+
+---
+
+## 👏 Credits
+
+<a href="https://github.com/koukibadr/Bottom-Picker/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=koukibadr/Bottom-Picker"/>
 </a>
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+
+⭐ If you found this package helpful, please consider giving it a star on [GitHub](https://github.com/koukibadr/Bottom-Picker)!
+
+</div>

@@ -1,29 +1,53 @@
+## [4.2.0] - 07/07/2026
+
+### Features
+
+- Add a search field display to filter the items in the simple picker. [PR#173](https://github.com/koukibadr/Bottom-Picker/pull/173)
+- Add `filterPredicate` attribute to filter the items in the simple picker. [PR#173](https://github.com/koukibadr/Bottom-Picker/pull/173)
+- Add `textInputAction` attribute to customize the search field action button. [PR#173](https://github.com/koukibadr/Bottom-Picker/pull/173)
+- Add `searchFieldDecoration` attribute to customize the search field decoration. [PR#173](https://github.com/koukibadr/Bottom-Picker/pull/173)
+- Add `itemBuilder` callback that render the item in the simple picker, allowing to use any type of object as item in the simple picker. [PR#173](https://github.com/koukibadr/Bottom-Picker/pull/173)
+- Add `buttonBuilder` callback that render the submit button with `instance` and `context` attributes instead of built-in button with basic functionality, to give developer full control over the button appearance and behavior. [PR#174](https://github.com/koukibadr/Bottom-Picker/pull/174)
+
+### Changes
+
+- Remove all deprecated attributes related to title and description rendering.
+- Bottom Picker now support generic type for the simple picker, allowing to use any type of object as item in the simple picker.
+- Expose `currentValue` attribute to get the selected value in the simple picker, year picker, date picker, and time picker. [PR#176](https://github.com/koukibadr/Bottom-Picker/pull/176)
+- Expose `currentFirstDateTime` and `currentSecondDateTime` attributes to get the selected values in the range date picker and range time picker. [PR#176](https://github.com/koukibadr/Bottom-Picker/pull/176)
+- Improved modal dismissal handling with a dedicated dismiss() method and safer lifecycle tracking [PR#174](https://github.com/koukibadr/Bottom-Picker/pull/174)
+
+### Bug Fixes
+
+- Refined date selection behavior to better respect allowed calendar days [PR#176](https://github.com/koukibadr/Bottom-Picker/pull/176)
+- Simplified picker headers and removed the separate close button area [PR#176](https://github.com/koukibadr/Bottom-Picker/pull/176)
+
 ## [4.1.1] - 23/08/2025
 
-**Bug Fix**
+### Bug Fixes
 
 - add SafeArea flag to show or hide safe area widget from bottom picker widget tree and bottom sheet. [ISSUE#163](https://github.com/koukibadr/Bottom-Picker/issues/163)
 
 ## [4.1.0] - 09/08/2025
 
-**Features**
+### Features
 
 - Add hour predicate attribute to datetime picker [PR#161](https://github.com/koukibadr/Bottom-Picker/pull/161) [ISSUE#160](https://github.com/koukibadr/Bottom-Picker/issues/160)
 
-**Bug Fix**
+### Bug Fixes
 
 - Resolve initial time initialization in date time picker [PR#159](https://github.com/koukibadr/Bottom-Picker/pull/159) [ISSUE#158](https://github.com/koukibadr/Bottom-Picker/issues/158)
 - add SafeArea to prevent content overflow in edge-to-edge mode [PR#159](https://github.com/koukibadr/Bottom-Picker/pull/159)
 
 ## [4.0.1] - 31/07/2025
 
-**Bug Fix**
+### Bug Fixes
 
 - Resolve `EdgeInsetsGeometry.zero` build issue [ISSUE#156](https://github.com/koukibadr/Bottom-Picker/issues/156)
 
 ## [4.0.0] - 26/07/2025
 
-**Features**
+### Features
 
 - Add filter for unpick or block some days [PR#150](https://github.com/koukibadr/Bottom-Picker/pull/150) [ISSUE#148](https://github.com/koukibadr/Bottom-Picker/issues/148)
 - Transform `pickerTitle` into an optional header builder callback [PR#146](https://github.com/koukibadr/Bottom-Picker/pull/146)
@@ -33,38 +57,38 @@
 - Refactor cupertino date enum using Flutter cupertino enum instead of custom enum
 - Add `diameterRatio` parameter for simple picker display [PR#154](https://github.com/koukibadr/Bottom-Picker/pull/154)
 
-**Bug Fix**
+### Bug Fixes
 
 - `selectedItemIndex` parameters does not work for simple picker
 - Resolve issue regarding `seleectedIndex` for Web and desktop platforms
 
 ## [3.2.1] - 05/06/2025
 
-**Bug Fix**
+### Bug Fixes
 
 - Remove `debugLabel` attribute from `CupertinoDatePickerWidget` to support older flutter versions [PR#136](https://github.com/koukibadr/Bottom-Picker/pull/136) [Issue#135](https://github.com/koukibadr/Bottom-Picker/issues/135)
 
 ## [3.2.0] - 18/05/2025
 
-**Changes:**
+### Changes
 
 - Add `closeWidget` attribute to replace default close widget icon [PR#128](https://github.com/koukibadr/Bottom-Picker/issues/128) [PR#133](https://github.com/koukibadr/Bottom-Picker/pull/133).
 
 ## [3.1.0] - 22/04/2025
 
-**Changes:**
+### Changes
 
-- Integrate a cupertino picker in the package with extra parameters to display a time seperator ":" with a flag attribute `showTimeSeparator`.
+- Integrate a cupertino picker in the package with extra parameters to display a time separator ":" with a flag attribute `showTimeSeparator`.
 - Update default `itemExtent` value to 30 for all time and date pickers
 - Add `itemExtent` attribute to time and range constructors for more picker customization.
 
-**Bug Fixes:**
+### Bug Fixes
 
-- Fix cupertino picker time seperator rendering and text style.
+- Fix cupertino picker time separator rendering and text style.
 
 ## [3.0.0] - 06/04/2025
 
-**Changes**
+### Changes
 
 - Create new timer picker using `CupertinoTimerPicker` under the hood with `onChange` and `onSubmit` supporting the `Duration` result type [PR#123](https://github.com/koukibadr/Bottom-Picker/pull/123).
 

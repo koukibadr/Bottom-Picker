@@ -711,7 +711,10 @@ class BottomPicker<T> extends StatefulWidget {
 
   /// The button builder callback that will be used to build the button widget.
   /// If this is provided, it will override the default button widget and any other button-related properties
-  /// The callback takes a [BuildContext] and returns a [Widget] that will be used as the button.
+  /// The callback takes:
+  /// - [BuildContext] context: The build context of the button.
+  /// - [BottomPicker] instance: The instance of the BottomPicker widget.
+  /// and returns a [Widget] that will be used as the button.
   /// If it's null, the default button widget will be used (will be removed in the future).
   final Widget Function(BottomPicker instance, BuildContext context)?
       buttonBuilder;
