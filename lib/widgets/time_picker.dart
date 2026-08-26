@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A time picker widget that can be used to select a time duration
 /// based on the Time picker mode [CupertinoTimerPickerMode].

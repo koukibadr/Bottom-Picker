@@ -1,5 +1,5 @@
 import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 /// A date picker widget that can be used to select a date or time.
 class DatePicker extends StatelessWidget {

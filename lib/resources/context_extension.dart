@@ -1,5 +1,5 @@
 import 'package:bottom_picker/resources/values.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 extension ContextExtensions on BuildContext {
   double get bottomPickerWidth =>

@@ -1,5 +1,5 @@
 import 'package:bottom_picker/resources/arrays.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A button widget that can be used to open the bottom picker.
 @Deprecated(

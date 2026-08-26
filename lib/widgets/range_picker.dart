@@ -1,5 +1,5 @@
 import 'package:bottom_picker/widgets/date_picker.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 /// A range picker widget that can be used to select a range of dates or times.
 class RangePicker extends StatefulWidget {

@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/cupertino/cupertino_date_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:example/country_data.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ExampleApp extends StatelessWidget {
   final buttonWidth = 300.0;

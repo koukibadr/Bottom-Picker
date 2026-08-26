@@ -1,3 +1,8 @@
+## [5.0.0]
+
+- Migrates to material_ui and cupertino_ui.
+- Updates minimum supported SDK version to Flutter 3.44/Dart 3.12.
+
 ## [4.2.0] - 07/07/2026
 
 ### Features
