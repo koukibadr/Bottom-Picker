@@ -214,12 +214,12 @@ class BottomPicker<T> extends StatefulWidget {
     @Deprecated('Use buttonBuilder instead') this.buttonPadding,
     @Deprecated('Use buttonBuilder instead') this.buttonWidth,
     this.pickerTextStyle,
+    this.dateOrder = DatePickerDateOrder.mdy,
   }) {
     datePickerMode = CupertinoDatePickerMode.monthYear;
     bottomPickerType = BottomPickerType.dateTime;
     use24hFormat = false;
     onRangeDateSubmitPressed = null;
-    dateOrder = DatePickerDateOrder.mdy;
     assertInitialValues();
   }
 
