@@ -51,7 +51,8 @@ class BottomPickerButton extends StatelessWidget {
       child: Container(
         width: buttonWidth ?? 100,
         padding: EdgeInsets.all(buttonPadding ?? 8.0),
-        decoration: style ??
+        decoration:
+            style ??
             BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: solidColor,
@@ -65,14 +66,10 @@ class BottomPickerButton extends StatelessWidget {
                     )
                   : null,
             ),
-        child: buttonChild ??
+        child:
+            buttonChild ??
             const Center(
-              child: Text(
-                'Select',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
+              child: Text('Select', style: TextStyle(color: Colors.white)),
             ),
       ),
     );

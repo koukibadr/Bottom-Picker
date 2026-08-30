@@ -6,26 +6,18 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Simple picker item testing...', () {
-    late List<int> items = List.generate(
-      10,
-      (index) => index,
-    );
+    late List<int> items = List.generate(10, (index) => index);
 
-    testWidgets('Simple use case: picker should function properly',
-        (tester) async {
+    testWidgets('Simple use case: picker should function properly', (
+      tester,
+    ) async {
       var bottomPicker = BottomPicker(
         headerBuilder: (context) {
           return Text('Item picker');
         },
         items: items,
       );
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: bottomPicker,
-          ),
-        ),
-      );
+      await tester.pumpWidget(MaterialApp(home: Scaffold(body: bottomPicker)));
 
       // Verify that the picker title is displayed
       expect(find.text('Item picker'), findsOneWidget);
@@ -46,91 +38,95 @@ void main() {
       expect(bottomPicker.bottomPickerType, BottomPickerType.simple);
     });
 
-    testWidgets('On change callback should be called when an item is selected',
-        (tester) async {
-      // Arrange
-      int itemIndex = -1;
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: BottomPicker(
-              headerBuilder: (context) {
-                return Text('Item picker');
-              },
-              items: items,
-              itemBuilder: (item, index) {
-                return Text('Item $item');
-              },
-              onChange: (item) {
-                itemIndex = item;
-              },
+    testWidgets(
+      'On change callback should be called when an item is selected',
+      (tester) async {
+        // Arrange
+        int itemIndex = -1;
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: BottomPicker(
+                headerBuilder: (context) {
+                  return Text('Item picker');
+                },
+                items: items,
+                itemBuilder: (item, index) {
+                  return Text('Item $item');
+                },
+                onChange: (item) {
+                  itemIndex = item;
+                },
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      // Act
-      expect(itemIndex, -1);
+        // Act
+        expect(itemIndex, -1);
 
-      await tester.drag(
-        find.text('Item 1'),
-        const Offset(0.0, -20.0),
-      ); // see top of file
-      await tester.pump();
-      expect(itemIndex, 1);
+        await tester.drag(
+          find.text('Item 1'),
+          const Offset(0.0, -20.0),
+        ); // see top of file
+        await tester.pump();
+        expect(itemIndex, 1);
 
-      await tester.drag(
-        find.text('Item 2'),
-        const Offset(0.0, -40.0),
-      ); // see top of file
-      await tester.pump();
-      expect(itemIndex, 2);
+        await tester.drag(
+          find.text('Item 2'),
+          const Offset(0.0, -40.0),
+        ); // see top of file
+        await tester.pump();
+        expect(itemIndex, 2);
 
-      await tester.drag(
-        find.text('Item 3'),
-        const Offset(0.0, -60.0),
-      ); // see top of file
-      await tester.pump();
-      expect(itemIndex, 3);
-    });
+        await tester.drag(
+          find.text('Item 3'),
+          const Offset(0.0, -60.0),
+        ); // see top of file
+        await tester.pump();
+        expect(itemIndex, 3);
+      },
+    );
 
     testWidgets(
-        'On submit callback invoked when pressing submit button: index should be changed',
-        (tester) async {
-      var index = -1;
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: BottomPicker(
-              headerBuilder: (context) {
-                return Text('Item picker');
-              },
-              items: items,
-              onSubmit: (p0) {
-                if (p0 != null) {
-                  index = p0;
-                }
-              },
+      'On submit callback invoked when pressing submit button: index should be changed',
+      (tester) async {
+        var index = -1;
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: BottomPicker(
+                headerBuilder: (context) {
+                  return Text('Item picker');
+                },
+                items: items,
+                onSubmit: (p0) {
+                  if (p0 != null) {
+                    index = p0;
+                  }
+                },
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.drag(
-        find.text('2'),
-        const Offset(0.0, -60.0),
-      ); // see top of file
-      await tester.pump();
-      await tester.tap(find.byType(BottomPickerButton));
-      await tester.pumpAndSettle();
-      expect(index, 2);
+        await tester.drag(
+          find.text('2'),
+          const Offset(0.0, -60.0),
+        ); // see top of file
+        await tester.pump();
+        await tester.tap(find.byType(BottomPickerButton));
+        await tester.pumpAndSettle();
+        expect(index, 2);
 
-      // Test that the picker is closed after submit
-      expect(find.byType(BottomPicker), findsNothing);
-    });
+        // Test that the picker is closed after submit
+        expect(find.byType(BottomPicker), findsNothing);
+      },
+    );
 
-    testWidgets('On dismiss callback invoked when pressing submit button',
-        (tester) async {
+    testWidgets('On dismiss callback invoked when pressing submit button', (
+      tester,
+    ) async {
       var index = -1;
       await tester.pumpWidget(
         MaterialApp(
@@ -162,54 +158,52 @@ void main() {
     });
 
     testWidgets(
-        'onCloseButtonPressed callback invoked when pressing the close icon',
-        (tester) async {
-      var index = -1;
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: BottomPicker(
-              headerBuilder: (context) {
-                return Row(
-                  children: [
-                    Text('Item picker'),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                        index = 9;
-                      },
-                      child: Icon(Icons.close),
-                    ),
-                  ],
-                );
-              },
-              items: items,
+      'onCloseButtonPressed callback invoked when pressing the close icon',
+      (tester) async {
+        var index = -1;
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: BottomPicker(
+                headerBuilder: (context) {
+                  return Row(
+                    children: [
+                      Text('Item picker'),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                          index = 9;
+                        },
+                        child: Icon(Icons.close),
+                      ),
+                    ],
+                  );
+                },
+                items: items,
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.drag(
-        find.text('2'),
-        const Offset(0.0, -60.0),
-      ); // see top of file
-      await tester.pump();
-      await tester.tap(find.byIcon(Icons.close));
-      await tester.pumpAndSettle();
-      expect(index, 9);
+        await tester.drag(
+          find.text('2'),
+          const Offset(0.0, -60.0),
+        ); // see top of file
+        await tester.pump();
+        await tester.tap(find.byIcon(Icons.close));
+        await tester.pumpAndSettle();
+        expect(index, 9);
 
-      // Test that the picker is closed after submit
-      expect(find.byType(BottomPicker), findsNothing);
-    });
+        // Test that the picker is closed after submit
+        expect(find.byType(BottomPicker), findsNothing);
+      },
+    );
 
     testWidgets('Testing picker widgets display  flags', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: BottomPicker(
-              displaySubmitButton: false,
-              items: items,
-            ),
+            body: BottomPicker(displaySubmitButton: false, items: items),
           ),
         ),
       );
@@ -222,11 +216,7 @@ void main() {
     test('Testing bottom picker assertions', () async {
       expect(
         () => MaterialApp(
-          home: Scaffold(
-            body: BottomPicker(
-              items: items,
-            ),
-          ),
+          home: Scaffold(body: BottomPicker(items: items)),
         ),
         returnsNormally,
       );
@@ -234,15 +224,10 @@ void main() {
       expect(
         () => MaterialApp(
           home: Scaffold(
-            body: BottomPicker(
-              displaySubmitButton: false,
-              items: [],
-            ),
+            body: BottomPicker(displaySubmitButton: false, items: []),
           ),
         ),
-        throwsA(
-          isA<AssertionError>(),
-        ),
+        throwsA(isA<AssertionError>()),
       );
 
       expect(
@@ -255,9 +240,7 @@ void main() {
             ),
           ),
         ),
-        throwsA(
-          isA<AssertionError>(),
-        ),
+        throwsA(isA<AssertionError>()),
       );
 
       expect(
@@ -270,9 +253,7 @@ void main() {
             ),
           ),
         ),
-        throwsA(
-          isA<AssertionError>(),
-        ),
+        throwsA(isA<AssertionError>()),
       );
     });
   });

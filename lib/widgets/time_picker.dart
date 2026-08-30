@@ -56,24 +56,23 @@ class TimePicker extends StatelessWidget {
     this.initialDuration,
     this.secondInterval = 1,
     this.pickerThemeData,
-  })  : assert(
-          minuteInterval > 0 && minuteInterval < 60,
-          'minuteInterval must be a positive integer from 1 to 59.',
-        ),
-        assert(itemExtent > 0, 'itemExtent must be a positive number.'),
-        assert(
-          secondInterval > 0 && secondInterval < 60,
-          'secondInterval must be a positive integer from 1 to 59.',
-        );
+  }) : assert(
+         minuteInterval > 0 && minuteInterval < 60,
+         'minuteInterval must be a positive integer from 1 to 59.',
+       ),
+       assert(itemExtent > 0, 'itemExtent must be a positive number.'),
+       assert(
+         secondInterval > 0 && secondInterval < 60,
+         'secondInterval must be a positive integer from 1 to 59.',
+       );
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTheme(
       data: CupertinoThemeData(
-        textTheme: pickerThemeData ??
-            CupertinoTextThemeData(
-              dateTimePickerTextStyle: textStyle,
-            ),
+        textTheme:
+            pickerThemeData ??
+            CupertinoTextThemeData(dateTimePickerTextStyle: textStyle),
       ),
       child: CupertinoTimerPicker(
         itemExtent: itemExtent,

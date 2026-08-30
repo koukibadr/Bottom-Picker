@@ -49,16 +49,16 @@ class SimplePicker<T> extends StatelessWidget {
     if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
       return CupertinoTheme(
         data: CupertinoThemeData(
-          textTheme: pickerThemeData ??
-              CupertinoTextThemeData(
-                pickerTextStyle: textStyle,
-              ),
+          textTheme:
+              pickerThemeData ??
+              CupertinoTextThemeData(pickerTextStyle: textStyle),
         ),
         child: CupertinoPicker(
           offAxisFraction: 2.0,
           diameterRatio: diameterRatio,
           itemExtent: itemExtent,
-          selectionOverlay: selectionOverlay ??
+          selectionOverlay:
+              selectionOverlay ??
               const CupertinoPickerDefaultSelectionOverlay(),
           scrollController: FixedExtentScrollController(
             initialItem: selectedItemIndex,
@@ -69,10 +69,7 @@ class SimplePicker<T> extends StatelessWidget {
             if (itemBuilder != null) {
               return itemBuilder!(items[index], index);
             } else {
-              return Text(
-                items[index].toString(),
-                style: textStyle,
-              );
+              return Text(items[index].toString(), style: textStyle);
             }
           }),
         ),
@@ -84,17 +81,12 @@ class SimplePicker<T> extends StatelessWidget {
           if (itemBuilder != null) {
             return itemBuilder!(items[index], index);
           } else {
-            return Text(
-              items[index].toString(),
-              style: textStyle,
-            );
+            return Text(items[index].toString(), style: textStyle);
           }
         }),
         useMagnifier: true,
         magnification: 1.5,
-        controller: FixedExtentScrollController(
-          initialItem: selectedItemIndex,
-        ),
+        controller: FixedExtentScrollController(initialItem: selectedItemIndex),
         onSelectedItemChanged: onChange,
       );
     }

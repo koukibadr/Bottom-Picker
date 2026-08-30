@@ -68,11 +68,7 @@ class _BottomYearDatePicker extends State<BottomYearDatePicker> {
     return SimplePicker(
       items: years,
       onChange: (index) {
-        widget.onDateChanged(
-          DateTime(
-            years[index],
-          ),
-        );
+        widget.onDateChanged(DateTime(years[index]));
       },
       selectedItemIndex: 0,
       itemExtent: widget.itemExtent ?? 0,

@@ -88,14 +88,16 @@ class _RangePickerState extends State<RangePicker> {
     if (widget.mode == CupertinoDatePickerMode.time) {
       // If it is a time range, the minimum time uses the date of the day, ignores the date, and only needs the time
       // The default is 0:0:0
-      minFirstDateTime = widget.minFirstDateTime ??
+      minFirstDateTime =
+          widget.minFirstDateTime ??
           DateTime(
             DateTime.now().year,
             DateTime.now().month,
             DateTime.now().day,
           );
       initialFirstDateTime = widget.initialFirstDateTime ?? minFirstDateTime;
-      minSecondDateTime = widget.minSecondDateTime ??
+      minSecondDateTime =
+          widget.minSecondDateTime ??
           DateTime(
             DateTime.now().year,
             DateTime.now().month,
