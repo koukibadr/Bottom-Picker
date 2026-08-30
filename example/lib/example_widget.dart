@@ -299,6 +299,7 @@ class ExampleApp extends StatelessWidget {
 
   void _openMonthYearPicker(BuildContext context) {
     BottomPicker.monthYear(
+      dateOrder: DatePickerDateOrder.ydm,
       headerBuilder: (context) {
         return Row(
           children: [
