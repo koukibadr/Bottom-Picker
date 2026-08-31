@@ -10,7 +10,7 @@ A comprehensive and highly customizable bottom sheet picker widget for Flutter t
 
 <img src="https://github.com/koukibadr/Bottom-Picker/blob/main/example/bottom_picker_logo.gif?raw=true" alt="Bottom Picker Demo" width="300"/>
 
-**Version 4.2.0** — Full customization with advanced Cupertino picker features
+**New in v5.0.0:** Full support for the latest Flutter version >=3.44.0 with decoupled Material UI and Cupertino UI themes, providing better flexibility and cleaner architecture.
 
 </div>
 
@@ -121,7 +121,7 @@ Add `bottom_picker` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  bottom_picker: ^4.2.0
+  bottom_picker: ^5.0.0
 ```
 
 Then run:

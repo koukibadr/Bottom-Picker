@@ -1,7 +1,15 @@
-## [5.0.0]
+
+## [5.0.0] - 31/08/2026
+
+### Features 
+
+- Add `dateOrder` parameter to month year picker to customize the order of month and year display. [PR#181](https://github.com/koukibadr/Bottom-Picker/pull/181)
+
+### Changes 
 
 - Migrates to material_ui and cupertino_ui.
 - Updates minimum supported SDK version to Flutter 3.44/Dart 3.12.
+
 
 ## [4.2.0] - 07/07/2026
 
