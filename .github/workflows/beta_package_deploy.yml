@@ -79,6 +79,18 @@ jobs:
           sed -i "s/^version:.*/version: $version/" pubspec.yaml
           echo "$current -> $version"
           echo "version=$version" >> "$GITHUB_OUTPUT"
+      
+      - name: Update changelog
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          touch CHANGELOG.md
+          entry="## [$VERSION] - $(date -u +%d/%m/%Y)\n\n### Chores\n\n- Update changelog for version $VERSION release.\n"
+          awk -v entry="$entry" '
+            /^## / && !done { printf "%s\n", entry; done = 1 }
+            { print }
+            END { if (!done) printf "\n%s", entry }
+          ' CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
 
       - name: Commit version
         id: commit
