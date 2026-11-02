@@ -1,0 +1,133 @@
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+
+  analyze-code:
+    if: >-
+      !endsWith(github.actor, '[bot]') &&
+      !endsWith(github.event.head_commit.author.name, '[bot]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Running Flutter analysis on package code
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings --write=analysis_report.txt
+
+      - name: Artifact analysis report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: analysis-report
+          path: |
+            analysis_report.txt
+          retention-days: 15
+
+  unit-test:
+    if: >-
+      !endsWith(github.actor, '[bot]') &&
+      !endsWith(github.event.head_commit.author.name, '[bot]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run unit tests
+        run: flutter test
+
+  change-version:
+    needs: [analyze-code, unit-test]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
+      sha: ${{ steps.commit.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bump beta version
+        id: bump
+        run: |
+          current=$(grep -E '^version:' pubspec.yaml | awk '{print $2}')
+          base="${current%%+*}"   # drop any +build suffix
+          if [[ "$base" =~ ^(.+)-beta\.([0-9]+)$ ]]; then
+            version="${BASH_REMATCH[1]}-beta.$((BASH_REMATCH[2] + 1))"
+          else
+            version="$base-beta.1"
+          fi
+          sed -i "s/^version:.*/version: $version/" pubspec.yaml
+          echo "$current -> $version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Commit version
+        id: commit
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: release $VERSION"
+          git push origin HEAD:main
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  upload-package:
+    needs: change-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.change-version.outputs.sha }}
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Check Publish Warnings
+        run: dart pub publish --dry-run
+
+      - name: Publish new package version
+        uses: k-paxian/dart-package-publisher@master
+        with:
+          credentialJson: ${{ secrets.CREDENTIAL_JSON }}
+          flutter: true
+
+  github-prerelease:
+    needs: [change-version, upload-package]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Create pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.change-version.outputs.version }}
+          SHA: ${{ needs.change-version.outputs.sha }}
+        run: |
+          gh release create "v$VERSION" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$SHA" \
+            --title "v$VERSION" \
+            --generate-notes \
+            --prerelease
