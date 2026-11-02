@@ -63,7 +63,8 @@ jobs:
       sha: ${{ steps.commit.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
-
+        with:
+          token: ${{ secrets.RELEASE_TOKEN }}
       - name: Bump beta version
         id: bump
         run: |
