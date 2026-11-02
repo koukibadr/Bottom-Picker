@@ -1,4 +1,10 @@
 
+## [5.0.1-beta.1] - 02/11/2026
+
+### Chores
+
+- Update changelog for version 5.0.1-beta.1 release.
+
 ## [5.0.0] - 31/08/2026
 
 ### Features 
